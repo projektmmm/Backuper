@@ -1,0 +1,7 @@
+C:\Users\Vojta\source\repos\Deamon\Deamon\bin\Debug\Deamon.exe.config
+C:\Users\Vojta\source\repos\Deamon\Deamon\bin\Debug\Deamon.exe
+C:\Users\Vojta\source\repos\Deamon\Deamon\bin\Debug\Deamon.pdb
+C:\Users\Vojta\source\repos\Deamon\Deamon\obj\Debug\Deamon.csprojResolveAssemblyReference.cache
+C:\Users\Vojta\source\repos\Deamon\Deamon\obj\Debug\Deamon.csproj.CoreCompileInputs.cache
+C:\Users\Vojta\source\repos\Deamon\Deamon\obj\Debug\Deamon.exe
+C:\Users\Vojta\source\repos\Deamon\Deamon\obj\Debug\Deamon.pdb
