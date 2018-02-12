@@ -37,7 +37,7 @@ namespace ConsoleApp1
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); //chci dostat zpet json
 
                 Console.WriteLine("GET");
-                HttpResponseMessage response = await client.GetAsync("api/person/1");
+                HttpResponseMessage response = await client.GetAsync("api/person/3");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -46,6 +46,8 @@ namespace ConsoleApp1
                 }
                 #endregion
 
+                
+                
                 #region GETALL
                 Console.WriteLine("GET ALL");
                 response = await client.GetAsync("api/person");
@@ -61,7 +63,7 @@ namespace ConsoleApp1
                 }
 
                 #endregion
-
+                
                 #region POST
                 Console.WriteLine("POST");
                 Person toPost = new Person()
@@ -100,7 +102,7 @@ namespace ConsoleApp1
 
                 #endregion
 
-
+    
             }
         }
     }

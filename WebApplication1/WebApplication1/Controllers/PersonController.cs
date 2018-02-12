@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using WebApplication1.Models;
+using MySql.Data.MySqlClient;
 
 namespace WebApplication1.Controllers
 {
@@ -19,7 +20,19 @@ namespace WebApplication1.Controllers
 
         public Person Get(int id)
         {
-            return this.FindAll().Where(x => x.Id == id).First();
+            Sql.SetCommand($"SELECT * FROM tbPerson WHERE Id = {id}");
+            Sql.Open();
+            MySqlDataReader sRead = Sql.sComm.ExecuteReader();
+            sRead.Read();
+            Person ret =  new Person()
+            {
+                Id = Convert.ToInt32(sRead[0]),
+                Name = sRead[1].ToString(),
+                Surname = sRead[2].ToString(),
+                Age = Convert.ToInt32(sRead[3])
+            };
+            Sql.Close();
+            return ret;
         }
 
         public void Post([FromBody]Person person)
@@ -30,12 +43,24 @@ namespace WebApplication1.Controllers
 
         private List<Person> FindAll()
         {
-            return new List<Person>()
+            List<Person> ret = new List<Person>();
+            Sql.SetCommand($"SELECT * FROM tbPerson");
+            Sql.Open();
+            MySqlDataReader sRead = Sql.sComm.ExecuteReader();
+
+            while (sRead.Read())
             {
-                new Person() { Id = 1, Name = "Pepa", Surname = "Novak", Age = 52 },
-                new Person() { Id = 2, Name = "Karel", Surname = "Král", Age = 52 },
-                new Person() { Id = 3, Name = "Viktor", Surname = "Lusk", Age = 52 },
-            };
+                Person person = new Person()
+                {
+                    Id = Convert.ToInt32(sRead[0]),
+                    Name = sRead[1].ToString(),
+                    Surname = sRead[2].ToString(),
+                    Age = Convert.ToInt32(sRead[3])
+                };
+                ret.Add(person);
+            }
+
+            return ret;
         }
     }
 }
