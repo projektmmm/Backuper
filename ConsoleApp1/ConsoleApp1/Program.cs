@@ -68,10 +68,9 @@ namespace ConsoleApp1
                 Console.WriteLine("POST");
                 Person toPost = new Person()
                 {
-                    Id = 4,
-                    Name = "Alois",
-                    Surname = "Kedlubna",
-                    Age = 18
+                    Name = "Rubeus",
+                    Surname = "Hagrid",
+                    Age = 75
                 };
 
                 response = await client.PostAsJsonAsync("api/person", toPost);
@@ -91,14 +90,14 @@ namespace ConsoleApp1
                 Console.WriteLine("PUT");
                 toPost.Surname = "Zeli";
 
-                response = await client.PostAsJsonAsync(url, toPost);
+                response = await client.PostAsJsonAsync("api/person/15", toPost);
 
                 #endregion
 
                 #region DELETE
 
                 Console.WriteLine("DELETE");
-                response = await client.DeleteAsync(url);
+                response = await client.DeleteAsync("api/person/12");
 
                 #endregion
 

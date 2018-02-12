@@ -22,6 +22,7 @@ namespace WebApplication1
 
         public static void Open()
         {
+            sConn.Close();
             sConn.Open();
         }
 

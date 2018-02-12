@@ -37,7 +37,26 @@ namespace WebApplication1.Controllers
 
         public void Post([FromBody]Person person)
         {
-            int a = 0;
+            Sql.SetCommand($"INSERT INTO tbPerson(Name, Surname, Age) VALUES('{person.Name}','{person.Surname}','{person.Age}')");
+            Sql.Open();
+            Sql.sComm.ExecuteNonQuery();
+            Sql.Close();
+        }
+
+        public void Put(int id, [FromBody]Person person)
+        {
+            Sql.SetCommand($"UPDATE tbPerson SET Name={person.Name},Surname={person.Surname},Age={person.Age} WHERE Id={id}");
+            Sql.Open();
+            Sql.sComm.ExecuteNonQuery();
+            Sql.Close();
+        }
+
+        public void Delete(int id)
+        {
+            Sql.SetCommand($"DELETE FROM tbPerson WHERE Id={id}");
+            Sql.Open();
+            Sql.sComm.ExecuteNonQuery();
+            Sql.Close();
         }
 
 
@@ -60,6 +79,7 @@ namespace WebApplication1.Controllers
                 ret.Add(person);
             }
 
+            Sql.Close();
             return ret;
         }
     }
