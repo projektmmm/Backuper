@@ -1,15 +1,44 @@
-<<<<<<< HEAD
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using Newtonsoft.Json;
 
-namespace Deamon
+namespace Daemon
 {
     public class Backuper
     {
+        private FilesReportMaker reportMaker = new FilesReportMaker();
+        private string FullBack = @"C:\ProjektMMM\To\FullBackup-1-\";
+        private int FullCount;
+        private string DiffBack;
+        private List<string> InkrBack = new List<string>();
+
+        public DateTime GetOldest(string path)
+        {
+            DirectoryInfo di = new DirectoryInfo(path);
+            DateTime oldest = di.GetFiles()[0].LastWriteTime;
+            foreach (string f in Directory.GetFiles(path,"*",SearchOption.AllDirectories))
+            {
+                if (oldest < File.GetLastWriteTime(f))
+                {
+                    oldest = File.GetLastWriteTime(f);
+                }
+            }
+            foreach (string f in Directory.GetDirectories(path, "*", SearchOption.AllDirectories))
+            {
+                if (oldest < Directory.GetLastWriteTime(f))
+                {
+                    oldest = Directory.GetLastWriteTime(f);
+                }
+            }
+
+            return oldest;
+        }
+
+        
         /// <summary>
         /// Zkopíruje soubory z Settings.SourcePath do Settings.DestinationPath
         /// Když soubory v destinaci existují, overwritne je to
@@ -17,16 +46,32 @@ namespace Deamon
         /// <author>
         /// Musílek
         /// </author>
+        /// Bugs: neznámé
         public void FullBackup()
         {
-            ApiCommunication apiCommunication = new ApiCommunication();
-            apiCommunication.ToPost = new List<FileInfo>();
+            this.reportMaker = new FilesReportMaker();
+            this.DiffBack = null;
+            this.InkrBack = new List<string>();
             int Count = 0;
+            this.FullCount++;
+
+            FileInfo[] RootFiles = new DirectoryInfo(Settings.SourcePath).GetFiles();
+            foreach (FileInfo item in RootFiles)
+            {
+                reportMaker.AddFile(item);
+            }
 
             //Vytvoří podsložky
             foreach (string dirPath in Directory.GetDirectories(Settings.SourcePath, "*", SearchOption.AllDirectories))
             {
                 Directory.CreateDirectory(dirPath.Replace(Settings.SourcePath, Settings.DestinationPath));
+                FileInfo[] Files = new DirectoryInfo(dirPath).GetFiles();
+
+                //Informace o jednotlivych souborech pujdou do databaze
+                foreach (FileInfo item in Files)
+                {
+                    reportMaker.AddFile(item);
+                }
             }
 
             //Zkopíruje všechny soubory a přepíše existující
@@ -34,112 +79,98 @@ namespace Deamon
             {
                 File.Copy(newPath, newPath.Replace(Settings.SourcePath, Settings.DestinationPath), true);
                 Count++;
-                apiCommunication.ToPost.Add(new FileInfo() { BackupId = 0, }
             }
 
+            this.FullBack = Settings.DestinationPath + @"\FullBackup-" + this.FullCount + @"-\";
             Console.WriteLine("FullBackup completed!");
             Console.WriteLine(Count + " files copied");
-        }
 
-        public void DifferentialBackup()
-        {
-            int Count = 0;
-
-            //Vytvoří podsložky
-            foreach (string dirPath in Directory.GetDirectories(Settings.SourcePath, "*", SearchOption.AllDirectories))
+            //Info o Backupu
+            int Size = 0;
+            foreach (FileInformation item in reportMaker.GetReport())
             {
-                Directory.CreateDirectory(dirPath.Replace(Settings.SourcePath, Settings.DestinationPath));
+                Size += Convert.ToInt32(item.Size);
             }
 
-            //Zjistí datum změny souboru v destinaci a porovná ho s datem změny source souboru, když je source soubor novější přepíše soubor v destinaci
-            foreach (string newPath in Directory.GetFiles(Settings.SourcePath, "*.*", SearchOption.AllDirectories))
+            BackupInformation backupInformation = new BackupInformation()
             {
-                DateTime DestinationFile = File.GetLastWriteTime(newPath);
-                DateTime SourceFile = File.GetLastWriteTime(newPath.Replace(Settings.SourcePath, Settings.DestinationPath));
+                Date = DateTime.Now,
+                Type = "FULL",
+                Size = Size
+            };
+            List<string> toPost = new List<string>();
+            toPost.Add(JsonConvert.SerializeObject(reportMaker.GetReport()));
+            toPost.Add(JsonConvert.SerializeObject(backupInformation));
 
-                //je vetší - je starší
-                if (DestinationFile > SourceFile)
-                {
-                    File.Copy(newPath, newPath.Replace(Settings.SourcePath, Settings.DestinationPath), true);
-                    Count++;
-                }
-            }
-
-            Console.WriteLine("DifferentialBackup completed!");
-            Console.WriteLine(Count + " files copied");
+            //odesilani na API
+            ApiCommunication.PostBackupReport(toPost, "api/daemon");
         }
-    }
-}
-=======
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
 
-namespace Deamon
-{
-    public class Backuper
-    {
         /// <summary>
-        /// Zkopíruje soubory z Settings.SourcePath do Settings.DestinationPath
-        /// Když soubory v destinaci existují, overwritne je to
+        /// Jde o zálohu totožnou s fullem až na podmínku uvnitř foreachů
         /// </summary>
-        /// <author>
-        /// Musílek
-        /// </author>
-        public void FullBackup()
-        {
-            ApiCommunication apiCommunication = new ApiCommunication();
-            apiCommunication.ToPost = new List<FileInfo>();
-            int Count = 0;
-
-            //Vytvoří podsložky
-            foreach (string dirPath in Directory.GetDirectories(Settings.SourcePath, "*", SearchOption.AllDirectories))
-            {
-                Directory.CreateDirectory(dirPath.Replace(Settings.SourcePath, Settings.DestinationPath));
-            }
-
-            //Zkopíruje všechny soubory a přepíše existující
-            foreach (string newPath in Directory.GetFiles(Settings.SourcePath, "*.*", SearchOption.AllDirectories))
-            {
-                File.Copy(newPath, newPath.Replace(Settings.SourcePath, Settings.DestinationPath), true);
-                Count++;
-                apiCommunication.ToPost.Add(new FileInfo() { BackupId = 0, }
-            }
-
-            Console.WriteLine("FullBackup completed!");
-            Console.WriteLine(Count + " files copied");
-        }
-
+        /// Macek
+        /// Bugs:Neznámé
         public void DifferentialBackup()
         {
+            this.InkrBack = new List<string>();
             int Count = 0;
-
-            //Vytvoří podsložky
-            foreach (string dirPath in Directory.GetDirectories(Settings.SourcePath, "*", SearchOption.AllDirectories))
+            
+            if (this.FullBack!=null)
             {
-                Directory.CreateDirectory(dirPath.Replace(Settings.SourcePath, Settings.DestinationPath));
-            }
-
-            //Zjistí datum změny souboru v destinaci a porovná ho s datem změny source souboru, když je source soubor novější přepíše soubor v destinaci
-            foreach (string newPath in Directory.GetFiles(Settings.SourcePath, "*.*", SearchOption.AllDirectories))
-            {
-                DateTime DestinationFile = File.GetLastWriteTime(newPath);
-                DateTime SourceFile = File.GetLastWriteTime(newPath.Replace(Settings.SourcePath, Settings.DestinationPath));
-
-                //je vetší - je starší
-                if (DestinationFile > SourceFile)
+                foreach (string dirPath in Directory.GetDirectories(Settings.SourcePath,"*",SearchOption.AllDirectories))
                 {
-                    File.Copy(newPath, newPath.Replace(Settings.SourcePath, Settings.DestinationPath), true);
-                    Count++;
+                   if (Directory.GetLastWriteTime(dirPath)>this.GetOldest(this.FullBack))
+                    {
+                        Directory.CreateDirectory(dirPath.Replace(Settings.SourcePath,Settings.DestinationPath + @"\DiffBackupFor-" + this.FullCount + @"-\"));
+                    }
+                                                  
+                }
+                foreach (string filePath in Directory.GetFiles(Settings.SourcePath, "*.*", SearchOption.AllDirectories))
+                {
+
+                    if (File.GetLastWriteTime(filePath) > this.GetOldest(this.FullBack))
+                    {
+                        File.Copy(filePath, filePath.Replace(Settings.SourcePath, Settings.DestinationPath + @"\DiffBackupFor-" + this.FullCount + @"-\"), true);
+                    }
                 }
             }
-
+            else
+            {
+                this.FullBackup();
+            }
             Console.WriteLine("DifferentialBackup completed!");
             Console.WriteLine(Count + " files copied");
         }
+
+        public void InkrementalBackup()
+        {
+            if(FullBack!=null)
+            {
+                DateTime oldest = (this.DiffBack == null ? this.GetOldest(this.FullBack) : this.GetOldest(DiffBack));
+
+                foreach (string dirPath in Directory.GetDirectories(Settings.SourcePath, "*", SearchOption.AllDirectories))
+                {
+                    if (Directory.GetLastWriteTime(dirPath) > oldest)
+                    {
+                        Directory.CreateDirectory(dirPath.Replace(Settings.SourcePath, Settings.DestinationPath + @"\DiffBackupFor-" + this.FullCount + @"-\"));
+                    }
+
+                }
+                foreach (string filePath in Directory.GetFiles(Settings.SourcePath, "*.*", SearchOption.AllDirectories))
+                {
+
+                    if (File.GetLastWriteTime(filePath) > oldest)
+                    {
+                        File.Copy(filePath, filePath.Replace(Settings.SourcePath, Settings.DestinationPath + @"\DiffBackupFor-" + this.FullCount + @"-\"), true);
+                    }
+                }
+            }
+            else
+            {
+                this.FullBackup();
+            }
+
+        }
     }
 }
->>>>>>> 385e65321a94b574130fcc76c00b38b556f1e93e

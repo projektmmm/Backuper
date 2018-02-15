@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
-namespace Deamon
+namespace Daemon
 {
-    public class ApiCommunication
+    public static class ApiCommunication
     {
-        public List<FileInfo> ToPost { get; set; }
+        public static Uri Adress { get; set; } = new Uri("http://localhost:54736/");
 
-        public async void Post()
+        public static async Task PostBackupReport(List<string> toPost, string apiDestination)
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = Connection.Api;
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.BaseAddress = ApiCommunication.Adress;
+                client.DefaultRequestHeaders.Accept.Clear(); //odstraneni predeslych pozadovanych formatu odpovedi
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); //chci dostat zpet json
 
-                HttpResponseMessage Response = await client.PostAsJsonAsync("api/person", this.ToPost);
+                HttpResponseMessage response = await client.PostAsJsonAsync(apiDestination, toPost);
             }
         }
     }
