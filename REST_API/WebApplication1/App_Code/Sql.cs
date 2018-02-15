@@ -9,7 +9,7 @@ namespace WebApplication1
 {
     public static class Sql
     {
-        public static string ConnectionString = "Server=mysqlstudenti.litv.sssvt.cz; Database=3b2_mullervojtech_db2; Uid=mullervojtech; Pwd=123456";
+        public static string ConnectionString = "Server=mysqlstudenti.litv.sssvt.cz; Database=3b2_macekdaniel_db2; Uid=macekdaniel; Pwd=123456";
         public static MySqlConnection sConn = new MySqlConnection(ConnectionString);
         public static string query = "";
         public static MySqlCommand sComm = new MySqlCommand(query, sConn);
