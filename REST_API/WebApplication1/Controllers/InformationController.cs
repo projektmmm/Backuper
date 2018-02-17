@@ -26,7 +26,7 @@ namespace WebApplication1.Controllers
                 Sql.sComm.ExecuteNonQuery();
             }
 
-            Sql.SetCommand($"INSERT INTO tbBackup(Date, Type, Size) VALUES('{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}','{backupinfo.Type}','{backupinfo.Size}')");
+            Sql.SetCommand($"INSERT INTO tbBackupReport(Date, Type, Size) VALUES('{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}','{backupinfo.Type}','{backupinfo.Size}')");
             Sql.sComm.ExecuteNonQuery();
             Sql.Close();
         }
