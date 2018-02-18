@@ -11,9 +11,10 @@ namespace Daemon
     {
         static void Main(string[] args)
         {
+            ApiCommunication.GetNextRunSetting("api/daemon");
             Backuper b = new Backuper();
 
-            b.FullBackup();
+            //b.FullBackup();
 
             //b.DifferentialBackup();
 

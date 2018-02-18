@@ -52,6 +52,7 @@
     <Compile Include="Backuper.cs" />
     <Compile Include="BackupInformation.cs" />
     <Compile Include="FileInformation.cs" />
+    <Compile Include="NextRunSettings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FilesReportMaker.cs" />

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace Daemon
+namespace WebApplication1.Models
 {
     public class NextRunSettings
     {
@@ -12,13 +11,5 @@ namespace Daemon
         public int BackupType { get; set; }
         public string SourcePath { get; set; }
         public string DestinationPath { get; set; }
-
-
-        public void OverrideSettings()
-        {
-            Settings.DestinationPath = this.DestinationPath;
-            Settings.SourcePath = this.SourcePath;
-            Settings.RunAt = this.RunAt;
-        }
     }
 }

@@ -30,5 +30,23 @@ namespace WebApplication1.Controllers
             Sql.sComm.ExecuteNonQuery();
             Sql.Close();
         }
+
+        [Route("api/daemon")]
+        public NextRunSettings Get()
+        {
+            Sql.SetCommand("SELECT RunAt, BackupType, SourcePath, DestinationPath FROM tbBackups WHERE Id=1");
+            Sql.Open();
+            MySqlDataReader sRead = Sql.sComm.ExecuteReader();
+            sRead.Read();
+            NextRunSettings ret = new NextRunSettings()
+            {
+                RunAt = Convert.ToDateTime(sRead[0]),
+                BackupType = Convert.ToInt32(sRead[1]),
+                SourcePath = sRead[2].ToString(),
+                DestinationPath = sRead[3].ToString()
+            };
+            Sql.Close();
+            return ret;
+        }
     }
 }
