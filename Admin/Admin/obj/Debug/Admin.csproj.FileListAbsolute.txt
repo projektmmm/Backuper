@@ -1,0 +1,10 @@
+C:\Users\Vojta\Documents\GitHub\Backuper\Admin\Admin\bin\Debug\Admin.exe.config
+C:\Users\Vojta\Documents\GitHub\Backuper\Admin\Admin\bin\Debug\Admin.exe
+C:\Users\Vojta\Documents\GitHub\Backuper\Admin\Admin\bin\Debug\Admin.pdb
+C:\Users\Vojta\Documents\GitHub\Backuper\Admin\Admin\obj\Debug\Admin.csprojResolveAssemblyReference.cache
+C:\Users\Vojta\Documents\GitHub\Backuper\Admin\Admin\obj\Debug\Admin.Form1.resources
+C:\Users\Vojta\Documents\GitHub\Backuper\Admin\Admin\obj\Debug\Admin.Properties.Resources.resources
+C:\Users\Vojta\Documents\GitHub\Backuper\Admin\Admin\obj\Debug\Admin.csproj.GenerateResource.Cache
+C:\Users\Vojta\Documents\GitHub\Backuper\Admin\Admin\obj\Debug\Admin.csproj.CoreCompileInputs.cache
+C:\Users\Vojta\Documents\GitHub\Backuper\Admin\Admin\obj\Debug\Admin.exe
+C:\Users\Vojta\Documents\GitHub\Backuper\Admin\Admin\obj\Debug\Admin.pdb
