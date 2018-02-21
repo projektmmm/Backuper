@@ -57,6 +57,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FilesReportMaker.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Timer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

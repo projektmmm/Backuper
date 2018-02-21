@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 
 namespace Daemon
 {
-    public static class Settings
+    public  class Settings
     { 
-        public static string DaemonId { get; private set; }
-        public static DateTime RunAt { get; set; }
-        public static string SourcePath { get; set; } = @"C:\ProjektMMM\From\";
-        public static string DestinationPath { get; set; } = @"C:\ProjektMMM\To\";
+        
+        public string DaemonId { get; private set; }
+        public DateTime RunAt { get; set; }
+        public string SourcePath { get; set; } = @"C:\ProjektMMM\From\";
+        public string DestinationPath { get; set; } = @"C:\ProjektMMM\To\";
+
+        //upgrade pro timer
+        public int AskInterval { get; set; } = 10 * 60 * 1000; //10 min
     }
 }

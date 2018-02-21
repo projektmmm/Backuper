@@ -15,6 +15,7 @@ namespace Daemon
         private int FullCount;
         private string DiffBack;
         private List<string> InkrBack = new List<string>();
+        public Settings Settings = new Settings();
 
         public DateTime GetOldest(string path)
         {
@@ -153,7 +154,7 @@ namespace Daemon
                 {
                     if (Directory.GetLastWriteTime(dirPath) > oldest)
                     {
-                        Directory.CreateDirectory(dirPath.Replace(Settings.SourcePath, Settings.DestinationPath + @"\DiffBackupFor-" + this.FullCount + @"-\"));
+                        Directory.CreateDirectory(dirPath.Replace(Settings.SourcePath, Settings.DestinationPath + @"\InkrBackupFor-" + this.FullCount + @"-\"));
                     }
 
                 }
@@ -162,7 +163,7 @@ namespace Daemon
 
                     if (File.GetLastWriteTime(filePath) > oldest)
                     {
-                        File.Copy(filePath, filePath.Replace(Settings.SourcePath, Settings.DestinationPath + @"\DiffBackupFor-" + this.FullCount + @"-\"), true);
+                        File.Copy(filePath, filePath.Replace(Settings.SourcePath, Settings.DestinationPath + @"\InkrBackupFor-" + this.FullCount + @"-\"), true);
                     }
                 }
             }
