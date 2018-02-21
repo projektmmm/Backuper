@@ -15,6 +15,9 @@ namespace Daemon
         /// <summary>
         /// Odeslani reportu o Backupu
         /// </summary>
+        /// <param name="toPost"></param>
+        /// <param name="apiDestination"></param>
+        /// <returns></returns>
         public static async Task PostBackupReport(List<string> toPost, string apiDestination)
         {
             using (var client = GetJsonClient())
@@ -23,9 +26,7 @@ namespace Daemon
             }
         }
 
-        /// <summary>
-        /// Poptavka po novych nastavenich z databaze
-        /// </summary>
+
         public static async Task GetNextRunSetting(string apiDestination)
         {
             using (var client = GetJsonClient())
@@ -41,9 +42,7 @@ namespace Daemon
 
 
 
-        /// <summary>
-        /// Odesilane a prijimane informace budou vyzadovany v json formatu
-        /// </summary>
+
         private static HttpClient GetJsonClient()
         {
             HttpClient client = new HttpClient();

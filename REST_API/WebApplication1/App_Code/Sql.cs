@@ -30,11 +30,5 @@ namespace WebApplication1
         {
             sConn.Close();
         }
-
-        public static MySqlConnection GetConnection()
-        {
-            sConn = new MySqlConnection(ConnectionString);
-            return sConn;
-        }
     }
 }

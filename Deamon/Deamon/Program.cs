@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-using Daemon.Backups;
-using Deamon.Backups;
 
 namespace Daemon
 {
@@ -14,9 +12,8 @@ namespace Daemon
         static void Main(string[] args)
         {
             ApiCommunication.GetNextRunSetting("api/daemon");
-            //Backuper b = new Backuper();
-            //FullBackup fb = new FullBackup();
-            DifferentialBackup df = new DifferentialBackup();
+            Backuper b = new Backuper();
+
             //b.FullBackup();
 
             //b.DifferentialBackup();
