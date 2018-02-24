@@ -17,7 +17,7 @@ namespace Deamon.Backups
         public DifferentialBackup()
         {
             this.reportMaker = new FilesReportMaker();
-            this.Backup();
+            //this.Backup();
         }
 
         /// <summary>
@@ -26,22 +26,22 @@ namespace Deamon.Backups
         /// <ToDo>
         /// Možnost nakopírovat to do úplně nové složky. Vymazat složky a soubory, co už tam nejsou
         /// </ToDo>
-        public void Backup()
+        public void Backup(string SourcePath,string DestinationPath)
         {
             int Count = 0;
-            foreach (string dirPath in Directory.GetDirectories(Settings.SourcePath, "*", SearchOption.AllDirectories))
+            foreach (string dirPath in Directory.GetDirectories(SourcePath, "*", SearchOption.AllDirectories))
             {
-                if (Directory.GetLastWriteTime(dirPath) > this.GetOldest(Settings.DestinationPath))
+                if (Directory.GetLastWriteTime(dirPath) > this.GetOldest(DestinationPath))
                 {
-                    Directory.CreateDirectory(dirPath.Replace(Settings.SourcePath, Settings.DestinationPath));
+                    Directory.CreateDirectory(dirPath.Replace(SourcePath, DestinationPath));
                 }
             }
 
-            foreach (string filePath in Directory.GetFiles(Settings.SourcePath, "*.*", SearchOption.AllDirectories))
+            foreach (string filePath in Directory.GetFiles(SourcePath, "*.*", SearchOption.AllDirectories))
             {
-                if (File.GetLastWriteTime(filePath) > this.GetOldest(Settings.DestinationPath))
+                if (File.GetLastWriteTime(filePath) > this.GetOldest(DestinationPath))
                 {
-                    File.Copy(filePath, filePath.Replace(Settings.SourcePath, Settings.DestinationPath), true);
+                    File.Copy(filePath, filePath.Replace(SourcePath, DestinationPath), true);
                     Count++;
                     reportMaker.AddFile(new FileInfo(filePath));
                 }

@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace Daemon
 {
-    public class Backuper
+    public class BackupMenu
     {
         private FilesReportMaker reportMaker = new FilesReportMaker();
         private string FullBack = @"C:\ProjektMMM\To\FullBackup-1-\";

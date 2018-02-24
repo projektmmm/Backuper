@@ -14,7 +14,7 @@ namespace Daemon.Backups
 
         public FullBackup()
         {
-            this.Backup();
+            //this.Backup();
         }
 
 
@@ -24,21 +24,21 @@ namespace Daemon.Backups
         /// </summary>
         /// Author: Musilek
         /// Bugs: neznámé
-        public void Backup()
+        public void Backup(string SourcePath,string DestinationPath)
         {           
             this.reportMaker = new FilesReportMaker();
             int Count = 0;
 
             //Vytvoří podsložky
-            foreach (string dirPath in Directory.GetDirectories(Settings.SourcePath, "*", SearchOption.AllDirectories))
+            foreach (string dirPath in Directory.GetDirectories(SourcePath, "*", SearchOption.AllDirectories))
             {
-                Directory.CreateDirectory(dirPath.Replace(Settings.SourcePath, Settings.DestinationPath));
+                Directory.CreateDirectory(dirPath.Replace(SourcePath, DestinationPath));
             }
 
             //Zkopíruje všechny soubory a přepíše existující
-            foreach (string newPath in Directory.GetFiles(Settings.SourcePath, "*.*", SearchOption.AllDirectories))
+            foreach (string newPath in Directory.GetFiles(SourcePath, "*.*", SearchOption.AllDirectories))
             {
-                File.Copy(newPath, newPath.Replace(Settings.SourcePath, Settings.DestinationPath), true);
+                File.Copy(newPath, newPath.Replace(SourcePath, DestinationPath), true);
                 Count++;
                 reportMaker.AddFile(new FileInfo(newPath));
             }

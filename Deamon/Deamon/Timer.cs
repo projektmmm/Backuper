@@ -10,36 +10,39 @@ namespace Deamon
 {
     public class Timer //Macek
     {
-        private Backuper back = new Backuper();
+        private Backups.BackupMenu BackMenu = new Backups.BackupMenu();
+        private Settings settings = new Settings();
+        private ApiCommunication ApiCommunication = new ApiCommunication();
         private static System.Timers.Timer aTimer;
+        //Private List<Settings>
 
         public  void Start()
         {
             SetTimer();
         }
 
+        //Nastaví timer na interval danný v settings 
         private  void SetTimer()
         {
             // Create a timer with a two second interval.
-            aTimer = new System.Timers.Timer(this.back.Settings.AskInterval);
+            aTimer = new System.Timers.Timer(this.settings.AskInterval);
             // Hook up the Elapsed event for the timer. 
             aTimer.Elapsed += SendRequest;
             this.SetTimer();
         }
 
+        //Pošle request do databáze aby zjistil nové nastanení a následně ho změní všude kde je třeba
+        //pokuď již nastal čas backupu zpustí ho
         private  void SendRequest(Object source, ElapsedEventArgs e)
         {
-            
-            
-            //Dotáže se do Databáze jestli nejsou nové setting & nebo jestli neměl nastat backup (V případě že by někdo změnil setting na čas jenž již nastal)
-            //nechám to pro jistotu na tobě Mullere ...
-
-
+            ApiCommunication.GetNextRunSetting("api/daemon");
+            //Přidat kontrolu jestli se něco změnilo
+            this.settings = this.ApiCommunication.nextRunSettings.OverrideSettings();
+            this.BackMenu.ChangeType(this.settings.BackupType,this.settings.SourcePath,this.settings.DestinationPath);
             //Kontrola jestli nastal čas backupu 
-            if (DateTime.Now < this.back.Settings.RunAt)
+            if (DateTime.Now < this.settings.RunAt)
             {
-                //provede backup dle nastavení ... ještě dohodneme. 
-                
+                this.BackMenu.StartBackup();
             }
         }
     

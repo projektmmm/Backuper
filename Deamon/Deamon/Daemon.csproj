@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="ApiCommunication.cs" />
     <Compile Include="Backups\Backuper.cs" />
+    <Compile Include="Backups\BackupMenu.cs" />
     <Compile Include="Backups\DifferentialBackup.cs" />
     <Compile Include="Backups\FullBackup.cs" />
     <Compile Include="Backups\IBackup.cs" />

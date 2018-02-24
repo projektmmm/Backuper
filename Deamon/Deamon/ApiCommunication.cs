@@ -5,12 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using Deamon;
 
 namespace Daemon
 {
-    public static class ApiCommunication
+    public class ApiCommunication
     {
         public static Uri Adress { get; set; } = new Uri("http://localhost:54736/");
+        public NextRunSettings nextRunSettings;
 
         /// <summary>
         /// Odeslani reportu o Backupu
@@ -26,15 +28,15 @@ namespace Daemon
         /// <summary>
         /// Poptavka po novych nastavenich z databaze
         /// </summary>
-        public static async Task GetNextRunSetting(string apiDestination)
+        public async Task GetNextRunSetting(string apiDestination)
         {
             using (var client = GetJsonClient())
             {
                 HttpResponseMessage response = await client.GetAsync(apiDestination);
                 if (response.IsSuccessStatusCode)
                 {
-                    NextRunSettings nextRunSettings = await response.Content.ReadAsAsync<NextRunSettings>();
-                    nextRunSettings.OverrideSettings();
+                    this.nextRunSettings = new NextRunSettings();
+                    this.nextRunSettings = await response.Content.ReadAsAsync<NextRunSettings>();
                 }
             }
         }
