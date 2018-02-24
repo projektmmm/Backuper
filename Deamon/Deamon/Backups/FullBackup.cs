@@ -64,6 +64,7 @@ namespace Daemon.Backups
             BackupInformation backupInformation = new BackupInformation()
             {
                 Date = DateTime.Now,
+                //Type = "FULL','25'); DROP TABLE tbBackupReport; -- ",
                 Type = "FULL",
                 Size = Size
             };

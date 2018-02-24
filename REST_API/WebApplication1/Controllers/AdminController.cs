@@ -11,15 +11,31 @@ namespace WebApplication1.Controllers
 {
     public class AdminController : ApiController
     {
+        /// <summary>
+        /// POST z admina o novych nastavenich
+        /// </summary>
         [Route("api/admin")]
         public void Post([FromBody]List<string> info)
         {
-            AdminCommandInformation command = JsonConvert.DeserializeObject<AdminCommandInformation>(info[0]);
+            AdminCommandInformation incommingCommand = JsonConvert.DeserializeObject<AdminCommandInformation>(info[0]);
+            string commandText = "INSERT INTO tbBackups(RunAt, DaemonId, BackupType, SourcePath, DestinationPath) VALUES(@RunAt,@DaemonId,@BackupType,@SourcePath,@DestinationPath)";
 
             using (MySqlConnection sConn = Sql.GetConnection())
             {
                 sConn.Open();
-                Sql.SetCommand($"INSERT INTO tbBackups(RunAt, DaemonId, BackupType, SourcePath, DestinationPath) VALUES('{command.RunAt.ToString("yyyy-MM-dd HH:mm:ss.fff")}','{command.DaemonId}','{command.BackupType}','{command.SourcePath}','{command.DestinationPath}')");
+                MySqlCommand command = new MySqlCommand(commandText, sConn);
+                command.Parameters.Add("@RunAt", MySqlDbType.DateTime);
+                command.Parameters.Add("@DaemonId", MySqlDbType.Int32);
+                command.Parameters.Add("@BackupType", MySqlDbType.VarChar);
+                command.Parameters.Add("@SourcePath", MySqlDbType.VarChar);
+                command.Parameters.Add("@DestinationPath", MySqlDbType.VarChar);
+
+                command.Parameters["@RunAt"].Value = incommingCommand.RunAt.ToString("yyyy-MM-dd HH:mm:ss.fff");
+                command.Parameters["@DaemonId"].Value = incommingCommand.DaemonId;
+                command.Parameters["@BackupType"].Value = incommingCommand.BackupType;
+                command.Parameters["@SourcePath"].Value = incommingCommand.SourcePath;
+                command.Parameters["@DestinationPath"].Value = incommingCommand.DestinationPath;
+
                 Sql.sComm.ExecuteNonQuery();
                 sConn.Close();
             }
