@@ -30,6 +30,7 @@ namespace Daemon
         /// <ToDo>
         /// Aby logovani slozek nespadlo po slozce 10
         /// Aby fungovalo MODIFIED a ne DEL+NEW
+        /// Aby to fungovalo se slozkama
         /// </ToDo>
         public void Backup()
         {
@@ -49,6 +50,7 @@ namespace Daemon
             {
                 if (Directory.GetLastWriteTime(dirPath) > this.GetOldest(this.FullBackupPath))
                 {
+                    string abz = dirPath.Replace(this.SourcePath, this.DestinationPath);
                     Directory.CreateDirectory(dirPath.Replace(this.SourcePath, this.DestinationPath));
                 }
             }
