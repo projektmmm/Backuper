@@ -8,48 +8,126 @@ using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
 
-namespace Deamon.Backups
+namespace Daemon
 {
     public class DifferentialBackup : IBackup
     {
         private FilesReportMaker reportMaker { get; set; }
+        private string SourcePath { get; set; }
+        private string FullBackupPath { get; set; }
+        private string DestinationPath { get; set; }
 
-        public DifferentialBackup()
+        public DifferentialBackup(string sourcePath, string fullBackupPath)
         {
             this.reportMaker = new FilesReportMaker();
-            //this.Backup();
+            this.SourcePath = sourcePath;
+            this.FullBackupPath = fullBackupPath;
         }
 
         /// <summary>
         /// Diferenciální backup. Porovná výchozí složku s destinací a překopíruje soubory, co chybí
         /// </summary>
         /// <ToDo>
-        /// Možnost nakopírovat to do úplně nové složky. Vymazat složky a soubory, co už tam nejsou
+        /// Aby logovani slozek nespadlo po slozce 10
+        /// Aby fungovalo MODIFIED a ne DEL+NEW
         /// </ToDo>
-        public void Backup(string SourcePath,string DestinationPath)
+        public void Backup()
         {
-            int Count = 0;
-            foreach (string dirPath in Directory.GetDirectories(SourcePath, "*", SearchOption.AllDirectories))
+            int fileCount = 0;
+            int directoryCount = 0;
+
+            //Vytvoreni slozky pro svuj diff backup
+            foreach (string dirPath in Directory.GetDirectories(this.FullBackupPath + "\\diff_backups"))
             {
-                if (Directory.GetLastWriteTime(dirPath) > this.GetOldest(DestinationPath))
+                directoryCount++;
+            }
+            this.DestinationPath = this.FullBackupPath + "\\diff_backups\\" + ((directoryCount).ToString());
+            Directory.CreateDirectory(this.DestinationPath);
+
+            //Prekopirovani novych slozek
+            foreach (string dirPath in Directory.GetDirectories(this.SourcePath, "*", SearchOption.AllDirectories))
+            {
+                if (Directory.GetLastWriteTime(dirPath) > this.GetOldest(this.FullBackupPath))
                 {
-                    Directory.CreateDirectory(dirPath.Replace(SourcePath, DestinationPath));
+                    Directory.CreateDirectory(dirPath.Replace(this.SourcePath, this.DestinationPath));
                 }
             }
 
-            foreach (string filePath in Directory.GetFiles(SourcePath, "*.*", SearchOption.AllDirectories))
+            List<LogModel> oldLogFile = new List<LogModel>();
+            List<LogModel> oldLog = new List<LogModel>();
+            List<LogModel> newLog = new List<LogModel>();
+            //Nacetni stareho logu
+            using (StreamReader streamReader = new StreamReader(this.DestinationPath.Substring(0, this.DestinationPath.Length-1) + (directoryCount-1).ToString() + "\\FileLog.log"))
             {
-                if (File.GetLastWriteTime(filePath) > this.GetOldest(DestinationPath))
-                {
-                    File.Copy(filePath, filePath.Replace(SourcePath, DestinationPath), true);
-                    Count++;
-                    reportMaker.AddFile(new FileInfo(filePath));
-                }
+                string logtext = streamReader.ReadToEnd();
+                oldLogFile = JsonConvert.DeserializeObject<List<LogModel>>(logtext);//.OrderBy(f => new LogModel().FileName);
             }
+
+            //Odmazani nepotrebnych informaci z logu
+            int index = 0;
+            foreach (LogModel item in oldLogFile)
+            {
+                if (item.Action != "DEL")
+                    oldLog.Add(item);
+            }
+
+            //Porovnavani logu s aktulani verzi vychozi slozky pro fullbackup
+            foreach (string filePath in Directory.GetFiles(this.SourcePath, "*.*", SearchOption.AllDirectories).OrderBy(f => new FileInfo(f).FullName))
+            {
+                FileInfo fileInfo = new FileInfo(filePath);
+                index = 0;
+                bool found = false;
+
+                foreach (LogModel item in oldLog)
+                {
+                    //nezmeneno - EXISTS
+                    if (fileInfo.FullName == item.FilePath && fileInfo.LastWriteTime == item.LastWriteTime)
+                    {
+                        newLog.Add(new LogModel() { Action = "EXI", FileName = fileInfo.Name, FilePath = fileInfo.FullName, LastWriteTime = Convert.ToDateTime(fileInfo.LastWriteTime) });
+                        oldLog.RemoveAt(index);
+                        found = true;
+                        break;
+                    }
+                    //zmena zapisu - MODIFIED
+                    else if (fileInfo.Name == item.FilePath && fileInfo.LastWriteTime != item.LastWriteTime)
+                    {
+                        newLog.Add(new LogModel() { Action = "MOD", FileName = fileInfo.Name, FilePath = fileInfo.FullName, LastWriteTime = Convert.ToDateTime(fileInfo.LastWriteTime) });
+                        File.Copy(filePath, filePath.Replace(this.SourcePath, this.DestinationPath), true);
+                        fileCount++;
+                        reportMaker.AddFile(new FileInfo(filePath));
+                        oldLog.RemoveAt(index);
+                        found = true;
+                        break;
+                    }
+                    index++;
+                }
+                if (found == true)
+                    continue;
+
+                //nenalezene v minulem logu - NEW
+                File.Copy(filePath, filePath.Replace(this.SourcePath, this.DestinationPath), true);
+                fileCount++;
+                reportMaker.AddFile(new FileInfo(filePath));
+                newLog.Add(new LogModel() { Action = "NEW", FileName = fileInfo.Name, FilePath = fileInfo.FullName, LastWriteTime = Convert.ToDateTime(fileInfo.LastWriteTime) });
+            }
+
+            //nenalezene v puvodnim adresari - DELETE
+            foreach (LogModel item in oldLog)
+            {
+                newLog.Add(new LogModel() { Action = "DEL", FileName = item.FileName, FilePath = item.FilePath, LastWriteTime = Convert.ToDateTime(item.LastWriteTime)});
+            }
+
+            //Zapsani noveho logu do souboru
+            using (StreamWriter streamWriter = new StreamWriter(this.DestinationPath + "\\FileLog.log", false))
+            {
+                string toWrite = JsonConvert.SerializeObject(newLog);
+                streamWriter.Write(toWrite);
+            }
+
 
             Console.WriteLine("DifferentialBackup completed!");
-            Console.WriteLine(Count + " files copied");
-            this.SendReport();
+            Console.WriteLine(fileCount + " files copied");
+            //this.SendReport();
         }
 
         /// <summary>

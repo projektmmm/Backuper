@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 using Daemon.Backups;
 using Deamon;
 
-namespace Deamon.Backups
+namespace Daemon
 {
     public class BackupMenu
     {
 
         //Tuhle classu využijeme jako středobod backupů. Musíme vymyslet nějáký chytrý pusob jak je přepínat
-        FullBackup fb = new FullBackup();
-        DifferentialBackup df = new DifferentialBackup();
+        //FullBackup fb = new FullBackup();
+        //DifferentialBackup df = new DifferentialBackup();
 
 
         int BackupType = 1; //1-Full,2=Diff
@@ -31,11 +31,11 @@ namespace Deamon.Backups
             //Musíme vymyslet něco chytřejšího 
             if(this.BackupType == 1)
             {
-                this.fb.Backup(this.SourcePath,this.DestinationPath);
+                //this.fb.Backup(this.SourcePath,this.DestinationPath);
             }
             else if(this.BackupType == 2)
             {
-                this.df.Backup(this.SourcePath, this.DestinationPath);
+                //this.df.Backup(this.SourcePath, this.DestinationPath);
             }
         }
     

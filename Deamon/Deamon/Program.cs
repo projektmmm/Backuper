@@ -13,9 +13,17 @@ namespace Daemon
     {
         static void Main(string[] args)
         {
-            Timer timer = new Timer();
-            timer.Start();
-            //ApiCommunication.GetNextRunSetting("api/daemon");
+            //Timer timer = new Timer();
+            //timer.Start();
+
+            //FullBackup fb = new FullBackup(@"C:\ProjektMMM\From", @"C:\ProjektMMM\To");
+            //fb.Backup();
+
+
+            DifferentialBackup df = new DifferentialBackup(@"C:\ProjektMMM\From", @"C:\ProjektMMM\To");
+            df.Backup();
+
+            //ApiCommunication.GetNextRunSetting("api /daemon");
             ////Backuper b = new Backuper();
             ////FullBackup fb = new FullBackup();
             //DifferentialBackup df = new DifferentialBackup();
@@ -23,7 +31,7 @@ namespace Daemon
 
             ////b.DifferentialBackup();
 
-            //Console.ReadLine();
+            Console.ReadLine();
         }
     }
 }

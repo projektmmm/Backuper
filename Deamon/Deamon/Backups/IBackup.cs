@@ -8,7 +8,7 @@ namespace Daemon.Backups
 {
     public interface IBackup
     {
-        void Backup(string SourcePath, string DestinationPath);
+        void Backup();
         void SendReport();
     }
 }
