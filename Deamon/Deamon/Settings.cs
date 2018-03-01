@@ -16,5 +16,7 @@ namespace Daemon
 
         //upgrade pro timer
         public int AskInterval { get; set; } = 10 * 60 * 1000; //10 min
+        //Upgrade pro novou verzi
+        public int BackupType { get; set; } = 1;
     }
 }

@@ -58,6 +58,7 @@
             this.comboBox_BackupType.Name = "comboBox_BackupType";
             this.comboBox_BackupType.Size = new System.Drawing.Size(200, 21);
             this.comboBox_BackupType.TabIndex = 2;
+            this.comboBox_BackupType.SelectedIndexChanged += new System.EventHandler(this.comboBox_BackupType_SelectedIndexChanged);
             // 
             // textBox_DestinationPath
             // 

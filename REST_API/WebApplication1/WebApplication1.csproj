@@ -200,6 +200,7 @@
     <Compile Include="Controllers\DaemonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Test.cs" />
+    <Compile Include="Email.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

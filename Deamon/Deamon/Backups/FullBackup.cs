@@ -11,10 +11,13 @@ namespace Daemon.Backups
     public class FullBackup : IBackup
     {
         private FilesReportMaker reportMaker { get; set; }
+        private string SourcePath { get; set; }
+        private string DestinationPath { get; set; }
 
-        public FullBackup()
+        public FullBackup(string sourcePath, string destinationPath)
         {
-            this.Backup();
+            this.SourcePath = sourcePath;
+            this.DestinationPath = destinationPath;
         }
 
 
@@ -22,25 +25,39 @@ namespace Daemon.Backups
         /// Zkopíruje soubory z Settings.SourcePath do Settings.DestinationPath
         /// Když soubory v destinaci existují, přepíše to.
         /// </summary>
-        /// Author: Musilek
-        /// Bugs: neznámé
+        /// ToDo: Udelat lepsi pojmenovavani slozky pro diff backupy
         public void Backup()
         {           
             this.reportMaker = new FilesReportMaker();
             int Count = 0;
 
+            //Vytvori slozky pro diferencialni backupy
+            DirectoryInfo directoryInfo = Directory.CreateDirectory(this.DestinationPath + "\\diff_backups");
+            directoryInfo.Attributes = FileAttributes.Hidden;
+            Directory.CreateDirectory(this.DestinationPath + "\\diff_backups\\0");
+
             //Vytvoří podsložky
-            foreach (string dirPath in Directory.GetDirectories(Settings.SourcePath, "*", SearchOption.AllDirectories))
+            foreach (string dirPath in Directory.GetDirectories(this.SourcePath, "*", SearchOption.AllDirectories))
             {
-                Directory.CreateDirectory(dirPath.Replace(Settings.SourcePath, Settings.DestinationPath));
+                Directory.CreateDirectory(dirPath.Replace(this.SourcePath, this.DestinationPath));
             }
 
-            //Zkopíruje všechny soubory a přepíše existující
-            foreach (string newPath in Directory.GetFiles(Settings.SourcePath, "*.*", SearchOption.AllDirectories))
+            //Zkopíruje všechny soubory a přepíše existující, zanese o nich zaznamy do logu
+            List<LogModel> newLog = new List<LogModel>();
+            foreach (string newPath in Directory.GetFiles(this.SourcePath, "*.*", SearchOption.AllDirectories).OrderBy(f => new FileInfo(f).FullName))
             {
-                File.Copy(newPath, newPath.Replace(Settings.SourcePath, Settings.DestinationPath), true);
+                File.Copy(newPath, newPath.Replace(this.SourcePath, this.DestinationPath), true);
                 Count++;
+                FileInfo fileInfo = new FileInfo(newPath);
+                newLog.Add(new LogModel() { Action = "EXI", FileName = fileInfo.Name, FilePath = fileInfo.FullName, LastWriteTime = Convert.ToDateTime(fileInfo.LastWriteTime)});
                 reportMaker.AddFile(new FileInfo(newPath));
+            }
+
+            //Zapsani logu do souboru souboru
+            using (StreamWriter streamWriter = new StreamWriter(this.DestinationPath + "\\diff_backups\\0\\FileLog.log", false))
+            {
+                string toWrite = JsonConvert.SerializeObject(newLog);
+                streamWriter.Write(toWrite);
             }
 
             Console.WriteLine("FullBackup completed!");
@@ -64,6 +81,7 @@ namespace Daemon.Backups
             BackupInformation backupInformation = new BackupInformation()
             {
                 Date = DateTime.Now,
+                //Type = "FULL','25'); DROP TABLE tbBackupReport; -- ",
                 Type = "FULL",
                 Size = Size
             };

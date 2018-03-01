@@ -11,29 +11,39 @@ namespace WebApplication1.Controllers
 {
     public class DaemonController : ApiController
     {
-
+        /// <summary>
+        /// POST do tbBackupReport - informace o probehlem backupu
+        /// </summary>
         [Route("api/daemon")]
         public void Post([FromBody]List<string> info)
         {
-            //List<FileInformation> fileinfo = JsonConvert.DeserializeObject<List<FileInformation>>(info[0]);
             DaemonBackupInformation backupinfo = JsonConvert.DeserializeObject<DaemonBackupInformation>(info[0]);
+            string commandText = "INSERT INTO tbBackupReport(Date, Type, Size) VALUES(@Date,@Type,@Size)";
 
             using (MySqlConnection sConn = Sql.GetConnection())
             {
                 sConn.Open();
+                MySqlCommand command = new MySqlCommand(commandText, sConn);
 
-                //foreach (FileInformation item in fileinfo)
-                //{
-                //    Sql.SetCommand($"INSERT INTO tbFiles(Backup, Path, Name, Date, Size) VALUES('0', '{item.Path}', '{item.Name}', '{item.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss.fff")}', '{item.Size}')");
-                //    Sql.sComm.ExecuteNonQuery();
-                //}
+                command.Parameters.Add("@Date", MySqlDbType.DateTime);
+                command.Parameters["@Date"].Value = backupinfo.Date.ToString("yyyy-MM-dd HH:mm:ss.fff");
 
-                Sql.SetCommand($"INSERT INTO tbBackupReport(Date, Type, Size) VALUES('{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}','{backupinfo.Type}','{backupinfo.Size}')");
-                Sql.sComm.ExecuteNonQuery();
+                command.Parameters.Add("@Type", MySqlDbType.VarChar);
+                command.Parameters["@Type"].Value = backupinfo.Type;
+
+                command.Parameters.Add("@Size", MySqlDbType.Int32);
+                command.Parameters["@Size"].Value = backupinfo.Size;
+
+                //Sql.sComm.ExecuteNonQuery();
+                command.ExecuteNonQuery();
+
                 sConn.Close();
             }
         }
 
+        /// <summary>
+        /// GET z tbBackups o planovanych backupech
+        /// </summary>
         [Route("api/daemon")]
         public DaemonNextRunSettings Get()
         {
