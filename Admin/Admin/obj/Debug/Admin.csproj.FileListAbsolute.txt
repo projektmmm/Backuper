@@ -22,3 +22,7 @@ D:\Knihovny\Dokumenty\GitHub\Backuper\Admin\Admin\bin\Debug\Newtonsoft.Json.dll
 D:\Knihovny\Dokumenty\GitHub\Backuper\Admin\Admin\bin\Debug\System.Net.Http.Formatting.dll
 D:\Knihovny\Dokumenty\GitHub\Backuper\Admin\Admin\bin\Debug\Newtonsoft.Json.xml
 D:\Knihovny\Dokumenty\GitHub\Backuper\Admin\Admin\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\Vojta\Documents\GitHub\Backuper\Admin\Admin\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Vojta\Documents\GitHub\Backuper\Admin\Admin\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\Vojta\Documents\GitHub\Backuper\Admin\Admin\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Vojta\Documents\GitHub\Backuper\Admin\Admin\bin\Debug\System.Net.Http.Formatting.xml

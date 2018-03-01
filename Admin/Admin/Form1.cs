@@ -61,5 +61,19 @@ namespace Admin
                 return false;
             }
         }
+
+        private void comboBox_BackupType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox_BackupType.SelectedIndex == 1 || comboBox_BackupType.SelectedIndex == 2)
+            {
+                textBox_DestinationPath.ReadOnly = true;
+                textBox_SourcePath.ReadOnly = true;
+            }
+            else
+            {
+                textBox_DestinationPath.ReadOnly = false;
+                textBox_SourcePath.ReadOnly = false;
+            }
+        }
     }
 }

@@ -57,6 +57,7 @@
     <Compile Include="Backups\IncrementalBackup.cs" />
     <Compile Include="MessageModels\BackupInformation.cs" />
     <Compile Include="MessageModels\FileInformation.cs" />
+    <Compile Include="MessageModels\LogModel.cs" />
     <Compile Include="MessageModels\NextRunSettings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

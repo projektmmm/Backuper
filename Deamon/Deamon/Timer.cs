@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Deamon
+namespace Daemon
 {
     public class Timer //Macek
     {
-        private Backups.BackupMenu BackMenu = new Backups.BackupMenu();
+        private BackupMenu BackMenu = new BackupMenu();
         private Settings settings = new Settings();
         private ApiCommunication ApiCommunication = new ApiCommunication();
         private static System.Timers.Timer aTimer;
