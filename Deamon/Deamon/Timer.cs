@@ -38,11 +38,11 @@ namespace Deamon
             ApiCommunication.GetNextRunSetting("api/daemon");
             //Přidat kontrolu jestli se něco změnilo
             this.settings = this.ApiCommunication.nextRunSettings.OverrideSettings();
-            this.BackMenu.ChangeType(this.settings.BackupType,this.settings.SourcePath,this.settings.DestinationPath);
+            this.BackMenu.ChangeBackupSettings(this.settings.BackupType);
             //Kontrola jestli nastal čas backupu 
             if (DateTime.Now < this.settings.RunAt)
             {
-                this.BackMenu.StartBackup();
+                this.BackMenu.StartBackup(this.settings.SourcePath, this.settings.DestinationPath);
             }
         }
     
