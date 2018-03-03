@@ -28,9 +28,9 @@ namespace Daemon
         /// Diferenciální backup. Porovná výchozí složku s destinací a překopíruje soubory, co chybí
         /// </summary>
         /// <ToDo>
-        /// Aby logovani slozek nespadlo po slozce 10
-        /// Aby fungovalo MODIFIED a ne DEL+NEW
-        /// Aby to fungovalo se slozkama
+        /// <Davacka>>Aby logovani slozek nespadlo po slozce 10</Davacka>
+        /// <Davacka>Aby fungovalo MODIFIED a ne DEL+NEW</Davacka>
+        /// <Davacka>Aby to fungovalo se slozkama</Davacka>
         /// </ToDo>
         public void Backup()
         {
@@ -59,7 +59,7 @@ namespace Daemon
             List<LogModel> oldLog = new List<LogModel>();
             List<LogModel> newLog = new List<LogModel>();
             //Nacetni stareho logu
-            using (StreamReader streamReader = new StreamReader(this.DestinationPath.Substring(0, this.DestinationPath.Length-1) + (directoryCount-1).ToString() + "\\FileLog.log"))
+            using (StreamReader streamReader = new StreamReader(this.DestinationPath.Substring(0, Application.IdentifyCharIndex(this.DestinationPath, '\\')) + '\\' + (directoryCount-1).ToString() + "\\FileLog.log"))
             {
                 string logtext = streamReader.ReadToEnd();
                 oldLogFile = JsonConvert.DeserializeObject<List<LogModel>>(logtext);//.OrderBy(f => new LogModel().FileName);
@@ -83,7 +83,7 @@ namespace Daemon
                 foreach (LogModel item in oldLog)
                 {
                     //nezmeneno - EXISTS
-                    if (fileInfo.FullName == item.FilePath && fileInfo.LastWriteTime == item.LastWriteTime)
+                    if (fileInfo.FullName == item.FilePath && Convert.ToDateTime(fileInfo.LastWriteTime) == item.LastWriteTime)
                     {
                         newLog.Add(new LogModel() { Action = "EXI", FileName = fileInfo.Name, FilePath = fileInfo.FullName, LastWriteTime = Convert.ToDateTime(fileInfo.LastWriteTime) });
                         oldLog.RemoveAt(index);
@@ -91,9 +91,17 @@ namespace Daemon
                         break;
                     }
                     //zmena zapisu - MODIFIED
-                    else if (fileInfo.Name == item.FilePath && fileInfo.LastWriteTime != item.LastWriteTime)
+                    else if (fileInfo.FullName == item.FilePath && Convert.ToDateTime(fileInfo.LastWriteTime) != item.LastWriteTime)
                     {
                         newLog.Add(new LogModel() { Action = "MOD", FileName = fileInfo.Name, FilePath = fileInfo.FullName, LastWriteTime = Convert.ToDateTime(fileInfo.LastWriteTime) });
+
+                        if (Application.CountChar(fileInfo.FullName, '\\') - 1 > Application.CountChar(this.DestinationPath, '\\') - 2)
+                        {
+                            string directoryName = fileInfo.FullName.Replace(this.SourcePath, this.DestinationPath);
+                            string newdirname = directoryName.Substring(0, Application.IdentifyLastCharIndex(directoryName, '\\'));
+                            Directory.CreateDirectory(newdirname);
+                        }
+
                         File.Copy(filePath, filePath.Replace(this.SourcePath, this.DestinationPath), true);
                         fileCount++;
                         reportMaker.AddFile(new FileInfo(filePath));

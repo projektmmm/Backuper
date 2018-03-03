@@ -38,7 +38,7 @@ namespace Daemon
             ApiCommunication.GetNextRunSetting("api/daemon");
             //Přidat kontrolu jestli se něco změnilo
             this.settings = this.ApiCommunication.nextRunSettings.OverrideSettings();
-            this.BackMenu.ChangeBackupSettings(this.settings.BackupType);
+            
             //Kontrola jestli nastal čas backupu 
             if (DateTime.Now < this.settings.RunAt)
             {

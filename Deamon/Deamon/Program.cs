@@ -19,9 +19,10 @@ namespace Daemon
             //FullBackup fb = new FullBackup(@"C:\ProjektMMM\From", @"C:\ProjektMMM\To");
             //fb.Backup();
 
-
+          
             DifferentialBackup df = new DifferentialBackup(@"C:\ProjektMMM\From", @"C:\ProjektMMM\To");
             df.Backup();
+            
 
             //ApiCommunication.GetNextRunSetting("api /daemon");
             ////Backuper b = new Backuper();
