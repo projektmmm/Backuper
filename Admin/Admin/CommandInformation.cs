@@ -13,5 +13,6 @@ namespace Admin
         public string BackupType { get; set; }
         public string SourcePath { get; set; }
         public string DestinationPath { get; set; }
+        public string Cron { get; set; }
     }
 }

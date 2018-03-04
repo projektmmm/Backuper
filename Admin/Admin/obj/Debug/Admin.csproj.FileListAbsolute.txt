@@ -26,3 +26,4 @@ C:\Users\Vojta\Documents\GitHub\Backuper\Admin\Admin\bin\Debug\Newtonsoft.Json.d
 C:\Users\Vojta\Documents\GitHub\Backuper\Admin\Admin\bin\Debug\System.Net.Http.Formatting.dll
 C:\Users\Vojta\Documents\GitHub\Backuper\Admin\Admin\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Vojta\Documents\GitHub\Backuper\Admin\Admin\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\Vojta\Documents\GitHub\Backuper\Admin\Admin\obj\Debug\Admin.RepeatPicker.resources

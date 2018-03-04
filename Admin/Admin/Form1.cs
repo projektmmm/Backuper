@@ -14,6 +14,8 @@ namespace Admin
 {
     public partial class Form1 : Form
     {
+        RepeatPicker rp = new RepeatPicker();
+
         public Form1()
         {
             InitializeComponent();
@@ -35,10 +37,10 @@ namespace Admin
                 CommandInformation commandInformation = new CommandInformation()
                 {
                     DaemonId = Convert.ToInt32(this.comboBox_DaemonId.SelectedItem),
-                    RunAt = Convert.ToDateTime(this.dateTimePicker_RunAt.Value),
                     BackupType = this.comboBox_BackupType.SelectedItem.ToString(),
                     SourcePath = this.textBox_SourcePath.Text.Replace("\\","\\\\"),
-                    DestinationPath = this.textBox_DestinationPath.Text.Replace("\\", "\\\\")
+                    DestinationPath = this.textBox_DestinationPath.Text.Replace("\\", "\\\\"),
+                    //Cron = rp.Cron     -odesílání Cronu
                 };
 
                 toPost.Add(JsonConvert.SerializeObject(commandInformation));
@@ -50,9 +52,9 @@ namespace Admin
         {
             bool SourceBool = Regex.IsMatch(textBox_SourcePath.Text, @"^(?:[A-Za-z]{1}\:\\)");
             bool DestinationBool = Regex.IsMatch(textBox_DestinationPath.Text, @"^(?:[A-Za-z]{1}\:\\)");
-            if (dateTimePicker_RunAt.Value > DateTime.Now && SourceBool && DestinationBool)
+            if (SourceBool && DestinationBool)
             {
-                //datum není v minulosti && cesty začínaj na [A-Z]:\
+                //cesty začínaj na [A-Z]:\
                 return true;
             }
             else
@@ -74,6 +76,11 @@ namespace Admin
                 textBox_DestinationPath.ReadOnly = false;
                 textBox_SourcePath.ReadOnly = false;
             }
+        }
+
+        private void button_OpenRepeatPicker_Click(object sender, EventArgs e)
+        {           
+            rp.Show();
         }
     }
 }
