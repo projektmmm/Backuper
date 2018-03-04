@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using Daemon.Backups;
-using Deamon;
 
 namespace Daemon
 {
@@ -20,9 +19,12 @@ namespace Daemon
             //fb.Backup();
 
           
-            DifferentialBackup df = new DifferentialBackup(@"C:\ProjektMMM\From", @"C:\ProjektMMM\To");
-            df.Backup();
-            
+            //DifferentialBackup df = new DifferentialBackup(@"C:\ProjektMMM\From", @"C:\ProjektMMM\To");
+            //df.Backup();
+
+            IncrementalBackup ib = new IncrementalBackup(@"C:\ProjektMMM\From", @"C:\ProjektMMM\To");
+            ib.Backup();
+
 
             //ApiCommunication.GetNextRunSetting("api /daemon");
             ////Backuper b = new Backuper();

@@ -24,14 +24,6 @@ namespace Daemon
             this.FullBackupPath = fullBackupPath;
         }
 
-        /// <summary>
-        /// Diferenciální backup. Porovná výchozí složku s destinací a překopíruje soubory, co chybí
-        /// </summary>
-        /// <ToDo>
-        /// <Davacka>>Aby logovani slozek nespadlo po slozce 10</Davacka>
-        /// <Davacka>Aby fungovalo MODIFIED a ne DEL+NEW</Davacka>
-        /// <Davacka>Aby to fungovalo se slozkama</Davacka>
-        /// </ToDo>
         public void Backup()
         {
             int fileCount = 0;

@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Daemon.Backups;
-using Deamon;
 
 namespace Daemon
 {
     public class BackupMenu
     {
-        public IBackup Back;
+        public IBackup Backup;
 
     
         int BackupType = 1; //1-Full,2=Diff
@@ -19,18 +18,18 @@ namespace Daemon
 
         public void ChangeType(int type, string sourcePath, string destinationPath)
         {
-            if (type ==1)
+            if (type == 1)
             {
-                this.Back = new FullBackup(sourcePath, destinationPath);
+                this.Backup = new FullBackup(sourcePath, destinationPath);
             }
-            else if(type ==2)
+            else if(type == 2)
             {
-                this.Back = new DifferentialBackup(sourcePath, destinationPath);
+                this.Backup = new DifferentialBackup(sourcePath, destinationPath);
             }
         }
         public void StartBackup(string sourcePath, string destinationPath)
         {
-            this.Back.Backup();
+            this.Backup.Backup();
         }
     
 
