@@ -18,12 +18,12 @@ namespace Daemon
             //FullBackup fb = new FullBackup(@"C:\ProjektMMM\From", @"C:\ProjektMMM\To");
             //fb.Backup();
 
-          
-            //DifferentialBackup df = new DifferentialBackup(@"C:\ProjektMMM\From", @"C:\ProjektMMM\To");
-            //df.Backup();
 
-            IncrementalBackup ib = new IncrementalBackup(@"C:\ProjektMMM\From", @"C:\ProjektMMM\To");
-            ib.Backup();
+            DifferentialBackup df = new DifferentialBackup(@"C:\ProjektMMM\From", @"C:\ProjektMMM\To");
+            df.Backup();
+
+            //IncrementalBackup ib = new IncrementalBackup(@"C:\ProjektMMM\From", @"C:\ProjektMMM\To");
+            //ib.Backup();
 
 
             //ApiCommunication.GetNextRunSetting("api /daemon");
