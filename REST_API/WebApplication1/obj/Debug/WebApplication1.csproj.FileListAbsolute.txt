@@ -130,3 +130,9 @@ D:\Knihovny\Dokumenty\GitHub\Backuper\REST_API\WebApplication1\obj\Debug\WebAppl
 D:\Knihovny\Dokumenty\GitHub\Backuper\REST_API\WebApplication1\obj\Debug\WebApplication1.csproj.CoreCompileInputs.cache
 D:\Knihovny\Dokumenty\GitHub\Backuper\REST_API\WebApplication1\obj\Debug\WebApplication1.dll
 D:\Knihovny\Dokumenty\GitHub\Backuper\REST_API\WebApplication1\obj\Debug\WebApplication1.pdb
+D:\Knihovny\Dokumenty\GitHub\Backuper\REST_API\WebApplication1\bin\Microsoft.IdentityModel.Logging.dll
+D:\Knihovny\Dokumenty\GitHub\Backuper\REST_API\WebApplication1\bin\Microsoft.IdentityModel.Tokens.dll
+D:\Knihovny\Dokumenty\GitHub\Backuper\REST_API\WebApplication1\bin\System.IdentityModel.Tokens.Jwt.dll
+D:\Knihovny\Dokumenty\GitHub\Backuper\REST_API\WebApplication1\bin\Microsoft.IdentityModel.Logging.xml
+D:\Knihovny\Dokumenty\GitHub\Backuper\REST_API\WebApplication1\bin\Microsoft.IdentityModel.Tokens.xml
+D:\Knihovny\Dokumenty\GitHub\Backuper\REST_API\WebApplication1\bin\System.IdentityModel.Tokens.Jwt.xml
