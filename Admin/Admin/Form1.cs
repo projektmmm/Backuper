@@ -37,10 +37,11 @@ namespace Admin
                 CommandInformation commandInformation = new CommandInformation()
                 {
                     DaemonId = Convert.ToInt32(this.comboBox_DaemonId.SelectedItem),
+                    RunAt = this.dateTimePicker_RunAt.Value,
+                    Cron = rp.Cron,
                     BackupType = this.comboBox_BackupType.SelectedItem.ToString(),
                     SourcePath = this.textBox_SourcePath.Text.Replace("\\","\\\\"),
                     DestinationPath = this.textBox_DestinationPath.Text.Replace("\\", "\\\\"),
-                    //Cron = rp.Cron     -odesílání Cronu
                 };
 
                 toPost.Add(JsonConvert.SerializeObject(commandInformation));

@@ -39,6 +39,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.button_OpenRepeatPicker = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dateTimePicker_RunAt = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // comboBox_BackupType
@@ -140,11 +142,31 @@
             this.label6.TabIndex = 14;
             this.label6.Text = "RepeatSettings:";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(42, 172);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(37, 13);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "RunAt";
+            // 
+            // dateTimePicker_RunAt
+            // 
+            this.dateTimePicker_RunAt.CustomFormat = "yyyy-mm-dd hh:mm:ss";
+            this.dateTimePicker_RunAt.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker_RunAt.Location = new System.Drawing.Point(143, 168);
+            this.dateTimePicker_RunAt.Name = "dateTimePicker_RunAt";
+            this.dateTimePicker_RunAt.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker_RunAt.TabIndex = 18;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(427, 256);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.dateTimePicker_RunAt);
             this.Controls.Add(this.button_OpenRepeatPicker);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -177,6 +199,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button_OpenRepeatPicker;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker_RunAt;
     }
 }
 

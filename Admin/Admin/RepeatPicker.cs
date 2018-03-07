@@ -33,7 +33,7 @@ namespace Admin
         private void buttonSaveMinutes_Click(object sender, EventArgs e)
         {
             this.Cron = "/" + comboBoxEveryMinutes.Text + " * * * *";
-            this.Close();
+            this.Hide();
         }
 
         private void buttonSaveHourly_Click(object sender, EventArgs e)
@@ -41,12 +41,12 @@ namespace Admin
             if (radioButtonEveryHours.Checked)
             {
                 this.Cron = "* /" + comboBoxEveryHours.Text + " * * *";
-                this.Close();
+                this.Hide();
             }
             else if (radioButtonStartsAtHours.Checked)
             {
                 this.Cron = comboBoxStartsMinutesHourly.Text + " " + comboBoxStartsHourHourly.Text + " /1 * *";
-                this.Close();
+                this.Hide();
             }
         }
 
@@ -55,12 +55,12 @@ namespace Admin
             if (radioButtonEveryDays.Checked)
             {               
                 this.Cron = comboBoxStartMinutesDaily.Text + " " + comboBoxStartHourDaily.Text + " /" + comboBoxEveryDays.Text + " * *";
-                this.Close();
+                this.Hide();
             }
             else if (radioButtonEveryWeekDay.Checked)
             {
                 this.Cron = comboBoxStartMinutesDaily.Text + " " + comboBoxStartHourDaily.Text + " /1 * *";
-                this.Close();
+                this.Hide();
             }
         }
 
@@ -113,7 +113,7 @@ namespace Admin
             Days = Days.Substring(0, Days.Length - 1);
 
             this.Cron = comboBoxStartMinutesWeekly.Text + " " + comboBoxStartHourWeekly.Text + " * * " + Days;
-            this.Close();
+            this.Hide();
         }
 
         private void buttonSaveMonthly_Click(object sender, EventArgs e)
