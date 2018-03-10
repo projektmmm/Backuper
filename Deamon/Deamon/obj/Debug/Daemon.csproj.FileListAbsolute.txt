@@ -9,3 +9,14 @@ D:\Knihovny\Dokumenty\GitHub\Backuper\Deamon\Deamon\obj\Debug\Daemon.csproj.Core
 D:\Knihovny\Dokumenty\GitHub\Backuper\Deamon\Deamon\obj\Debug\Deamon.exe
 D:\Knihovny\Dokumenty\GitHub\Backuper\Deamon\Deamon\obj\Debug\Deamon.pdb
 D:\Knihovny\Dokumenty\GitHub\Backuper\Deamon\Deamon\obj\Debug\Daemon.csprojResolveAssemblyReference.cache
+C:\Users\Vojta\Documents\GitHub\Backuper\Deamon\Deamon\bin\Debug\Deamon.exe.config
+C:\Users\Vojta\Documents\GitHub\Backuper\Deamon\Deamon\bin\Debug\Deamon.exe
+C:\Users\Vojta\Documents\GitHub\Backuper\Deamon\Deamon\bin\Debug\Deamon.pdb
+C:\Users\Vojta\Documents\GitHub\Backuper\Deamon\Deamon\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Vojta\Documents\GitHub\Backuper\Deamon\Deamon\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\Vojta\Documents\GitHub\Backuper\Deamon\Deamon\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Vojta\Documents\GitHub\Backuper\Deamon\Deamon\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\Vojta\Documents\GitHub\Backuper\Deamon\Deamon\obj\Debug\Daemon.csprojResolveAssemblyReference.cache
+C:\Users\Vojta\Documents\GitHub\Backuper\Deamon\Deamon\obj\Debug\Daemon.csproj.CoreCompileInputs.cache
+C:\Users\Vojta\Documents\GitHub\Backuper\Deamon\Deamon\obj\Debug\Deamon.exe
+C:\Users\Vojta\Documents\GitHub\Backuper\Deamon\Deamon\obj\Debug\Deamon.pdb

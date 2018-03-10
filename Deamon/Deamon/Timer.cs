@@ -14,6 +14,7 @@ namespace Daemon
         private Settings settings = new Settings();
         private ApiCommunication ApiCommunication = new ApiCommunication();
         private static System.Timers.Timer aTimer;
+        
         //Private List<Settings>
 
         public  void Start()
@@ -22,22 +23,25 @@ namespace Daemon
         }
 
         //Nastaví timer na interval danný v settings 
-        private  void SetTimer()
+        private void SetTimer()
         {
             // Create a timer with a two second interval.
             aTimer = new System.Timers.Timer(this.settings.AskInterval);
+            
             // Hook up the Elapsed event for the timer. 
             aTimer.Elapsed += SendRequest;
-            this.SetTimer();
+
+            aTimer.Enabled = true;
         }
 
         //Pošle request do databáze aby zjistil nové nastanení a následně ho změní všude kde je třeba
         //pokuď již nastal čas backupu zpustí ho
-        private  void SendRequest(Object source, ElapsedEventArgs e)
+        private void SendRequest(Object source, ElapsedEventArgs e)
         {
             ApiCommunication.GetNextRunSetting("api/daemon");
             //Přidat kontrolu jestli se něco změnilo
             this.settings = this.ApiCommunication.nextRunSettings.OverrideSettings();
+            
             
             //Kontrola jestli nastal čas backupu 
             if (DateTime.Now < this.settings.RunAt)

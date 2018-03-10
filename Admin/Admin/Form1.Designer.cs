@@ -153,7 +153,7 @@
             // 
             // dateTimePicker_RunAt
             // 
-            this.dateTimePicker_RunAt.CustomFormat = "yyyy-mm-dd hh:mm:ss";
+            this.dateTimePicker_RunAt.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.dateTimePicker_RunAt.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker_RunAt.Location = new System.Drawing.Point(143, 168);
             this.dateTimePicker_RunAt.Name = "dateTimePicker_RunAt";

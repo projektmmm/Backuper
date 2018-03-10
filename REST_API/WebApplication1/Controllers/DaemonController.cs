@@ -50,15 +50,16 @@ namespace WebApplication1.Controllers
             using (MySqlConnection sConn = Sql.GetConnection())
             {
                 sConn.Open();
-                Sql.SetCommand("SELECT RunAt, BackupType, SourcePath, DestinationPath FROM tbBackups WHERE Id=1");
+                Sql.SetCommand("SELECT RunAt, Cron, BackupType, SourcePath, DestinationPath FROM tbBackups WHERE Id=1");
                 MySqlDataReader sRead = Sql.sComm.ExecuteReader();
                 sRead.Read();
                 DaemonNextRunSettings ret = new DaemonNextRunSettings()
                 {
                     RunAt = Convert.ToDateTime(sRead[0]),
-                    BackupType = Convert.ToInt32(sRead[1]),
-                    SourcePath = sRead[2].ToString(),
-                    DestinationPath = sRead[3].ToString()
+                    Cron = sRead[1].ToString(),
+                    BackupType = Convert.ToInt32(sRead[2]),
+                    SourcePath = sRead[3].ToString(),
+                    DestinationPath = sRead[4].ToString()
                 };
                 sConn.Close();
                 return ret;

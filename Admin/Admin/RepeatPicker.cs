@@ -22,7 +22,7 @@ namespace Admin
     /// </summary>
     public partial class RepeatPicker : Form
     {
-        public string Cron { get; set; }
+        public string Cron { get; set; } = "* * * * *";
 
         public RepeatPicker()
         {

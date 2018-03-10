@@ -12,15 +12,15 @@ namespace Daemon
     {
         static void Main(string[] args)
         {
-            //Timer timer = new Timer();
-            //timer.Start();
+            Timer timer = new Timer();
+            timer.Start();
 
             //FullBackup fb = new FullBackup(@"C:\ProjektMMM\From", @"C:\ProjektMMM\To");
             //fb.Backup();
 
 
-            DifferentialBackup df = new DifferentialBackup(@"C:\ProjektMMM\From", @"C:\ProjektMMM\To");
-            df.Backup();
+            //DifferentialBackup df = new DifferentialBackup(@"C:\ProjektMMM\From", @"C:\ProjektMMM\To");
+            //df.Backup();
 
             //IncrementalBackup ib = new IncrementalBackup(@"C:\ProjektMMM\From", @"C:\ProjektMMM\To");
             //ib.Backup();
