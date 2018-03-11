@@ -17,9 +17,12 @@ namespace WebApplication1.Controllers
         [Route("api/admin")]
         public void Post([FromBody]List<string> info)
         {
-            AdminCommandInformation incommingCommand = JsonConvert.DeserializeObject<AdminCommandInformation>(info[0]);
-            string commandText = "INSERT INTO tbBackups(RunAt, Cron, DaemonId, BackupType, SourcePath, DestinationPath) VALUES(@RunAt,@Cron,@DaemonId,@BackupType,@SourcePath,@DestinationPath)";
+            Token tokenHandler = new Token();
+            bool a = tokenHandler.Verify(info[1]);
 
+            AdminCommandInformation incommingCommand = JsonConvert.DeserializeObject<AdminCommandInformation>(info[0]);
+
+            string commandText = "INSERT INTO tbBackups(RunAt, Cron, DaemonId, BackupType, SourcePath, DestinationPath) VALUES(@RunAt,@Cron,@DaemonId,@BackupType,@SourcePath,@DestinationPath)";
             using (MySqlConnection sConn = new MySqlConnection(Sql.ConnectionString))
             {
                 sConn.Open();

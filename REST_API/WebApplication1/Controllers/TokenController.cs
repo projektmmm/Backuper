@@ -13,12 +13,6 @@ namespace WebApplication1.Controllers
 {
     public class TokenController : ApiController
     {
-        [Route("api/admin/{token}")]
-        public string Get(string intoken)
-        {
-            Token token = JsonConvert.DeserializeObject<Token>(intoken);
-            string ret = (token.Verify(token.IdAdmin, token.Password)) ? "true" : "false";
-            return ret;
-        }
+       
     }
 }
