@@ -70,6 +70,9 @@ namespace WebApplication1.Models
             return ret;
         }
 
+        /// <summary>
+        /// Ziskani validacnich parametru pro overovani tokenu
+        /// </summary>
         private TokenValidationParameters GetValidationParameters()
         {
             return new TokenValidationParameters()
