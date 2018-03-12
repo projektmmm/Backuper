@@ -53,6 +53,8 @@ namespace Daemon
                 this.BackMenu.StartBackup(this.settings.SourcePath, this.settings.DestinationPath);
             }
 
+            this.settings.RozdelatCron();
+
             SetTimer();
         }
     
