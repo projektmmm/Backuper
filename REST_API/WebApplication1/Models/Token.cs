@@ -13,32 +13,32 @@ namespace WebApplication1.Models
 {
     public class Token
     {
-        public int IdAdmin { get; set; }
+        public int AdminId { get; set; }
         public string Password { get; set; }
         private readonly string Key = "5156badb-b49f-4687-8af8-448c7f3f7688";
 
-        public Token()
-        {
-        }
-
+        /// <summary>
+        /// Zjisti, zda jsou prihlasovaci udaje platne a token se naleza v databazi
+        /// </summary>
         public bool Verify(string encryptedToken)
         {
             SecurityToken validatedToken = null;
-            ClaimsPrincipal principal = new JwtSecurityTokenHandler().ValidateToken(encryptedToken, this.GetValidationParameters(), out validatedToken);
-            Token token = new Token();
+            JwtSecurityToken token = null;
 
-            string validatedStringToken = validatedToken.ToString();
-            for (int i = 1; i < validatedStringToken.Length; i++)
+            //zjisti, zda token nekdo neoklamal
+            try
             {
-                if (validatedStringToken[i - 1] == '}' && validatedStringToken[i] == '.' && validatedStringToken[i + 1] == '{')
-                {
-                    token = JsonConvert.DeserializeObject<Token>(validatedStringToken.Substring(++i));
-                    break;
-                }
+                ClaimsPrincipal principal = new JwtSecurityTokenHandler().ValidateToken(encryptedToken, this.GetValidationParameters(), out validatedToken);
+                token = new JwtSecurityTokenHandler().ReadJwtToken(encryptedToken);
+            }
+            catch
+            {
+                return false;
             }
 
-            this.IdAdmin = token.IdAdmin;
-            token.Password = token.Password;         
+            this.AdminId = Convert.ToInt32(token.Payload["AdminId"]);
+            this.Password = token.Payload["Password"].ToString();
+
 
             string commandText = "SELECT * FROM tbAdminTokens WHERE IdAdmin=@IdAdmin AND Password=@Password";
             bool ret = false;
@@ -49,14 +49,14 @@ namespace WebApplication1.Models
 
                 command.Parameters.Add("@IdAdmin", MySqlDbType.Int32);
                 command.Parameters.Add("@Password", MySqlDbType.VarChar);
-                command.Parameters["@IdAdmin"].Value = this.IdAdmin;
+                command.Parameters["@IdAdmin"].Value = this.AdminId;
                 command.Parameters["@Password"].Value = this.Password;
 
                 MySqlDataReader sRead = command.ExecuteReader();
 
                 if (sRead.Read())
                 {
-                    if (Convert.ToInt32(sRead[0]) == this.IdAdmin && sRead[1].ToString() == this.Password)
+                    if (Convert.ToInt32(sRead[0]) == this.AdminId && sRead[1].ToString() == this.Password)
                         ret = true;
                     else
                         ret = false;

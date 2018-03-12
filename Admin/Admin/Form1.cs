@@ -45,7 +45,8 @@ namespace Admin
                 };
 
                 toPost.Add(JsonConvert.SerializeObject(commandInformation));
-                ApiCommunication.PostBackupReport(toPost, "api/admin");
+                ApiCommunication api = new ApiCommunication();
+                api.PostBackupReport(toPost, "api/admin");
             }
         }
 

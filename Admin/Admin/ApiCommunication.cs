@@ -10,24 +10,23 @@ using System.IdentityModel.Tokens.Jwt;
 
 namespace Admin
 {
-    public static class ApiCommunication
+    public class ApiCommunication
     {
         public static Uri Adress { get; set; } = new Uri("http://localhost:54736/");
         private static string Key { get; set; } = "5156badb-b49f-4687-8af8-448c7f3f7688";
-        private static string AdminId { get; set; } = "1";
-        private static string Password { get; set; } = "Ab123456";
+        private GlobalSettings globalSettings = new GlobalSettings();
 
         /// <summary>
         /// Odeslani reportu o Backupu
         /// </summary>
-        public static async Task PostBackupReport(List<string> toPost, string apiDestination)
+        public async Task PostBackupReport(List<string> toPost, string apiDestination)
         {
             JwtHeader header = ApiCommunication.CreateToken();
 
             JwtPayload content = new JwtPayload
             {
-                { "AdminId", AdminId },
-                { "Password", Password }
+                { "AdminId", this.globalSettings.AdminId },
+                { "Password", this.globalSettings.GetHashedPassword() }
             };
 
             JwtSecurityToken secToken = new JwtSecurityToken(header, content);
@@ -59,6 +58,9 @@ namespace Admin
             return client;
         }
 
+        /// <summary>
+        /// Vytvori hlavicku tokenu
+        /// </summary>
         private static JwtHeader CreateToken()
         {
             var securityKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(Encoding.UTF8.GetBytes(ApiCommunication.Key));

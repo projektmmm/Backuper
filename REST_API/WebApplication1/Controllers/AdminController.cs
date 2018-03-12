@@ -13,12 +13,15 @@ namespace WebApplication1.Controllers
     {
         /// <summary>
         /// POST z admina o novych nastavenich
+        /// Validace tokenu
         /// </summary>
         [Route("api/admin")]
-        public void Post([FromBody]List<string> info)
+        public bool Post([FromBody]List<string> info)
         {
             Token tokenHandler = new Token();
-            bool a = tokenHandler.Verify(info[1]);
+            bool token = tokenHandler.Verify(info[1]);
+            if (token == false)
+                return false;
 
             AdminCommandInformation incommingCommand = JsonConvert.DeserializeObject<AdminCommandInformation>(info[0]);
 
@@ -44,6 +47,8 @@ namespace WebApplication1.Controllers
                 command.ExecuteNonQuery();
                 sConn.Close();
             }
+
+            return true;
         }
     }
 }
