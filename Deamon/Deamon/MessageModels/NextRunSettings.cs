@@ -9,6 +9,7 @@ namespace Daemon
     public class NextRunSettings
     {
         public DateTime RunAt { get; set; }
+        public string Cron { get; set; }
         public int BackupType { get; set; }
         public string SourcePath { get; set; }
         public string DestinationPath { get; set; }
@@ -20,6 +21,7 @@ namespace Daemon
             s.DestinationPath = this.DestinationPath;
             s.SourcePath = this.SourcePath;
             s.RunAt = this.RunAt;
+            s.Cron = this.Cron;
             s.BackupType = this.BackupType;
 
             return s;
