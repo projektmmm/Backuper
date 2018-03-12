@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Daemon
 {
@@ -32,6 +33,8 @@ namespace Daemon
             aTimer.Elapsed += SendRequest;
 
             aTimer.Enabled = true;
+
+
         }
 
         //Pošle request do databáze aby zjistil nové nastanení a následně ho změní všude kde je třeba
@@ -40,6 +43,7 @@ namespace Daemon
         {
             ApiCommunication.GetNextRunSetting("api/daemon");
             //Přidat kontrolu jestli se něco změnilo
+            Thread.Sleep(10000);
             this.settings = this.ApiCommunication.nextRunSettings.OverrideSettings();
             
             
@@ -48,6 +52,8 @@ namespace Daemon
             {
                 this.BackMenu.StartBackup(this.settings.SourcePath, this.settings.DestinationPath);
             }
+
+            SetTimer();
         }
     
     }
