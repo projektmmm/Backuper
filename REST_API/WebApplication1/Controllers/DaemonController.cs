@@ -57,7 +57,7 @@ namespace WebApplication1.Controllers
                 {
                     RunAt = Convert.ToDateTime(sRead[0]),
                     Cron = sRead[1].ToString(),
-                    BackupType = Convert.ToInt32(sRead[2]),
+                    BackupType = sRead[2].ToString(),
                     SourcePath = sRead[3].ToString(),
                     DestinationPath = sRead[4].ToString()
                 };

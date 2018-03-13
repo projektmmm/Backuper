@@ -50,5 +50,20 @@ namespace WebApplication1.Controllers
 
             return true;
         }
+
+        [Route("api/admin")]
+        public bool Post([FromBody]string info)
+        {
+            User user = JsonConvert.DeserializeObject<User>(info);
+            //Kontrola, zda existuje
+            using (MySqlConnection sConn = new MySqlConnection(Sql.ConnectionString))
+            {
+                string commandText = "SELECT * FROM tbUsers WHERE Username = @Username";
+                sConn.Open();
+                MySqlCommand command = new MySqlCommand(commandText, sConn);
+                command.Parameters.Add("@Username", MySqlDbType.VarChar);
+
+            }
+        }
     }
 }
