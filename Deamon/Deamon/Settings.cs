@@ -8,7 +8,6 @@ namespace Daemon
 {
     public class Settings
     {
-        
         public string DaemonId { get; private set; }
         public DateTime RunAt { get; set; }
         public string Cron { get; set; }
@@ -19,11 +18,28 @@ namespace Daemon
         public int AskInterval { get; set; } = 1 * 60 * 1000;
         //Upgrade pro novou verzi
         public int BackupType { get; set; } = 1;
-
-        public void RozdelatCron()
+        //rozdělávač cronu
+        public void UnparseCron()
         {
-            int _cron = Convert.ToInt32(Cron.Substring(1, 1));
-            AskInterval = _cron * 60 * 1000;
+            string _cron = Cron;
+            int index = _cron.IndexOf('/');
+
+            if (index == 0)
+            {
+                AskInterval = _cron[index + 1] * 60 * 1000;
+            }
+            else if (index == 2)
+            {
+                AskInterval = _cron[index + 1] * 60 * 60 * 1000;
+            }
+            else if (index == 4)
+            {
+                AskInterval = _cron[index + 1] * 60 * 60 * 24 * 1000;
+            }
+            else
+            {
+                
+            }
         }
     }
 }
