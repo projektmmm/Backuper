@@ -33,8 +33,6 @@ namespace Daemon
             aTimer.Elapsed += SendRequest;
 
             aTimer.Enabled = true;
-
-
         }
 
         //Pošle request do databáze aby zjistil nové nastanení a následně ho změní všude kde je třeba
@@ -46,14 +44,13 @@ namespace Daemon
             Thread.Sleep(10000);
             this.settings = this.ApiCommunication.nextRunSettings.OverrideSettings();
             
-            
             //Kontrola jestli nastal čas backupu 
             if (DateTime.Now < this.settings.RunAt)
             {
                 this.BackMenu.StartBackup(this.settings.SourcePath, this.settings.DestinationPath);
             }
 
-            this.settings.RozdelatCron();
+            this.settings.UnparseCron();
 
             SetTimer();
         }
