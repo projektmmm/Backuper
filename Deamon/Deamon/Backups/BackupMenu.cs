@@ -11,18 +11,18 @@ namespace Daemon
     {
         public IBackup Backup;
 
-    
-        int BackupType = 1; //1-Full,2=Diff
+
+        string BackupType = "FULL";
         public string SourcePath { get; set; } = @"C:\ProjektMMM\From\";
         public string DestinationPath { get; set; } = @"C:\ProjektMMM\To\";
 
-        public void ChangeType(int type, string sourcePath, string destinationPath)
+        public void ChangeType(string type, string sourcePath, string destinationPath)
         {
-            if (type == 1)
+            if (type == "FULL")
             {
                 this.Backup = new FullBackup(sourcePath, destinationPath);
             }
-            else if(type == 2)
+            else if(type == "DIFF")
             {
                 this.Backup = new DifferentialBackup(sourcePath, destinationPath);
             }
@@ -31,7 +31,5 @@ namespace Daemon
         {
             this.Backup.Backup();
         }
-    
-
     }
 }
