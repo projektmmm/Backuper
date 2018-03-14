@@ -50,10 +50,33 @@ namespace Daemon
                 this.BackMenu.StartBackup(this.settings.SourcePath, this.settings.DestinationPath);
             }
 
-            this.settings.UnparseCron();
+            this.UnparseCron();
 
             SetTimer();
         }
-    
+
+        private void UnparseCron()
+        {
+            string Cron = settings.Cron;
+            int index = Cron.IndexOf('/') + 1;
+
+            if (index == 1)
+            {
+                
+                this.settings.AskInterval = Convert.ToInt32(Cron[index]) * 60 * 1000;
+            }
+            else if (index == 3)
+            {
+                this.settings.AskInterval = Convert.ToInt32(Cron[index]) * 60 * 60 * 1000;
+            }
+            else if (index == 5)
+            {
+                this.settings.AskInterval = Convert.ToInt32(Cron[index]) * 60 * 60 * 24 * 1000;
+            }
+            else
+            {
+
+            }
+        }
     }
 }
