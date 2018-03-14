@@ -11,13 +11,10 @@ namespace Daemon
         public string DaemonId { get; private set; }
         public DateTime RunAt { get; set; }
         public string Cron { get; set; }
+        public string BackupType { get; set; } = "FULL";
         public string SourcePath { get; set; } = @"C:\ProjektMMM\From\";
         public string DestinationPath { get; set; } = @"C:\ProjektMMM\To\";
 
-        //upgrade pro timer
-        public int AskInterval { get; set; } = 1 * 3 * 1000;
-        //Upgrade pro novou verzi
-        public string BackupType { get; set; } = "FULL";
-
+        public int AskInterval { get; set; } = 50000;
     }
 }

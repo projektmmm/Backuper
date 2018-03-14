@@ -15,6 +15,7 @@ namespace Daemon
             Timer timer = new Timer();
             timer.Start();
 
+
             //FullBackup fb = new FullBackup(@"C:\ProjektMMM\From", @"C:\ProjektMMM\To");
             //fb.Backup();
 

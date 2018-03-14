@@ -20,3 +20,4 @@ C:\Users\Vojta\Documents\GitHub\Backuper\Deamon\Deamon\obj\Debug\Daemon.csprojRe
 C:\Users\Vojta\Documents\GitHub\Backuper\Deamon\Deamon\obj\Debug\Daemon.csproj.CoreCompileInputs.cache
 C:\Users\Vojta\Documents\GitHub\Backuper\Deamon\Deamon\obj\Debug\Deamon.exe
 C:\Users\Vojta\Documents\GitHub\Backuper\Deamon\Deamon\obj\Debug\Deamon.pdb
+C:\Users\Vojta\Documents\GitHub\Backuper\Deamon\Deamon\bin\Debug\NCrontab.dll
