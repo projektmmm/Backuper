@@ -16,9 +16,9 @@ namespace Admin
     /// lomeno před číslem znamená že to je každý časový údaj
     /// čárky oddělují např více dní v týdnu
     /// příklady: 
-    /// 15 13 /1 * * = 13:15 každý den
-    /// /1 * * * * = každou minutu
-    /// 15 13 * * 1,2 = 13:15 každé pondělí a úterý
+    /// 15 13 */1 * * = 13:15 každý den
+    /// */1 * * * * = každou minutu
+    /// 15 13 * * mon,tue = 13:15 každé pondělí a úterý
     /// </summary>
     public partial class RepeatPicker : Form
     {
@@ -32,7 +32,7 @@ namespace Admin
 
         private void buttonSaveMinutes_Click(object sender, EventArgs e)
         {
-            this.Cron = "/" + comboBoxEveryMinutes.Text + " * * * *";
+            this.Cron = "*/" + comboBoxEveryMinutes.Text + " * * * *";
             this.Hide();
         }
 
@@ -40,12 +40,12 @@ namespace Admin
         {
             if (radioButtonEveryHours.Checked)
             {
-                this.Cron = "* /" + comboBoxEveryHours.Text + " * * *";
+                this.Cron = "* */" + comboBoxEveryHours.Text + " * * *";
                 this.Hide();
             }
             else if (radioButtonStartsAtHours.Checked)
             {
-                this.Cron = comboBoxStartsMinutesHourly.Text + " " + comboBoxStartsHourHourly.Text + " /1 * *";
+                this.Cron = comboBoxStartsMinutesHourly.Text + " " + comboBoxStartsHourHourly.Text + " * * *";
                 this.Hide();
             }
         }
@@ -54,58 +54,58 @@ namespace Admin
         {
             if (radioButtonEveryDays.Checked)
             {               
-                this.Cron = comboBoxStartMinutesDaily.Text + " " + comboBoxStartHourDaily.Text + " /" + comboBoxEveryDays.Text + " * *";
+                this.Cron = comboBoxStartMinutesDaily.Text + " " + comboBoxStartHourDaily.Text + " */" + comboBoxEveryDays.Text + " * *";
                 this.Hide();
             }
             else if (radioButtonEveryWeekDay.Checked)
             {
-                this.Cron = comboBoxStartMinutesDaily.Text + " " + comboBoxStartHourDaily.Text + " /1 * *";
+                this.Cron = comboBoxStartMinutesDaily.Text + " " + comboBoxStartHourDaily.Text + " * * *";
                 this.Hide();
             }
         }
 
         private void buttonSaveWeekly_Click(object sender, EventArgs e)
         {
-            List<int> days = new List<int>();
+            List<string> days = new List<string>();
 
             if (checkBox_Monday.Checked)
             {
-                days.Add(1);
+                days.Add("Mon");
             }
 
             if (checkBox_Tuesday.Checked)
             {
-                days.Add(2);
+                days.Add("Tue");
             }
 
             if (checkBox_Wednesday.Checked)
             {
-                days.Add(3);
+                days.Add("Wed");
             }
 
             if (checkBox_Thursday.Checked)
             {
-                days.Add(4);
+                days.Add("Thu");
             }
 
             if (checkBox_Friday.Checked)
             {
-                days.Add(5);
+                days.Add("Fri");
             }
 
             if (checkBox_Saturday.Checked)
             {
-                days.Add(6);
+                days.Add("Sat");
             }
 
             if (checkBox_Sunday.Checked)
             {
-                days.Add(7);
+                days.Add("Sun");
             }
 
             string Days = "";
 
-            foreach (int item in days)
+            foreach (string item in days)
             {
                 Days = Days + item + ",";
             }
