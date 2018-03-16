@@ -15,6 +15,7 @@ namespace WebApplication1.Controllers
         /// POST z admina o novych nastavenich
         /// Validace tokenu
         /// </summary>
+
         [Route("api/admin")]
         public bool Post([FromBody]List<string> info)
         {
