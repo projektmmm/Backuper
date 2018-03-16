@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebApplication1.Models
 {
-    public class DaemonBackupInformation
+    public class BackupInformation
     {
         public DateTime Date { get; set; }
         public string Type { get; set; }

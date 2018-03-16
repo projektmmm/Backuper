@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebApplication1.Models
 {
-    public class DaemonNextRunSettings
+    public class NextRunSettings
     {
         public DateTime RunAt { get; set; }
         public string Cron { get; set; }

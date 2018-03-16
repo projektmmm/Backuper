@@ -17,7 +17,7 @@ namespace WebApplication1.Controllers
         [Route("api/daemon")]
         public void Post([FromBody]List<string> info)
         {
-            DaemonBackupInformation backupinfo = JsonConvert.DeserializeObject<DaemonBackupInformation>(info[0]);
+            BackupInformation backupinfo = JsonConvert.DeserializeObject<BackupInformation>(info[0]);
             string commandText = "INSERT INTO tbBackupReport(Date, Type, Size) VALUES(@Date,@Type,@Size)";
 
             using (MySqlConnection sConn = Sql.GetConnection())
@@ -45,7 +45,7 @@ namespace WebApplication1.Controllers
         /// GET z tbBackups o planovanych backupech
         /// </summary>
         [Route("api/daemon")]
-        public DaemonNextRunSettings Get()
+        public NextRunSettings Get()
         {
             using (MySqlConnection sConn = Sql.GetConnection())
             {
@@ -53,7 +53,7 @@ namespace WebApplication1.Controllers
                 Sql.SetCommand("SELECT RunAt, Cron, BackupType, SourcePath, DestinationPath FROM tbBackups WHERE Id=1");
                 MySqlDataReader sRead = Sql.sComm.ExecuteReader();
                 sRead.Read();
-                DaemonNextRunSettings ret = new DaemonNextRunSettings()
+                NextRunSettings ret = new NextRunSettings()
                 {
                     RunAt = Convert.ToDateTime(sRead[0]),
                     Cron = sRead[1].ToString(),

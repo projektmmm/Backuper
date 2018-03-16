@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebApplication1.Models
 {
-    public class DaemonFileInfo
+    public class FileInfo
     {
         public string Name { get; set; }
         public string Path { get; set; }

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebApplication1.Models
 {
-    public class AdminCommandInformation
+    public class CommandInformation
     {
         public int DaemonId { get; set; }
         public DateTime RunAt { get; set; }

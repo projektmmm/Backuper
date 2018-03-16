@@ -208,19 +208,16 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\DaemonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\Test.cs" />
-    <Compile Include="Controllers\TokenController.cs" />
-    <Compile Include="Email.cs" />
+    <Compile Include="App_Code\Email.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AdminCommandInformation.cs" />
-    <Compile Include="Models\DaemonBackupInformation.cs" />
-    <Compile Include="Models\DaemonFileInfo.cs" />
-    <Compile Include="Models\DaemonNextRunSettings.cs" />
-    <Compile Include="Models\Person.cs" />
-    <Compile Include="Models\Token.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Admin\CommandInformation.cs" />
+    <Compile Include="Models\Daemon\BackupInformation.cs" />
+    <Compile Include="Models\Daemon\FileInfo.cs" />
+    <Compile Include="Models\Daemon\NextRunSettings.cs" />
+    <Compile Include="Models\Admin\Token.cs" />
+    <Compile Include="Models\Admin\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App_Code\Sql.cs" />
   </ItemGroup>
