@@ -17,14 +17,14 @@ namespace WebApplication1.Controllers
         /// </summary>
 
         [Route("api/admin/form")]
-        public bool Post([FromBody]List<string> info)
+        public bool Post(CommandInformation incommingCommand)
         {
-            Token tokenHandler = new Token();
-            bool token = tokenHandler.Verify(info[1]);
-            if (token == false)
-                return false;
+            //Token tokenHandler = new Token();
+            //bool token = tokenHandler.Verify(info[1]);
+            //if (token == false)
+            //    return false;
 
-            CommandInformation incommingCommand = JsonConvert.DeserializeObject<CommandInformation>(info[0]);
+            //CommandInformation incommingCommand = JsonConvert.DeserializeObject<CommandInformation>(info[0]);
 
             string commandText = "INSERT INTO tbBackups(RunAt, Cron, DaemonId, BackupType, SourcePath, DestinationPath) VALUES(@RunAt,@Cron,@DaemonId,@BackupType,@SourcePath,@DestinationPath)";
             using (MySqlConnection sConn = new MySqlConnection(Sql.ConnectionString))
