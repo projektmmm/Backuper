@@ -41,4 +41,8 @@ export class DeamonsSettingsComponent implements OnInit {
      .subscribe(Response=>{console.log(Response)
      })
   }
+
+  Edit(Cron){
+    Cron.value = "xxxx"
+  }
 }
