@@ -12,6 +12,8 @@ import { DeamonsComponent } from './deamons/deamons.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 import { DeamonsSettingsComponent } from './deamons-settings/deamons-settings.component';
 
+import {MatButtonModule, MatCheckboxModule, MatProgressSpinnerModule} from '@angular/material'
+
 
 @NgModule({
   declarations: [
@@ -27,6 +29,9 @@ import { DeamonsSettingsComponent } from './deamons-settings/deamons-settings.co
   imports: [
     BrowserModule,
     HttpClientModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatProgressSpinnerModule,
     
     RouterModule.forRoot([ 
 {path: '', component: LoginComponent},

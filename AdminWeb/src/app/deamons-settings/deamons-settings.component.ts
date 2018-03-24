@@ -6,8 +6,6 @@ import { Http, Headers } from '@angular/http';
 import { HttpHeaders } from '@angular/common/http';
 import { RequestOptions } from '@angular/http';
 
-
-
 @Component({
   selector: 'app-deamons-settings',
   templateUrl: './deamons-settings.component.html',
@@ -43,6 +41,6 @@ export class DeamonsSettingsComponent implements OnInit {
   }
 
   Edit(Cron){
-    Cron.value = "xxxx"
+    Cron.value = Cron.value + "x"
   }
 }
