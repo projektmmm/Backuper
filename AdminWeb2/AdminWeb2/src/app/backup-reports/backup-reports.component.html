@@ -1,3 +1,33 @@
-<p>
-  backup-reports works!
-</p>
+<h2>Backup Reports</h2>
+<button (click)="getReports()">Get Reports</button>
+
+<data-table
+    [items]="items"                 
+    [itemCount]="itemCount"
+    (reload)="reloadItems($event)"
+>
+
+<!-- SLOUPEC 1 - DATE -->
+<data-table-column
+    [property]="'Date'"
+    [header]="'Date'"
+    [sortable]="true"
+    [resizable]="true"
+></data-table-column>
+
+<!-- SLOUPEC 2 - TYPE -->
+<data-table-column
+    [property]="'Type'"
+    [header]="'Type'"
+    [sortable]="true"
+    [resizable]="true" 
+></data-table-column>
+
+<!-- SLOUPEC 3 - SIZE -->
+<data-table-column
+    [property]="'Size'"
+    [header]="'Size'"
+    [sortable]="true"
+    [resizable]="true"
+></data-table-column>
+</data-table>

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule} from '@angular/router'
+import { DataTableModule} from 'angular5-data-table';
 
 
 import { AppComponent } from './app.component';
@@ -25,6 +26,7 @@ import { HomeComponent } from './home/home.component';
   imports: [
     BrowserModule,
     HttpClientModule,
+    DataTableModule,
     NgbModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent},

@@ -117,5 +117,33 @@ namespace WebApplication1.Controllers
                     return true;
             }
         }
+
+        [Route("api/admin")]
+        public List<BackupInformation> Get()
+        {
+            List<BackupInformation> data = new List<BackupInformation>();
+            string commandText = "SELECT * FROM tbBackupReport";
+
+            using (MySqlConnection sConn = Sql.GetConnection())
+            {
+                sConn.Open();
+                MySqlCommand sComm = new MySqlCommand(commandText, sConn);
+                MySqlDataReader sRead = sComm.ExecuteReader();
+
+                while (sRead.Read())
+                {
+                    data.Add(new BackupInformation()
+                    {
+                        Date = Convert.ToDateTime(sRead["Date"]),
+                        Size = Convert.ToInt32(sRead["Size"]),
+                        Type = sRead["Type"].ToString()
+                    });
+                }
+                sConn.Close();
+            }
+
+            return data;
+
+        }
     }
 }
