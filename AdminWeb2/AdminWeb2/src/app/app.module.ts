@@ -13,6 +13,8 @@ import {BackupReportsComponent} from './backup-reports/backup-reports.component'
 import {DaemonsComponent} from './daemons/daemons.component';
 import {AdminSettingsComponent} from './admin-settings/admin-settings.component';
 import {HomeComponent} from './home/home.component';
+import {LoginComponent} from './login/login.component';
+import {RegisterComponent} from './register/register.component';
 
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -22,9 +24,10 @@ import {MatTableModule} from '@angular/material/table';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatSliderModule} from '@angular/material/slider';
-import { MatPaginatorModule } from '@angular/material';
+import {MatPaginatorModule} from '@angular/material';
 
 import 'hammerjs';
+
 
 
 @NgModule({
@@ -34,7 +37,9 @@ import 'hammerjs';
     BackupReportsComponent,
     DaemonsComponent,
     AdminSettingsComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +48,9 @@ import 'hammerjs';
     DataTableModule,
     NgbModule.forRoot(),
     RouterModule.forRoot([
-      {path: '', component: HomeComponent},
+      {path: '', component: LoginComponent},
+      {path: 'register', component: RegisterComponent},
+      {path: 'home', component: HomeComponent},
       {path: 'admin-settings', component: AdminSettingsComponent},
       {path: 'backup-reports', component: BackupReportsComponent},
       {path: 'daemons', component: DaemonsComponent}

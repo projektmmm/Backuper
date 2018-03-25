@@ -1,5 +1,12 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<bs-navbar></bs-navbar>
+<div *ngIf="router.url!='/' && router.url!='/register'">
+  <bs-navbar></bs-navbar>
+</div>
+
+
+
+
+
 
 <main role="main" class="container">
   <router-outlet></router-outlet>
