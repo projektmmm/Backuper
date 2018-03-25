@@ -3,6 +3,7 @@ import { HttpClientModule, HttpClient, HttpParams,HttpClientJsonpModule} from '@
 import { BackupReport} from './backup-report';
 import { DataTableResource } from 'angular5-data-table';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @Component({
   selector: 'backup-reports',

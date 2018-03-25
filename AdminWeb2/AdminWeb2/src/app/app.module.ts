@@ -1,7 +1,6 @@
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {RouterModule} from '@angular/router'
 import {DataTableModule} from 'angular5-data-table';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -24,7 +23,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatSliderModule} from '@angular/material/slider';
-import {MatPaginatorModule} from '@angular/material';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 import 'hammerjs';
 
@@ -46,14 +45,14 @@ import 'hammerjs';
     BrowserAnimationsModule,
     HttpClientModule,
     DataTableModule,
-    NgbModule.forRoot(),
     RouterModule.forRoot([
-      {path: '', component: LoginComponent},
+      {path: '', component: HomeComponent},
       {path: 'register', component: RegisterComponent},
       {path: 'home', component: HomeComponent},
       {path: 'admin-settings', component: AdminSettingsComponent},
       {path: 'backup-reports', component: BackupReportsComponent},
-      {path: 'daemons', component: DaemonsComponent}
+      {path: 'daemons', component: DaemonsComponent},
+      {path: 'login', component: LoginComponent}
     ]),
     MatToolbarModule,
     MatButtonModule,
