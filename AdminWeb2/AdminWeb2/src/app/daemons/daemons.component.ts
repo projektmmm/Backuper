@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Settings } from './settings';
 import { HttpClientModule, HttpClient, HttpParams, HttpClientJsonpModule, HttpHeaders } from '@angular/common/http';
 import { Http, Headers, RequestOptions} from '@angular/http';
-import { MatSlider } from '@angular/material/slider';
 
 @Component({
   selector: 'daemons',
@@ -39,5 +38,9 @@ export class DaemonsComponent implements OnInit {
     this.http2.post(this.root_URL + "/api/admin/form", JSON.stringify(data), head)
     .subscribe(Response => { console.log(Response) })
 
+  }
+
+  UpdateCron(EMMinutes, Cron){
+    Cron.value = "*/" + EMMinutes.value + " * * * *"
   }
 }

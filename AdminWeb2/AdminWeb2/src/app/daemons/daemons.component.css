@@ -38,6 +38,13 @@
     width: 100%
 }
 
+.example-half-width {
+    padding-left: 0px;
+    padding-top: 10px;
+    
+    width: 25%
+}
+
 mat-grid-tile {
     background: white;
   }

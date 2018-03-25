@@ -12,7 +12,7 @@
                 <input matInput #RunAt type="text" ng-model="RunAt" placeholder="RunAt" value="">
             </mat-form-field>
             <mat-form-field class="example-full-width">
-                <input matInput #Cron type="text" ng-model="Cron" placeholder="Cron" value="">
+                <input matInput #Cron type="text" ng-model="Cron" placeholder="Cron">
             </mat-form-field>
             <mat-form-field class="example-full-width">
                 <input matInput #BackupType type="text" ng-model="BackupType" placeholder="BackupType" value="">
@@ -24,7 +24,7 @@
                 <input matInput #DestinationPath type="text" ng-model="DestinationPath" placeholder="DestinationPath" value="">
             </mat-form-field>
         </form>
-        <button mat-raised-button class="margin430" (click)="Send(DaemonId.value,RunAt.value,Cron.value,BackupType.value,SourcePath.value,DestinationPath.value)">
+        <button mat-raised-button class="margin430" color="primary" (click)="Send(DaemonId.value,RunAt.value,Cron.value,BackupType.value,SourcePath.value,DestinationPath.value)">
             Send Settings
         </button>
     </mat-grid-tile>
@@ -34,12 +34,25 @@
                 Repeat settings    
             </div>
             <mat-tab-group>
-                <mat-tab label="Minutes">Minutes</mat-tab>
-                <mat-tab label="Hourly">Hourly</mat-tab>
-                <mat-tab label="Daily">Daily</mat-tab>
-                <mat-tab label="Weekly">Weekly</mat-tab>
+                <mat-tab label="Minutes">
+                    <mat-form-field class="example-half-width">
+                        <input matInput #EMMinutes ng-model="EMMinutes" type="number" min="1" max="60" placeholder="minutes">                    
+                    </mat-form-field>                 
+                </mat-tab>
+                <mat-tab label="Hourly">
+
+                </mat-tab>
+                <mat-tab label="Daily">
+
+                </mat-tab>
+                <mat-tab label="Weekly">
+
+                </mat-tab>
             </mat-tab-group>
         </div>
+        <button mat-raised-button color="primary" (click)="UpdateCron(EMMinutes, Cron)">
+            Update Cron
+        </button>
     </mat-grid-tile>
 </mat-grid-list>
 
