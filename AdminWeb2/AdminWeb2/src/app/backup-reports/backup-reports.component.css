@@ -1,0 +1,25 @@
+.roboto {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 30px;
+    padding: 28px 8px; 
+}
+
+.page-header {
+    color: #3f51b5;
+    padding-left: 20px;
+    background-origin: padding-box;
+    background-size: auto;
+}
+
+.example-container {
+    display: flex;
+    flex-direction: column;
+    max-height: 500px;
+    min-width: 300px;
+  }
+  
+  .mat-table {
+    overflow: auto;
+    max-height: 500px;
+  }
