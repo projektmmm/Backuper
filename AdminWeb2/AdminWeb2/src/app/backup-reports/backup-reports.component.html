@@ -4,33 +4,33 @@
 
 <button (click)="getReports()">Get Reports</button>
 
-<data-table
-    [items]="items"                 
-    [itemCount]="itemCount"
-    (reload)="reloadItems($event)"
->
+<mat-table [dataSource]='tableResource' matSort>
 
-<!-- SLOUPEC 1 - DATE -->
-<data-table-column
-    [property]="'Date'"
-    [header]="'Date'"
-    [sortable]="true"
-    [resizable]="true"
-></data-table-column>
+    <!-- Date -->
+    <ng-container matColumnDef="Date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>DATE</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.Date}}</mat-cell>
+    </ng-container>
 
-<!-- SLOUPEC 2 - TYPE -->
-<data-table-column
-    [property]="'Type'"
-    [header]="'Type'"
-    [sortable]="true"
-    [resizable]="true" 
-></data-table-column>
+    <!-- Type -->
+    <ng-container matColumnDef="Type">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Type</mat-header-cell>
+        <mat-cell cell *matCellDef="let row">{{row.Type}}</mat-cell>
+    </ng-container>
 
-<!-- SLOUPEC 3 - SIZE -->
-<data-table-column
-    [property]="'Size'"
-    [header]="'Size'"
-    [sortable]="true"
-    [resizable]="true"
-></data-table-column>
-</data-table>
+    <!-- Backup -->
+    <ng-container matColumnDef="Size">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Size</mat-header-cell>
+        <mat-cell cell *matCellDef="let row">{{row.Size}}</mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+
+</mat-table>>

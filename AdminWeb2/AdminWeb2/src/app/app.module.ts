@@ -22,6 +22,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatSliderModule} from '@angular/material/slider';
+import { MatPaginatorModule } from '@angular/material';
 
 import 'hammerjs';
 
@@ -54,7 +55,8 @@ import 'hammerjs';
     MatTableModule,
     MatGridListModule,
     MatTabsModule,
-    MatSliderModule
+    MatSliderModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
