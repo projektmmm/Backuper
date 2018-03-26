@@ -30,6 +30,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import 'hammerjs';
 import { PlannedBackupsComponent } from './planned-backups/planned-backups.component';
+import { CronLabelComponent } from './settings-components/cron-label/cron-label.component';
+import { SendSettingsComponent} from './settings-components/send-settings/send-settings.component';
 
 
 
@@ -43,7 +45,9 @@ import { PlannedBackupsComponent } from './planned-backups/planned-backups.compo
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    PlannedBackupsComponent
+    PlannedBackupsComponent,
+    CronLabelComponent,
+    SendSettingsComponent
   ],
   imports: [
     BrowserModule,

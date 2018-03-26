@@ -3,7 +3,6 @@ import { HttpClientModule, HttpClient, HttpParams,HttpClientJsonpModule} from '@
 import { BackupReport} from './backup-report';
 import { DataTableResource } from 'angular5-data-table';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import {MatPaginatorModule} from '@angular/material/paginator';
 
 @Component({
   selector: 'backup-reports',
@@ -26,7 +25,7 @@ export class BackupReportsComponent implements OnInit {
   itemCount: number; 
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  //@ViewChild(MatSort) sort: MatSort;
 
 
   async getReports() {
@@ -48,7 +47,7 @@ export class BackupReportsComponent implements OnInit {
       //.then(count => this.itemCount = count)
 
       this.tableResource.paginator = this.paginator;
-      this.tableResource.sort = this.sort;
+      //this.tableResource.sort = this.sort;
   }
 
   //reloadItems(params) {

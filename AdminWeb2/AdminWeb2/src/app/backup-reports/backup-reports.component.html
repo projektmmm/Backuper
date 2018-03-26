@@ -2,7 +2,9 @@
     <div class="roboto">Backup reports</div>
 </div>
 
-<button (click)="getReports()">Get Reports</button>
+<button mat-raised-button color="primary" class="marginn" (click)="GetReports()">
+    Get Reports
+</button> 
 
 <mat-table [dataSource]='tableResource' matSort>
 
@@ -34,9 +36,10 @@
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 -->
 
-<mat-paginator [length]="10"
+
+
+</mat-table>>
+<mat-paginator 
               [pageSize]="10"
               [pageSizeOptions]="[5, 10, 25, 100]">
 </mat-paginator>
-
-</mat-table>>

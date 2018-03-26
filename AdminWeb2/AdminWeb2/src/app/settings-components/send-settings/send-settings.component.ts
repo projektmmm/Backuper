@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Settings } from './settings';
 import { HttpClientModule, HttpClient, HttpParams, HttpClientJsonpModule, HttpHeaders } from '@angular/common/http';
 import { Http, Headers, RequestOptions} from '@angular/http';
-import { CronLabelComponent } from '../settings-components/cron-label/cron-label.component';
 
 @Component({
-  selector: 'daemons',
-  templateUrl: './daemons.component.html',
-  styleUrls: ['./daemons.component.css']
+  selector: 'send-settings',
+  templateUrl: './send-settings.component.html',
+  styleUrls: ['./send-settings.component.css']
 })
-export class DaemonsComponent implements OnInit {
+export class SendSettingsComponent implements OnInit {
 
+  
   constructor(private http2: HttpClient) {
     this.headers.append("Content-Type", "application/json");
     this.headers.append("Accept", "application/json");
@@ -21,6 +21,7 @@ export class DaemonsComponent implements OnInit {
 
   headers = new HttpHeaders();
   readonly root_URL = 'http://localhost:54736';
+  @Input() show: boolean;
 
   Send(daemonId, runAt, cron, backupType, sourcePath, destinationPath) {
 
@@ -114,4 +115,5 @@ export class DaemonsComponent implements OnInit {
       Cron.value = StartMinutesWeekly.value + " " + StartHoursWeekly.value + " * * " + result
     }
   }
+
 }

@@ -1,45 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { Settings } from './settings';
-import { HttpClientModule, HttpClient, HttpParams, HttpClientJsonpModule, HttpHeaders } from '@angular/common/http';
-import { Http, Headers, RequestOptions} from '@angular/http';
-import { CronLabelComponent } from '../settings-components/cron-label/cron-label.component';
 
 @Component({
-  selector: 'daemons',
-  templateUrl: './daemons.component.html',
-  styleUrls: ['./daemons.component.css']
+  selector: 'cron-label',
+  templateUrl: './cron-label.component.html',
+  styleUrls: ['./cron-label.component.css']
 })
-export class DaemonsComponent implements OnInit {
+export class CronLabelComponent implements OnInit {
 
-  constructor(private http2: HttpClient) {
-    this.headers.append("Content-Type", "application/json");
-    this.headers.append("Accept", "application/json");
-   }
+  constructor() { }
 
   ngOnInit() {
   }
 
-  headers = new HttpHeaders();
-  readonly root_URL = 'http://localhost:54736';
-
-  Send(daemonId, runAt, cron, backupType, sourcePath, destinationPath) {
-
-    const head = {headers: new HttpHeaders({'Content-Type':'application/json'})};
-    head.headers.append('Content-Type', 'application/json');
-
-    const data: Settings = {
-      DaemonId: daemonId,
-      RunAt: new Date,
-      Cron: cron,
-      BackupType: backupType,
-      SourcePath: sourcePath,
-      DestinationPath: destinationPath
-    }
-
-    this.http2.post(this.root_URL + "/api/admin/form", JSON.stringify(data), head)
-    .subscribe(Response => { console.log(Response) })
-
-  }
 
   UpdateCronMinutes(EMMinutes, Cron){
     if(EMMinutes.value > 59 || EMMinutes.value < 1){
@@ -114,4 +86,5 @@ export class DaemonsComponent implements OnInit {
       Cron.value = StartMinutesWeekly.value + " " + StartHoursWeekly.value + " * * " + result
     }
   }
+
 }

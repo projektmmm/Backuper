@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, Input } from '@angular/core';
 import { HttpClientModule, HttpClient, HttpParams,HttpClientJsonpModule} from '@angular/common/http';
 import { Backups} from './backups';
 import { DataTableResource } from 'angular5-data-table';
@@ -23,11 +23,12 @@ export class PlannedBackupsComponent implements OnInit {
   displayedColumns = ['RunAt', 'Cron', 'DaemonId', 'BackupType', 'SourcePath', 'DestinationPath', 'Edit'];
   tableResource: MatTableDataSource<Backups>;
   items: Backups[] = [];
-  itemCount: number; 
+  itemCount: number;
+  showVar: boolean = false;
+  rowIndex: number;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
 
   async getBackup() {
     this.http.get<Backups[]>(this.Root_URL + "/api/admin/backups").subscribe
@@ -49,6 +50,12 @@ export class PlannedBackupsComponent implements OnInit {
 
       this.tableResource.paginator = this.paginator;
       this.tableResource.sort = this.sort;
+  }
+
+  show($event) {
+    this.showVar = !this.showVar;
+    this.rowIndex = this.tableResource.data.length;
+    console.log(this.rowIndex);
   }
 
   //reloadItems(params) {
