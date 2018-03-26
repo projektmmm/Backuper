@@ -25,9 +25,13 @@
             </mat-form-field>
         </form>
         
+        <button mat-raised-button class="margin430" color="primary" (click)="Send(DaemonId.value,RunAt.value,Cron.value,BackupType.value,SourcePath.value,DestinationPath.value)">
+            Send Settings
+        </button>
+
     </mat-grid-tile>
     <mat-grid-tile>
-        <<div class="croneditor">
+        <div class="croneditor">
             <div class="repeat">
                 Repeat settings    
             </div>
@@ -134,12 +138,6 @@
                 </mat-tab>
             </mat-tab-group>
         </div>
-        <div class="cronbutton">
-            
-        </div> >
     </mat-grid-tile>
 </mat-grid-list>
 
-<button mat-raised-button class="margin430" color="primary" (click)="Send(DaemonId.value,RunAt.value,Cron.value,BackupType.value,SourcePath.value,DestinationPath.value)">
-    Send Settings
-</button>

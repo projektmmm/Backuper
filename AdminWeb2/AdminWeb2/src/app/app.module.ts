@@ -27,6 +27,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import 'hammerjs';
 import { PlannedBackupsComponent } from './planned-backups/planned-backups.component';
@@ -75,7 +77,9 @@ import { SendSettingsComponent} from './settings-components/send-settings/send-s
     MatPaginatorModule,
     MatRadioModule,
     MatFormFieldModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
