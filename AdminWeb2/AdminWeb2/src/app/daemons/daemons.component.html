@@ -24,9 +24,7 @@
                 <input matInput #DestinationPath type="text" ng-model="DestinationPath" placeholder="DestinationPath" value="">
             </mat-form-field>
         </form>
-        <button mat-raised-button class="margin430" color="primary" (click)="Send(DaemonId.value,RunAt.value,Cron.value,BackupType.value,SourcePath.value,DestinationPath.value)">
-            Send Settings
-        </button>
+        
     </mat-grid-tile>
     <mat-grid-tile>
         <<div class="croneditor">
@@ -142,3 +140,6 @@
     </mat-grid-tile>
 </mat-grid-list>
 
+<button mat-raised-button class="margin430" color="primary" (click)="Send(DaemonId.value,RunAt.value,Cron.value,BackupType.value,SourcePath.value,DestinationPath.value)">
+    Send Settings
+</button>
