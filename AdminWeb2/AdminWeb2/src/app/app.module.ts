@@ -24,6 +24,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import 'hammerjs';
 
@@ -62,7 +65,10 @@ import 'hammerjs';
     MatGridListModule,
     MatTabsModule,
     MatSliderModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatRadioModule,
+    MatFormFieldModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

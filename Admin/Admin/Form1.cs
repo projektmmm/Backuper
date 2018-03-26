@@ -31,23 +31,25 @@ namespace Admin
 
         private void button_Send_Click(object sender, EventArgs e)
         {
-            List<string> toPost = new List<string>();
-            if (ValidateAll())
-            {
-                CommandInformation commandInformation = new CommandInformation()
-                {
-                    DaemonId = Convert.ToInt32(this.comboBox_DaemonId.SelectedItem),
-                    RunAt = this.dateTimePicker_RunAt.Value,
-                    Cron = rp.Cron,
-                    BackupType = this.comboBox_BackupType.SelectedItem.ToString(),
-                    SourcePath = this.textBox_SourcePath.Text.Replace("\\","\\\\"),
-                    DestinationPath = this.textBox_DestinationPath.Text.Replace("\\", "\\\\"),
-                };
+            MessageBox.Show(rp.Cron);
 
-                toPost.Add(JsonConvert.SerializeObject(commandInformation));
-                ApiCommunication api = new ApiCommunication();
-                api.PostBackupReport(toPost, "api/admin");
-            }
+            //List<string> toPost = new List<string>();
+            //if (ValidateAll())
+            //{
+            //    CommandInformation commandInformation = new CommandInformation()
+            //    {
+            //        DaemonId = Convert.ToInt32(this.comboBox_DaemonId.SelectedItem),
+            //        RunAt = this.dateTimePicker_RunAt.Value,
+            //        Cron = rp.Cron,
+            //        BackupType = this.comboBox_BackupType.SelectedItem.ToString(),
+            //        SourcePath = this.textBox_SourcePath.Text.Replace("\\","\\\\"),
+            //        DestinationPath = this.textBox_DestinationPath.Text.Replace("\\", "\\\\"),
+            //    };
+
+            //    toPost.Add(JsonConvert.SerializeObject(commandInformation));
+            //    ApiCommunication api = new ApiCommunication();
+            //    api.PostBackupReport(toPost, "api/admin");
+            //}
         }
 
         private bool ValidateAll()

@@ -49,3 +49,9 @@ D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Admin\Admin\obj\Debug\Admin.csproj.C
 D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Admin\Admin\obj\Debug\Admin.csproj.CopyComplete
 D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Admin\Admin\obj\Debug\Admin.exe
 D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Admin\Admin\obj\Debug\Admin.pdb
+C:\Users\Vojta\Documents\GitHub\Backuper\Admin\Admin\bin\Debug\Microsoft.IdentityModel.Logging.dll
+C:\Users\Vojta\Documents\GitHub\Backuper\Admin\Admin\bin\Debug\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Vojta\Documents\GitHub\Backuper\Admin\Admin\bin\Debug\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Vojta\Documents\GitHub\Backuper\Admin\Admin\bin\Debug\Microsoft.IdentityModel.Logging.xml
+C:\Users\Vojta\Documents\GitHub\Backuper\Admin\Admin\bin\Debug\Microsoft.IdentityModel.Tokens.xml
+C:\Users\Vojta\Documents\GitHub\Backuper\Admin\Admin\bin\Debug\System.IdentityModel.Tokens.Jwt.xml
