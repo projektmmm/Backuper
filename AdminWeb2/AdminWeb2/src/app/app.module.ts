@@ -29,6 +29,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import 'hammerjs';
+import { PlannedBackupsComponent } from './planned-backups/planned-backups.component';
 
 
 
@@ -41,7 +42,8 @@ import 'hammerjs';
     AdminSettingsComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    PlannedBackupsComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,8 @@ import 'hammerjs';
       {path: 'admin-settings', component: AdminSettingsComponent},
       {path: 'backup-reports', component: BackupReportsComponent},
       {path: 'daemons', component: DaemonsComponent},
-      {path: 'login', component: LoginComponent}
+      {path: 'login', component: LoginComponent},
+      {path: 'planned-backups', component: PlannedBackupsComponent}
     ]),
     MatToolbarModule,
     MatButtonModule,
