@@ -3,6 +3,7 @@ import { Settings } from './settings';
 import { HttpClientModule, HttpClient, HttpParams, HttpClientJsonpModule, HttpHeaders } from '@angular/common/http';
 import { Http, Headers, RequestOptions} from '@angular/http';
 import { CronLabelComponent } from '../settings-components/cron-label/cron-label.component';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'daemons',
@@ -11,10 +12,16 @@ import { CronLabelComponent } from '../settings-components/cron-label/cron-label
 })
 export class DaemonsComponent implements OnInit {
 
-  constructor(private http2: HttpClient) {
+  constructor(private http2: HttpClient, public snackBar: MatSnackBar) {
     this.headers.append("Content-Type", "application/json");
     this.headers.append("Accept", "application/json");
    }
+
+   openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 1500,
+    });
+  }
 
   ngOnInit() {
   }
@@ -41,17 +48,22 @@ export class DaemonsComponent implements OnInit {
 
   }
 
-  UpdateCronMinutes(EMMinutes, Cron){
-    if(EMMinutes.value > 59 || EMMinutes.value < 1){
-      alert("enter number between 1 and 59")
-    }
-    else{
-      if(EMMinutes.value == ""){
+  UpdateCronMinutes(EMMinutes, Cron)
+  {
+    if(EMMinutes.value >= 1 && EMMinutes.value <= 59)
+    {
+      if(EMMinutes.value == "")
+      {
       Cron.value = "";
       }
-      else {
+      else 
+      {
       Cron.value = "*/" + EMMinutes.value + " * * * *";
       }
+    }
+    else
+    {    
+      this.openSnackBar("enter number between 1 and 59","")
     }
   }
 

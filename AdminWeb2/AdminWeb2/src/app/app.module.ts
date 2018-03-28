@@ -29,6 +29,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatIconModule} from '@angular/material/icon';
+
 
 import 'hammerjs';
 import { PlannedBackupsComponent } from './planned-backups/planned-backups.component';
@@ -79,7 +82,10 @@ import { SendSettingsComponent} from './settings-components/send-settings/send-s
     MatFormFieldModule,
     MatCheckboxModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
