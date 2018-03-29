@@ -1,3 +1,13 @@
-<p>
-  login works!
-</p>
+
+<Div>
+<div class="input">
+  <input #Username type="text" ng-model="Username" placeholder="Username">
+</div>
+<div class="input">
+  <input #Password type="password" ng-model="Password" placeholder="Password">
+</div>
+<div class="input">
+<a><button (click)="Login(Username.value,Password.value)">Login</button></a>
+<a href="register"><button (click)="Register()">Register</button></a>
+</div>
+</Div>
