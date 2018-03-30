@@ -47,7 +47,7 @@ export class DaemonsComponent implements OnInit {
     this.http2.post(this.root_URL + "/api/admin/form", JSON.stringify(data), head)
     .subscribe(Response => { console.log(Response) })
 
-    this.openSnackBar("Settings sended!","")
+    this.openSnackBar("","Settings sended!")
   }
 
   UpdateCronMinutes(EMMinutes, Cron)
@@ -55,6 +55,7 @@ export class DaemonsComponent implements OnInit {
     if(EMMinutes.value >= 1 && EMMinutes.value <= 59)
     {
       Cron.value = "*/" + EMMinutes.value + " * * * *";
+      this.openSnackBar("","Cron updated!")
     }
     else
     {    
@@ -69,6 +70,7 @@ export class DaemonsComponent implements OnInit {
       if(EveryHourHourly.value >= 1 && EveryHourHourly.value <= 23)
       {
         Cron.value = "* */" + EveryHourHourly.value + " * * *";
+        this.openSnackBar("","Cron updated!")
       }
       else
       {
@@ -90,6 +92,7 @@ export class DaemonsComponent implements OnInit {
         }
 
         Cron.value = StartEveryMinuteHourly.value + " " + StartEveryHourHourly.value + " * * *";
+        this.openSnackBar("","Cron updated!")
       }
       else
       {
@@ -115,6 +118,7 @@ export class DaemonsComponent implements OnInit {
         }
 
         Cron.value = StartMinutesDaily.value + " " + StartHoursDaily.value + " */" + DaysOneDaily.value + " * *";
+        this.openSnackBar("","Cron updated!")
       }
       else
       {
@@ -125,6 +129,7 @@ export class DaemonsComponent implements OnInit {
     else
     {
       Cron.value = StartMinutesDaily.value + " " + StartHoursDaily.value + " * * *";
+      this.openSnackBar("","Cron updated!")
     }
   }
 
@@ -175,6 +180,7 @@ export class DaemonsComponent implements OnInit {
       }
 
       Cron.value = StartMinutesWeekly.value + " " + StartHoursWeekly.value + " * * " + result
+      this.openSnackBar("","Cron updated!")
     }
     else
     {
