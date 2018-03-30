@@ -2,6 +2,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router'
+import {Route, RouterLink} from '@angular/router'
 import {DataTableModule} from 'angular5-data-table';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -14,6 +15,7 @@ import {AdminSettingsComponent} from './admin-settings/admin-settings.component'
 import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
+
 
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';

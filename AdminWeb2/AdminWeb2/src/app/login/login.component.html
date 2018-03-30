@@ -1,13 +1,17 @@
+<form>
+  <mat-form-field class="width-full">
+    <input matInput #Username type="text" ng-model="Username" placeholder="Username">
+  </mat-form-field>
+  <mat-form-field class="width-full">
+    <input matInput #Password type="password" ng-model="Password" placeholder="Password">
+  </mat-form-field>
+  <mat-form-field class="width-full">
+    <button mat-raised-button (click)="Login(Username.value,Password.value)">Login</button>
+    <button mat-raised-button routerLink="/register" (click)="Register()">Register</button>
+  </mat-form-field>
+</form>
 
-<Div>
-<div class="input">
-  <input #Username type="text" ng-model="Username" placeholder="Username">
-</div>
-<div class="input">
-  <input #Password type="password" ng-model="Password" placeholder="Password">
-</div>
-<div class="input">
-<a><button (click)="Login(Username.value,Password.value)">Login</button></a>
-<a href="register"><button (click)="Register()">Register</button></a>
-</div>
-</Div>
+
+
+
+

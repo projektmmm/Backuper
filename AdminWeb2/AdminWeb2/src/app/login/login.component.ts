@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClientModule, HttpClient, HttpParams,HttpClientJsonpModule,HttpHeaders} from '@angular/common/http';
 import { User } from './User';
 import { RouterLink, Router } from '@angular/router';
+import { query } from '@angular/core/src/animation/dsl';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
