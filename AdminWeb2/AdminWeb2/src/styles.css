@@ -22,3 +22,8 @@ body {
     font-size: 20px;
     padding: 10px 0px;
 }
+
+.padding-left-right {
+    padding-left: 100px;
+    padding-right: 100px;
+}

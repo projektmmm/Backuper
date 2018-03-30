@@ -1,66 +1,68 @@
 <div class="page-header" color="primary">
   Planned Backups
 </div>
+<div class="padding-left-right">
+    <mat-table [dataSource]='tableResource' matSort class="datatable">
 
-<mat-table [dataSource]='tableResource' matSort class="datatable">
-
-  <!-- DaemonId -->
-  <ng-container matColumnDef="DaemonId">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>DaemonID </mat-header-cell>
-      <mat-cell *matCellDef="let row">{{row.DaemonId}}</mat-cell>
-  </ng-container>
-
-  <!-- RunAt -->
-  <ng-container matColumnDef="RunAt">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Run At</mat-header-cell>
-      <mat-cell cell *matCellDef="let row">{{row.RunAt}}</mat-cell>
-  </ng-container>
-
-  <!-- Cron -->
-  <ng-container matColumnDef="Cron">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Cron</mat-header-cell>
-      <mat-cell cell *matCellDef="let row">{{row.Cron}}</mat-cell>
-  </ng-container>
-
-  <!-- BackupType -->
-  <ng-container matColumnDef="BackupType">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Backup Type</mat-header-cell>
-    <mat-cell cell *matCellDef="let row">{{row.BackupType}}</mat-cell>
-  </ng-container>
-
-  <!-- SourcePath -->
-  <ng-container matColumnDef="SourcePath">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Source Path</mat-header-cell>
-    <mat-cell cell *matCellDef="let row">{{row.SourcePath}}</mat-cell>
-  </ng-container>
-
-    <!-- DestinationPath -->
-    <ng-container matColumnDef="DestinationPath">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Destination Path</mat-header-cell>
-      <mat-cell cell *matCellDef="let row">{{row.DestinationPath}}</mat-cell>
-    </ng-container>
-
-    <!-- EditButton -->
-    <ng-container matColumnDef="Edit">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Edit</mat-header-cell>
-      <mat-cell cell *matCellDef="let row">
-
-        <button mat-raised-button color="primary" class="marginn" (click)="show($event)">
-          Edit
-        </button> 
-
-      </mat-cell>
+        <!-- DaemonId -->
+        <ng-container matColumnDef="DaemonId">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>DaemonID </mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.DaemonId}}</mat-cell>
+        </ng-container>
       
-    </ng-container>
+        <!-- RunAt -->
+        <ng-container matColumnDef="RunAt">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Run At</mat-header-cell>
+            <mat-cell cell *matCellDef="let row">{{row.RunAt}}</mat-cell>
+        </ng-container>
+      
+        <!-- Cron -->
+        <ng-container matColumnDef="Cron">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Cron</mat-header-cell>
+            <mat-cell cell *matCellDef="let row">{{row.Cron}}</mat-cell>
+        </ng-container>
+      
+        <!-- BackupType -->
+        <ng-container matColumnDef="BackupType">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Backup Type</mat-header-cell>
+          <mat-cell cell *matCellDef="let row">{{row.BackupType}}</mat-cell>
+        </ng-container>
+      
+        <!-- SourcePath -->
+        <ng-container matColumnDef="SourcePath">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Source Path</mat-header-cell>
+          <mat-cell cell *matCellDef="let row">{{row.SourcePath}}</mat-cell>
+        </ng-container>
+      
+          <!-- DestinationPath -->
+          <ng-container matColumnDef="DestinationPath">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Destination Path</mat-header-cell>
+            <mat-cell cell *matCellDef="let row">{{row.DestinationPath}}</mat-cell>
+          </ng-container>
+      
+          <!-- EditButton -->
+          <ng-container matColumnDef="Edit">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Edit</mat-header-cell>
+            <mat-cell cell *matCellDef="let row">
+      
+              <button mat-raised-button color="primary" (click)="show($event)">
+                Edit
+              </button> 
+      
+            </mat-cell>
+            
+          </ng-container>
+      
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+      
+      </mat-table>
+      <mat-paginator [length]="10"
+                  [pageSize]="10"
+                  [pageSizeOptions]="[5, 10, 25, 100]">
+      </mat-paginator>
+</div>
 
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;">
-  </mat-row>
-
-</mat-table>
-<mat-paginator [length]="10"
-            [pageSize]="10"
-            [pageSizeOptions]="[5, 10, 25, 100]">
-</mat-paginator>
 
 <send-settings [show]="showVar"></send-settings>
