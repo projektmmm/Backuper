@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { SendSettingsComponent } from './../settings-components/send-settings/send-settings.component';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { Settings } from './settings';
 import { HttpClientModule, HttpClient, HttpParams, HttpClientJsonpModule, HttpHeaders } from '@angular/common/http';
 import { Http, Headers, RequestOptions} from '@angular/http';
 import { CronLabelComponent } from '../settings-components/cron-label/cron-label.component';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'daemons',
@@ -26,6 +27,7 @@ export class DaemonsComponent implements OnInit {
   ngOnInit() {
   }
 
+  @Input() Cron: string;
   headers = new HttpHeaders();
   readonly root_URL = 'http://localhost:54736';
 
@@ -125,5 +127,10 @@ export class DaemonsComponent implements OnInit {
     else{
       Cron.value = StartMinutesWeekly.value + " " + StartHoursWeekly.value + " * * " + result
     }
+  }
+
+
+  onCronUpdate() {
+    console.log("cronValue");
   }
 }

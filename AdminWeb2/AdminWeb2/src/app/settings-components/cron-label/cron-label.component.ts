@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'cron-label',
@@ -12,40 +12,49 @@ export class CronLabelComponent implements OnInit {
   ngOnInit() {
   }
 
+  @Input() Cron;
+  @Output() change = new EventEmitter();
 
-  UpdateCronMinutes(EMMinutes, Cron){
+
+  UpdateCronMinutes(EMMinutes, Cron = this.Cron){
     if(EMMinutes.value > 59 || EMMinutes.value < 1){
       alert("enter number between 1 and 59")
     }
     else{
       if(EMMinutes.value == ""){
-      Cron.value = "";
+      this.Cron.value = "";
       }
       else {
-      Cron.value = "*/" + EMMinutes.value + " * * * *";
+      this.Cron.value = "*/" + EMMinutes.value + " * * * *";
       }
     }
+
+    this.change.emit(this.Cron.value);
   }
 
-  UpdateCronHourly(Cron, EveryHourRadioHourly, StartEveryHourRadioHourly, EveryHourHourly, StartEveryHourHourly, StartEveryMinuteHourly){
+  UpdateCronHourly(Cron = this.Cron, EveryHourRadioHourly, StartEveryHourRadioHourly, EveryHourHourly, StartEveryHourHourly, StartEveryMinuteHourly){
     if(EveryHourRadioHourly.checked){
-      Cron.value = "* */" + EveryHourHourly.value + " * * *";
+      this.Cron.value = "* */" + EveryHourHourly.value + " * * *";
     }
     else{
-      Cron.value = StartEveryMinuteHourly.value + " " + StartEveryHourHourly.value + " * * *"
+      this.Cron.value = StartEveryMinuteHourly.value + " " + StartEveryHourHourly.value + " * * *"
     }
+
+    this.change.emit(this.Cron.value);
   }
 
-  UpdateCronDaily(Cron, RadioOneDaily, RadioTwoDaily, DaysOneDaily, StartHoursDaily, StartMinutesDaily){
+  UpdateCronDaily(Cron = this.Cron, RadioOneDaily, RadioTwoDaily, DaysOneDaily, StartHoursDaily, StartMinutesDaily){
     if(RadioOneDaily.checked){
-      Cron.value = StartMinutesDaily.value + " " + StartHoursDaily.value + " */" + DaysOneDaily.value + " * *" 
+      this.Cron.value = StartMinutesDaily.value + " " + StartHoursDaily.value + " */" + DaysOneDaily.value + " * *" 
     }
     else{
-      Cron.value = StartMinutesDaily.value + " " + StartHoursDaily.value + " * * *"
+      this.Cron.value = StartMinutesDaily.value + " " + StartHoursDaily.value + " * * *"
     }
+
+    this.change.emit(this.Cron.value);
   }
 
-  UpdateCronWeekly(Cron,CheckMonday, CheckTuesday, CheckWednesday, CheckThursday, CheckFriday, CheckSaturday,CheckSunday,StartHoursWeekly,StartMinutesWeekly){
+  UpdateCronWeekly(Cron = this.Cron ,CheckMonday, CheckTuesday, CheckWednesday, CheckThursday, CheckFriday, CheckSaturday,CheckSunday,StartHoursWeekly,StartMinutesWeekly){
  
  
     let result: string = "";
@@ -83,8 +92,10 @@ export class CronLabelComponent implements OnInit {
 
     }
     else{
-      Cron.value = StartMinutesWeekly.value + " " + StartHoursWeekly.value + " * * " + result
+      this.Cron.value = StartMinutesWeekly.value + " " + StartHoursWeekly.value + " * * " + result
     }
+
+    this.change.emit(this.Cron.value);
   }
 
 }

@@ -1,12 +1,9 @@
 <div *ngIf="show">
+    <form class="example-form">
 
-<div class="page-header" color="primary">
-  <div class="roboto">Send new settings</div>
-</div>
-
-<mat-grid-list cols="2" rowHeight="2:1">
-  <mat-grid-tile>
-      <form class="example-form">
+            <div class="page-header" color="primary">
+                <div class="roboto">Send new settings</div>
+                  
           <mat-form-field class="example-full-width">
               <input matInput #DaemonId type="text" ng-model="DaemonId" placeholder="DaemonId" value="">
           </mat-form-field>
@@ -25,123 +22,9 @@
           <mat-form-field class="example-full-width">
               <input matInput #DestinationPath type="text" ng-model="DestinationPath" placeholder="DestinationPath" value="">
           </mat-form-field>
-      </form>
+
       <button mat-raised-button class="margin430" color="primary" (click)="Send(DaemonId.value,RunAt.value,Cron.value,BackupType.value,SourcePath.value,DestinationPath.value)">
           Send Settings
       </button>
-  </mat-grid-tile>
-  <mat-grid-tile>
-        <div class="croneditor">
-          <div class="repeat">
-              Repeat settings    
-          </div>
-          <mat-tab-group>
-              <mat-tab label="Minutes">
-                  Every
-                  <mat-form-field class="example-half-width">
-                      <input matInput #EMMinutes ng-model="EMMinutes" type="number" min="1" max="59" placeholder="minute(s)">                    
-                  </mat-form-field>  
-                  
-                  <button mat-raised-button color="primary" class="marginn" (click)="UpdateCronMinutes(EMMinutes, Cron)">
-                      Update Cron
-                  </button> 
-
-              </mat-tab>
-              <mat-tab label="Hourly">
-                  <mat-radio-group>
-                      <div>
-                          <mat-radio-button #EveryHourRadioHourly ng-model="EveryHourRadioHourly" class="hourly-padding" value="1">Every</mat-radio-button>
-                          <mat-form-field class="tw-width">
-                              <input matInput #EveryHourHourly ng-model="EveryHourHourly" type="number" min="1" max="59" placeholder="Hour(s)">                    
-                          </mat-form-field>               
-                      </div>
-                      <div>
-                          <mat-radio-button #StartEveryHourRadioHourly ng-model="StartEveryHourRadioHourly" class="hourly-padding" value="2">Start every</mat-radio-button>
-                          <mat-form-field class="tw-width">
-                              <input matInput #StartEveryHourHourly ng-model="StartEveryHourHourly" type="number" min="0" max="23" placeholder="Hour">                    
-                          </mat-form-field>
-                          :
-                          <mat-form-field class="tw-width">
-                              <input matInput #StartEveryMinuteHourly ng-model="StartEveryMinuteHourly" type="number" min="0" max="59" placeholder="Minute">                    
-                          </mat-form-field>               
-                      </div>
-                  </mat-radio-group>
-
-                  <button mat-raised-button color="primary" class="marginn" (click)="UpdateCronHourly(Cron, EveryHourRadioHourly, StartEveryHourRadioHourly, EveryHourHourly, StartEveryHourHourly, StartEveryMinuteHourly)">
-                      Update Cron
-                  </button> 
-
-              </mat-tab>
-              <mat-tab label="Daily">
-                  <mat-radio-group>
-                      <div>
-                          <mat-radio-button #RadioOneDaily ng-model="RadioOneDaily" class="hourly-padding" value="1">Every</mat-radio-button>
-                          <mat-form-field class="tw-width">
-                              <input matInput #DaysOneDaily ng-model="DaysOneDaily" type="number" placeholder="Day(s)">                    
-                          </mat-form-field>  
-                      </div>
-                      <div>
-                          <mat-radio-button #RadioTwoDaily ng-model="RadioTwoDaily" class="hourly-padding" value="2">Every week day</mat-radio-button>
-                      </div>
-                      <div>
-                          Start time
-                          <mat-form-field class="tw-width">
-                              <input matInput #StartHoursDaily ng-model="StartHoursDaily" type="number" min="0" max="23" placeholder="Hour">                    
-                          </mat-form-field>  
-                          <mat-form-field class="tw-width">
-                              <input matInput #StartMinutesDaily ng-model="StartMinutesDaily" type="number" min="0" max="59" placeholder="Minute">                    
-                          </mat-form-field>  
-                      </div>
-                  </mat-radio-group>
-
-                  <button mat-raised-button color="primary" class="marginn" (click)="UpdateCronDaily(Cron, RadioOneDaily, RadioTwoDaily, DaysOneDaily, StartHoursDaily, StartMinutesDaily)">
-                      Update Cron
-                  </button> 
-
-              </mat-tab>
-              <mat-tab label="Weekly">
-                  <div>
-                      <mat-checkbox #CheckMonday ng-model="CheckMonday">Monday</mat-checkbox>
-                      <mat-checkbox #CheckTuesday ng-model="CheckTuesday">Tuesday</mat-checkbox>
-                      <mat-checkbox #CheckWednesday ng-model="CheckWednesday">Wednesday</mat-checkbox>
-                      <mat-checkbox #CheckThursday ng-model="CheckThursday">Thursday</mat-checkbox>
-                  </div>
-                  <div>
-                      <mat-checkbox #CheckFriday ng-model="CheckFriday">Friday</mat-checkbox>
-                      <mat-checkbox #CheckSaturday ng-model="CheckSaturday">Saturday</mat-checkbox>
-                      <mat-checkbox #CheckSunday ng-model="CheckSunday">Sunday</mat-checkbox>
-                  </div>
-                  
-                  <div>
-                  Start time
-                  <mat-form-field class="tw-width">
-                      <input matInput #StartHoursWeekly ng-model="StartHoursWeekly" type="number" min="0" max="23" placeholder="Hour">                    
-                  </mat-form-field>  
-                  <mat-form-field class="tw-width">
-                      <input matInput #StartMinutesWeekly ng-model="StartMinutesWeekly" type="number" min="0" max="59" placeholder="Minute">                    
-                  </mat-form-field>  
-                  </div>
-
-                  <button mat-raised-button color="primary" class="marginn" (click)="UpdateCronWeekly(
-                          Cron,
-                          CheckMonday, 
-                          CheckTuesday, 
-                          CheckWednesday, 
-                          CheckThursday, 
-                          CheckFriday, 
-                          CheckSaturday,
-                          CheckSunday,
-                          StartHoursWeekly,StartMinutesWeekly)">
-                      Update Cron
-                  </button> 
-
-              </mat-tab>
-          </mat-tab-group>
-      </div>
-      <div class="cronbutton">
-          
-      </div> 
-  </mat-grid-tile>
-</mat-grid-list>
 
 </div>

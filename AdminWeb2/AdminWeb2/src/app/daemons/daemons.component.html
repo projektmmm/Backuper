@@ -1,9 +1,8 @@
-<div class="page-header" color="primary">
-    <div class="roboto">Send new settings</div>
-</div>
+
 
 <mat-grid-list cols="2" rowHeight="2:1">
     <mat-grid-tile>
+        
         <form class="example-form">
             <mat-form-field class="example-full-width">
                 <input matInput #DaemonId type="text" ng-model="DaemonId" placeholder="DaemonId" value="">
@@ -31,6 +30,8 @@
 
     </mat-grid-tile>
     <mat-grid-tile>
+        <cron-label [Cron]="Cron" (change)="onCronUpdate()"></cron-label>
+        <!--
         <div class="croneditor">
             <div class="repeat">
                 Repeat settings    
@@ -138,6 +139,7 @@
                 </mat-tab>
             </mat-tab-group>
         </div>
+    -->
     </mat-grid-tile>
 </mat-grid-list>
 
