@@ -4,6 +4,7 @@ import { HttpClientModule, HttpClient, HttpParams, HttpClientJsonpModule, HttpHe
 import { Http, Headers, RequestOptions} from '@angular/http';
 import { CronLabelComponent } from '../settings-components/cron-label/cron-label.component';
 import {MatSnackBar} from '@angular/material';
+import { query } from '@angular/core/src/animation/dsl';
 
 @Component({
   selector: 'daemons',
@@ -46,42 +47,84 @@ export class DaemonsComponent implements OnInit {
     this.http2.post(this.root_URL + "/api/admin/form", JSON.stringify(data), head)
     .subscribe(Response => { console.log(Response) })
 
+    this.openSnackBar("Settings sended!","")
   }
 
   UpdateCronMinutes(EMMinutes, Cron)
   {
     if(EMMinutes.value >= 1 && EMMinutes.value <= 59)
     {
-      if(EMMinutes.value == "")
-      {
-      Cron.value = "";
-      }
-      else 
-      {
       Cron.value = "*/" + EMMinutes.value + " * * * *";
-      }
     }
     else
     {    
-      this.openSnackBar("enter number between 1 and 59","")
+      this.openSnackBar("Enter number between 1 and 59","");
     }
   }
 
-  UpdateCronHourly(Cron, EveryHourRadioHourly, StartEveryHourRadioHourly, EveryHourHourly, StartEveryHourHourly, StartEveryMinuteHourly){
-    if(EveryHourRadioHourly.checked){
-      Cron.value = "* */" + EveryHourHourly.value + " * * *";
+  UpdateCronHourly(Cron, EveryHourRadioHourly, StartEveryHourRadioHourly, EveryHourHourly, StartEveryHourHourly, StartEveryMinuteHourly)
+  {
+    if(EveryHourRadioHourly.checked)
+    {
+      if(EveryHourHourly.value >= 1 && EveryHourHourly.value <= 23)
+      {
+        Cron.value = "* */" + EveryHourHourly.value + " * * *";
+      }
+      else
+      {
+        this.openSnackBar("Enter number between 1 and 23","");
+      }
     }
-    else{
-      Cron.value = StartEveryMinuteHourly.value + " " + StartEveryHourHourly.value + " * * *"
+    else
+    {
+      if((StartEveryHourHourly.value >= 0 && StartEveryHourHourly.value <= 23) && (StartEveryMinuteHourly.value >= 0 && StartEveryMinuteHourly.value <= 59))
+      {
+        if(StartEveryMinuteHourly.value == 0)
+        {
+          StartEveryMinuteHourly.value = 0;   
+        }
+        
+        if(StartEveryHourHourly.value == 0)
+        {
+          StartEveryHourHourly.value = 0;
+        }
+
+        Cron.value = StartEveryMinuteHourly.value + " " + StartEveryHourHourly.value + " * * *";
+      }
+      else
+      {
+        this.openSnackBar("Wrong time format","");
+      }   
     }
   }
 
-  UpdateCronDaily(Cron, RadioOneDaily, RadioTwoDaily, DaysOneDaily, StartHoursDaily, StartMinutesDaily){
-    if(RadioOneDaily.checked){
-      Cron.value = StartMinutesDaily.value + " " + StartHoursDaily.value + " */" + DaysOneDaily.value + " * *" 
+  UpdateCronDaily(Cron, RadioOneDaily, RadioTwoDaily, DaysOneDaily, StartHoursDaily, StartMinutesDaily)
+  {
+    if(RadioOneDaily.checked)
+    {
+      if(DaysOneDaily.value >= 1 && DaysOneDaily.value <= 31)
+      {
+        if(StartMinutesDaily.value == 0)
+        {
+          StartMinutesDaily.value = 0;
+        }
+
+        if(StartHoursDaily.value == 0)
+        {
+          StartHoursDaily.value = 0;
+        }
+
+        Cron.value = StartMinutesDaily.value + " " + StartHoursDaily.value + " */" + DaysOneDaily.value + " * *";
+      }
+      else
+      {
+        this.openSnackBar("Enter number between 1 and 31","");
+      }
+      
     }
-    else{
-      Cron.value = StartMinutesDaily.value + " " + StartHoursDaily.value + " * * *"
+    else
+    {
+      Cron.value = StartMinutesDaily.value + " " + StartHoursDaily.value + " * * *";
     }
   }
 
@@ -119,11 +162,23 @@ export class DaemonsComponent implements OnInit {
 
     result = result.slice(0, -1)
 
-    if(result == "" || StartHoursWeekly.value == "" || StartMinutesWeekly.value == ""){
+    if(result != "")
+    {
+      if(StartHoursWeekly.value == 0)
+      {
+        StartHoursWeekly.value = 0;
+      }
 
-    }
-    else{
+      if(StartMinutesWeekly.value == 0)
+      {
+        StartMinutesWeekly.value = 0;
+      }
+
       Cron.value = StartMinutesWeekly.value + " " + StartHoursWeekly.value + " * * " + result
+    }
+    else
+    {
+      this.openSnackBar("Choose on or more days","");
     }
   }
 }

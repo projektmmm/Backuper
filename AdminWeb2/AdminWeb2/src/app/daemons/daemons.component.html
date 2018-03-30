@@ -50,7 +50,7 @@
                 <mat-tab label="Hourly">
                     <mat-radio-group>
                         <div>
-                            <mat-radio-button #EveryHourRadioHourly ng-model="EveryHourRadioHourly" class="hourly-padding" value="1">Every</mat-radio-button>
+                            <mat-radio-button #EveryHourRadioHourly checked="true" ng-model="EveryHourRadioHourly" class="hourly-padding" value="1">Every</mat-radio-button>
                             <mat-form-field class="tw-width">
                                 <input matInput #EveryHourHourly ng-model="EveryHourHourly" type="number" min="1" max="59" placeholder="Hour(s)">                    
                             </mat-form-field>               
@@ -75,7 +75,7 @@
                 <mat-tab label="Daily">
                     <mat-radio-group>
                         <div>
-                            <mat-radio-button #RadioOneDaily ng-model="RadioOneDaily" class="hourly-padding" value="1">Every</mat-radio-button>
+                            <mat-radio-button #RadioOneDaily checked="true" ng-model="RadioOneDaily" class="hourly-padding" value="1">Every</mat-radio-button>
                             <mat-form-field class="tw-width">
                                 <input matInput #DaysOneDaily ng-model="DaysOneDaily" type="number" placeholder="Day(s)">                    
                             </mat-form-field>  
