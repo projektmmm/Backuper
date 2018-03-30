@@ -1,15 +1,13 @@
 <div class="page-header" color="primary">
     <div class="roboto">Send new settings</div>
 </div>
+<input #RunAt ng-model="RunAt" hidden>
 
 <mat-grid-list cols="2" rowHeight="2:1">
     <mat-grid-tile>
         <form class="example-form">
             <mat-form-field class="example-full-width">
                 <input matInput #DaemonId type="text" ng-model="DaemonId" placeholder="DaemonId" value="">
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-                <input matInput #RunAt type="text" ng-model="RunAt" placeholder="RunAt" value="">
             </mat-form-field>
             <mat-form-field class="example-full-width">
                 <input matInput #Cron type="text" ng-model="Cron" placeholder="Cron">
@@ -25,7 +23,8 @@
             </mat-form-field>
         </form>
         
-        <button mat-raised-button class="margin430" color="primary" (click)="Send(DaemonId.value,RunAt.value,Cron.value,BackupType.value,SourcePath.value,DestinationPath.value)">
+        <button mat-raised-button class="margin430" color="primary" 
+        (click)="Send(DaemonId.value,RunAt.value,Cron.value,BackupType.value,SourcePath.value,DestinationPath.value)">
             Send Settings
         </button>
 
@@ -35,7 +34,7 @@
             <div class="repeat">
                 Repeat settings    
             </div>
-            <mat-tab-group>
+            <mat-tab-group #MatTab>
                 <mat-tab label="Minutes">
                     Every
                     <mat-form-field class="example-half-width">
