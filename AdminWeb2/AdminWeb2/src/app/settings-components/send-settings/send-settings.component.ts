@@ -21,13 +21,7 @@ export class SendSettingsComponent implements OnInit {
 
   headers = new HttpHeaders();
   readonly root_URL = 'http://localhost:54736';
-  @Input() show: boolean = true;
-  @Input() daemonId: number;
-  @Input() runAt: Date;
-  @Input() cron: string;
-  @Input() backupType: string;
-  @Input() sourcePath: string;
-  @Input() destinationPath: string;
+  @Input() show: boolean;
 
   Send(daemonId, runAt, cron, backupType, sourcePath, destinationPath) {
 

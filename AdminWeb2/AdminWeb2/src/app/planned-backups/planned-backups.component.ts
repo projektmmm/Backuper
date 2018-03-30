@@ -24,7 +24,7 @@ export class PlannedBackupsComponent implements OnInit {
   tableResource: MatTableDataSource<Backups>;
   items: Backups[] = [];
   itemCount: number;
-  showVar: boolean;
+  showVar: boolean = false;
   rowIndex: number;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -54,7 +54,8 @@ export class PlannedBackupsComponent implements OnInit {
 
   show($event) {
     this.showVar = !this.showVar;
-    console.log("erroadfr");
+    this.rowIndex = this.tableResource.data.length;
+    console.log(this.rowIndex);
   }
 
   //reloadItems(params) {
