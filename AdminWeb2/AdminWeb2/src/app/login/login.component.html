@@ -5,13 +5,7 @@
   <mat-form-field class="width-full">
     <input matInput #Password type="password" ng-model="Password" placeholder="Password">
   </mat-form-field>
-  <mat-form-field class="width-full">
-    <button mat-raised-button (click)="Login(Username.value,Password.value)">Login</button>
-    <button mat-raised-button routerLink="/register" (click)="Register()">Register</button>
-  </mat-form-field>
 </form>
 
-
-
-
-
+<button mat-raised-button (click)="Login(Username.value,Password.value)">Login</button>
+<button mat-raised-button routerLink="/register" (click)="Register()">Register</button>
