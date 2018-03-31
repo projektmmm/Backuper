@@ -48,6 +48,25 @@ export class SendSettingsComponent implements OnInit {
 
   }
 
+  Update(daemonId, runAt, cron, backupType, sourcePath, destinationPath) {
+
+    const head = {headers: new HttpHeaders({'Content-Type':'application/json'})};
+    head.headers.append('Content-Type', 'application/json');
+
+    const data: Settings = {
+      DaemonId: daemonId,
+      RunAt: new Date,
+      Cron: cron,
+      BackupType: backupType,
+      SourcePath: sourcePath,
+      DestinationPath: destinationPath
+    }
+
+    this.http2.put(this.root_URL + "/api/admin/form", JSON.stringify(data), head)
+    .subscribe(Response => { console.log(Response) })
+
+  }
+
   UpdateCronMinutes(EMMinutes, Cron){
     if(EMMinutes.value > 59 || EMMinutes.value < 1){
       alert("enter number between 1 and 59")

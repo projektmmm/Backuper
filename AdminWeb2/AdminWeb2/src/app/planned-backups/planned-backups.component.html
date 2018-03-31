@@ -40,13 +40,17 @@
             <mat-cell cell *matCellDef="let row">{{row.DestinationPath}}</mat-cell>
           </ng-container>
       
-          <!-- EditButton -->
-          <ng-container matColumnDef="Edit">
+          <!-- Buttons -->
+          <ng-container matColumnDef="Buttons">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Edit</mat-header-cell>
             <mat-cell cell *matCellDef="let row">
       
               <button mat-raised-button color="primary" (click)="show(row)">
                 Edit
+              </button> 
+
+              <button mat-raised-button color="primary" (click)="delete(row)">
+                Delete
               </button> 
       
             </mat-cell>

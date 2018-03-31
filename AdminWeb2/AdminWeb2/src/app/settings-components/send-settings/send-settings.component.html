@@ -4,43 +4,46 @@
   <div class="roboto">Send new settings</div>
 </div>
 
-<mat-grid-list cols="2" rowHeight="2:1">
-  <mat-grid-tile>
-      <form class="example-form">
-          <mat-form-field class="example-full-width">
+<mat-grid-list cols="2">
+  <mat-grid-tile class="left-column">
+      <form class="settings-form">
+          <mat-form-field class="settings-row">
               <p>Daemon ID</p>
               <input matInput #DaemonId type="text" ng-model="DaemonId" value="{{this.daemonId}}">
           </mat-form-field>
-          <mat-form-field class="example-full-width">
+          <mat-form-field class="settings-row">
                 <p>Run At</p>
               <input matInput #RunAt type="text" ng-model="RunAt" value="{{this.runAt}}">
           </mat-form-field>
-          <mat-form-field class="example-full-width">
+          <mat-form-field class="settings-row">
                 <p>Cron</p>
               <input matInput #Cron type="text" ng-model="Cron" value="{{this.cron}}" disabled=true>
           </mat-form-field>
-          <mat-form-field class="example-full-width">
+          <mat-form-field class="settings-row">
                 <p>Backup Type</p>
               <input matInput #BackupType type="text" ng-model="BackupType" value="{{this.backupType}}">
           </mat-form-field>
-          <mat-form-field class="example-full-width">
+          <mat-form-field class="settings-row">
                 <p>Source Path</p>
               <input matInput #SourcePath type="text" ng-model="SourcePath" value="{{this.sourcePath}}">
           </mat-form-field>
-          <mat-form-field class="example-full-width">
+          <mat-form-field class="settings-row">
                 <p>Destination Path</p>
               <input matInput #DestinationPath type="text" ng-model="DestinationPath" value="{{this.destinationPath}}">
           </mat-form-field>
+          <button mat-raised-button class="send-settings-btn" color="primary" (click)="Update(DaemonId.value,RunAt.value,Cron.value,BackupType.value,SourcePath.value,DestinationPath.value)">
+            Update Settings
+        </button>
       </form>
-      <button mat-raised-button class="margin430" color="primary" (click)="Send(DaemonId.value,RunAt.value,Cron.value,BackupType.value,SourcePath.value,DestinationPath.value)">
-          Send Settings
-      </button>
+      
   </mat-grid-tile>
   <mat-grid-tile>
-        <div class="croneditor">
-          <div class="repeat">
-              Repeat settings    
-          </div>
+        <div class="cron-editor">
+          
+            <div class="roboto">Update Cron</div>
+            
+
+
           <mat-tab-group>
               <mat-tab label="Minutes">
                   Every

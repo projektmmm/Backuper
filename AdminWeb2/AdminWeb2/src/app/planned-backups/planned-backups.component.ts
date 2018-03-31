@@ -20,7 +20,7 @@ export class PlannedBackupsComponent implements OnInit {
   }
 
   readonly Root_URL = 'http://localhost:54736'; 
-  displayedColumns = ['RunAt', 'Cron', 'DaemonId', 'BackupType', 'SourcePath', 'DestinationPath', 'Edit'];
+  displayedColumns = ['RunAt', 'Cron', 'DaemonId', 'BackupType', 'SourcePath', 'DestinationPath', 'Buttons'];
   tableResource: MatTableDataSource<Backups>;
   items: Backups[] = [];
   itemCount: number;
@@ -71,10 +71,11 @@ export class PlannedBackupsComponent implements OnInit {
 
   }
 
-  //reloadItems(params) {
-    //if (!this.tableResource) return;
-    //this.tableResource.query(params)
-      //.then(items => this.items = items);
+  async delete(row) {
+
+    //TODO
+
+  }
 
   
 
