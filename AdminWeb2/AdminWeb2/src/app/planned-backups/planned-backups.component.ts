@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, Input } from '@angular/core';
+import { Component, ViewChild, OnInit, Input, Output } from '@angular/core';
 import { HttpClientModule, HttpClient, HttpParams,HttpClientJsonpModule} from '@angular/common/http';
 import { Backups} from './backups';
 import { DataTableResource } from 'angular5-data-table';
@@ -29,6 +29,13 @@ export class PlannedBackupsComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @Output() runAt: Date;
+  @Output() cron: string;
+  @Output() daemonId: number;
+  @Output() backupType: string;
+  @Output() sourcePath: string;
+  @Output() destinationPath: string;
+  
 
   async getBackup() {
     this.http.get<Backups[]>(this.Root_URL + "/api/admin/backups").subscribe
@@ -52,10 +59,16 @@ export class PlannedBackupsComponent implements OnInit {
       this.tableResource.sort = this.sort;
   }
 
-  show($event) {
+  show(row) {
     this.showVar = !this.showVar;
-    this.rowIndex = this.tableResource.data.length;
-    console.log(this.rowIndex);
+    this.runAt = row.RunAt;
+    this.cron = row.Cron;
+    this.daemonId = row.DaemonId;
+    this.backupType = row.BackupType;
+    this.sourcePath = row.SourcePath;
+    this.destinationPath = row.DestinationPath
+
+
   }
 
   //reloadItems(params) {

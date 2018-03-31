@@ -12,20 +12,21 @@
     background-size: auto;
 }
 
-.example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
+.settings-form {
+    padding: 20px;
+    height: 1000px;
+}
 
-    position: absolute;
-    left: 0px;
-    top: 0px;
-  }
+.settings-row {
+    padding: 0px, 20px;
+
+}
 
 .croneditor {
     position: absolute;
     left: 0px;
     top: 0px;
+    height: 1000px;
 }
 
 .cronbutton {

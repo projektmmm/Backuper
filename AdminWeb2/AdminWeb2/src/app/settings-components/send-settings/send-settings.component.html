@@ -8,22 +8,28 @@
   <mat-grid-tile>
       <form class="example-form">
           <mat-form-field class="example-full-width">
-              <input matInput #DaemonId type="text" ng-model="DaemonId" placeholder="DaemonId" value="">
+              <p>Daemon ID</p>
+              <input matInput #DaemonId type="text" ng-model="DaemonId" value="{{this.daemonId}}">
           </mat-form-field>
           <mat-form-field class="example-full-width">
-              <input matInput #RunAt type="text" ng-model="RunAt" placeholder="RunAt" value="">
+                <p>Run At</p>
+              <input matInput #RunAt type="text" ng-model="RunAt" value="{{this.runAt}}">
           </mat-form-field>
           <mat-form-field class="example-full-width">
-              <input matInput #Cron type="text" ng-model="Cron" placeholder="Cron">
+                <p>Cron</p>
+              <input matInput #Cron type="text" ng-model="Cron" value="{{this.cron}}" disabled=true>
           </mat-form-field>
           <mat-form-field class="example-full-width">
-              <input matInput #BackupType type="text" ng-model="BackupType" placeholder="BackupType" value="">
+                <p>Backup Type</p>
+              <input matInput #BackupType type="text" ng-model="BackupType" value="{{this.backupType}}">
           </mat-form-field>
           <mat-form-field class="example-full-width">
-              <input matInput #SourcePath type="text" ng-model="SourcePath" placeholder="SourcePath" value="">
+                <p>Source Path</p>
+              <input matInput #SourcePath type="text" ng-model="SourcePath" value="{{this.sourcePath}}">
           </mat-form-field>
           <mat-form-field class="example-full-width">
-              <input matInput #DestinationPath type="text" ng-model="DestinationPath" placeholder="DestinationPath" value="">
+                <p>Destination Path</p>
+              <input matInput #DestinationPath type="text" ng-model="DestinationPath" value="{{this.destinationPath}}">
           </mat-form-field>
       </form>
       <button mat-raised-button class="margin430" color="primary" (click)="Send(DaemonId.value,RunAt.value,Cron.value,BackupType.value,SourcePath.value,DestinationPath.value)">

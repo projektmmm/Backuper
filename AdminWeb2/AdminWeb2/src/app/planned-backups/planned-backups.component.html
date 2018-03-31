@@ -7,13 +7,13 @@
         <!-- DaemonId -->
         <ng-container matColumnDef="DaemonId">
             <mat-header-cell *matHeaderCellDef mat-sort-header>DaemonID </mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.DaemonId}}</mat-cell>
+            <mat-cell *matCellDef="let row" ng-model="daemonId">{{row.DaemonId}}</mat-cell>
         </ng-container>
       
         <!-- RunAt -->
         <ng-container matColumnDef="RunAt">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Run At</mat-header-cell>
-            <mat-cell cell *matCellDef="let row">{{row.RunAt}}</mat-cell>
+            <mat-cell cell *matCellDef="let row" ng-model="runAt">{{row.RunAt}}</mat-cell>
         </ng-container>
       
         <!-- Cron -->
@@ -45,7 +45,7 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header>Edit</mat-header-cell>
             <mat-cell cell *matCellDef="let row">
       
-              <button mat-raised-button color="primary" (click)="show($event)">
+              <button mat-raised-button color="primary" (click)="show(row)">
                 Edit
               </button> 
       
@@ -65,4 +65,12 @@
 </div>
 
 
-<send-settings [show]="showVar"></send-settings>
+<send-settings class="editSettings"
+  [show]="showVar"
+  [daemonId]="this.daemonId"
+  [runAt]="this.runAt"
+  [cron]="this.cron"
+  [backupType]="this.backupType"
+  [sourcePath]="this.sourcePath"
+  [destinationPath]="this.destinationPath"
+></send-settings>
