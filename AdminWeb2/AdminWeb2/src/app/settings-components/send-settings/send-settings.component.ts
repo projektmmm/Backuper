@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material';
 import { Component, OnInit, Input } from '@angular/core';
 import { Settings } from './settings';
 import { HttpClientModule, HttpClient, HttpParams, HttpClientJsonpModule, HttpHeaders } from '@angular/common/http';
@@ -11,7 +12,7 @@ import { Http, Headers, RequestOptions} from '@angular/http';
 export class SendSettingsComponent implements OnInit {
 
   
-  constructor(private http2: HttpClient) {
+  constructor(private http2: HttpClient, public snackBar: MatSnackBar) {
     this.headers.append("Content-Type", "application/json");
     this.headers.append("Accept", "application/json");
    }
@@ -30,24 +31,10 @@ export class SendSettingsComponent implements OnInit {
   @Input() sourcePath: string;
   @Input() destinationPath: string;
 
-  Send(id, daemonId, runAt, cron, backupType, sourcePath, destinationPath) {
-
-    const head = {headers: new HttpHeaders({'Content-Type':'application/json'})};
-    head.headers.append('Content-Type', 'application/json');
-
-    const data: Settings = {
-      Id: id,
-      DaemonId: daemonId,
-      RunAt: runAt,
-      Cron: cron,
-      BackupType: backupType,
-      SourcePath: sourcePath,
-      DestinationPath: destinationPath
-    }
-
-    this.http2.post(this.root_URL + "/api/admin/planned-backups", JSON.stringify(data), head)
-    .subscribe(Response => { console.log(Response) })
-
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 1500,
+    }); 
   }
 
   Update(daemonId, runAt, cron, backupType, sourcePath, destinationPath) {
@@ -66,7 +53,17 @@ export class SendSettingsComponent implements OnInit {
     }
 
     this.http2.patch(this.root_URL + "/api/admin/planned-backups/" + this.id, JSON.stringify(data), head)
-    .subscribe(Response => { console.log(Response) })
+    .subscribe(response => { 
+      
+      if (response == true) {
+      this.show = !this.show;
+      this.openSnackBar("", "Success!")
+      }
+      else {
+        this.openSnackBar("", "Error!");
+      }
+
+    })
 
   }
 

@@ -39,6 +39,7 @@ import 'hammerjs';
 import { PlannedBackupsComponent } from './planned-backups/planned-backups.component';
 import { CronLabelComponent } from './settings-components/cron-label/cron-label.component';
 import { SendSettingsComponent} from './settings-components/send-settings/send-settings.component';
+import { MatSortModule } from '@angular/material';
 
 
 
@@ -87,7 +88,8 @@ import { SendSettingsComponent} from './settings-components/send-settings/send-s
     MatSnackBarModule,
     FormsModule,
     ReactiveFormsModule,
-    MatIconModule
+    MatIconModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]

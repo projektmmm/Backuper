@@ -3,7 +3,8 @@ import { HttpClientModule, HttpClient, HttpParams,HttpClientJsonpModule} from '@
 import { Backups} from './backups';
 import { DataTableResource } from 'angular5-data-table';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'planned-backups',
@@ -12,7 +13,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 })
 export class PlannedBackupsComponent implements OnInit {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, public snackBar: MatSnackBar) {
     this.getBackup();
    }
 
@@ -20,7 +21,7 @@ export class PlannedBackupsComponent implements OnInit {
   }
 
   readonly Root_URL = 'http://localhost:63324'; 
-  displayedColumns = ['Id','RunAt', 'Cron', 'DaemonId', 'BackupType', 'SourcePath', 'DestinationPath', 'Buttons'];
+  displayedColumns = ['RunAt', 'Cron', 'DaemonId', 'BackupType', 'SourcePath', 'DestinationPath', 'Buttons'];
   tableResource: MatTableDataSource<Backups>;
   items: Backups[] = [];
   itemCount: number;
@@ -37,24 +38,43 @@ export class PlannedBackupsComponent implements OnInit {
   @Output() sourcePath: string;
   @Output() destinationPath: string;
   
+  ngAfterViewInit() {
+    if (this.tableResource != null)
+      this.tableResource.sort = this.sort;
+  }
 
   async getBackup() {
     this.http.get<Backups[]>(this.Root_URL + "/api/admin/planned-backups").subscribe
     (data => { 
 
       this.inititalizeTable(data);
-
+      this.tableResource.sort = this.sort;
+      
     });
   }
 
   
   async delete(row) {
-
     this.http.delete(this.Root_URL + "/api/admin/planned-backups/" + row.Id).subscribe
-    (data => {
-      console.log(data);
+    (response => {
+     
+      if (response == true) {
+        this.openSnackBar("", "Successfully deleted!");
+        this.getBackup();
+      }
+      else {
+        this.openSnackBar("", "Error!")
+        this.getBackup();
+      }
+
     })
 
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 1500,
+    }); 
   }
 
   private inititalizeTable(data: Backups[]) {

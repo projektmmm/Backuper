@@ -2,7 +2,8 @@
     Backup Reports
 </div>
 <div class="padding-left-right">
-    <mat-table [dataSource]='tableResource' matSort class="datatable">
+    <div class="mat-elevation-z8">
+    <mat-table #table [dataSource]='tableResource' matSort>
 
         <!-- Date -->
         <ng-container matColumnDef="Date">
@@ -24,17 +25,9 @@
 
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;">
-        </mat-row>
-
-
-    <!--
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-    -->
-
-
-
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
+    </div>
     <mat-paginator 
                 [pageSize]="10"
                 [pageSizeOptions]="[5, 10, 25, 100]">

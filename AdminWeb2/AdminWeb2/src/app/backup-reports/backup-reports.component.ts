@@ -2,7 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { HttpClientModule, HttpClient, HttpParams,HttpClientJsonpModule} from '@angular/common/http';
 import { BackupReport} from './backup-report';
 import { DataTableResource } from 'angular5-data-table';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'backup-reports',
@@ -25,16 +25,20 @@ export class BackupReportsComponent implements OnInit {
   itemCount: number; 
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  //@ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort) sort: MatSort;
 
-
-  async getReports() {
+  getReports() {
     this.http.get<BackupReport[]>(this.Root_URL + "/api/admin/backup-reports").subscribe
     (data => { 
 
       this.inititalizeTable(data);
 
     });
+  }
+
+  ngAfterViewInit() {
+    if (this.tableResource != null)
+      this.tableResource.sort = this.sort;
   }
 
   private inititalizeTable(data: BackupReport[]) {
@@ -44,10 +48,10 @@ export class BackupReportsComponent implements OnInit {
       //.then(items => this.items = items);
 
     //this.tableResource.count()
-      //.then(count => this.itemCount = count)
-
+      //.then(count => this.itemCount = count) 
+      
       this.tableResource.paginator = this.paginator;
-      //this.tableResource.sort = this.sort;
+      this.tableResource.sort = this.sort;
   }
 
   //reloadItems(params) {
