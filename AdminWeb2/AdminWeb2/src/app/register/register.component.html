@@ -1,13 +1,21 @@
-<div class="input">
-    <input #Username type="text" ng-model="Username" placeholder="Username">
-  </div>
-  <div class="input">
-    <input #Password type="password" ng-model="Password" placeholder="Password">
-  </div>
-  <div class="input">
-    <input #Email type="text" ng-model="Email" placeholder="Email">
-  </div>
-  <div class="input">
-    <a><button (click)="Register(Username.value,Password.value,Email.value)">Register</button></a>
-    <a href=""><button>Back</button></a>
-  </div>
+<div class="form">
+  <form>
+    <div>
+      <mat-form-field class="width-small">
+        <input matInput #Username type="text" ng-model="Username" placeholder="Username">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="width-small">
+        <input matInput #Password type="password" ng-model="Password" placeholder="Password">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="width-small">
+        <input matInput #Email type="text" ng-model="Email" placeholder="Email">
+      </mat-form-field>
+    </div>
+  </form>
+  <button mat-raised-button color="primary" (click)="Register(Username.value,Password.value,Email.value)">Register</button>
+  <button mat-raised-button color="primary" routerLink="/">Back</button>
+</div>
