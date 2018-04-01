@@ -19,8 +19,8 @@ export class PlannedBackupsComponent implements OnInit {
   ngOnInit() {
   }
 
-  readonly Root_URL = 'http://localhost:54736'; 
-  displayedColumns = ['RunAt', 'Cron', 'DaemonId', 'BackupType', 'SourcePath', 'DestinationPath', 'Buttons'];
+  readonly Root_URL = 'http://localhost:63324'; 
+  displayedColumns = ['Id','RunAt', 'Cron', 'DaemonId', 'BackupType', 'SourcePath', 'DestinationPath', 'Buttons'];
   tableResource: MatTableDataSource<Backups>;
   items: Backups[] = [];
   itemCount: number;
@@ -29,6 +29,7 @@ export class PlannedBackupsComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @Output() id: number;
   @Output() runAt: Date;
   @Output() cron: string;
   @Output() daemonId: number;
@@ -38,12 +39,22 @@ export class PlannedBackupsComponent implements OnInit {
   
 
   async getBackup() {
-    this.http.get<Backups[]>(this.Root_URL + "/api/admin/backups").subscribe
+    this.http.get<Backups[]>(this.Root_URL + "/api/admin/planned-backups").subscribe
     (data => { 
 
       this.inititalizeTable(data);
 
     });
+  }
+
+  
+  async delete(row) {
+
+    this.http.delete(this.Root_URL + "/api/admin/planned-backups/" + row.Id).subscribe
+    (data => {
+      console.log(data);
+    })
+
   }
 
   private inititalizeTable(data: Backups[]) {
@@ -66,16 +77,10 @@ export class PlannedBackupsComponent implements OnInit {
     this.daemonId = row.DaemonId;
     this.backupType = row.BackupType;
     this.sourcePath = row.SourcePath;
-    this.destinationPath = row.DestinationPath
-
-
+    this.destinationPath = row.DestinationPath;
+    this.id = row.Id;
   }
 
-  async delete(row) {
-
-    //TODO
-
-  }
 
   
 

@@ -18,7 +18,7 @@ export class BackupReportsComponent implements OnInit {
   ngOnInit() {
   }
 
-  readonly Root_URL = 'http://localhost:54736'; 
+  readonly Root_URL = 'http://localhost:63324/'; 
   displayedColumns = ['Type', 'Date', 'Size']
   tableResource: MatTableDataSource<BackupReport>;
   items: BackupReport[] = [];
@@ -29,7 +29,7 @@ export class BackupReportsComponent implements OnInit {
 
 
   async getReports() {
-    this.http.get<BackupReport[]>(this.Root_URL + "/api/admin").subscribe
+    this.http.get<BackupReport[]>(this.Root_URL + "/api/admin/backup-reports").subscribe
     (data => { 
 
       this.inititalizeTable(data);

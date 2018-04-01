@@ -5,4 +5,6 @@ export interface Settings {
     BackupType: string;
     SourcePath: string;
     DestinationPath: string
+
+    Id: number;
 }

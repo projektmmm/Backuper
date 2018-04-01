@@ -16,23 +16,19 @@ export class RegisterComponent implements OnInit {
     
   }
 
-  Register(IUsername:string,IPassword:string,IEmail:string){
+  Register(IUsername:string,IPassword:string,IEmail:string) {
+
     const head =  {headers: new  HttpHeaders({'Content-Type':'application/json'}) };
     head.headers.append('Content-Type', 'application/json')
+
     const data: User={
-      Username:IUsername,
-      Password:IPassword,
-      Email:IEmail
+      Username: IUsername,
+      Password: IPassword,
+      Email: IEmail
     }
-    this.http.post<boolean>('http://localhost:54736/api/admin/register',data,head)
+    this.http.post('http://localhost:63324/api/admin/register', JSON.stringify(data), head)
     .subscribe(Response=>{
-      if(Response)
-      {
-        console.log("Succ");
-      }
-      else{
-        console.log("XXX")
-      }
+      console.log(Response);
     }
     )}
   }

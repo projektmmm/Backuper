@@ -20,8 +20,9 @@ export class SendSettingsComponent implements OnInit {
   }
 
   headers = new HttpHeaders();
-  readonly root_URL = 'http://localhost:54736';
+  readonly root_URL = 'http://localhost:63324';
   @Input() show: boolean;
+  @Input() id: number;
   @Input() runAt: Date;
   @Input() cron: string;
   @Input() daemonId: number;
@@ -29,21 +30,22 @@ export class SendSettingsComponent implements OnInit {
   @Input() sourcePath: string;
   @Input() destinationPath: string;
 
-  Send(daemonId, runAt, cron, backupType, sourcePath, destinationPath) {
+  Send(id, daemonId, runAt, cron, backupType, sourcePath, destinationPath) {
 
     const head = {headers: new HttpHeaders({'Content-Type':'application/json'})};
     head.headers.append('Content-Type', 'application/json');
 
     const data: Settings = {
+      Id: id,
       DaemonId: daemonId,
-      RunAt: new Date,
+      RunAt: runAt,
       Cron: cron,
       BackupType: backupType,
       SourcePath: sourcePath,
       DestinationPath: destinationPath
     }
 
-    this.http2.post(this.root_URL + "/api/admin/form", JSON.stringify(data), head)
+    this.http2.post(this.root_URL + "/api/admin/planned-backups", JSON.stringify(data), head)
     .subscribe(Response => { console.log(Response) })
 
   }
@@ -54,6 +56,7 @@ export class SendSettingsComponent implements OnInit {
     head.headers.append('Content-Type', 'application/json');
 
     const data: Settings = {
+      Id: this.id,
       DaemonId: daemonId,
       RunAt: new Date,
       Cron: cron,
@@ -62,7 +65,7 @@ export class SendSettingsComponent implements OnInit {
       DestinationPath: destinationPath
     }
 
-    this.http2.put(this.root_URL + "/api/admin/form", JSON.stringify(data), head)
+    this.http2.patch(this.root_URL + "/api/admin/planned-backups/" + this.id, JSON.stringify(data), head)
     .subscribe(Response => { console.log(Response) })
 
   }

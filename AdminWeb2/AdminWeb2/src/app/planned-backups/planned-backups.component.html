@@ -4,6 +4,12 @@
 <div class="padding-left-right">
     <mat-table [dataSource]='tableResource' matSort class="datatable">
 
+      <!-- Id -->
+      <ng-container matColumnDef="Id">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Id </mat-header-cell>
+          <mat-cell *matCellDef="let row" ng-model="daemonId">{{row.Id}}</mat-cell>
+      </ng-container>
+
         <!-- DaemonId -->
         <ng-container matColumnDef="DaemonId">
             <mat-header-cell *matHeaderCellDef mat-sort-header>DaemonID </mat-header-cell>
@@ -77,4 +83,5 @@
   [backupType]="this.backupType"
   [sourcePath]="this.sourcePath"
   [destinationPath]="this.destinationPath"
+  [id]="this.id"
 ></send-settings>

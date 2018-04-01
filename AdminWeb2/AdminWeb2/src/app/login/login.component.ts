@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClientModule, HttpClient, HttpParams,HttpClientJsonpModule,HttpHeaders} from '@angular/common/http';
 import { User } from './User';
 import { RouterLink, Router,ActivatedRoute } from '@angular/router';
+import { PARAMETERS } from '@angular/core/src/util/decorators';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit {
       Username:IUsername,
       Password:IPassword
     }
-    this.http.post<boolean>('http://localhost:54736/api/admin/login',data,head)
+    this.http.post('http://localhost:63324/api/admin/login', JSON.stringify(data), head)
     .subscribe(Response=>{
       if(Response)
       {

@@ -28,7 +28,7 @@ export class DaemonsComponent implements OnInit {
   }
 
   headers = new HttpHeaders();
-  readonly root_URL = 'http://localhost:54736';
+  readonly root_URL = 'http://localhost:63324';
 
   Send(daemonId, runAt, cron, backupType, sourcePath, destinationPath) {
 
@@ -41,10 +41,11 @@ export class DaemonsComponent implements OnInit {
       Cron: cron,
       BackupType: backupType,
       SourcePath: sourcePath,
-      DestinationPath: destinationPath
+      DestinationPath: destinationPath,
+      Id: null
     }
 
-    this.http2.post(this.root_URL + "/api/admin/form", JSON.stringify(data), head)
+    this.http2.post(this.root_URL + "/api/admin/daemon-settings", JSON.stringify(data), head)
     .subscribe(Response => { console.log(Response) })
 
     this.openSnackBar("","Settings sended!")
