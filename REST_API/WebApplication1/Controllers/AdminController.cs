@@ -57,9 +57,9 @@ namespace WebApplication1.Controllers
         /// ToDo: Prideleni tokenu
         /// </summary>
         [Route("api/admin/register")]
-        public bool Post([FromBody]string info)
+        public bool Post2(User user)
         {
-            User user = JsonConvert.DeserializeObject<User>(info);
+            //User user = JsonConvert.DeserializeObject<User>(info);
             //Kontrola, zda existuje
             using (MySqlConnection sConn = new MySqlConnection(Sql.ConnectionString))
             {
@@ -85,6 +85,27 @@ namespace WebApplication1.Controllers
                     return false;
                 }
             }
+            string commandText2 = "INSERT INTO tbUsers(Username, Password, Email) VALUES(@Username,@Password,@Email)";
+
+            using (MySqlConnection sConn = Sql.GetConnection())
+            {
+                sConn.Open();
+                MySqlCommand command = new MySqlCommand(commandText2, sConn);
+
+                command.Parameters.Add("@Username", MySqlDbType.VarChar);
+                command.Parameters.Add("@Password", MySqlDbType.VarChar);
+                command.Parameters.Add("@Email", MySqlDbType.VarChar);
+
+                command.Parameters["@Username"].Value = user.Username;
+                command.Parameters["@Password"].Value = user.Password;
+                command.Parameters["@Email"].Value = user.Email;
+
+                //Sql.sComm.ExecuteNonQuery();
+                command.ExecuteNonQuery();
+
+                sConn.Close();
+            }
+
             return true;
         }
 
@@ -93,13 +114,14 @@ namespace WebApplication1.Controllers
         /// ToDo: Validace dle tokenu
         /// </summary>
         [Route("api/admin/login")]
-        public bool Get(string info)
+        public bool Post(User user)
         {
-            User user = JsonConvert.DeserializeObject<User>(info);
+            //User user = JsonConvert.DeserializeObject<User>(info);
             string commandText = "SELECT * FROM tbUsers WHERE Username=@Username AND Password=@Password";
 
             using (MySqlConnection sConn = Sql.GetConnection())
             {
+                sConn.Open();
                 MySqlCommand sComm = new MySqlCommand(commandText, sConn);
                 sComm.Parameters.Add("@Username", MySqlDbType.VarChar);
                 sComm.Parameters.Add("@Password", MySqlDbType.VarChar);
@@ -109,12 +131,22 @@ namespace WebApplication1.Controllers
 
                 MySqlDataReader sRead = sComm.ExecuteReader();
 
-                if (sRead.Depth != 1)
+                int Count = 0;
+
+                while (sRead.Read())
                 {
-                    return false;
+                    Count++;
+                }
+
+
+
+                sConn.Close();
+                if (Count == 1)
+                {
+                    return true;
                 }
                 else
-                    return true;
+                    return false;
             }
         }
 

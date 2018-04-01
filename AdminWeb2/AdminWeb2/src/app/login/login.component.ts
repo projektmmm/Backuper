@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClientModule, HttpClient, HttpParams,HttpClientJsonpModule,HttpHeaders} from '@angular/common/http';
 import { User } from './User';
-import { RouterLink, Router } from '@angular/router';
-import { query } from '@angular/core/src/animation/dsl';
-
+import { RouterLink, Router,ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,7 +9,9 @@ import { query } from '@angular/core/src/animation/dsl';
 })
 export class LoginComponent implements OnInit {
     
-    constructor(private http :HttpClient) {
+    constructor(private http :HttpClient,
+      private route: ActivatedRoute,
+      private router:Router,) {
      
   }
   Login(IUsername:string,IPassword:string) {
@@ -25,8 +25,10 @@ export class LoginComponent implements OnInit {
     .subscribe(Response=>{
       if(Response)
       {
-        localStorage.setItem("Data",JSON.stringify(Response));
+        localStorage.setItem("LogedIn","True");
+        ///localStorage.setItem("Token",)
         console.log("Done");
+        this.router.navigate(['/home'])
       }
       else{
         console.log("Nope")
