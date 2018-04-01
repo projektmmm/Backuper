@@ -78,18 +78,18 @@ namespace Daemon.Backups
                 Size += Convert.ToInt32(item.Size);
             }
 
-            BackupInformation backupInformation = new BackupInformation()
+            BackupReport backupInformation = new BackupReport()
             {
                 Date = DateTime.Now,
                 //Type = "FULL','25'); DROP TABLE tbBackupReport; -- ",
                 Type = "FULL",
                 Size = Size
             };
-            List<string> toPost = new List<string>();
-            toPost.Add(JsonConvert.SerializeObject(backupInformation));
+            //List<string> toPost = new List<string>();
+            //toPost.Add(JsonConvert.SerializeObject(backupInformation));
 
             //odesilani na API
-            ApiCommunication.PostBackupReport(toPost, "api/daemon");
+            ApiCommunication.PostBackupReport(backupInformation, "api/daemon");
         }
     }
 }

@@ -10,13 +10,13 @@ namespace Daemon
 {
     public class ApiCommunication
     {
-        public static Uri Adress { get; set; } = new Uri("http://localhost:54736/");
+        public static Uri Adress { get; set; } = new Uri("http://localhost:63324/");
         public NextRunSettings nextRunSettings;
 
         /// <summary>
         /// Odeslani reportu o Backupu
         /// </summary>
-        public static async Task PostBackupReport(List<string> toPost, string apiDestination)
+        public static async Task PostBackupReport(BackupReport toPost, string apiDestination)
         {
             using (var client = GetJsonClient())
             {

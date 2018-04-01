@@ -21,3 +21,16 @@ C:\Users\Vojta\Documents\GitHub\Backuper\Deamon\Deamon\obj\Debug\Daemon.csproj.C
 C:\Users\Vojta\Documents\GitHub\Backuper\Deamon\Deamon\obj\Debug\Deamon.exe
 C:\Users\Vojta\Documents\GitHub\Backuper\Deamon\Deamon\obj\Debug\Deamon.pdb
 C:\Users\Vojta\Documents\GitHub\Backuper\Deamon\Deamon\bin\Debug\NCrontab.dll
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Deamon\Deamon\bin\Debug\Deamon.exe.config
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Deamon\Deamon\bin\Debug\Deamon.exe
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Deamon\Deamon\bin\Debug\Deamon.pdb
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Deamon\Deamon\bin\Debug\NCrontab.dll
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Deamon\Deamon\bin\Debug\Newtonsoft.Json.dll
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Deamon\Deamon\bin\Debug\System.Net.Http.Formatting.dll
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Deamon\Deamon\bin\Debug\Newtonsoft.Json.xml
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Deamon\Deamon\bin\Debug\System.Net.Http.Formatting.xml
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Deamon\Deamon\obj\Debug\Daemon.csprojResolveAssemblyReference.cache
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Deamon\Deamon\obj\Debug\Daemon.csproj.CoreCompileInputs.cache
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Deamon\Deamon\obj\Debug\Daemon.csproj.CopyComplete
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Deamon\Deamon\obj\Debug\Deamon.exe
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Deamon\Deamon\obj\Debug\Deamon.pdb

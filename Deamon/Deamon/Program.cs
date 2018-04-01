@@ -12,8 +12,10 @@ namespace Daemon
     {
         static void Main(string[] args)
         {
-            Timer timer = new Timer();
-            timer.Start();
+            //Timer timer = new Timer();
+            //timer.Start();
+
+            //ApiCommunication.PostBackupReport(new BackupReport() { Date = DateTime.Now, Size = 123456, Type = "FULL" }, "api/daemon");
 
 
             //FullBackup fb = new FullBackup(@"C:\ProjektMMM\From", @"C:\ProjektMMM\To");

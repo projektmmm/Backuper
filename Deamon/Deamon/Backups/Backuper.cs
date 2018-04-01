@@ -93,7 +93,7 @@ namespace Daemon
                 Size += Convert.ToInt32(item.Size);
             }
 
-            BackupInformation backupInformation = new BackupInformation()
+            BackupReport backupInformation = new BackupReport()
             {
                 Date = DateTime.Now,
                 Type = "FULL",
@@ -101,11 +101,11 @@ namespace Daemon
             };
 
             List<string> toPost = new List<string>();
-            toPost.Add(JsonConvert.SerializeObject(reportMaker.GetReport()));
-            toPost.Add(JsonConvert.SerializeObject(backupInformation));
+            //toPost.Add(JsonConvert.SerializeObject(reportMaker.GetReport()));
+            //toPost.Add(JsonConvert.SerializeObject(backupInformation));
 
             //odesilani na API
-            ApiCommunication.PostBackupReport(toPost, "api/daemon");
+            ApiCommunication.PostBackupReport(backupInformation, "api/daemon");
         }
 
         /// <summary>
