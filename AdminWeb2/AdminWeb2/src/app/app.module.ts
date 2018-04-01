@@ -62,7 +62,7 @@ import { SendSettingsComponent} from './settings-components/send-settings/send-s
     HttpClientModule,
     DataTableModule,
     RouterModule.forRoot([
-      {path: '', component: HomeComponent},
+      {path: '', component: LoginComponent},
       {path: 'register', component: RegisterComponent},
       {path: 'home', component: HomeComponent},
       {path: 'admin-settings', component: AdminSettingsComponent},
