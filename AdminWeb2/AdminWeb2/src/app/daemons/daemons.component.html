@@ -21,10 +21,16 @@
                     <input matInput #BackupType type="text" ng-model="BackupType" placeholder="BackupType" value="">
                 </mat-form-field>
                 <mat-form-field class="width-full">
-                    <input matInput #SourcePath type="text" ng-model="SourcePath" placeholder="SourcePath" value="">
+                    <input matInput #SourcePath type="text" ng-model="SourcePath" placeholder="SourcePath" value="" [formControl]="SourcePathFormControl" [errorStateMatcher]="SourcePathmatcher"> 
+                    <mat-error *ngIf="SourcePathFormControl.hasError('required')">
+                        Path is <strong>required</strong>
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="width-full">
-                    <input matInput #DestinationPath type="text" ng-model="DestinationPath" placeholder="DestinationPath" value="">
+                    <input matInput #DestinationPath type="text" ng-model="DestinationPath" placeholder="DestinationPath" value="" [formControl]="DestinationPathFormControl" [errorStateMatcher]="DestinationPathmatcher">
+                    <mat-error *ngIf="DestinationPathFormControl.hasError('required')">
+                        Path is <strong>required</strong>
+                    </mat-error>
                 </mat-form-field>
             </form>
         </div>

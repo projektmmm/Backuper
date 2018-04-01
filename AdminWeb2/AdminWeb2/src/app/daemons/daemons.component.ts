@@ -5,6 +5,15 @@ import { Http, Headers, RequestOptions} from '@angular/http';
 import { CronLabelComponent } from '../settings-components/cron-label/cron-label.component';
 import {MatSnackBar} from '@angular/material';
 import { query } from '@angular/core/src/animation/dsl';
+import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material/core';
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'daemons',
@@ -12,7 +21,7 @@ import { query } from '@angular/core/src/animation/dsl';
   styleUrls: ['./daemons.component.css']
 })
 export class DaemonsComponent implements OnInit {
-
+  
   constructor(private http2: HttpClient, public snackBar: MatSnackBar) {
     this.headers.append("Content-Type", "application/json");
     this.headers.append("Accept", "application/json");
@@ -23,6 +32,21 @@ export class DaemonsComponent implements OnInit {
       duration: 1500,
     });
   }
+
+  
+
+  SourcePathFormControl = new FormControl('', [
+    Validators.required,
+  ]);
+
+  DestinationPathFormControl = new FormControl('', [
+    Validators.required,
+  ]);
+
+  SourcePathmatcher = new MyErrorStateMatcher();
+  DestinationPathmatcher = new MyErrorStateMatcher();
+
+
 
   ngOnInit() {
   }
