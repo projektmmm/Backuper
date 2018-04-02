@@ -33,7 +33,11 @@ export class DaemonsComponent implements OnInit {
     });
   }
 
-  
+  backups = [
+    {value: 'FULL', viewValue: 'FULL'},
+    {value: 'DIFF', viewValue: 'DIFF'},
+    {value: 'INCR', viewValue: 'INCR'}
+  ];
 
   SourcePathFormControl = new FormControl('', [
     Validators.required,
