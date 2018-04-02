@@ -15,19 +15,25 @@
                     <input matInput #DaemonId type="text" ng-model="DaemonId" placeholder="DaemonId" value="">
                 </mat-form-field>
                 <mat-form-field class="width-full">
-                    <input matInput #Cron type="text" ng-model="Cron" placeholder="Cron">
+                    <input matInput #Cron type="text" ng-model="Cron" placeholder="Cron" disabled="true">
                 </mat-form-field>
                 <mat-form-field class="width-full">
                     <input matInput #BackupType type="text" ng-model="BackupType" placeholder="BackupType" value="">
                 </mat-form-field>
                 <mat-form-field class="width-full">
                     <input matInput #SourcePath type="text" ng-model="SourcePath" placeholder="SourcePath" value="" [formControl]="SourcePathFormControl" [errorStateMatcher]="SourcePathmatcher"> 
+                    <mat-error *ngIf="SourcePathFormControl.hasError('pattern') && !SourcePathFormControl.hasError('required')">
+                        Please enter a valid pattern
+                    </mat-error>
                     <mat-error *ngIf="SourcePathFormControl.hasError('required')">
                         Path is <strong>required</strong>
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="width-full">
                     <input matInput #DestinationPath type="text" ng-model="DestinationPath" placeholder="DestinationPath" value="" [formControl]="DestinationPathFormControl" [errorStateMatcher]="DestinationPathmatcher">
+                    <mat-error *ngIf="DestinationPathFormControl.hasError('pattern') && !DestinationPathFormControl.hasError('required')">
+                        Please enter a valid pattern
+                    </mat-error>
                     <mat-error *ngIf="DestinationPathFormControl.hasError('required')">
                         Path is <strong>required</strong>
                     </mat-error>

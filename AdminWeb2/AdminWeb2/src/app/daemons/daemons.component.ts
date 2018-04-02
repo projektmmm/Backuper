@@ -37,10 +37,12 @@ export class DaemonsComponent implements OnInit {
 
   SourcePathFormControl = new FormControl('', [
     Validators.required,
+    Validators.pattern("^[a-zA-Z]{1}:(.)+"),
   ]);
 
   DestinationPathFormControl = new FormControl('', [
     Validators.required,
+    Validators.pattern("^[a-zA-Z]{1}:(.)+"),
   ]);
 
   SourcePathmatcher = new MyErrorStateMatcher();

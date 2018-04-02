@@ -1,7 +1,7 @@
 <div *ngIf="show">
 
 <div class="page-header" color="primary">
-  <div class="roboto">Send new settings</div>
+  <div class="roboto">Update settings</div>
 </div>
 
 <mat-grid-list cols="2">
@@ -26,11 +26,23 @@
           </mat-form-field>
           <mat-form-field class="settings-row">
                 <p>Source Path</p>
-              <input matInput #SourcePath type="text" ng-model="SourcePath" value="{{this.sourcePath}}">
+              <input matInput #SourcePath type="text" ng-model="SourcePath" value="{{this.sourcePath}}" [formControl]="SourcePathFormControl" [errorStateMatcher]="SourcePathmatcher">
+              <mat-error *ngIf="SourcePathFormControl.hasError('pattern') && !SourcePathFormControl.hasError('required')">
+                Please enter a valid pattern
+            </mat-error>
+              <mat-error *ngIf="SourcePathFormControl.hasError('required')">
+                Path is <strong>required</strong>
+                </mat-error>
           </mat-form-field>
           <mat-form-field class="settings-row">
                 <p>Destination Path</p>
-              <input matInput #DestinationPath type="text" ng-model="DestinationPath" value="{{this.destinationPath}}">
+              <input matInput #DestinationPath type="text" ng-model="DestinationPath" value="{{this.destinationPath}}" [formControl]="DestinationPathFormControl" [errorStateMatcher]="DestinationPathmatcher">
+              <mat-error *ngIf="DestinationPathFormControl.hasError('pattern') && !DestinationPathFormControl.hasError('required')">
+                Please enter a valid pattern
+            </mat-error>
+              <mat-error *ngIf="DestinationPathFormControl.hasError('required')">
+                Path is <strong>required</strong>
+                </mat-error>
           </mat-form-field>
           <button mat-raised-button class="send-settings-btn" color="primary" (click)="Update(DaemonId.value,RunAt.value,Cron.value,BackupType.value,SourcePath.value,DestinationPath.value)">
             Update Settings
@@ -153,5 +165,4 @@
       </div> 
   </mat-grid-tile>
 </mat-grid-list>
-
 </div>

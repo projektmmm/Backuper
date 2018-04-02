@@ -3,6 +3,15 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Settings } from './settings';
 import { HttpClientModule, HttpClient, HttpParams, HttpClientJsonpModule, HttpHeaders } from '@angular/common/http';
 import { Http, Headers, RequestOptions} from '@angular/http';
+import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material/core';
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'send-settings',
@@ -16,6 +25,20 @@ export class SendSettingsComponent implements OnInit {
     this.headers.append("Content-Type", "application/json");
     this.headers.append("Accept", "application/json");
    }
+
+
+   SourcePathFormControl = new FormControl('', [
+    Validators.required,
+    Validators.pattern("^[a-zA-Z]{1}:(.)+"),
+  ]);
+
+  DestinationPathFormControl = new FormControl('', [
+    Validators.required,
+    Validators.pattern("^[a-zA-Z]{1}:(.)+"),
+  ]);
+
+  SourcePathmatcher = new MyErrorStateMatcher();
+  DestinationPathmatcher = new MyErrorStateMatcher();
 
   ngOnInit() {
   }
