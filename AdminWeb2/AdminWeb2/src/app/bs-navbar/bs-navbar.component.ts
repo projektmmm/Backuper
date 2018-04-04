@@ -18,6 +18,5 @@ export class BsNavbarComponent implements OnInit {
   {
     localStorage.setItem("LogedIn","false")
   }
-
 }
 
