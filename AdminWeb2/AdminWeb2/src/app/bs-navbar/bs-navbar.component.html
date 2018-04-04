@@ -4,8 +4,11 @@
   <button mat-button routerLink="/planned-backups">Planned Backups</button>
   <button mat-button routerLink="/daemons">Daemon Settings</button>
   <button mat-button [matMenuTriggerFor]="menu">{{Username}}</button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item routerLink="/admin-settings">Admin settings</button>
-    <button mat-menu-item routerLink="/" (click)="Logout()">Log Out</button>
-  </mat-menu>
+  <div class="align-right">
+    <mat-menu #menu="matMenu" >
+      <button mat-menu-item routerLink="/admin-settings">Admin settings</button>
+      <button mat-menu-item routerLink="/" (click)="Logout()">Log Out</button>
+    </mat-menu>
+  </div>
+  
 </mat-toolbar>

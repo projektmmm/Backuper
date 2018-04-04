@@ -12,21 +12,17 @@
             </div>
             <form class="form-settings">
                 <mat-form-field class="width-full">
-                    <input matInput #DaemonId type="text" ng-model="DaemonId" placeholder="DaemonId" value="">
+                    <input matInput #DaemonId type="number" ng-model="DaemonId"  min="0" placeholder="DaemonId" value="">
                 </mat-form-field>
                 <mat-form-field class="width-full">
                     <input matInput #Cron type="text" ng-model="Cron" placeholder="Cron" disabled="true">
                 </mat-form-field>
                 <mat-form-field class="width-full">
-                    
-
                     <mat-select placeholder="BackupType" #BackupType ng-model="BackupType" value="">
                         <mat-option *ngFor="let backup of backups" [value]="backup.value">
                             {{ backup.viewValue }}
                         </mat-option>
                     </mat-select>
-
-
                 </mat-form-field>
                 <mat-form-field class="width-full">
                     <input matInput #SourcePath type="text" ng-model="SourcePath" placeholder="SourcePath" value="" [formControl]="SourcePathFormControl" [errorStateMatcher]="SourcePathmatcher"> 
