@@ -7,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BsNavbarComponent implements OnInit {
 
+  Username: string = localStorage.getItem("Username")
+
   constructor() { }
 
   ngOnInit() {
   }
   
+  Logout()
+  {
+    localStorage.setItem("LogedIn","false")
+  }
+
 }
 

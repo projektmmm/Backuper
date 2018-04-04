@@ -3,9 +3,9 @@
   <button mat-button routerLink="/backup-reports">Backup Reports</button>
   <button mat-button routerLink="/planned-backups">Planned Backups</button>
   <button mat-button routerLink="/daemons">Daemon Settings</button>
-  <button mat-button [matMenuTriggerFor]="menu">Username</button>
+  <button mat-button [matMenuTriggerFor]="menu">{{Username}}</button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item routerLink="/admin-settings">Admin settings</button>
-    <button mat-menu-item routerLink="/">Log Out</button>
+    <button mat-menu-item routerLink="/" (click)="Logout()">Log Out</button>
   </mat-menu>
 </mat-toolbar>

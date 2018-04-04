@@ -26,7 +26,8 @@ export class LoginComponent implements OnInit {
     .subscribe(Response=>{
       if(Response)
       {
-        localStorage.setItem("LogedIn","True");
+        localStorage.setItem("LogedIn","true");
+        localStorage.setItem("Username",IUsername);
         ///localStorage.setItem("Token",)
         console.log("Done");
         this.router.navigate(['/home'])
