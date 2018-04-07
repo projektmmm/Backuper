@@ -41,6 +41,7 @@ import { PlannedBackupsComponent } from './planned-backups/planned-backups.compo
 import { CronLabelComponent } from './settings-components/cron-label/cron-label.component';
 import { SendSettingsComponent} from './settings-components/send-settings/send-settings.component';
 import { MatSortModule } from '@angular/material';
+import { SendNewSettingsComponent } from './send-new-settings/send-new-settings.component';
 
 
 
@@ -56,7 +57,8 @@ import { MatSortModule } from '@angular/material';
     RegisterComponent,
     PlannedBackupsComponent,
     CronLabelComponent,
-    SendSettingsComponent
+    SendSettingsComponent,
+    SendNewSettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -69,9 +71,10 @@ import { MatSortModule } from '@angular/material';
       {path: 'home', component: HomeComponent},
       {path: 'admin-settings', component: AdminSettingsComponent},
       {path: 'backup-reports', component: BackupReportsComponent},
-      {path: 'daemons', component: DaemonsComponent},
+      {path: 'send-new-settings', component: SendNewSettingsComponent},
       {path: 'login', component: LoginComponent},
-      {path: 'planned-backups', component: PlannedBackupsComponent}
+      {path: 'planned-backups', component: PlannedBackupsComponent},
+      {path: 'daemons', component: DaemonsComponent}
     ]),
     MatToolbarModule,
     MatButtonModule,
