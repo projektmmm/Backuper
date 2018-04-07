@@ -8,6 +8,7 @@ namespace backuperApi
     public class Backups
     {
         public int Id { get; set; }
+        public int UserId { get; set; }
         public DateTime RunAt { get; set; }
         public string Cron { get; set; }
         public int DaemonId { get; set;}

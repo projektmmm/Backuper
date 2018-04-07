@@ -67,6 +67,7 @@ export class SendNewSettingsComponent implements OnInit {
 
     const data: Settings = {
       DaemonId: daemonId,
+      UserId: 1,
       RunAt: new Date,
       Cron: cron,
       BackupType: backupType,
