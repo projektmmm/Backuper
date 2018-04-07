@@ -198,7 +198,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="BackupReport_Repository.cs" />
     <Compile Include="Controllers\Admin\BackupReport_Controller.cs" />
-    <Compile Include="Controllers\Admin\DaemonSettings_Controller.cs" />
+    <Compile Include="Controllers\Admin\Daemons_Controller.cs" />
     <Compile Include="Controllers\Daemon\Daemon_Controller.cs" />
     <Compile Include="Controllers\Default\HomeController.cs" />
     <Compile Include="Controllers\Admin\LoginRegister_Controller.cs" />
@@ -210,6 +210,7 @@
     </Compile>
     <Compile Include="Models\BackupReport.cs" />
     <Compile Include="Models\Backups.cs" />
+    <Compile Include="Models\Daemons.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

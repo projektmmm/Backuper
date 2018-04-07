@@ -13,7 +13,7 @@ export class DaemonsComponent implements OnInit {
   
   headers = new HttpHeaders();
   readonly root_URL = 'http://localhost:63324';
-  displayedColumns = ['Id'];
+  displayedColumns = ['Id', 'Name', 'Description'];
   tableSource: MatTableDataSource<Daemons>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -22,6 +22,7 @@ export class DaemonsComponent implements OnInit {
   constructor(private http: HttpClient, public snackBar: MatSnackBar) {
     this.headers.append("Content-Type", "application/json");
     this.headers.append("Accept", "application/json");
+    this.getReports();
   }
 
    ngOnInit() {
@@ -33,7 +34,7 @@ export class DaemonsComponent implements OnInit {
   }
 
   getReports() {
-    this.http.get<Daemons[]>(this.root_URL + "api/admin/daemons/{1}").subscribe
+    this.http.get<Daemons[]>(this.root_URL + "/api/admin/daemons/1").subscribe
     (data => {
 
       this.initializeTable(data);
