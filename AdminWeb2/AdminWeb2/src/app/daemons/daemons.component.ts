@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { HttpClientModule, HttpClient, HttpParams, HttpClientJsonpModule, HttpHeaders } from '@angular/common/http';
 import { Http, Headers, RequestOptions} from '@angular/http';
 import { MatSnackBar, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
@@ -13,7 +13,7 @@ export class DaemonsComponent implements OnInit {
   
   headers = new HttpHeaders();
   readonly root_URL = 'http://localhost:63324';
-  displayedColumns = ['Id', 'Name', 'Description'];
+  displayedColumns = ['Id', 'Name', 'Description', 'Funcbuttons'];
   tableSource: MatTableDataSource<Daemons>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

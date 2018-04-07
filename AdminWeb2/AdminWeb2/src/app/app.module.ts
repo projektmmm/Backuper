@@ -35,13 +35,13 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 
-
 import 'hammerjs';
 import { PlannedBackupsComponent } from './planned-backups/planned-backups.component';
 import { CronLabelComponent } from './settings-components/cron-label/cron-label.component';
 import { SendSettingsComponent} from './settings-components/send-settings/send-settings.component';
-import { MatSortModule } from '@angular/material';
+import { MatSortModule, MatDialogModule } from '@angular/material';
 import { SendNewSettingsComponent } from './send-new-settings/send-new-settings.component';
+import { DaemonsInfoComponent } from './daemons-info/daemons-info.component';
 
 
 
@@ -58,7 +58,8 @@ import { SendNewSettingsComponent } from './send-new-settings/send-new-settings.
     PlannedBackupsComponent,
     CronLabelComponent,
     SendSettingsComponent,
-    SendNewSettingsComponent
+    SendNewSettingsComponent,
+    DaemonsInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +75,8 @@ import { SendNewSettingsComponent } from './send-new-settings/send-new-settings.
       {path: 'send-new-settings', component: SendNewSettingsComponent},
       {path: 'login', component: LoginComponent},
       {path: 'planned-backups', component: PlannedBackupsComponent},
-      {path: 'daemons', component: DaemonsComponent}
+      {path: 'daemons', component: DaemonsComponent},
+      {path: 'daemons-info', component: DaemonsInfoComponent}
     ]),
     MatToolbarModule,
     MatButtonModule,
@@ -94,7 +96,8 @@ import { SendNewSettingsComponent } from './send-new-settings/send-new-settings.
     ReactiveFormsModule,
     MatIconModule,
     MatSortModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

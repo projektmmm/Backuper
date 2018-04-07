@@ -16,5 +16,14 @@ namespace backuperApi.Controllers
         {
             return this.database.Daemons.Where(d => d.UserId == i).ToList<Daemons>();
         }
+
+        /*
+        [HttpGet]
+        [Route("api/admin/daemons/nextrun/{i}")]
+        public string Get(int i)
+        {
+            this.database.Backups.Where(d => d.RunAt => )
+        }
+        */
     }
 }
