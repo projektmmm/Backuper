@@ -1,12 +1,38 @@
-<div mat-dialog-content>
-<ol>
-  <li>Id - {{ this.Name }}</li>
-  <!--
-  <li>Affected Files - {{ this.errorDetails[0].AffectedFiles }}</li>
-  <li>Problem - {{ this.errorDetails[0].Problem }}</li>
-  <li>BackupId - {{ this.errorDetails[0].BackupId }}</li>
-  <li>DaemonId - {{ this.errorDetails[0].DaemonId }}</li>
-  <li>DaemonName - {{ this.errorDetails[0].DaemonName }}</li>
-  -->
-</ol>
+<div *ngIf="this.canLoad">
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let error of errorDetails">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        #{{ error.Id }}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ error.AffectedFiles }} Affected Files
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div class="expandedContent">
+    <table class="tableErrorContent">
+      <tr>
+        <td class="listHeader">Problem</td>
+        <td>{{ error.Problem }}</td>
+      </tr>
+      <tr>
+        <td class="listHeader">Backup ID</td>
+        <td>{{ error.BackupId }}</td>
+      </tr>
+      <tr>
+        <td class="listHeader"> Daemon ID</td>
+        <td>{{ error.DaemonId }}</td>
+      </tr>
+      <tr>
+        <td class="listHeader">Daemon Name</td>
+        <td>{{ error.DaemonName }}</td>
+      </tr>
+    </table>
+
+    <button mat-raised-button (click)="solvedProblem(error.Id)"><i class="material-icons">done</i> Solved!</button> 
+  </div>
+  </mat-expansion-panel>
+</mat-accordion>
+<button mat-button color="primary" (action)="closeDialog()" [mat-dialog-close] cdkFocusInitial>Close</button>
 </div>

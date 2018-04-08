@@ -97,13 +97,12 @@ export class DaemonsInfoComponent implements OnInit {
 
     
       let dialogRef = this.dialog.open(ErrorInfoComponent, {
-        width: '250px',
-        height: '250px',
-        data: { Name: 'Austin' }
+        width: '600px',
+        height: '400px'
       });
 
       dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
+        this.getErrors();
       });
     
   }

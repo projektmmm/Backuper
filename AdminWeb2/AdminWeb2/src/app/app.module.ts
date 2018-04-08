@@ -39,7 +39,7 @@ import 'hammerjs';
 import { PlannedBackupsComponent } from './planned-backups/planned-backups.component';
 import { CronLabelComponent } from './settings-components/cron-label/cron-label.component';
 import { SendSettingsComponent} from './settings-components/send-settings/send-settings.component';
-import { MatSortModule, MatDialogModule } from '@angular/material';
+import { MatSortModule, MatDialogModule, MatExpansionModule } from '@angular/material';
 import { SendNewSettingsComponent } from './send-new-settings/send-new-settings.component';
 import { DaemonsInfoComponent } from './daemons-info/daemons-info.component';
 import { ErrorInfoComponent } from './daemons-info/error-info/error-info.component';
@@ -100,7 +100,8 @@ import { ErrorInfoComponent } from './daemons-info/error-info/error-info.compone
     MatIconModule,
     MatSortModule,
     MatSelectModule,
-    MatDialogModule
+    MatDialogModule,
+    MatExpansionModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

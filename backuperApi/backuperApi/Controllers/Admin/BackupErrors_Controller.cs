@@ -58,5 +58,23 @@ namespace backuperApi.Controllers.Admin
 
             return errorDetails;
         }
+
+        [HttpPatch]
+        [Route("api/admin/backup-errors/{errorId}")]
+        public bool Patch(int errorId)
+        {
+            BackupErrors dbRecord = this.FindById(errorId);
+
+            dbRecord.Solved = true;
+            this.database.SaveChanges();
+            return true;
+        }
+
+
+        private BackupErrors FindById(int id)
+        {
+            return this.database.BackupErrors.Find(id);
+        }
+
     }
 }
