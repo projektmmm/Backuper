@@ -9,3 +9,12 @@ export interface Backups {
     SourcePath: string;
     DestinationPath: string;
 }
+
+export interface ErrorDetails {
+    Id: number;
+    AffectedFiles: number;
+    Problem: string;
+    BackupId: number;
+    DaemonId: number;
+    DaemonName: string;
+}

@@ -13,6 +13,9 @@ namespace backuperApi
         public DbSet<Backups> Backups { get; set; }
         public DbSet<Users> Users { get; set; }
         public DbSet<Daemons> Daemons { get; set; }
+        public DbSet<BackupErrors> BackupErrors { get; set; }
+
+        public static string ConnectionString = "Server=mysqlstudenti.litv.sssvt.cz; Database=3b2_macekdaniel_db2; Uid=macekdaniel; Pwd=123456";
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

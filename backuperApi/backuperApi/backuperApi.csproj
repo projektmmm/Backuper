@@ -196,7 +196,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="BackupReport_Repository.cs" />
+    <Compile Include="Controllers\Admin\BackupErrors_Controller.cs" />
     <Compile Include="Controllers\Admin\BackupReport_Controller.cs" />
     <Compile Include="Controllers\Admin\Daemons_Controller.cs" />
     <Compile Include="Controllers\Daemon\Daemon_Controller.cs" />
@@ -208,9 +208,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BackupErrors.cs" />
     <Compile Include="Models\BackupReport.cs" />
     <Compile Include="Models\Backups.cs" />
     <Compile Include="Models\Daemons.cs" />
+    <Compile Include="Models\Non-Database\ErrorDetails.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
