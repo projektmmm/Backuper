@@ -37,7 +37,7 @@ namespace backuperApi.Controllers
             dbRecord.BackupType = toUpdate.BackupType;
             dbRecord.Cron = toUpdate.Cron;
             dbRecord.DestinationPath = toUpdate.DestinationPath;
-            dbRecord.RunAt = toUpdate.RunAt;
+            dbRecord.NextRun = toUpdate.NextRun;
             dbRecord.SourcePath = toUpdate.SourcePath;
 
             this.database.SaveChanges();

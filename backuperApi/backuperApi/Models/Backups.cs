@@ -9,7 +9,7 @@ namespace backuperApi
     {
         public int Id { get; set; }
         public int UserId { get; set; }
-        public DateTime RunAt { get; set; }
+        public DateTime NextRun { get; set; }
         public string Cron { get; set; }
         public int DaemonId { get; set;}
         public string BackupType { get; set; }

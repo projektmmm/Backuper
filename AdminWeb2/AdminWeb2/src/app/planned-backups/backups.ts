@@ -1,6 +1,6 @@
 export interface Backups {
     Id: number;
-    RunAt: Date;
+    NextRun: Date;
     Cron: string;
     DaemonId: number;
     BackupType: string;

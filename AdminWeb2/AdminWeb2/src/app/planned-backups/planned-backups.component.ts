@@ -21,7 +21,7 @@ export class PlannedBackupsComponent implements OnInit {
   }
 
   readonly Root_URL = 'http://localhost:63324'; 
-  displayedColumns = ['RunAt', 'Cron', 'DaemonId', 'BackupType', 'SourcePath', 'DestinationPath', 'Buttons'];
+  displayedColumns = ['NextRun', 'Cron', 'DaemonId', 'BackupType', 'SourcePath', 'DestinationPath', 'Buttons'];
   tableResource: MatTableDataSource<Backups>;
   items: Backups[] = [];
   itemCount: number;
@@ -31,7 +31,7 @@ export class PlannedBackupsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @Output() id: number;
-  @Output() runAt: Date;
+  @Output() nextRun: Date;
   @Output() cron: string;
   @Output() daemonId: number;
   @Output() backupType: string;
@@ -92,7 +92,7 @@ export class PlannedBackupsComponent implements OnInit {
 
   show(row) {
     this.showVar = !this.showVar;
-    this.runAt = row.RunAt;
+    this.nextRun = row.nextRun;
     this.cron = row.Cron;
     this.daemonId = row.DaemonId;
     this.backupType = row.BackupType;

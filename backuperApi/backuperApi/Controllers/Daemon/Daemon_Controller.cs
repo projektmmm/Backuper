@@ -23,7 +23,7 @@ namespace backuperApi.Controllers.Daemon
         [Route("api/daemon")]
         public Backups Get()
         {
-            return this.database.Backups.Where(b => b.RunAt > DateTime.Now).First<Backups>();
+            return this.database.Backups.Where(b => b.NextRun > DateTime.Now).First<Backups>();
         }
 
     }

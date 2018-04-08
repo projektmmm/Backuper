@@ -6,4 +6,6 @@ export interface BackupReport {
     Id: number;
     ConnectedTo: number;
     DaemonId: number;
+    UserId: number;
+    BackupReportId: number;
 }
