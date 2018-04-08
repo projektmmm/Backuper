@@ -42,6 +42,7 @@ import { SendSettingsComponent} from './settings-components/send-settings/send-s
 import { MatSortModule, MatDialogModule } from '@angular/material';
 import { SendNewSettingsComponent } from './send-new-settings/send-new-settings.component';
 import { DaemonsInfoComponent } from './daemons-info/daemons-info.component';
+import { ErrorInfoComponent } from './daemons-info/error-info/error-info.component';
 
 
 
@@ -59,8 +60,10 @@ import { DaemonsInfoComponent } from './daemons-info/daemons-info.component';
     CronLabelComponent,
     SendSettingsComponent,
     SendNewSettingsComponent,
-    DaemonsInfoComponent
+    DaemonsInfoComponent,
+    ErrorInfoComponent,
   ],
+  entryComponents: [ErrorInfoComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

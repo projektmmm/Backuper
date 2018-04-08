@@ -9,7 +9,7 @@
         </tr>
         <tr>
           <td class="nextBackupCountdown">
-            <button mat-raised-button color="{{ this.warningButtonColor }}" ng-hide="this.hideWarningButton" click="showWarning()"><i class="material-icons">check_circle</i>{{ this.warningButtonText }}</button>
+            <button mat-raised-button color="{{ this.warningButtonColor }}" ng-hide="this.hideWarningButton" (click)="showWarning()"><i class="material-icons">{{ this.warningButtonIcon }}</i> {{ this.warningButtonText }}</button>
           </td>
         </tr>
         <tr>

@@ -1,8 +1,9 @@
+import { ErrorInfoComponent } from './error-info/error-info.component';
 import { SendSettingsComponent } from './../settings-components/send-settings/send-settings.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClientModule, HttpClient, HttpParams, HttpClientJsonpModule, HttpHeaders } from '@angular/common/http';
 import { Http, Headers, RequestOptions} from '@angular/http';
-import { MatDialog, CanColor } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Backups, ErrorDetails } from './interfaces';
 
 
@@ -25,6 +26,7 @@ export class DaemonsInfoComponent implements OnInit {
   warningButtonText: string = "";
   hideWarningButton: boolean = true;
   warningButtonColor: string;
+  warningButtonIcon: string;
 
   ngOnInit() {
   }
@@ -52,7 +54,7 @@ export class DaemonsInfoComponent implements OnInit {
   }
 
   getErrors() {
-    this.http.get<ErrorDetails[]>(this.root_URL + "/api/admin/backup-errors/1-12").subscribe
+    this.http.get<ErrorDetails[]>(this.root_URL + "/api/admin/backup-errors/1-1").subscribe
     (data => {
 
       this.errorDetails = data;
@@ -65,11 +67,13 @@ export class DaemonsInfoComponent implements OnInit {
 
       this.warningButtonText = "No problems";
       this.warningButtonColor = "primary";
+      this.warningButtonIcon = "check_circle";
     }
     else {
 
     this.warningButtonText = "Problems";
     this.warningButtonColor = "warn";
+    this.warningButtonIcon = "error_outline";
     }
 
     this.hideWarningButton = false;
@@ -84,6 +88,24 @@ export class DaemonsInfoComponent implements OnInit {
       this.tableResource.sort = this.sort;
       */
     });
+  }
+
+  showWarning() {
+    if (this.warningButtonText == "No problems") {
+      return;
+    }
+
+    
+      let dialogRef = this.dialog.open(ErrorInfoComponent, {
+        width: '250px',
+        height: '250px',
+        data: { errorDetails: this.errorDetails }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+      });
+    
   }
 
 
