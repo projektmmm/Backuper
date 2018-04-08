@@ -11,12 +11,18 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 export class ErrorInfoComponent implements OnInit {
 
   constructor (
-    public dialogRef: MatDialogRef<DaemonsInfoComponent>, @Inject(MAT_DIALOG_DATA) public data: ErrorDetails[]) { 
-      this.errorDetails = data;
+    @Inject(MAT_DIALOG_DATA) public data: any) { 
+      //this.errorDetails = data;
+      //this.Id = data[0].Id;
+      this.Name = data.Name;
+      
     }
 
   ngOnInit() {
   }
 
+  Id: number;
   errorDetails: ErrorDetails[];
+  Name: string;
+  
 }

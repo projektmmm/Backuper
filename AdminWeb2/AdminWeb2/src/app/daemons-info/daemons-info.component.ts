@@ -99,7 +99,7 @@ export class DaemonsInfoComponent implements OnInit {
       let dialogRef = this.dialog.open(ErrorInfoComponent, {
         width: '250px',
         height: '250px',
-        data: { errorDetails: this.errorDetails }
+        data: { Name: 'Austin' }
       });
 
       dialogRef.afterClosed().subscribe(result => {
