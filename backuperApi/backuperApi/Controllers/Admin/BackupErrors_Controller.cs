@@ -13,8 +13,8 @@ namespace backuperApi.Controllers.Admin
         public Database database = new Database();
 
         [HttpGet]
-        [Route("api/admin/backup-errors/{userId}-{daemonId}")]
-        public List<ErrorDetails> Get(int userId, int daemonId)
+        [Route("api/admin/backup-errors/{userName}-{daemonId}")]
+        public List<ErrorDetails> Get(string userName, int daemonId)
         {
             string commandText = ErrorDetails.GetQuery();
             List<ErrorDetails> errorDetails = new List<ErrorDetails>();
@@ -23,10 +23,10 @@ namespace backuperApi.Controllers.Admin
             {
                 sConn.Open();
                 MySqlCommand command = new MySqlCommand(commandText, sConn);
-                command.Parameters.Add("@UserId", MySqlDbType.Int32);
+                command.Parameters.Add("@UserName", MySqlDbType.VarChar);
                 command.Parameters.Add("@DaemonId", MySqlDbType.Int32);
 
-                command.Parameters["@UserId"].Value = userId;
+                command.Parameters["@UserName"].Value = userName;
                 command.Parameters["@DaemonId"].Value = daemonId;
 
                 try

@@ -20,7 +20,8 @@ namespace backuperApi
                 "FROM BackupErrors be INNER JOIN " +
                 "BackupReport br ON be.Id=br.BackupErrorId " +
                 "INNER JOIN Daemons da ON da.Id=br.DaemonId " +
-                $"WHERE br.UserId=@UserId AND br.DaemonId=@DaemonId " +
+                "INNER JOIN Users us ON  br.UserId=us.Id " +
+                $"WHERE us.Username=@UserName AND br.DaemonId=@DaemonId " +
                 "AND be.Problem <> 'No problem'" +
                 "AND be.Solved <> 1";
         }

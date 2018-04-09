@@ -17,9 +17,9 @@ import { DataTableResource } from 'angular5-data-table';
 export class DaemonsInfoComponent implements OnInit {
 
   constructor(private http: HttpClient, public dialog: MatDialog, private rowIdService: rowIdService) {
+    this.daemonId = this.rowIdService.rowId;
     this.getBackups();
     this.getErrors();
-    console.log(this.rowIdService.rowId);
    }
 
   headers = new HttpHeaders();
@@ -30,6 +30,7 @@ export class DaemonsInfoComponent implements OnInit {
   hideWarningButton: boolean = true;
   warningButtonColor: string;
   warningButtonIcon: string;
+  daemonId: number;
 
   ngOnInit() {
   }
@@ -57,7 +58,7 @@ export class DaemonsInfoComponent implements OnInit {
   }
 
   getErrors() {
-    this.http.get<ErrorDetails[]>(this.root_URL + "/api/admin/backup-errors/1-1").subscribe
+    this.http.get<ErrorDetails[]>(this.root_URL + "/api/admin/backup-errors/" + localStorage.getItem("Username") + "-" + this.daemonId).subscribe
     (data => {
 
       this.errorDetails = data;
@@ -101,7 +102,8 @@ export class DaemonsInfoComponent implements OnInit {
     
       let dialogRef = this.dialog.open(ErrorInfoComponent, {
         width: '600px',
-        height: '400px'
+        height: '400px',
+        data: { daemonId: this.daemonId}
       });
 
       dialogRef.afterClosed().subscribe(result => {

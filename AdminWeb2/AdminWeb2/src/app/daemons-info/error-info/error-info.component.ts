@@ -13,10 +13,10 @@ import { Http, Headers, RequestOptions} from '@angular/http';
 })
 export class ErrorInfoComponent implements OnInit {
 
-  constructor (private http: HttpClient, public dialogRef: MatDialogRef<DaemonsInfoComponent>, public snackBar: MatSnackBar)
+  constructor (private http: HttpClient, public dialogRef: MatDialogRef<DaemonsInfoComponent>, public snackBar: MatSnackBar, @Inject(MAT_DIALOG_DATA) public data: any)
     { 
-      //this.errorDetails = data;
-      //this.Id = data[0].Id;
+      this.daemonId = data.daemonId;
+      this.userName = localStorage.getItem("Username");
       this.getErrors();
       
     }
@@ -25,6 +25,8 @@ export class ErrorInfoComponent implements OnInit {
   }
 
   Id: number;
+  daemonId: number;
+  userName: string;
   errorDetails: ErrorDetails[];
   Name: string;
   canLoad: boolean = false;
@@ -37,7 +39,7 @@ export class ErrorInfoComponent implements OnInit {
   }
 
   getErrors() {
-    this.http.get<ErrorDetails[]>(this.root_URL + "/api/admin/backup-errors/1-1").subscribe
+    this.http.get<ErrorDetails[]>(this.root_URL + "/api/admin/backup-errors/" + this.userName + "-" + this.daemonId).subscribe
     (data => {
       if (data[0].Problem == 'N') {
         this.errorDetails = null;
