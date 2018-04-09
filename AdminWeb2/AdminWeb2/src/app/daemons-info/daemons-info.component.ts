@@ -5,7 +5,8 @@ import { HttpClientModule, HttpClient, HttpParams, HttpClientJsonpModule, HttpHe
 import { Http, Headers, RequestOptions} from '@angular/http';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Backups, ErrorDetails } from './interfaces';
-
+import { DataSource } from '@angular/cdk/table';
+import { DataTableResource } from 'angular5-data-table';
 
 @Component({
   selector: 'daemons-info',
