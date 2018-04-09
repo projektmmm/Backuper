@@ -27,6 +27,8 @@ export class PlannedBackupsComponent implements OnInit {
   itemCount: number;
   showVar: boolean = false;
   rowIndex: number;
+  username: string = localStorage.getItem("Username");
+  adress: string = this.Root_URL + "/api/admin/planned-backups";
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -37,6 +39,7 @@ export class PlannedBackupsComponent implements OnInit {
   @Output() backupType: string;
   @Output() sourcePath: string;
   @Output() destinationPath: string;
+  @Input() actuallDaemonId: number;
   
   ngAfterViewInit() {
     if (this.tableResource != null)
@@ -44,7 +47,8 @@ export class PlannedBackupsComponent implements OnInit {
   }
 
   async getBackup() {
-    this.http.get<Backups[]>(this.Root_URL + "/api/admin/planned-backups").subscribe
+    this.adress = (this.actuallDaemonId == null) ? this.adress : this.adress + "/" + this.username + "-" + this.actuallDaemonId;
+    this.http.get<Backups[]>(this.adress).subscribe
     (data => { 
 
       this.inititalizeTable(data);

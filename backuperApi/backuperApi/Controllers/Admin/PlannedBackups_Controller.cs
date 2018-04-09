@@ -18,6 +18,20 @@ namespace backuperApi.Controllers
             return this.database.Backups.ToList();
         }
 
+        [HttpGet]
+        [Route("api/admin/planned-backups/{username}-{daemonId}")]
+        public List<Backups> Get(string username, int daemonId)
+        {
+            //inner join v entity frameworku boiis
+            var query = from b in this.database.Backups
+                        join u in this.database.Users
+                        on b.UserId equals u.Id
+                        where u.Username == username && b.DaemonId == daemonId
+                        select b;
+
+            return query.ToList<Backups>();
+        }
+
         [HttpPost]
         [Route("api/admin/daemon-settings")]
         public bool Post(Backups toInsert)
