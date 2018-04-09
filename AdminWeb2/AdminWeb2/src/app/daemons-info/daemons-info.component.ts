@@ -1,7 +1,7 @@
 import { rowIdService } from './service';
 import { ErrorInfoComponent } from './error-info/error-info.component';
 import { SendSettingsComponent } from './../settings-components/send-settings/send-settings.component';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Output } from '@angular/core';
 import { HttpClientModule, HttpClient, HttpParams, HttpClientJsonpModule, HttpHeaders } from '@angular/common/http';
 import { Http, Headers, RequestOptions, HttpModule} from '@angular/http';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -18,6 +18,7 @@ export class DaemonsInfoComponent implements OnInit {
 
   constructor(private http: HttpClient, public dialog: MatDialog, private rowIdService: rowIdService) {
     this.daemonId = this.rowIdService.rowId;
+    this.showBackupReports = true;
     this.getBackups();
     this.getErrors();
    }
@@ -30,7 +31,8 @@ export class DaemonsInfoComponent implements OnInit {
   hideWarningButton: boolean = true;
   warningButtonColor: string;
   warningButtonIcon: string;
-  daemonId: number;
+  showBackupReports: boolean = false;
+  @Output() daemonId: number;
 
   ngOnInit() {
   }

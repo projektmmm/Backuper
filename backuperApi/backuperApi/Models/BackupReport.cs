@@ -15,5 +15,6 @@ namespace backuperApi
         public int DaemonId { get; set; }
         public int UserId { get; set; }
         public int BackupErrorId { get; set; }
+        public int BackupId { get; set; }
     }
 }

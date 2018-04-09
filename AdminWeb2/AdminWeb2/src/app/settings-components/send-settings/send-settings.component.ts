@@ -41,7 +41,7 @@ export class SendSettingsComponent implements OnInit {
   DestinationPathmatcher = new MyErrorStateMatcher();
 
   ngOnInit() {
-  }
+  } 
 
   headers = new HttpHeaders();
   readonly root_URL = 'http://localhost:63324';

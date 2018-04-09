@@ -24,7 +24,9 @@
             <planned-backups></planned-backups>
           </mat-tab>
           <mat-tab label="Backup reports">
-            <backup-reports></backup-reports>
+            <div *ngIf="this.showBackupReports">
+            <backup-reports [daemonId]="this.daemonId"></backup-reports>
+          </div>
           </mat-tab>
           <mat-tab label="Statistics">
             <div class="page-header">

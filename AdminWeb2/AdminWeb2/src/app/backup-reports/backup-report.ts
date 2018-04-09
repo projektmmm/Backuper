@@ -8,4 +8,5 @@ export interface BackupReport {
     DaemonId: number;
     UserId: number;
     BackupReportId: number;
+    BackupId: number;
 }

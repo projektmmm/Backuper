@@ -17,8 +17,7 @@ export class ErrorInfoComponent implements OnInit {
     { 
       this.daemonId = data.daemonId;
       this.userName = localStorage.getItem("Username");
-      this.getErrors();
-      
+      this.getErrors();      
     }
 
   ngOnInit() {

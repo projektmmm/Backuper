@@ -9,13 +9,27 @@ namespace backuperApi.Controllers
 {
     public class BackupReport_Controller : ApiController
     {
-        public Database backupReport = new Database();
+        public Database database = new Database();
 
         [HttpGet]
         [Route("api/admin/backup-reports")]
         public List<BackupReport> Get()
         {
-            return this.backupReport.BackupReport.ToList();
+            return this.database.BackupReport.ToList();
+        }
+
+        [HttpGet]
+        [Route("api/admin/backup-reports/{username}-{daemonId}")]
+        public List<BackupReport> Get(string username, int daemonId)
+        {
+            //inner join v entity frameworku boiis
+            var query = from b in this.database.BackupReport
+                        join u in this.database.Users
+                        on b.UserId equals u.Id
+                        where u.Username == username && b.DaemonId == daemonId
+                        select b;
+
+            return query.ToList<BackupReport>();
         }
     }
 }

@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, Input } from '@angular/core';
 import { HttpClientModule, HttpClient, HttpParams,HttpClientJsonpModule} from '@angular/common/http';
 import { BackupReport} from './backup-report';
 import { DataTableResource } from 'angular5-data-table';
@@ -23,16 +23,19 @@ export class BackupReportsComponent implements OnInit {
   tableResource: MatTableDataSource<BackupReport>;
   items: BackupReport[] = [];
   itemCount: number; 
+  adress: string = this.Root_URL + "/api/admin/backup-reports";
 
+  @Input() daemonId: number;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   getReports() {
-    this.http.get<BackupReport[]>(this.Root_URL + "/api/admin/backup-reports").subscribe
+    if(this.daemonId != null)
+      this.adress = this.adress + "/" + localStorage.getItem("Username") + "-" + this.daemonId;
+    this.http.get<BackupReport[]>(this.adress).subscribe
     (data => { 
 
       this.inititalizeTable(data);
-
     });
   }
 
