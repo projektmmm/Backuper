@@ -27,7 +27,7 @@
         <ng-container matColumnDef="Funcbuttons">
             <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
             <mat-cell cell *matCellDef="let row">
-                <button mat-raised-button color="primary" routerLink="/daemons-info">
+                <button mat-raised-button color="primary" (click)="passRowIdToService(row.Id)">
                     Details
                 </button>
             </mat-cell>

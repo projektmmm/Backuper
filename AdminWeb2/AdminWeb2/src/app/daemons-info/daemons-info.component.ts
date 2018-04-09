@@ -1,8 +1,9 @@
+import { rowIdService } from './service';
 import { ErrorInfoComponent } from './error-info/error-info.component';
 import { SendSettingsComponent } from './../settings-components/send-settings/send-settings.component';
 import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClientModule, HttpClient, HttpParams, HttpClientJsonpModule, HttpHeaders } from '@angular/common/http';
-import { Http, Headers, RequestOptions} from '@angular/http';
+import { Http, Headers, RequestOptions, HttpModule} from '@angular/http';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Backups, ErrorDetails } from './interfaces';
 import { DataSource } from '@angular/cdk/table';
@@ -15,9 +16,10 @@ import { DataTableResource } from 'angular5-data-table';
 })
 export class DaemonsInfoComponent implements OnInit {
 
-  constructor(private http: HttpClient, public dialog: MatDialog) {
+  constructor(private http: HttpClient, public dialog: MatDialog, private rowIdService: rowIdService) {
     this.getBackups();
     this.getErrors();
+    console.log(this.rowIdService.rowId);
    }
 
   headers = new HttpHeaders();

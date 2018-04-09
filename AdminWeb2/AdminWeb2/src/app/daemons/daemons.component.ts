@@ -1,8 +1,11 @@
+import { AppModule } from './../app.module';
+import { rowIdService } from './../daemons-info/service';
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { HttpClientModule, HttpClient, HttpParams, HttpClientJsonpModule, HttpHeaders } from '@angular/common/http';
-import { Http, Headers, RequestOptions} from '@angular/http';
+import { Http, Headers, RequestOptions, HttpModule} from '@angular/http';
 import { MatSnackBar, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Daemons } from './daemons';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'daemons',
@@ -19,7 +22,7 @@ export class DaemonsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private http: HttpClient, public snackBar: MatSnackBar) {
+  constructor(private http: HttpClient, public snackBar: MatSnackBar, private rowIdService: rowIdService, private router: Router) {
     this.headers.append("Content-Type", "application/json");
     this.headers.append("Accept", "application/json");
     this.getReports();
@@ -55,4 +58,11 @@ export class DaemonsComponent implements OnInit {
       duration: 1500,
     });
   }  
+
+  passRowIdToService(rowId: number) {
+    this.rowIdService.rowId = rowId;
+    console.log(this.rowIdService.rowId);
+    this.router.navigate(['./daemons-info']);
+  }
+
 }

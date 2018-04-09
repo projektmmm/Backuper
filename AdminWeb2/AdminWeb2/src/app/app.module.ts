@@ -1,3 +1,4 @@
+import { HttpModule } from '@angular/http';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
@@ -43,6 +44,7 @@ import { MatSortModule, MatDialogModule, MatExpansionModule } from '@angular/mat
 import { SendNewSettingsComponent } from './send-new-settings/send-new-settings.component';
 import { DaemonsInfoComponent } from './daemons-info/daemons-info.component';
 import { ErrorInfoComponent } from './daemons-info/error-info/error-info.component';
+import { rowIdService } from './daemons-info/service';
 
 
 
@@ -61,13 +63,14 @@ import { ErrorInfoComponent } from './daemons-info/error-info/error-info.compone
     SendSettingsComponent,
     SendNewSettingsComponent,
     DaemonsInfoComponent,
-    ErrorInfoComponent,
+    ErrorInfoComponent
   ],
   entryComponents: [ErrorInfoComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    HttpModule,
     DataTableModule,
     RouterModule.forRoot([
       {path: '', component: LoginComponent},
@@ -103,7 +106,9 @@ import { ErrorInfoComponent } from './daemons-info/error-info/error-info.compone
     MatDialogModule,
     MatExpansionModule,
   ],
-  providers: [],
+  providers: [
+    rowIdService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
