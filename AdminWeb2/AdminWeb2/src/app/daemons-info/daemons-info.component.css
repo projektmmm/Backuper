@@ -1,3 +1,21 @@
 .mat-raised-button {
     padding: 10px 50px;
 }
+
+mat-grid-tile {
+    background: lightblue;
+  }
+
+.tabs {
+    position: absolute;
+    left: 25px;
+    top: 25px;
+}
+
+.tab {
+    padding-right: 200px;
+}
+
+.widthboi {
+    width: 100%;
+}

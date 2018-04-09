@@ -1,6 +1,6 @@
 <div class="actionButtons">
-  <mat-grid-list cols="2">
-    <mat-grid-tile>
+  <mat-grid-list cols="4" rows="10" rowHeight="3:1">
+    <mat-grid-tile colspan="1" rowspan="5">
       <table class="warningTable">
         <tr>
           <td class="warningWindow">
@@ -17,8 +17,20 @@
         </tr>
       </table>
     </mat-grid-tile>
-    <mat-grid-tile>
-      <p>Contentboi</p>
+    <mat-grid-tile colspan="3" rowspan="5">
+      <div class="tabs">
+        <mat-tab-group class="widthboi">
+          <mat-tab label="Planned backups">
+            <planned-backups></planned-backups>
+          </mat-tab>
+          <mat-tab label="Backup reports">
+            <backup-reports></backup-reports>
+          </mat-tab>
+          <mat-tab label="Statistics">
+            TODO
+          </mat-tab>
+        </mat-tab-group>
+      </div>
     </mat-grid-tile>
   </mat-grid-list>
 </div>
