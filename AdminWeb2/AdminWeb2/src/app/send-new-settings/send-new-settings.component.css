@@ -1,6 +1,6 @@
 .form {
     position: absolute;
-    left: 100px;
+    left: 50px;
     top: 0px;
 }
 
@@ -9,11 +9,13 @@
   }
 
 .form-settings-button {
-    margin-top: 350px;
+    position: absolute;
+    right: 50px;
+    top: 250px;
 }
 
 .width-full {
-    width: 100%
+    width: 275px;
 }
 
 .width-quarter {
@@ -31,10 +33,22 @@
 }
 
 .tab-button{
-    margin-left: 50px;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+
+.tab-width {
+    width: 662px;
+    height: 400px;
 }
 
 mat-grid-tile {
-    background: white;
+    background: rgb(248, 248, 248);
 }
 
+.test{
+    position: relative;
+    top: 50px;
+    left: 50px;
+}

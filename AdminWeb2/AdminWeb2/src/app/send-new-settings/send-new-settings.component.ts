@@ -82,6 +82,17 @@ export class SendNewSettingsComponent implements OnInit {
     this.openSnackBar("","Settings sended!")
   }
 
+  OnTabChanges(currentTabIndex)
+  {
+    console.log("sss")
+    localStorage.setItem("ActiveTab",currentTabIndex)
+  }
+
+  UpdateCron(Cron,TimeTab)
+  {
+    
+  }
+
   UpdateCronMinutes(EMMinutes, Cron)
   {
     if(EMMinutes.value >= 1 && EMMinutes.value <= 59)

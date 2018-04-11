@@ -455,3 +455,5 @@ C:\Users\sveta\Desktop\Backuper-master\backuperApi\backuperApi\bin\cs\System.Web
 C:\Users\sveta\Desktop\Backuper-master\backuperApi\backuperApi\bin\cs\System.Web.WebPages.Deployment.resources.dll
 C:\Users\sveta\Desktop\Backuper-master\backuperApi\backuperApi\bin\cs\System.Web.WebPages.Razor.resources.dll
 C:\Users\sveta\Desktop\Backuper-master\backuperApi\backuperApi\obj\Debug\backuperApi.csproj.CopyComplete
+C:\Users\Vojta\Documents\GitHub\Backuper\backuperApi\backuperApi\bin\BCrypt.Net.dll
+C:\Users\Vojta\Documents\GitHub\Backuper\backuperApi\backuperApi\bin\BCrypt.Net.xml
