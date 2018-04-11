@@ -1,8 +1,11 @@
 .width-small {
-    width: 10%
+    width: 20%
 }
 
 .form {
     margin-top: 200px;
+    text-align: center;
+}
+.input:placeholder {
     text-align: center;
 }

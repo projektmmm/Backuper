@@ -3,6 +3,8 @@ import { HttpClientModule, HttpClient, HttpParams,HttpClientJsonpModule,HttpHead
 import { User } from './User';
 import { RouterLink, Router,ActivatedRoute } from '@angular/router';
 import { PARAMETERS } from '@angular/core/src/util/decorators';
+import {MatSnackBar} from '@angular/material';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,10 +13,16 @@ import { PARAMETERS } from '@angular/core/src/util/decorators';
 export class LoginComponent implements OnInit {
     
     constructor(private http :HttpClient,
+      public snackBar: MatSnackBar,
       private route: ActivatedRoute,
       private router:Router,) {
      
   }
+  
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 1500,
+    })};
   Login(IUsername:string,IPassword:string) {
     const head =  {headers: new  HttpHeaders({'Content-Type':'application/json'}) };
     head.headers.append('Content-Type', 'application/json')
@@ -22,18 +30,21 @@ export class LoginComponent implements OnInit {
       Username:IUsername,
       Password:IPassword
     }
-    this.http.post('http://localhost:63324/api/admin/login', JSON.stringify(data), head)
+    this.http.post<string>('http://localhost:63324/api/admin/login', JSON.stringify(data), head)
     .subscribe(Response=>{
-      if(Response)
+      if(Response!="false")
       {
+      
         localStorage.setItem("LogedIn","true");
-        localStorage.setItem("Username",IUsername);
+        localStorage.setItem("Username",Response);
         ///localStorage.setItem("Token",)
-        console.log("Done");
+        
+        this.openSnackBar("","Login Succeded")
         this.router.navigate(['/home'])
       }
       else{
-        console.log("Nope")
+        console.log("fail")
+        this.openSnackBar("","Login Failed")
       }
     }
     )}

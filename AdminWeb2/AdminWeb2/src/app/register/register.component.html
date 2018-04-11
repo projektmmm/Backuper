@@ -2,17 +2,30 @@
   <form>
     <div>
       <mat-form-field class="width-small">
-        <input matInput #Username type="text" ng-model="Username" placeholder="Username">
-      </mat-form-field>
+      <input matInput #Username type="text" ng-model="Username" placeholder="Enter Username" [formControl]="UsernameFormControl" [errorStateMatcher]="Usernamematcher">
+      <mat-error *ngIf="UsernameFormControl.hasError('required')">
+          Username is  <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
     </div>
     <div>
       <mat-form-field class="width-small">
-        <input matInput #Password type="password" ng-model="Password" placeholder="Password">
-      </mat-form-field>
+      <input matInput #Password type="password" ng-model="Password" placeholder="Enter Password" [formControl]="PasswordFormControl" [errorStateMatcher]="Passwordmatcher">
+      
+      <mat-error *ngIf="PasswordFormControl.hasError('required')">
+          Password is  <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
     </div>
     <div>
       <mat-form-field class="width-small">
-        <input matInput #Email type="text" ng-model="Email" placeholder="Email">
+      <input matInput #Email type="text" ng-model="Email" placeholder="Enter Email" [formControl]="EmailFormControl" [errorStateMatcher]="Emailmatcher">
+      <mat-error *ngIf="EmailFormControl.hasError('email') && !EmailFormControl.hasError('required')">
+        Please enter a valid pattern
+    </mat-error>
+      <mat-error *ngIf="EmailFormControl.hasError('required')">
+        Email is  <strong>required</strong>
+        </mat-error>
       </mat-form-field>
     </div>
   </form>
