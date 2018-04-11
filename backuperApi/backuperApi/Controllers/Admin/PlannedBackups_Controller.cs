@@ -4,12 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using Newtonsoft.Json;
+using NCrontab;
 
 namespace backuperApi.Controllers
 {
     public class PlannedBackups_Controller : ApiController
     {
         public Database database = new Database();
+        public CrontabSchedule Schedule;
 
         [HttpGet]
         [Route("api/admin/planned-backups")]
@@ -36,6 +38,10 @@ namespace backuperApi.Controllers
         [Route("api/admin/daemon-settings")]
         public bool Post(Backups toInsert)
         {
+            //ještě než se to uloží do databáze tak to vypočítá z cronu nextrun
+            Schedule = CrontabSchedule.Parse(toInsert.Cron);
+            toInsert.NextRun = Schedule.GetNextOccurrence(DateTime.Now);
+
             this.database.Backups.Add(toInsert);
             this.database.SaveChanges();
             return true;
