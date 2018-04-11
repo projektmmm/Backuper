@@ -26,6 +26,11 @@ export class SendSettingsComponent implements OnInit {
     this.headers.append("Accept", "application/json");
    }
 
+   backups = [
+    {value: 'FULL', viewValue: 'FULL'},
+    {value: 'DIFF', viewValue: 'DIFF'},
+    {value: 'INCR', viewValue: 'INCR'}
+  ];
 
    SourcePathFormControl = new FormControl('', [
     Validators.required,
