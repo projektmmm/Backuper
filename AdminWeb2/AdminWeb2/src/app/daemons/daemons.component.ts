@@ -25,7 +25,7 @@ export class DaemonsComponent implements OnInit {
   constructor(private http: HttpClient, public snackBar: MatSnackBar, private rowIdService: rowIdService, private router: Router) {
     this.headers.append("Content-Type", "application/json");
     this.headers.append("Accept", "application/json");
-    this.getReports();
+    this.getDaemons();
   }
 
    ngOnInit() {
@@ -36,8 +36,8 @@ export class DaemonsComponent implements OnInit {
       this.tableSource.sort = this.sort;
   }
 
-  getReports() {
-    this.http.get<Daemons[]>(this.root_URL + "/api/admin/daemons/1").subscribe
+  getDaemons() {
+    this.http.get<Daemons[]>(this.root_URL + "/api/admin/daemons/" + localStorage.getItem("Username")).subscribe
     (data => {
 
       this.initializeTable(data);

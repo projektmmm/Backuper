@@ -24,7 +24,7 @@ namespace backuperApi.Controllers
         [Route("api/admin/planned-backups/{username}-{daemonId}")]
         public List<Backups> Get(string username, int daemonId)
         {
-            //inner join v entity frameworku boiis
+            //inner join v entity frameworku
             var query = from b in this.database.Backups
                         join u in this.database.Users
                         on b.UserId equals u.Id

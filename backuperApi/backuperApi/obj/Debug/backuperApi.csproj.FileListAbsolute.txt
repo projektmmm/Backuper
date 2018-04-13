@@ -458,3 +458,6 @@ C:\Users\sveta\Desktop\Backuper-master\backuperApi\backuperApi\obj\Debug\backupe
 C:\Users\Vojta\Documents\GitHub\Backuper\backuperApi\backuperApi\bin\BCrypt.Net.dll
 C:\Users\Vojta\Documents\GitHub\Backuper\backuperApi\backuperApi\bin\BCrypt.Net.xml
 C:\Users\Vojta\Documents\GitHub\Backuper\backuperApi\backuperApi\bin\NCrontab.dll
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\backuperApi\backuperApi\bin\BCrypt.Net.dll
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\backuperApi\backuperApi\bin\NCrontab.dll
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\backuperApi\backuperApi\bin\BCrypt.Net.xml

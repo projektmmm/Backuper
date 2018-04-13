@@ -14,10 +14,11 @@ import { MatSnackBar } from '@angular/material';
 export class PlannedBackupsComponent implements OnInit {
 
   constructor(private http: HttpClient, public snackBar: MatSnackBar) {
-    this.getBackup();
+    
    }
 
   ngOnInit() {
+    this.getBackup();
   }
 
   readonly Root_URL = 'http://localhost:63324'; 
@@ -47,7 +48,9 @@ export class PlannedBackupsComponent implements OnInit {
   }
 
   async getBackup() {
-    this.adress = (this.actuallDaemonId == null) ? this.adress : this.adress + "/" + this.username + "-" + this.actuallDaemonId;
+    console.log(this.actuallDaemonId);
+    if(this.actuallDaemonId != null)
+      this.adress = this.adress + "/" + localStorage.getItem("Username") + "-" + this.actuallDaemonId;
     this.http.get<Backups[]>(this.adress).subscribe
     (data => { 
 

@@ -12,10 +12,11 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 export class BackupReportsComponent implements OnInit {
 
   constructor(private http: HttpClient) {
-    this.getReports();
+    
    }
 
   ngOnInit() {
+    this.getReports();
   }
 
   readonly Root_URL = 'http://localhost:63324/'; 

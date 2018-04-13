@@ -21,7 +21,7 @@
       <div class="tabs">
         <mat-tab-group class="widthboi" mat-stretch-tabs="always">
           <mat-tab label="Planned backups">
-            <planned-backups></planned-backups>
+            <planned-backups [actuallDaemonId]="this.daemonId"></planned-backups>
           </mat-tab>
           <mat-tab label="Backup reports">
             <div *ngIf="this.showBackupReports">
