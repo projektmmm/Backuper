@@ -1,7 +1,7 @@
 import { ErrorDetails } from './../interfaces';
 import { DaemonsInfoComponent } from './../daemons-info.component';
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { HttpClientModule, HttpClient, HttpParams, HttpClientJsonpModule, HttpHeaders } from '@angular/common/http';
 import { Http, Headers, RequestOptions} from '@angular/http';
 
@@ -27,9 +27,16 @@ export class ErrorInfoComponent implements OnInit {
   daemonId: number;
   userName: string;
   errorDetails: ErrorDetails[];
+  tableResource: MatTableDataSource<ErrorDetails>;
   Name: string;
   canLoad: boolean = false;
   readonly root_URL = 'http://localhost:63324';
+  displayedColumns = ['Content'];
+  notSolved = "highlight_off";
+  solved = "check_circle";
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
@@ -46,9 +53,10 @@ export class ErrorInfoComponent implements OnInit {
       }
        
 
-      this.errorDetails = data;
+      this.tableResource = new MatTableDataSource(data);
       this.canLoad = true;
-      this.ngOnInit();
+      this.tableResource.paginator = this.paginator;
+      this.tableResource.sort = this.sort;
     })
   }
 
@@ -62,6 +70,7 @@ export class ErrorInfoComponent implements OnInit {
     })
 
   }
+  
 
   closeDialog() {
     this.dialogRef.close()

@@ -41,7 +41,8 @@ namespace backuperApi.Controllers.Admin
                             Problem = sRead[2].ToString(),
                             BackupId = Convert.ToInt32(sRead[3]),
                             DaemonId = Convert.ToInt32(sRead[4]),
-                            DaemonName = sRead[5].ToString()
+                            DaemonName = sRead[5].ToString(),
+                            Solved = Convert.ToBoolean(sRead[6])
                         });
                     }
 

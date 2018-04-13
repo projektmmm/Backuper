@@ -103,8 +103,8 @@ export class DaemonsInfoComponent implements OnInit {
 
     
       let dialogRef = this.dialog.open(ErrorInfoComponent, {
-        width: '600px',
-        height: '400px',
+        width: '700px',
+        height: '600px',
         data: { daemonId: this.daemonId}
       });
 
