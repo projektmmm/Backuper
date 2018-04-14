@@ -26,8 +26,12 @@ export class ErrorInfoComponent implements OnInit {
   Id: number;
   daemonId: number;
   userName: string;
-  errorDetails: ErrorDetails[];
-  tableResource: MatTableDataSource<ErrorDetails>;
+  errorDetails: ErrorDetails[] = [];
+  errorDetails_notSolved: ErrorDetails[] = [];
+  errorDetails_solved: ErrorDetails[] = [];
+  tableSource_notSolved: MatTableDataSource<ErrorDetails>;
+  tableSource_solved: MatTableDataSource<ErrorDetails>;
+  tableSource: MatTableDataSource<ErrorDetails>;
   Name: string;
   canLoad: boolean = false;
   readonly root_URL = 'http://localhost:63324';
@@ -52,11 +56,9 @@ export class ErrorInfoComponent implements OnInit {
         return;
       }
        
-
-      this.tableResource = new MatTableDataSource(data);
-      this.canLoad = true;
-      this.tableResource.paginator = this.paginator;
-      this.tableResource.sort = this.sort;
+    this.prepareVersions(data); 
+      
+    this.canLoad = true;
     })
   }
 
@@ -71,6 +73,43 @@ export class ErrorInfoComponent implements OnInit {
 
   }
   
+  prepareVersions(data: ErrorDetails[]) {
+
+    this.errorDetails_notSolved = [];
+    this.errorDetails_solved = [];
+
+    data.forEach(element => {
+      
+      if (element.Solved == true) {
+        this.errorDetails_solved.push(element);
+      }
+      else {
+        this.errorDetails_solved.push(element);
+        this.errorDetails_notSolved.push(element);        
+      }
+    });
+
+    this.tableSource_notSolved = new MatTableDataSource(this.errorDetails_notSolved);
+    this.tableSource_notSolved.paginator = this.paginator;
+    this.tableSource_notSolved.sort = this.sort;
+
+    this.tableSource_solved = new MatTableDataSource(this.errorDetails_solved);
+    this.tableSource_solved.paginator = this.paginator;
+    this.tableSource_solved.sort = this.sort;
+
+    this.tableSource = this.tableSource_notSolved;  
+  }
+
+  showSolved(isChecked: boolean) {
+    
+    if (isChecked == false) {
+      this.tableSource = this.tableSource_solved;
+    }
+    else {
+      this.tableSource = this.tableSource_notSolved;
+    }
+
+  }
 
   closeDialog() {
     this.dialogRef.close()

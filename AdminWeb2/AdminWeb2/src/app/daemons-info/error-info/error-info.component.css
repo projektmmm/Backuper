@@ -1,3 +1,15 @@
-.icon {
-    padding-right: 20px;
+
+mat-checkbox {
+    margin-left: 40px;
+    padding-bottom: -40px;
+}
+
+.tableErrorContent {
+    border-left-style: solid;
+    border-left-width: 1px;
+}
+
+.listHeader {
+    padding: 0px 10px 0px 5px;
+    font-weight: bold;
 }

@@ -10,6 +10,7 @@ namespace backuperApi
         public int Id { get; set; }
         public int AffectedFiles { get; set; }
         public string Problem { get; set; }
+        public string ProblemPath { get; set; }
         public bool Solved { get; set; }
     }
 }

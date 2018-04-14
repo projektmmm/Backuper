@@ -69,7 +69,7 @@ export class DaemonsInfoComponent implements OnInit {
   }
 
   private checkErrors() {
-    if (this.errorDetails[0].Problem == "N") {
+    if (this.errorDetails[0].Problem == "N" || this.errorDetails[0].Solved == true) {
 
       this.warningButtonText = "No problems";
       this.warningButtonColor = "primary";
@@ -97,14 +97,10 @@ export class DaemonsInfoComponent implements OnInit {
   }
 
   showWarning() {
-    if (this.warningButtonText == "No problems") {
-      return;
-    }
-
     
       let dialogRef = this.dialog.open(ErrorInfoComponent, {
         width: '700px',
-        height: '600px',
+        //height: '600px',
         data: { daemonId: this.daemonId}
       });
 

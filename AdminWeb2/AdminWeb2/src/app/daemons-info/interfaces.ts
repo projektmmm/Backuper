@@ -17,5 +17,6 @@ export interface ErrorDetails {
     BackupId: number;
     DaemonId: number;
     DaemonName: string;
+    ProblemPath: string;
     Solved: boolean;
 }

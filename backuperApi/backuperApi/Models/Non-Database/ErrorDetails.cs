@@ -14,16 +14,18 @@ namespace backuperApi
         public int DaemonId { get; set; }
         public string DaemonName { get; set; }
         public bool Solved { get; set; }
+        public string ProblemPath { get; set; }
 
         public static string GetQuery()
         {
-            return "SELECT be.Id, be.AffectedFiles, be.Problem, br.BackupId, da.Id, da.Name, be.Solved " +
+            return "SELECT be.Id, be.AffectedFiles, be.Problem, br.BackupId, da.Id, da.Name, be.Solved, be.ProblemPath " +
                 "FROM BackupErrors be INNER JOIN " +
                 "BackupReport br ON be.Id=br.BackupErrorId " +
                 "INNER JOIN Daemons da ON da.Id=br.DaemonId " +
                 "INNER JOIN Users us ON  br.UserId=us.Id " +
                 $"WHERE us.Username=@UserName AND br.DaemonId=@DaemonId " +
-                "AND be.Problem <> 'No problem'";
+                "AND be.Problem <> 'No problem'" +
+                "ORDER BY be.Solved ASC";
         }
     }
 }

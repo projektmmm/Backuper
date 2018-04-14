@@ -2,14 +2,18 @@
 <h1 mat-dialog-title>Problems</h1>
 <mat-accordion>
 <div mat-dialog-content>
-  <mat-table [dataSource]="tableResource" matSort>
+  <mat-table [dataSource]="this.tableSource" matSort>
       <ng-container matColumnDef="Content">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Error list</mat-header-cell>
           <mat-cell *matCellDef="let error">
             <mat-expansion-panel>
               <mat-expansion-panel-header>
                 <mat-panel-title>#{{ error.Id }}</mat-panel-title>
-                <mat-panel-description>{{ error.AffectedFiles }} Affected Files <div class="icon"><i class="material-icons">{{ (error.Solved == false) ? this.notSolved : this.solved }} </i></div>
+                <mat-panel-description>
+                
+                  <i class="material-icons">{{ (error.Solved == false) ? this.notSolved : this.solved }}</i>
+                  {{ (error.Solved == false) ? "Not solved   " : "Solved   "}}
+                
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <table class="tableErrorContent">
@@ -17,6 +21,10 @@
                     <td class="listHeader">Problem</td>
                     <td>{{ error.Problem }}</td>
                   </tr>
+                  <tr>
+                      <td class="listHeader">Problem Path</td>
+                      <td>{{ error.ProblemPath }}</td>
+                    </tr>
                   <tr>
                     <td class="listHeader">Backup ID</td>
                     <td>{{ error.BackupId }}</td>
@@ -30,6 +38,11 @@
                     <td>{{ error.DaemonName }}</td>
                   </tr>
                 </table>
+
+                <button mat-raised-button color="primary" (click)="solvedProblem(error.Id)" disabled="{{error.Solved}}">
+                  <i class="material-icons">done</i> Solved!
+                </button> 
+
             </mat-expansion-panel>
           </mat-cell>
         </ng-container>
@@ -41,12 +54,13 @@
 </div>
 </mat-accordion>
 <mat-paginator 
-  [pageSize]="5"
-  [pageSizeOptions]="[3,5,8,10]">
+[pageSize]="4"
+[pageSizeOptions]="[4, 6, 8, 10]">
 </mat-paginator>
 
 <mat-dialog-actions>
-<button mat-button color="primary" (action)="closeDialog()" [mat-dialog-close] cdkFocusInitial>Close</button>
+<button mat-button class="closeButton" color="primary" (action)="closeDialog()" [mat-dialog-close] cdkFocusInitial>Close</button>
+<mat-checkbox #CheckSolved class="checkSolved" (click)="this.showSolved(CheckSolved.checked)">Show solved</mat-checkbox>
 </mat-dialog-actions>
 
 
