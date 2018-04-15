@@ -130,6 +130,8 @@ export class DaemonsInfoComponent implements OnInit {
       });    
   }
 
+
+
   allowEdit() {
     this.editSettings = false;
   }

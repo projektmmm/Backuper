@@ -45,6 +45,7 @@ import { SendNewSettingsComponent } from './send-new-settings/send-new-settings.
 import { DaemonsInfoComponent } from './daemons-info/daemons-info.component';
 import { ErrorInfoComponent } from './daemons-info/error-info/error-info.component';
 import { rowIdService } from './daemons-info/service';
+import { UpdateSettingsComponent } from './planned-backups/update-settings/update-settings.component';
 
 
 
@@ -63,7 +64,8 @@ import { rowIdService } from './daemons-info/service';
     SendSettingsComponent,
     SendNewSettingsComponent,
     DaemonsInfoComponent,
-    ErrorInfoComponent
+    ErrorInfoComponent,
+    UpdateSettingsComponent
   ],
   entryComponents: [ErrorInfoComponent],
   imports: [

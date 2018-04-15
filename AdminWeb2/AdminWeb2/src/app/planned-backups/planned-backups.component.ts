@@ -5,6 +5,21 @@ import { DataTableResource } from 'angular5-data-table';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material';
+import { UpdateSettingsComponent } from './update-settings/update-settings.component';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
+
+
+
+
+import { SendSettingsComponent } from './../settings-components/send-settings/send-settings.component';
+
+import { Http, Headers, RequestOptions, HttpModule} from '@angular/http';
+
+import { DataSource } from '@angular/cdk/table';
+
+import { FormGroupDirective } from '@angular/forms';
+
 
 @Component({
   selector: 'planned-backups',
@@ -13,7 +28,7 @@ import { MatSnackBar } from '@angular/material';
 })
 export class PlannedBackupsComponent implements OnInit {
 
-  constructor(private http: HttpClient, public snackBar: MatSnackBar) {
+  constructor(private http: HttpClient, public snackBar: MatSnackBar, public dialog: MatDialog) {
     
    }
 
@@ -109,6 +124,13 @@ export class PlannedBackupsComponent implements OnInit {
   }
 
 
-  
+  showUpdateSettings()
+  {
+    let dialogRef = this.dialog.open(UpdateSettingsComponent, {
+      width: '500'
+    });
+
+    
+  }
 
 }

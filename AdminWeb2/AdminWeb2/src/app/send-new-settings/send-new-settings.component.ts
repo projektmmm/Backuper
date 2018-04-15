@@ -230,4 +230,6 @@ export class SendNewSettingsComponent implements OnInit {
       this.openSnackBar("Choose on or more days","");
     }
   }
+
+  
 }

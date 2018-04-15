@@ -29,6 +29,7 @@ export class DaemonsComponent implements OnInit {
   }
 
    ngOnInit() {
+     this.getDaemons();
   }
 
   ngAfterViewInit() {
