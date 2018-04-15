@@ -3,21 +3,69 @@
     <mat-grid-tile colspan="1" rowspan="5">
       <table class="warningTable">
         <tr>
-          <td class="warningWindow">
-            <button mat-raised-button color="primary" routerLink="/send-new-settings">New Backup</button>
+          <td colspan="2" >
+            <button mat-raised-button color="primary" routerLink="/daemons" class="leftButton">
+              <i class="material-icons">keyboard_arrow_left</i> Daemons List
+            </button>
           </td>
         </tr>
         <tr>
-          <td class="nextBackupCountdown">
-            <button mat-raised-button color="{{ this.warningButtonColor }}" ng-hide="this.hideWarningButton" (click)="showWarning()"><i class="material-icons">
+          <td class="warningWindow" colspan="2">
+            <button mat-raised-button color="primary" routerLink="/send-new-settings" class="leftButton">New Backup</button>
+          </td>
+        </tr>
+        <tr>
+          <td class="nextBackupCountdown" colspan="2">
+            <button mat-raised-button color="{{ this.warningButtonColor }}" class="leftButton" ng-hide="this.hideWarningButton" (click)="showWarning()"><i class="material-icons">
               {{ this.warningButtonIcon }}</i> {{ this.warningButtonText }}
             </button>
           </td>
         </tr>
         <tr>
-          <td class="nextBackupCountdown"> TODO </td>
+          <td>
+            <h3>Daemon Settings</h3>
+          </td>
+          <td>
+            <button mat-raised-button color="warn" (click)="this.allowEdit()"> 
+              <i class="material-icons">build</i>
+              Edit
+            </button>
+          </td>
         </tr>
+        <!-- DAEMON SETTINGS FORM -->
+        <!-- DAEMON ID -->
+        <tr>
+        <td colspan="2">
+          <form>
+            <mat-form-field class="dSettingsFormField">
+              <input matInput #DaemonId type="text" ng-model="DaemonId" placeholder="Daemon ID" disabled="true" value="{{ this.daemonId }}">
+            </mat-form-field>
+        <!-- DAEMON NAME -->
+            <mat-form-field class="dSettingsFormField">
+              <input matInput #DaemonName type="text" ng-model="DaemonName" placeholder="Daemon Name" disabled = "{{ this.editSettings }}" value="{{ this.daemonName }}">
+            </mat-form-field>
+        <!-- DAEMON DESCRIPTION -->
+            <mat-form-field class="dSettingsFormField">
+              <input matInput #DaemonDescription type="text" ng-model="DaemonDescription" placeholder="Daemon Description" disabled="{{ this.editSettings }}" value="{{ this.daemonDescription }}">
+            </mat-form-field>
+          </form>
+        </td>
+      </tr>
+      <!-- BUTTONS -->
+      <div *ngIf="!this.editSettings">          
+      <tr>
+        <td colspan="2">
+          <button mat-raised-button class="formButton" color="primary" (click)="this.saveFormEditing(DaemonName.value, DaemonDescription.Value)">Save</button>
+          <button mat-raised-button class="formButton" color="primary" (click)="this.cancelFormEditing()">Cancel</button>
+        </td>
+      </tr>
+      </div>
       </table>
+
+
+
+
+
     </mat-grid-tile>
     <mat-grid-tile colspan="3" rowspan="5">
       <div class="tabs">

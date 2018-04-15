@@ -23,3 +23,24 @@ mat-grid-tile {
 .form {
     padding: 20px 30px;
 }
+
+.leftButton {
+    width: 300px;
+}
+
+.warningTable {
+    vertical-align: top;
+}
+
+.formButton {
+    border: none;    
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    padding: 10px 15px;
+}
+
+.dSettingsFormField {
+    width: 300px;
+}

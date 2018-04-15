@@ -1,3 +1,4 @@
+import { Daemons } from './../daemons/daemons';
 import { rowIdService } from './service';
 import { ErrorInfoComponent } from './error-info/error-info.component';
 import { SendSettingsComponent } from './../settings-components/send-settings/send-settings.component';
@@ -8,6 +9,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Backups, ErrorDetails } from './interfaces';
 import { DataSource } from '@angular/cdk/table';
 import { DataTableResource } from 'angular5-data-table';
+import { FormGroupDirective } from '@angular/forms';
 
 @Component({
   selector: 'daemons-info',
@@ -19,6 +21,7 @@ export class DaemonsInfoComponent implements OnInit {
   constructor(private http: HttpClient, public dialog: MatDialog, private rowIdService: rowIdService) {
     this.daemonId = this.rowIdService.rowId;
     this.showBackupReports = true;
+    this.getDaemonInfo();
     this.getBackups();
     this.getErrors();
    }
@@ -29,9 +32,12 @@ export class DaemonsInfoComponent implements OnInit {
   errorDetails: ErrorDetails[];
   warningButtonText: string = "";
   hideWarningButton: boolean = true;
+  editSettings: boolean = true;
   warningButtonColor: string;
   warningButtonIcon: string;
   showBackupReports: boolean = false;
+  daemonName: string;
+  daemonDescription: string;
   @Output() daemonId: number;
 
   ngOnInit() {
@@ -85,15 +91,30 @@ export class DaemonsInfoComponent implements OnInit {
     this.hideWarningButton = false;
   }
 
-  getBackups() {
+  async getBackups() {
     this.http.get<Backups[]>(this.root_URL + "/api/admin/planned-backups").subscribe
     (data => { 
       this.plannedBackups = data;
-      /*
-      this.inititalizeTable(data);
-      this.tableResource.sort = this.sort;
-      */
     });
+  }
+
+  async getDaemonInfo() {
+    this.http.get<Daemons>(this.root_URL + "/api/admin/daemons/" + localStorage.getItem("Username") + "-" + this.daemonId).subscribe
+    (data => {
+      this.daemonDescription = data.Description;
+      this.daemonName = data.Name;
+    })
+  }
+
+  cancelFormEditing() {
+
+    this.editSettings = true;
+    this.getDaemonInfo();
+  }
+
+  saveFormEditing(name: string, description: string) { 
+    console.log(name);
+    console.log(description);
   }
 
   showWarning() {
@@ -106,8 +127,11 @@ export class DaemonsInfoComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         this.getErrors();
-      });
-    
+      });    
+  }
+
+  allowEdit() {
+    this.editSettings = false;
   }
 
 
