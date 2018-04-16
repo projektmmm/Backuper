@@ -5,7 +5,7 @@ import { SendSettingsComponent } from './../settings-components/send-settings/se
 import { Component, OnInit, Inject, Output } from '@angular/core';
 import { HttpClientModule, HttpClient, HttpParams, HttpClientJsonpModule, HttpHeaders } from '@angular/common/http';
 import { Http, Headers, RequestOptions, HttpModule} from '@angular/http';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { Backups, ErrorDetails } from './interfaces';
 import { DataSource } from '@angular/cdk/table';
 import { DataTableResource } from 'angular5-data-table';
@@ -18,7 +18,7 @@ import { FormGroupDirective } from '@angular/forms';
 })
 export class DaemonsInfoComponent implements OnInit {
 
-  constructor(private http: HttpClient, public dialog: MatDialog, private rowIdService: rowIdService) {
+  constructor(private http: HttpClient, public dialog: MatDialog, public snackBar: MatSnackBar, private rowIdService: rowIdService) {
     this.daemonId = this.rowIdService.rowId;
     this.showBackupReports = true;
     this.getDaemonInfo();
@@ -38,11 +38,17 @@ export class DaemonsInfoComponent implements OnInit {
   showBackupReports: boolean = false;
   daemonName: string;
   daemonDescription: string;
+  toSend: Daemons = { Id: 0, UserId: 0, Name:"", Description:""};
   @Output() daemonId: number;
 
   ngOnInit() {
   }
 
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 1500,
+    }); 
+  }
 
   newBackup() {
     const dialogRef = this.dialog.open(SendSettingsComponent, {
@@ -109,12 +115,25 @@ export class DaemonsInfoComponent implements OnInit {
   cancelFormEditing() {
 
     this.editSettings = true;
+    this.daemonName = "";
+    this.daemonDescription = "";
     this.getDaemonInfo();
   }
 
   saveFormEditing(name: string, description: string) { 
-    console.log(name);
-    console.log(description);
+    this.toSend.Id = this.daemonId;
+    this.toSend.Name = name;
+    this.toSend.Description = description;
+
+    this.http.put(this.root_URL + "/api/admin/daemon/" + localStorage.getItem("Username"), this.toSend).subscribe
+    (response => {
+      if (response == true) {
+        this.openSnackBar("", "Successfully Updated!");
+      }
+      else {
+        this.openSnackBar("", "Not saved - there are unknown problems");
+      }
+    })
   }
 
   showWarning() {

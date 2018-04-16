@@ -1,6 +1,6 @@
 <div class="actionButtons">
   <mat-grid-list cols="4" rows="10" rowHeight="3:1">
-    <mat-grid-tile colspan="1" rowspan="5">
+    <mat-grid-tile colspan="1" rowspan="4">
       <table class="warningTable">
         <tr>
           <td colspan="2" >
@@ -55,7 +55,7 @@
       <div *ngIf="!this.editSettings">          
       <tr>
         <td colspan="2">
-          <button mat-raised-button class="formButton" color="primary" (click)="this.saveFormEditing(DaemonName.value, DaemonDescription.Value)">Save</button>
+          <button mat-raised-button class="formButton" color="primary" (click)="this.saveFormEditing(DaemonName.value, DaemonDescription.value)">Save</button>
           <button mat-raised-button class="formButton" color="primary" (click)="this.cancelFormEditing()">Cancel</button>
         </td>
       </tr>

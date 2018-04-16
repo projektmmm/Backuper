@@ -1,2 +1,7 @@
 
 REST_API/.vs/WebApplication1/v15/Server/sqlite3/storage.ide
+*.ide-shm
+backuperApi/.vs/backuperApi/v15/Server/sqlite3/storage.ide-shm
+*.ide-shm
+*.ide-wal
+*.ide

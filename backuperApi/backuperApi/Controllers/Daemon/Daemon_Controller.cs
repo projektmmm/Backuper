@@ -26,5 +26,36 @@ namespace backuperApi.Controllers.Daemon
             return this.database.Backups.Where(b => b.NextRun > DateTime.Now).First<Backups>();
         }
 
+        [HttpPut]
+        [Route("api/admin/daemon/{username}")]
+        public bool Put(Daemons daemons, string username)
+        {
+            try
+            {
+                Daemons dbRecord = this.FindById(username, daemons.Id);
+
+                dbRecord.Name = daemons.Name;
+                dbRecord.Description = daemons.Description;
+                this.database.SaveChanges();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private Daemons FindById(string username, int daemonId)
+        {
+            var query = from d in this.database.Daemons
+                        join u in this.database.Users
+                        on d.UserId equals u.Id
+                        where u.Username == username && d.Id == daemonId
+                        select d;
+
+            return query.First();
+        }
+
     }
 }
