@@ -46,7 +46,7 @@ export class DaemonsInfoComponent implements OnInit {
 
   newBackup() {
     const dialogRef = this.dialog.open(SendSettingsComponent, {
-      height: '600px'
+      
     });
 
     dialogRef.afterClosed().subscribe(

@@ -46,6 +46,7 @@ import { DaemonsInfoComponent } from './daemons-info/daemons-info.component';
 import { ErrorInfoComponent } from './daemons-info/error-info/error-info.component';
 import { rowIdService } from './daemons-info/service';
 import { UpdateSettingsComponent } from './planned-backups/update-settings/update-settings.component';
+import { checkAndUpdateView } from '@angular/core/src/view/view';
 
 
 
@@ -67,7 +68,7 @@ import { UpdateSettingsComponent } from './planned-backups/update-settings/updat
     ErrorInfoComponent,
     UpdateSettingsComponent
   ],
-  entryComponents: [ErrorInfoComponent],
+  entryComponents: [ErrorInfoComponent,UpdateSettingsComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

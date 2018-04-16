@@ -80,7 +80,13 @@ export class SendSettingsComponent implements OnInit {
       DestinationPath: destinationPath
     }
 
-    this.http2.patch(this.root_URL + "/api/admin/planned-backups/" + this.id, JSON.stringify(data), head)
+    if(backupType == "" || cron == "" || sourcePath == "" || destinationPath == "")
+    {
+      this.openSnackBar("Settings not sended","")
+    }
+    else
+    {
+      this.http2.patch(this.root_URL + "/api/admin/planned-backups/" + this.id, JSON.stringify(data), head)
     .subscribe(response => { 
       
       if (response == true) {
@@ -92,6 +98,9 @@ export class SendSettingsComponent implements OnInit {
       }
 
     })
+    }
+
+    
 
   }
 

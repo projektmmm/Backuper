@@ -76,10 +76,17 @@ export class SendNewSettingsComponent implements OnInit {
       Id: null
     }
 
-    this.http2.post(this.root_URL + "/api/admin/daemon-settings", JSON.stringify(data), head)
-    .subscribe(Response => { console.log(Response) })
+    if(backupType == "" || cron == "" || sourcePath == "" || destinationPath == "")
+    {
+      this.openSnackBar("Settings not sended","")
+    }
+    else
+    {
+      this.http2.post(this.root_URL + "/api/admin/daemon-settings", JSON.stringify(data), head)
+          .subscribe(Response => { console.log(Response) })
 
-    this.openSnackBar("","Settings sended!")
+      this.openSnackBar("","Settings sended!")
+    }
   }
 
   OnTabChanges(currentTabIndex)

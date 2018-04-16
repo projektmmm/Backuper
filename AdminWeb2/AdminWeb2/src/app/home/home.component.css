@@ -3,3 +3,7 @@
     left: 100px;
     top: 0px;
 }
+
+mat-grid-tile {
+    background: rgb(255, 255, 255);
+}

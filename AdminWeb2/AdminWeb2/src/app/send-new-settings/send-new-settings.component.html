@@ -13,15 +13,6 @@
             </div>
             <form class="form-settings">
                 <mat-form-field class="width-full">
-                    <input matInput value="0" #SourcePath type="text" ng-model="SourcePath" placeholder="SourcePath" value="" [formControl]="SourcePathFormControl" [errorStateMatcher]="SourcePathmatcher"> 
-                    <mat-error *ngIf="SourcePathFormControl.hasError('pattern') && !SourcePathFormControl.hasError('required')">
-                        Please enter a valid pattern
-                    </mat-error>
-                    <mat-error *ngIf="SourcePathFormControl.hasError('required')">
-                        Path is <strong>required</strong>
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field class="width-full">
                     <mat-select placeholder="BackupType" #BackupType ng-model="BackupType" value="">
                         <mat-option *ngFor="let backup of backups" [value]="backup.value">
                             {{ backup.viewValue }}
@@ -29,7 +20,7 @@
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field class="width-full">
-                    <input matInput value="0" #Cron type="text" ng-model="Cron" placeholder="Cron" disabled="true">
+                    <input matInput value="0" #Cron type="text" ng-model="Cron" placeholder="Cron" disabled="true" value="">
                 </mat-form-field>
             </form> 
             <button mat-raised-button color="primary" class="form-settings-button" (click)="Send(DaemonId.value,RunAt.value,Cron.value,BackupType.value,SourcePath.value,DestinationPath.value)">
@@ -55,10 +46,16 @@
                                     Path is <strong>required</strong>
                                 </mat-error>
                             </mat-form-field>
+                            <mat-form-field class="width-full">
+                                <input matInput value="0" #SourcePath type="text" ng-model="SourcePath" placeholder="SourcePath" value="" [formControl]="SourcePathFormControl" [errorStateMatcher]="SourcePathmatcher"> 
+                                <mat-error *ngIf="SourcePathFormControl.hasError('pattern') && !SourcePathFormControl.hasError('required')">
+                                    Please enter a valid pattern
+                                </mat-error>
+                                <mat-error *ngIf="SourcePathFormControl.hasError('required')">
+                                    Path is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
                         </form>
-                    </div>
-                    <div>
-
                     </div>
                 </mat-tab>
                 <mat-tab label="FTP">
