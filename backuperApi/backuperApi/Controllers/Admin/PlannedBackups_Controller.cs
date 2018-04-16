@@ -41,6 +41,7 @@ namespace backuperApi.Controllers
             //ještě než se to uloží do databáze tak to vypočítá z cronu nextrun
             Schedule = CrontabSchedule.Parse(toInsert.Cron);
             toInsert.NextRun = Schedule.GetNextOccurrence(DateTime.Now);
+            
 
             this.database.Backups.Add(toInsert);
             this.database.SaveChanges();

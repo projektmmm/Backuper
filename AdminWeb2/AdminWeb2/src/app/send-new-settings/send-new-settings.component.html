@@ -1,25 +1,27 @@
-<div class="page-header" color="primary">
+<!--<div class="page-header" color="primary">
   New Backup Settings
 </div>
-
+-->
 <input #RunAt ng-model="RunAt" hidden>
 <input #DaemonId ng-model="DaemonId" value="1" hidden>
 
-<mat-grid-list cols="5" rowHeight="1:2">
-    <mat-grid-tile colspan="1">
+<table>
+    <tr>
+        <td colspan="1">
         <div class="form">
             <div class="page-subheader">
                 Backup Setting
             </div>
             <form class="form-settings">
-                <mat-form-field class="width-full">
+                <mat-form-field class="left-width-full">
                     <mat-select placeholder="BackupType" #BackupType ng-model="BackupType" value="">
                         <mat-option *ngFor="let backup of backups" [value]="backup.value">
                             {{ backup.viewValue }}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-                <mat-form-field class="width-full">
+                <br>
+                <mat-form-field class="left-width-full">
                     <input matInput value="0" #Cron type="text" ng-model="Cron" placeholder="Cron" disabled="true" value="">
                 </mat-form-field>
             </form> 
@@ -27,9 +29,10 @@
                 Send Settings
             </button>
         </div>
-    </mat-grid-tile>
-    <mat-grid-tile colspan="2">
-      <div class="form">
+    </td>
+    <!-- PATH SETTINGS -->
+    <td colspan="3">
+      <div class="pathSettings">
           <div class="page-subheader">
               Path Settings
           </div>
@@ -46,6 +49,7 @@
                                     Path is <strong>required</strong>
                                 </mat-error>
                             </mat-form-field>
+                            <br>
                             <mat-form-field class="width-full">
                                 <input matInput value="0" #SourcePath type="text" ng-model="SourcePath" placeholder="SourcePath" value="" [formControl]="SourcePathFormControl" [errorStateMatcher]="SourcePathmatcher"> 
                                 <mat-error *ngIf="SourcePathFormControl.hasError('pattern') && !SourcePathFormControl.hasError('required')">
@@ -58,37 +62,44 @@
                         </form>
                     </div>
                 </mat-tab>
+                <!-- FTP -->
                 <mat-tab label="FTP">
-                    <div>
-                        <mat-form-field class="width-full">
+                    <table>
+                        <tr>
+                            <td>
+                        <mat-form-field class="rightFTPform">
                             <input matInput value="0" #ServerAddress type="text" ng-model="ServerAddress" placeholder="Server Address" value="">
                         </mat-form-field>
-                    </div>
-                    <div>
-                        <mat-form-field class="width-full">
+                        </td>
+                        <td class="rightFTPpadding">
+                        <mat-form-field class="rightFTPform">
                             <input matInput value="0" #PortNumber type="text" ng-model="PortNumber" placeholder="Port Number" value="">
-                        </mat-form-field>   
-                    </div>
-                    <div>
-                        <mat-form-field class="width-full">
+                        </mat-form-field>    
+                        </td>
+                        </tr>
+                        <tr>
+                        <td>
+                        <mat-form-field class="rightFTPform">
                                 <input matInput value="0" #FTPUsername type="text" ng-model="FTPUsername" placeholder="Username" value="">
-                            </mat-form-field>
-                    </div>
-                    <div>
-                    <mat-form-field class="width-full">
+                        </mat-form-field>
+                        </td>   
+                        <td class="rightFTPpadding">
+                        <mat-form-field class="rightFTPform">
                             <input matInput value="0" #FTPPassword type="password" ng-model="FTPPassword" placeholder="Password" value="">
                         </mat-form-field>
-                    </div>
+                        </td>
+                        </tr>
+                        </table>
                 </mat-tab>
-            </mat-tab-group>
-               
+            </mat-tab-group>               
       </div>
-  </mat-grid-tile>
-
-
-
-  <mat-grid-tile colspan="2">
-      <div class="form">
+    </td>
+<tr>
+    <td colspan="1">    
+    </td>
+    <!-- TIME SETTINGS -->
+    <td colspan="3">
+      <div class="timeSettings">
           <div class="page-subheader">
               Time Settings
           </div>
@@ -278,6 +289,8 @@
               </mat-tab>
           </mat-tab-group>
       </div>
-  </mat-grid-tile>
-</mat-grid-list>
+    </td>
+    </tr>
+</table>
+
 

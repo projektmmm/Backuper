@@ -1,7 +1,14 @@
 <div class="actionButtons">
   <mat-grid-list cols="4" rows="10" rowHeight="3:1">
-    <mat-grid-tile colspan="1" rowspan="4">
+    <mat-grid-tile colspan="1" rowspan="5">
       <table class="warningTable">
+        <tr>
+          <td>
+            <div class="page-header" color="primary">
+                  {{ this.daemonId }} - {{ this.daemonName }}
+            </div>
+          </td>
+        </tr>
         <tr>
           <td colspan="2" >
             <button mat-raised-button color="primary" routerLink="/daemons" class="leftButton">
@@ -11,7 +18,7 @@
         </tr>
         <tr>
           <td class="warningWindow" colspan="2">
-            <button mat-raised-button color="primary" routerLink="/send-new-settings" class="leftButton">New Backup</button>
+            <button mat-raised-button color="primary" (click)="this.newBackup()" class="leftButton">New Backup</button>
           </td>
         </tr>
         <tr>
@@ -23,10 +30,10 @@
         </tr>
         <tr>
           <td>
-            <h3>Daemon Settings</h3>
+            <h3 class="daemonSettings">Daemon Settings</h3>
           </td>
           <td>
-            <button mat-raised-button color="warn" (click)="this.allowEdit()"> 
+            <button mat-raised-button color="warn" (click)="this.allowEdit()" class="editButton"> 
               <i class="material-icons">build</i>
               Edit
             </button>

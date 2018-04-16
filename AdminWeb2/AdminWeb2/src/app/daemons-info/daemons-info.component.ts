@@ -1,3 +1,4 @@
+import { SendNewSettingsComponent } from './../send-new-settings/send-new-settings.component';
 import { Daemons } from './../daemons/daemons';
 import { rowIdService } from './service';
 import { ErrorInfoComponent } from './error-info/error-info.component';
@@ -50,6 +51,7 @@ export class DaemonsInfoComponent implements OnInit {
     }); 
   }
 
+  /*
   newBackup() {
     const dialogRef = this.dialog.open(SendSettingsComponent, {
       
@@ -61,7 +63,7 @@ export class DaemonsInfoComponent implements OnInit {
       }
     )
   }
-
+*/
 
   getNextBackup() {
     /*
@@ -134,6 +136,8 @@ export class DaemonsInfoComponent implements OnInit {
         this.openSnackBar("", "Not saved - there are unknown problems");
       }
     })
+
+    this.editSettings = !this.editSettings;
   }
 
   showWarning() {
@@ -149,10 +153,20 @@ export class DaemonsInfoComponent implements OnInit {
       });    
   }
 
-
-
   allowEdit() {
     this.editSettings = false;
+  }
+
+  newBackup() {
+    let dialogRef = this.dialog.open(SendNewSettingsComponent, {
+      //width: '1400px',
+      //height: '600px',
+      data: { daemonId: this.daemonId}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      
+    });    
   }
 
 

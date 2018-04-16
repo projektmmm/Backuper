@@ -44,3 +44,13 @@ mat-grid-tile {
 .dSettingsFormField {
     width: 300px;
 }
+
+.daemonSettings {
+    font-family: 'Roboto';
+    color: #3f51b5;
+    margin-top: 100px;
+}
+
+.editButton {
+    margin-top: 85px;
+}

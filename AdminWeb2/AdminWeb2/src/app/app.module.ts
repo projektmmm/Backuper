@@ -68,7 +68,11 @@ import { checkAndUpdateView } from '@angular/core/src/view/view';
     ErrorInfoComponent,
     UpdateSettingsComponent
   ],
-  entryComponents: [ErrorInfoComponent,UpdateSettingsComponent],
+  entryComponents: [
+    ErrorInfoComponent,
+    UpdateSettingsComponent,
+    SendNewSettingsComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
