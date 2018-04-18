@@ -33,9 +33,13 @@ namespace backuperApi.Controllers
         {
             try
             {
-                this.database.Users.Where(u => (u.Username == user.Username||u.Email == user.Username) && BCrypt.Net.BCrypt.Verify(user.Password, u.Password));
+                Users use = this.database.Users.Where(u => (u.Username == user.Username||u.Email == user.Username)).First<Users>();
 
-                return this.PostFind(user.Username);
+
+                if (use.Password == user.Password)
+                    return this.PostFind(user.Username);
+                else
+                    return "False";
                 
             }
             catch
