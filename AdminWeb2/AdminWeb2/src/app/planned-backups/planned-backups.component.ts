@@ -1,3 +1,5 @@
+import { rowIdService } from './../daemons-info/service';
+import { SendNewSettingsComponent } from './../send-new-settings/send-new-settings.component';
 import { Component, ViewChild, OnInit, Input, Output } from '@angular/core';
 import { HttpClientModule, HttpClient, HttpParams,HttpClientJsonpModule} from '@angular/common/http';
 import { Backups} from './backups';
@@ -7,17 +9,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material';
 import { UpdateSettingsComponent } from './update-settings/update-settings.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-
-
-
-
-
 import { SendSettingsComponent } from './../settings-components/send-settings/send-settings.component';
-
 import { Http, Headers, RequestOptions, HttpModule} from '@angular/http';
-
 import { DataSource } from '@angular/cdk/table';
-
 import { FormGroupDirective } from '@angular/forms';
 
 
@@ -28,7 +22,7 @@ import { FormGroupDirective } from '@angular/forms';
 })
 export class PlannedBackupsComponent implements OnInit {
 
-  constructor(private http: HttpClient, public snackBar: MatSnackBar, public dialog: MatDialog) {
+  constructor(private http: HttpClient, public snackBar: MatSnackBar, public dialog: MatDialog, private rowIdService: rowIdService) {
     
    }
 
@@ -63,9 +57,10 @@ export class PlannedBackupsComponent implements OnInit {
   }
 
   async getBackup() {
-    console.log(this.actuallDaemonId);
-    if(this.actuallDaemonId != null)
-      this.adress = this.adress + "/" + localStorage.getItem("Username") + "-" + this.actuallDaemonId;
+    if(this.actuallDaemonId != null) {
+    this.rowIdService.rowId = this.actuallDaemonId;
+      this.adress = this.adress + "/" + localStorage.getItem("Username") + "-" + this.actuallDaemonId; 
+    }
     this.http.get<Backups[]>(this.adress).subscribe
     (data => { 
 
@@ -124,10 +119,17 @@ export class PlannedBackupsComponent implements OnInit {
   }
 
 
-  showUpdateSettings()
+  showUpdateSettings(o_backupType: string, o_cron: string, o_destinationPath: string, o_sourcePath: string, o_backupId: number)
   {
-    let dialogRef = this.dialog.open(UpdateSettingsComponent, {
-      width: '500'
+    console.log(o_backupId);
+    let dialogRef = this.dialog.open(SendNewSettingsComponent, {
+      data: { 
+        backupType: o_backupType,
+        cron: o_cron,
+        destinationPath: o_destinationPath,
+        sourcePath: o_sourcePath,
+        backupId: o_backupId
+      }
     });
 
     

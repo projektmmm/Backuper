@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { rowIdService } from './../daemons-info/service';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Settings } from './settings';
 import { HttpClientModule, HttpClient, HttpParams, HttpClientJsonpModule, HttpHeaders } from '@angular/common/http';
 import { Http, Headers, RequestOptions} from '@angular/http';
 import { CronLabelComponent } from '../settings-components/cron-label/cron-label.component';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { query } from '@angular/core/src/animation/dsl';
-import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material/core';
+import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -22,9 +23,25 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class SendNewSettingsComponent implements OnInit {
   
-  constructor(private http2: HttpClient, public snackBar: MatSnackBar) {
+  constructor(private http2: HttpClient, public snackBar: MatSnackBar, @Inject(MAT_DIALOG_DATA) public data: any, private rowIdService: rowIdService) {
+
+    if (data != null) {
+      this.i_backupType = data.backupType;
+      this.i_cron = data.cron;
+      this.i_destinationPath = data.destinationPath;
+      this.i_sourcePath = data.sourcePath;
+      this.i_backupId = data.backupId;
+      this.isInEdit = true;
+      /*      
+      this.i_serverAdress = data.serverAdress;
+      this.i_portNumber = data.portNumber;
+      this.i_username = data.username;
+      this.i_password = data.passord;*/
+    }
+
     this.headers.append("Content-Type", "application/json");
     this.headers.append("Accept", "application/json");
+    this.daemonId = this.rowIdService.rowId;
    }
 
    openSnackBar(message: string, action: string) {
@@ -38,6 +55,17 @@ export class SendNewSettingsComponent implements OnInit {
     {value: 'DIFF', viewValue: 'DIFF'},
     {value: 'INCR', viewValue: 'INCR'}
   ];
+  i_backupType: string = "";
+  i_cron: string = "";
+  i_destinationPath: string = "";
+  i_sourcePath: string = "";
+  i_serverAdress: string = "";
+  i_portNumber: string = "";
+  i_username: string = "";
+  i_password: string = "";
+  i_backupId: number;
+  isInEdit: boolean = false;
+  daemonId: number;
 
   SourcePathFormControl = new FormControl('', [
     Validators.required,
@@ -60,13 +88,13 @@ export class SendNewSettingsComponent implements OnInit {
   headers = new HttpHeaders();
   readonly root_URL = 'http://localhost:63324';
 
-  Send(daemonId, runAt, cron, backupType, sourcePath, destinationPath) {
+  Send( runAt, cron, backupType, sourcePath, destinationPath) {
 
     const head = {headers: new HttpHeaders({'Content-Type':'application/json'})};
     head.headers.append('Content-Type', 'application/json');
 
     const data: Settings = {
-      DaemonId: daemonId,
+      DaemonId: this.daemonId,
       UserId: 1,
       RunAt: new Date,
       Cron: cron,
@@ -88,6 +116,41 @@ export class SendNewSettingsComponent implements OnInit {
       this.openSnackBar("","Settings sended!")
     }
   }
+
+  UpdatePlannedBackup(runAt, cron, backupType, sourcePath, destinationPath) {
+    const head = {headers: new HttpHeaders({'Content-Type':'application/json'})};
+    head.headers.append('Content-Type', 'application/json');
+
+    const data: Settings = {
+      DaemonId: this.daemonId,
+      UserId: 1,
+      RunAt: new Date,
+      Cron: cron,
+      BackupType: backupType,
+      SourcePath: sourcePath,
+      DestinationPath: destinationPath,
+      Id: this.i_backupId
+    }
+
+    if(backupType == "" || cron == "" || sourcePath == "" || destinationPath == "")
+    {
+      this.openSnackBar("Settings not Updated","")
+    }
+    else
+    {
+      this.http2.patch(this.root_URL + "/api/admin/planned-backups/" + this.i_backupId, JSON.stringify(data), head)
+          .subscribe(Response => { 
+            if (Response == false) {
+              this.openSnackBar("Settings not Updated","");
+              return;
+            }
+
+           })
+
+      this.openSnackBar("","Successfully Updated!")
+    }
+  }
+
 
   OnTabChanges(currentTabIndex)
   {

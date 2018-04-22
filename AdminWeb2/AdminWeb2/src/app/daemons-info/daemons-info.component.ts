@@ -147,7 +147,6 @@ export class DaemonsInfoComponent implements OnInit {
     let dialogRef = this.dialog.open(SendNewSettingsComponent, {
       //width: '1400px',
       //height: '600px',
-      data: { daemonId: this.daemonId}
     });
 
     dialogRef.afterClosed().subscribe(result => {
