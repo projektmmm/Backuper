@@ -11,5 +11,8 @@ namespace backuperApi
         public int UserId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public string DaemonPassword { get; set; }
+        public bool Installed { get; set; }
+        public bool Verified { get; set; }
     }
 }

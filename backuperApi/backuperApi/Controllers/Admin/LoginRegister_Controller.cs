@@ -39,7 +39,7 @@ namespace backuperApi.Controllers
                 if (use.Password == user.Password)
                     return this.PostFind(user.Username);
                 else
-                    return "False";
+                    return "false";
                 
             }
             catch
