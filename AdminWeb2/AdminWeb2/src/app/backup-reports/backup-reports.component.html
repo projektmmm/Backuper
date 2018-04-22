@@ -8,7 +8,7 @@
         <!-- Date -->
         <ng-container matColumnDef="Date">
             <mat-header-cell *matHeaderCellDef mat-sort-header>DATE</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.Date}}</mat-cell>
+            <mat-cell *matCellDef="let row">{{row.Date | date: "dd.MM.yyyy - hh:mm"}}</mat-cell>
         </ng-container>
 
         <!-- Type -->

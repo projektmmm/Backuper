@@ -90,7 +90,7 @@ import { checkAndUpdateView } from '@angular/core/src/view/view';
       {path: 'login', component: LoginComponent},
       {path: 'planned-backups', component: PlannedBackupsComponent},
       {path: 'daemons', component: DaemonsComponent},
-      {path: 'daemons-info', component: DaemonsInfoComponent}
+      {path: 'daemons-info/:id', component: DaemonsInfoComponent}
     ]),
     MatToolbarModule,
     MatButtonModule,

@@ -11,6 +11,7 @@ import { Backups, ErrorDetails } from './interfaces';
 import { DataSource } from '@angular/cdk/table';
 import { DataTableResource } from 'angular5-data-table';
 import { FormGroupDirective } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'daemons-info',
@@ -19,14 +20,13 @@ import { FormGroupDirective } from '@angular/forms';
 })
 export class DaemonsInfoComponent implements OnInit {
 
-  constructor(private http: HttpClient, public dialog: MatDialog, public snackBar: MatSnackBar, private rowIdService: rowIdService) {
-    this.daemonId = this.rowIdService.rowId;
-    this.showBackupReports = true;
-    this.getDaemonInfo();
-    this.getBackups();
-    this.getErrors();
+  constructor(private http: HttpClient, public dialog: MatDialog, public snackBar: MatSnackBar, private rowIdService: rowIdService, private route: ActivatedRoute) {
+    this.sub = this.route.params.subscribe(params => {
+      this.daemonId = +params['id'];
+    });
    }
 
+  sub: any;
   headers = new HttpHeaders();
   readonly root_URL = 'http://localhost:63324';
   plannedBackups: Backups[];
@@ -43,34 +43,20 @@ export class DaemonsInfoComponent implements OnInit {
   @Output() daemonId: number;
 
   ngOnInit() {
+    this.showBackupReports = true;
+    this.getDaemonInfo();
+    this.getBackups();
+    this.getErrors();
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 1500,
     }); 
-  }
-
-  /*
-  newBackup() {
-    const dialogRef = this.dialog.open(SendSettingsComponent, {
-      
-    });
-
-    dialogRef.afterClosed().subscribe(
-      result => {
-        console.log(result);
-      }
-    )
-  }
-*/
-
-  getNextBackup() {
-    /*
-    this.plannedBackups.forEach(element => {
-      //TODO
-      //if (element.)
-    }); */
   }
 
   getErrors() {

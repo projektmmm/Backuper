@@ -63,7 +63,7 @@ export class DaemonsComponent implements OnInit {
   passRowIdToService(rowId: number) {
     this.rowIdService.rowId = rowId;
     console.log(this.rowIdService.rowId);
-    this.router.navigate(['./daemons-info']);
+    this.router.navigate(['./daemons-info', rowId]);
   }
 
 }
