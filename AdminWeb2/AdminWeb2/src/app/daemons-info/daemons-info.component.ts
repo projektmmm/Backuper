@@ -86,8 +86,8 @@ export class DaemonsInfoComponent implements OnInit {
     if (this.errorDetails[0].Problem == "N" || this.errorDetails[0].Solved == true) {
 
       this.warningButtonText = "No problems";
-      this.warningButtonColor = "primary";
-      this.warningButtonIcon = "check_circle";
+      this.warningButtonColor = "";
+      this.warningButtonIcon = "verified_user";
     }
     else {
 

@@ -35,6 +35,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
+import {MatCardModule} from '@angular/material/card';
 
 import 'hammerjs';
 import { PlannedBackupsComponent } from './planned-backups/planned-backups.component';
@@ -112,6 +113,7 @@ import { checkAndUpdateView } from '@angular/core/src/view/view';
     MatSelectModule,
     MatDialogModule,
     MatExpansionModule,
+    MatCardModule,
   ],
   providers: [
     rowIdService

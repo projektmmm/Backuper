@@ -1,10 +1,11 @@
 <mat-toolbar color="primary" class="toolbar mat-elevation-z6">
-  <button mat-button routerLink="/home">Backuper</button>
+  <button mat-button routerLink="/home">Backupper</button>
   <button mat-button routerLink='/daemons'>Daemons</button> 
   <button mat-button routerLink="/backup-reports">Backup Reports</button>
   <button mat-button routerLink="/planned-backups">Planned Backups</button>
-  <button mat-button routerLink="/send-new-settings">New Backup Settings</button>
-  <button mat-button [matMenuTriggerFor]="menu">{{Username}}</button>
+  <!--button mat-button routerLink="/send-new-settings">New Backup Settings</button-->
+  <span class="spacer"></span>
+  <button mat-button [matMenuTriggerFor]="menu">{{Username}} <mat-icon class="example-icon">verified_user</mat-icon></button>
   <div class="align-right">
     <mat-menu #menu="matMenu" >
       <button mat-menu-item routerLink="/admin-settings">Admin settings</button>

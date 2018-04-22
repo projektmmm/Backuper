@@ -15,6 +15,44 @@ body {
     background-size: auto;
 }
 
+.page-header-white-absolute {
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 30px;
+    padding: 20px 0px;
+    background-origin: padding-box;
+    background-size: auto;
+
+    position: absolute;
+    left: 30px;
+    top: 80px;
+}
+
+.page-header-white-absolute2 {
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 30px;
+    padding: 20px 0px;
+    background-origin: padding-box;
+    background-size: auto;
+
+    position: absolute;
+    left: 30px;
+    top: 375px;
+}
+
+.page-header-white {
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 30px;
+    padding: 20px 0px;
+    background-origin: padding-box;
+    background-size: auto;
+}
+
 .page-subheader {
     color: #3f51b5;
     font-family: 'Roboto', sans-serif;
@@ -26,4 +64,11 @@ body {
 .padding-left-right {
     padding-left: 100px;
     padding-right: 100px;
+}
+
+.dialog-header {
+    color: #3f51b5;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
 }

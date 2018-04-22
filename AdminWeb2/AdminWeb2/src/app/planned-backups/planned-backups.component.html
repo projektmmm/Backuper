@@ -52,12 +52,12 @@
             <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
             <mat-cell cell *matCellDef="let row">
       
-              <button mat-raised-button color="primary" (click)="showUpdateSettings()">
-                Edit
+              <button mat-mini-fab color="primary" (click)="showUpdateSettings()">
+                <mat-icon>create</mat-icon>
               </button> 
 
-              <button mat-raised-button color="primary" (click)="delete(row)">
-                Delete
+              <button mat-mini-fab color="primary" (click)="delete(row)">
+                <mat-icon>delete</mat-icon>
               </button> 
 
             </mat-cell>

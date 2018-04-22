@@ -1,5 +1,9 @@
 
-<h1 mat-dialog-title>Problems</h1>
+<div mat-dialog-title class="dialog-header">Problems</div>
+
+<!-- close button -->
+
+
 <mat-accordion>
 <div mat-dialog-content>
   <mat-table [dataSource]="this.tableSource" matSort>
@@ -53,14 +57,12 @@
   </mat-table>
 </div>
 </mat-accordion>
-<mat-paginator 
-[pageSize]="4"
-[pageSizeOptions]="[4, 6, 8, 10]">
+<mat-paginator [pageSize]="5">
 </mat-paginator>
 
 <mat-dialog-actions>
-<button mat-button class="closeButton" color="primary" (action)="closeDialog()" [mat-dialog-close] cdkFocusInitial>Close</button>
-<mat-checkbox #CheckSolved class="checkSolved" (click)="this.showSolved(CheckSolved.checked)">Show solved</mat-checkbox>
+  <button mat-raised-button color="primary" (action)="closeDialog()" [mat-dialog-close] cdkFocusInitial>Close</button>
+  <mat-checkbox #CheckSolved class="checkSolved" (click)="this.showSolved(CheckSolved.checked)">Show solved</mat-checkbox>
 </mat-dialog-actions>
 
 

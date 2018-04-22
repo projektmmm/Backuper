@@ -2,15 +2,18 @@
   New Backup Settings
 </div>
 -->
+
+<div mat-dialog-title class="dialog-header">Problems</div>
+
 <input #RunAt ng-model="RunAt" hidden>
 <input #DaemonId ng-model="DaemonId" value="1" hidden>
 
 <table>
-    <tr>
+    
         <td colspan="1">
         <div class="form">
             <div class="page-subheader">
-                Backup Setting
+                Backup Settings
             </div>
             <form class="form-settings">
                 <mat-form-field class="left-width-full">
@@ -25,9 +28,6 @@
                     <input matInput value="0" #Cron type="text" ng-model="Cron" placeholder="Cron" disabled="true" value="">
                 </mat-form-field>
             </form> 
-            <button mat-raised-button color="primary" class="form-settings-button" (click)="Send(DaemonId.value,RunAt.value,Cron.value,BackupType.value,SourcePath.value,DestinationPath.value)">
-                Send Settings
-            </button>
         </div>
     </td>
     <!-- PATH SETTINGS -->
@@ -293,4 +293,10 @@
     </tr>
 </table>
 
+<mat-dialog-actions>
+    <button mat-raised-button color="primary" (action)="closeDialog()" [mat-dialog-close] cdkFocusInitial>Close</button>
+    <button mat-raised-button color="primary" class="form-settings-button" (click)="Send(DaemonId.value,RunAt.value,Cron.value,BackupType.value,SourcePath.value,DestinationPath.value)">
+        Send Settings
+    </button>   
+</mat-dialog-actions>
 

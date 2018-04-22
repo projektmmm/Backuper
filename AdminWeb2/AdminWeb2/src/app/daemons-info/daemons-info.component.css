@@ -38,7 +38,7 @@ mat-grid-tile {
     text-decoration: none;
     display: inline-block;
     font-size: 14px;
-    padding: 10px 15px;
+    padding: 0px 15px;
 }
 
 .dSettingsFormField {
@@ -47,10 +47,38 @@ mat-grid-tile {
 
 .daemonSettings {
     font-family: 'Roboto';
-    color: #3f51b5;
+    color: #ffffff;
     margin-top: 100px;
 }
 
-.editButton {
-    margin-top: 85px;
+.card {
+    width: 70%;
+    margin-left: 30px;
+}
+
+.InfoPanel{
+    background-color: #3f51b5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0px;
+    z-index: 1;
+}
+
+.infobuttons {
+    position: absolute;
+    left: 30px;
+    top: 170px;
+}
+
+.infosettings {
+    position: absolute;
+    left: 30px;
+    top: 465px;
+}
+
+.infobutton {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 30px;
 }

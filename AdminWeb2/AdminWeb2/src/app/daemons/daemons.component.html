@@ -1,5 +1,5 @@
 <div class="page-header" color="primary">
-    Daemon List
+    Daemons
 </div>
 <div class="padding-left-right">
     <div class="mat-elevation-z8">
@@ -27,8 +27,8 @@
             <ng-container matColumnDef="Funcbuttons">
                 <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
                 <mat-cell cell *matCellDef="let row">
-                    <button mat-raised-button color="primary" (click)="passRowIdToService(row.Id)">
-                        Details
+                    <button mat-mini-fab color="primary" (click)="passRowIdToService(row.Id)">
+                        <mat-icon>create</mat-icon>
                     </button>
                 </mat-cell>
             </ng-container>
