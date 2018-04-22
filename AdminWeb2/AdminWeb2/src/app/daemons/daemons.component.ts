@@ -29,10 +29,12 @@ export class DaemonsComponent implements OnInit {
   constructor(private http: HttpClient, public snackBar: MatSnackBar, private rowIdService: rowIdService, private router: Router,public dialog: MatDialog) {
     this.headers.append("Content-Type", "application/json");
     this.headers.append("Accept", "application/json");
+    this.newRequests();
     this.getDaemons();
   }
 
    ngOnInit() {
+     this.newRequests();
      this.getDaemons();
   }
 

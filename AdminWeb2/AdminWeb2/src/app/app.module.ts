@@ -67,6 +67,8 @@ import { DaemonsRequestComponent } from './daemons/daemons-request/daemons-reque
     SendSettingsComponent,
     SendNewSettingsComponent,
     DaemonsInfoComponent,
+    DaemonAdderComponent,
+    DaemonsRequestComponent,
     ErrorInfoComponent,
     UpdateSettingsComponent
   ],

@@ -17,7 +17,7 @@ namespace backuperApi.Controllers
             var query = from d in this.database.Daemons
                         join u in this.database.Users
                         on d.UserId equals u.Id
-                        where u.Username == username
+                        where u.Username == username && d.Verified == true
                         select d;
 
             return query.ToList<Daemons>();
