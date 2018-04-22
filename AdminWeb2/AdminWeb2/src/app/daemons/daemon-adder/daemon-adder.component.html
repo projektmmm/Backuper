@@ -1,0 +1,17 @@
+<div>
+<p>Admin: {{AdminName}}</p> 
+</div>
+<Div>
+  <p>Daemon nickname: <input matInput #Nickname type="Text" ng-model="Text" placeholder="Enter nickname"> <p> 
+</Div>
+<Div>
+    <p>Send Daemon to: <input matInput #DaemonTo type="Text" ng-model="Text" placeholder="Enter Email adress"> <p> 
+</Div>
+<Div>
+    <p>Daemon descrition: <input matInput #Description type="Text" ng-model="Text" placeholder="Enter Description"> <p> 
+</Div>
+<div>
+    <button mat-raised-button color="primary" (click)="AddDaemon(Nickname.value,DaemonTo.value,Description.value)">
+       Ok
+    </button>
+</div>

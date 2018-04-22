@@ -48,7 +48,8 @@ import { ErrorInfoComponent } from './daemons-info/error-info/error-info.compone
 import { rowIdService } from './daemons-info/service';
 import { UpdateSettingsComponent } from './planned-backups/update-settings/update-settings.component';
 import { checkAndUpdateView } from '@angular/core/src/view/view';
-
+import { DaemonAdderComponent } from './daemons/daemon-adder/daemon-adder.component';
+import { DaemonsRequestComponent } from './daemons/daemons-request/daemons-request.component';
 
 
 @NgModule({
@@ -72,7 +73,9 @@ import { checkAndUpdateView } from '@angular/core/src/view/view';
   entryComponents: [
     ErrorInfoComponent,
     UpdateSettingsComponent,
-    SendNewSettingsComponent
+    SendNewSettingsComponent,
+    DaemonAdderComponent,
+    DaemonsRequestComponent
   ],
   imports: [
     BrowserModule,
