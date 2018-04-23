@@ -1,14 +1,12 @@
 <div class="page-header" color="primary">
     Daemons
-</div>
-<div>
-    <button mat-raised-button color="primary" (click)="AddDaemon()">
-        Add Daemon
-    </button>
     
-    <button *ngIf='NewRequest' mat-raised-button color="primary" (click)="Requests()">
-            <i class="material-icons">add_alert</i>
-     </button>
+    
+    <button mat-mini-fab color="primary" (click)="AddDaemon()" class="margin-left"><mat-icon>add_circle</mat-icon></button>
+    <button *ngIf='NewRequest' mat-mini-fab color="primary" (click)="Requests()"><mat-icon>notifications</mat-icon></button>
+</div>
+
+    
 <div class="padding-left-right">
     <div class="mat-elevation-z8">
         <mat-table #table [dataSource]='tableSource' matSort>

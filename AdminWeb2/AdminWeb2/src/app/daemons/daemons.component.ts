@@ -60,13 +60,13 @@ export class DaemonsComponent implements OnInit {
   }
   AddDaemon(){
     let dialogRef = this.dialog.open(DaemonAdderComponent, {
-
+      width: "400px"
     })
 
   }
   Requests(){
     let dialogRef = this.dialog.open(DaemonsRequestComponent, {
-
+      width: "600px"
     })
   }
   private initializeTable(data: Daemons[]) {

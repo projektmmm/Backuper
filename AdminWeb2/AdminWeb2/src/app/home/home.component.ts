@@ -15,4 +15,11 @@ export class HomeComponent implements OnInit {
 
   }
 
+  inputs = [1]
+
+  Add()
+  {
+    this.inputs.push(1)
+  }
+
 }

@@ -1,3 +1,34 @@
+<div mat-dialog-title class="dialog-header">New Daemon</div>
+
+<div class="form">
+    <form>
+        <div>
+            <mat-form-field class="full-width">
+                <input matInput #Nickname type="Text" ng-model="Text" placeholder="Daemon Nickname">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="full-width">
+                <input matInput #DaemonTo type="Text" ng-model="Text" placeholder="Email Adress">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="full-width">
+                <input matInput #Description type="Text" ng-model="Text" placeholder="Daemon Description">
+            </mat-form-field>
+        </div>
+    </form>
+    
+</div>
+
+<mat-dialog-actions>
+    <button mat-raised-button color="primary" (action)="closeDialog()" [mat-dialog-close] cdkFocusInitial>Close</button>
+    <button mat-raised-button color="primary" (click)="AddDaemon(Nickname.value,DaemonTo.value,Description.value)">Ok</button>
+</mat-dialog-actions>
+
+
+
+<!--
 <div>
 <p>Admin: {{AdminName}}</p> 
 </div>
@@ -11,7 +42,6 @@
     <p>Daemon descrition: <input matInput #Description type="Text" ng-model="Text" placeholder="Enter Description"> <p> 
 </Div>
 <div>
-    <button mat-raised-button color="primary" (click)="AddDaemon(Nickname.value,DaemonTo.value,Description.value)">
-       Ok
-    </button>
+    
 </div>
+-->

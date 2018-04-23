@@ -151,6 +151,21 @@ export class SendNewSettingsComponent implements OnInit {
     }
   }
 
+  DestinationPaths = [1]
+  SourcePaths = [1]
+
+  AddDestinationPath()
+  {
+    console.log("destinationpath added")
+    this.DestinationPaths.push(1)
+  }
+
+  AddSourcePath()
+  {
+    console.log("sourcepath added")
+    this.SourcePaths.push(1)
+  }
+
 
   OnTabChanges(currentTabIndex)
   {

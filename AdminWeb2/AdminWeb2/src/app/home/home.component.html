@@ -9,19 +9,21 @@
                 Welcome <span>{{Username}}</span> !
             </div>
             <div class="page-subheader">
-                ...
+                <!--contentboi-->
             </div>
             <div class="page-subheader">
-                ...
+                <!--contentboi-->
             </div>
         </div>
     </mat-grid-tile>
     <mat-grid-tile>
-
-        <div ng-repeat="i in [1,2,3,4]">
-            {{i}}
+        <div *ngFor="let input of inputs">
+            <div>
+                <input mat-input placeholder="xxx">
+            </div>
         </div>
 
+        <button (click)="Add()">add</button>
     </mat-grid-tile>
 </mat-grid-list>
 
