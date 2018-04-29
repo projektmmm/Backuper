@@ -31,6 +31,7 @@ namespace backuperApi.Controllers
                         where u.Username == username && b.DaemonId == daemonId
                         select b;
 
+            this.UpdateCron(query.ToList<Backups>());
             return query.ToList<Backups>();
         }
 
@@ -80,6 +81,18 @@ namespace backuperApi.Controllers
         private Backups FindById(int id)
         {
             return this.database.Backups.Find(id);
+        }
+
+        private async void UpdateCron(List<Backups> toCheck)
+        {
+            foreach (Backups item in toCheck)
+            {
+                Schedule = CrontabSchedule.Parse(item.Cron);
+
+                Backups dbRecord = this.FindById(item.Id);
+                dbRecord.NextRun = Schedule.GetNextOccurrence(DateTime.Now);
+                this.database.SaveChanges();
+            }
         }
     }
 }
