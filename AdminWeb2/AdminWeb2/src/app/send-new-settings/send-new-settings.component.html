@@ -1,15 +1,9 @@
-<!--<div class="page-header" color="primary">
-  New Backup Settings
-</div>
--->
-
 <div mat-dialog-title class="dialog-header">Problems</div>
 
 <input #RunAt ng-model="RunAt" hidden>
 <input #DaemonId ng-model="DaemonId" value="1" hidden>
 
 <table>
-    
         <td colspan="1">
         <div class="form">
             <div class="page-subheader">
@@ -49,13 +43,13 @@
                         <div class="tab-padding">
                             <mat-radio-group>
                                 <div>
-                                    <mat-radio-button #EveryHourRadioHourly checked="true" ng-model="EveryHourRadioHourly" value="1">Every</mat-radio-button>
+                                    <mat-radio-button color="primary" #EveryHourRadioHourly checked="true" ng-model="EveryHourRadioHourly" value="1">Every</mat-radio-button>
                                     <mat-form-field class="width-small">
                                         <input matInput value="0" #EveryHourHourly ng-model="EveryHourHourly" type="number" min="1" max="59" placeholder="Hour(s)" (change)="UpdateCronHourly(Cron, EveryHourRadioHourly, StartEveryHourRadioHourly, EveryHourHourly, StartEveryHourHourly, StartEveryMinuteHourly)">                    
                                     </mat-form-field>               
                                 </div>
                                 <div>
-                                    <mat-radio-button #StartEveryHourRadioHourly ng-model="StartEveryHourRadioHourly" value="2">Start every</mat-radio-button>
+                                    <mat-radio-button color="primary" #StartEveryHourRadioHourly ng-model="StartEveryHourRadioHourly" value="2">Start every</mat-radio-button>
                                     <mat-form-field class="width-small">
                                         <input matInput value="0" #StartEveryHourHourly ng-model="StartEveryHourHourly" type="number" min="0" max="23" placeholder="Hour" (change)="UpdateCronHourly(Cron, EveryHourRadioHourly, StartEveryHourRadioHourly, EveryHourHourly, StartEveryHourHourly, StartEveryMinuteHourly)">                    
                                     </mat-form-field>
@@ -71,13 +65,13 @@
                         <div class="tab-padding">
                             <mat-radio-group>
                                 <div>
-                                    <mat-radio-button #RadioOneDaily checked="true" ng-model="RadioOneDaily" value="1">Every</mat-radio-button>
+                                    <mat-radio-button color="primary" #RadioOneDaily checked="true" ng-model="RadioOneDaily" value="1">Every</mat-radio-button>
                                     <mat-form-field class="width-small">
                                         <input matInput value="0" #DaysOneDaily ng-model="DaysOneDaily" type="number" placeholder="Day(s)" (change)="UpdateCronDaily(Cron, RadioOneDaily, RadioTwoDaily, DaysOneDaily, StartHoursDaily, StartMinutesDaily)">                    
                                     </mat-form-field>  
                                 </div>
                                 <div>
-                                    <mat-radio-button #RadioTwoDaily ng-model="RadioTwoDaily" value="2">Every week day</mat-radio-button>
+                                    <mat-radio-button color="primary" #RadioTwoDaily ng-model="RadioTwoDaily" value="2">Every week day</mat-radio-button>
                                 </div>
                                 <div>
                                     Start time
@@ -94,128 +88,47 @@
                     <mat-tab label="Weekly" (click)="OnTabChanges(3)">
                         <div class="tab-padding">
                               <div>
-                                  <mat-checkbox #CheckMonday ng-model="CheckMonday" (change)="UpdateCronWeekly(
-                                      Cron,
-                                      CheckMonday, 
-                                      CheckTuesday, 
-                                      CheckWednesday, 
-                                      CheckThursday, 
-                                      CheckFriday, 
-                                      CheckSaturday,
-                                      CheckSunday,
-                                      StartHoursWeekly,StartMinutesWeekly)">
+                                  <mat-checkbox #CheckMonday ng-model="CheckMonday" (change)="UpdateCronWeekly(Cron,CheckMonday, CheckTuesday, CheckWednesday, CheckThursday, CheckFriday, CheckSaturday,CheckSunday,StartHoursWeekly,StartMinutesWeekly)">
                                       Monday
                                   </mat-checkbox>
                               </div>
                               <div>
-                                  <mat-checkbox #CheckTuesday ng-model="CheckTuesday" (change)="UpdateCronWeekly(
-                                      Cron,
-                                      CheckMonday, 
-                                      CheckTuesday, 
-                                      CheckWednesday, 
-                                      CheckThursday, 
-                                      CheckFriday, 
-                                      CheckSaturday,
-                                      CheckSunday,
-                                      StartHoursWeekly,StartMinutesWeekly)">
+                                  <mat-checkbox #CheckTuesday ng-model="CheckTuesday" (change)="UpdateCronWeekly(Cron,CheckMonday, CheckTuesday, CheckWednesday, CheckThursday, CheckFriday, CheckSaturday,CheckSunday,StartHoursWeekly,StartMinutesWeekly)">
                                       Tuesday
                                   </mat-checkbox>
                               </div>
                               <div>
-                                  <mat-checkbox #CheckWednesday ng-model="CheckWednesday" (change)="UpdateCronWeekly(
-                                      Cron,
-                                      CheckMonday, 
-                                      CheckTuesday, 
-                                      CheckWednesday, 
-                                      CheckThursday, 
-                                      CheckFriday, 
-                                      CheckSaturday,
-                                      CheckSunday,
-                                      StartHoursWeekly,StartMinutesWeekly)">
+                                  <mat-checkbox #CheckWednesday ng-model="CheckWednesday" (change)="UpdateCronWeekly(Cron,CheckMonday, CheckTuesday, CheckWednesday, CheckThursday, CheckFriday, CheckSaturday,CheckSunday,StartHoursWeekly,StartMinutesWeekly)">
                                       Wednesday
                                   </mat-checkbox>
                               </div>
                               <div>
-                                  <mat-checkbox #CheckThursday ng-model="CheckThursday" (change)="UpdateCronWeekly(
-                                      Cron,
-                                      CheckMonday, 
-                                      CheckTuesday, 
-                                      CheckWednesday, 
-                                      CheckThursday, 
-                                      CheckFriday, 
-                                      CheckSaturday,
-                                      CheckSunday,
-                                      StartHoursWeekly,StartMinutesWeekly)">
+                                  <mat-checkbox #CheckThursday ng-model="CheckThursday" (change)="UpdateCronWeekly(Cron,CheckMonday, CheckTuesday, CheckWednesday, CheckThursday, CheckFriday, CheckSaturday,CheckSunday,StartHoursWeekly,StartMinutesWeekly)">
                                       Thursday
                                   </mat-checkbox>
                               </div>
                               <div>
-                                  <mat-checkbox #CheckFriday ng-model="CheckFriday" (change)="UpdateCronWeekly(
-                                      Cron,
-                                      CheckMonday, 
-                                      CheckTuesday, 
-                                      CheckWednesday, 
-                                      CheckThursday, 
-                                      CheckFriday, 
-                                      CheckSaturday,
-                                      CheckSunday,
-                                      StartHoursWeekly,StartMinutesWeekly)">
+                                  <mat-checkbox #CheckFriday ng-model="CheckFriday" (change)="UpdateCronWeekly(Cron,CheckMonday, CheckTuesday, CheckWednesday, CheckThursday, CheckFriday, CheckSaturday,CheckSunday,StartHoursWeekly,StartMinutesWeekly)">
                                       Friday
                                   </mat-checkbox>                        
                               </div>  
                               <div>
-                                  <mat-checkbox #CheckSaturday ng-model="CheckSaturday" (change)="UpdateCronWeekly(
-                                      Cron,
-                                      CheckMonday, 
-                                      CheckTuesday, 
-                                      CheckWednesday, 
-                                      CheckThursday, 
-                                      CheckFriday, 
-                                      CheckSaturday,
-                                      CheckSunday,
-                                      StartHoursWeekly,StartMinutesWeekly)">
+                                  <mat-checkbox #CheckSaturday ng-model="CheckSaturday" (change)="UpdateCronWeekly(Cron,CheckMonday, CheckTuesday, CheckWednesday, CheckThursday, CheckFriday, CheckSaturday,CheckSunday,StartHoursWeekly,StartMinutesWeekly)">
                                       Saturday
                                   </mat-checkbox>
                               </div>
                               <div>
-                                  <mat-checkbox #CheckSunday ng-model="CheckSunday" (change)="UpdateCronWeekly(
-                                      Cron,
-                                      CheckMonday, 
-                                      CheckTuesday, 
-                                      CheckWednesday, 
-                                      CheckThursday, 
-                                      CheckFriday, 
-                                      CheckSaturday,
-                                      CheckSunday,
-                                      StartHoursWeekly,StartMinutesWeekly)">
+                                  <mat-checkbox #CheckSunday ng-model="CheckSunday" (change)="UpdateCronWeekly(Cron,CheckMonday, CheckTuesday, CheckWednesday, CheckThursday, CheckFriday, CheckSaturday,CheckSunday,StartHoursWeekly,StartMinutesWeekly)">
                                       Sunday
                                   </mat-checkbox>
                               </div>
                               <div>
                                 Start time
                                 <mat-form-field class="width-small">
-                                    <input matInput value="0" #StartHoursWeekly ng-model="StartHoursWeekly" type="number" min="0" max="23" placeholder="Hour" (change)="UpdateCronWeekly(
-                                      Cron,
-                                      CheckMonday, 
-                                      CheckTuesday, 
-                                      CheckWednesday, 
-                                      CheckThursday, 
-                                      CheckFriday, 
-                                      CheckSaturday,
-                                      CheckSunday,
-                                      StartHoursWeekly,StartMinutesWeekly)">                    
+                                    <input matInput value="0" #StartHoursWeekly ng-model="StartHoursWeekly" type="number" min="0" max="23" placeholder="Hour" (change)="UpdateCronWeekly(Cron,CheckMonday, CheckTuesday, CheckWednesday, CheckThursday, CheckFriday, CheckSaturday,CheckSunday,StartHoursWeekly,StartMinutesWeekly)">                    
                                 </mat-form-field>  
                                 <mat-form-field class="width-small">
-                                    <input matInput value="0" #StartMinutesWeekly ng-model="StartMinutesWeekly" type="number" min="0" max="59" placeholder="Minute" (change)="UpdateCronWeekly(
-                                      Cron,
-                                      CheckMonday, 
-                                      CheckTuesday, 
-                                      CheckWednesday, 
-                                      CheckThursday, 
-                                      CheckFriday, 
-                                      CheckSaturday,
-                                      CheckSunday,
-                                      StartHoursWeekly,StartMinutesWeekly)">                    
+                                    <input matInput value="0" #StartMinutesWeekly ng-model="StartMinutesWeekly" type="number" min="0" max="59" placeholder="Minute" (change)="UpdateCronWeekly(Cron,CheckMonday, CheckTuesday, CheckWednesday, CheckThursday, CheckFriday, CheckSaturday,CheckSunday,StartHoursWeekly,StartMinutesWeekly)">                    
                                 </mat-form-field>  
                             </div>
                         </div>
@@ -307,4 +220,3 @@
         Update Settings
     </button>    
 </mat-dialog-actions>
-

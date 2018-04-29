@@ -169,8 +169,8 @@ export class SendNewSettingsComponent implements OnInit {
 
   OnTabChanges(currentTabIndex)
   {
-    console.log("sss")
-    localStorage.setItem("ActiveTab",currentTabIndex)
+    //console.log("sss")
+    //localStorage.setItem("ActiveTab",currentTabIndex)
   }
 
   UpdateCron(Cron,TimeTab)
@@ -183,13 +183,14 @@ export class SendNewSettingsComponent implements OnInit {
     if(EMMinutes.value >= 1 && EMMinutes.value <= 59)
     {
       Cron.value = "*/" + EMMinutes.value + " * * * *";
-      this.openSnackBar("","Cron updated!")
+      //cron updated
     }
     else
     {    
       this.openSnackBar("Enter number between 1 and 59","");
     }
   }
+
 
   UpdateCronHourly(Cron, EveryHourRadioHourly, StartEveryHourRadioHourly, EveryHourHourly, StartEveryHourHourly, StartEveryMinuteHourly)
   {
@@ -198,7 +199,7 @@ export class SendNewSettingsComponent implements OnInit {
       if(EveryHourHourly.value >= 1 && EveryHourHourly.value <= 23)
       {
         Cron.value = "* */" + EveryHourHourly.value + " * * *";
-        this.openSnackBar("","Cron updated!")
+        //cron updated
       }
       else
       {
@@ -220,7 +221,7 @@ export class SendNewSettingsComponent implements OnInit {
         }
 
         Cron.value = StartEveryMinuteHourly.value + " " + StartEveryHourHourly.value + " * * *";
-        this.openSnackBar("","Cron updated!")
+        //cron updated
       }
       else
       {
@@ -246,7 +247,7 @@ export class SendNewSettingsComponent implements OnInit {
         }
 
         Cron.value = StartMinutesDaily.value + " " + StartHoursDaily.value + " */" + DaysOneDaily.value + " * *";
-        this.openSnackBar("","Cron updated!")
+        //cron updated
       }
       else
       {
@@ -257,7 +258,7 @@ export class SendNewSettingsComponent implements OnInit {
     else
     {
       Cron.value = StartMinutesDaily.value + " " + StartHoursDaily.value + " * * *";
-      this.openSnackBar("","Cron updated!")
+      //cron updated
     }
   }
 
@@ -308,7 +309,7 @@ export class SendNewSettingsComponent implements OnInit {
       }
 
       Cron.value = StartMinutesWeekly.value + " " + StartHoursWeekly.value + " * * " + result
-      this.openSnackBar("","Cron updated!")
+      //cron updated
     }
     else
     {
