@@ -1,10 +1,10 @@
-<div mat-dialog-title class="dialog-header">Problems</div>
+<div mat-dialog-title class="dialog-header">New Backup</div>
 
 <input #RunAt ng-model="RunAt" hidden>
 <input #DaemonId ng-model="DaemonId" value="1" hidden>
 
 <table>
-        <td colspan="1">
+    <td colspan="1">
         <div class="form">
             <div class="page-subheader">
                 Backup Settings
@@ -25,7 +25,7 @@
         </div>
     </td>
     <!-- TIME SETTINGS -->
-    <td colspan="3">
+    <td colspan="2">
             <div class="timeSettings">
                 <div class="page-subheader">
                     Time Settings
@@ -135,9 +135,6 @@
                     </mat-tab>
                 </mat-tab-group>
             </div>
-          </td>
-<tr>
-    <td colspan="1">    
     </td>
     <!-- PATH SETTINGS -->
     <td colspan="3">
@@ -207,8 +204,7 @@
                       </mat-tab>
                   </mat-tab-group>               
             </div>
-          </td>
-    </tr>
+    </td>
 </table>
 
 <mat-dialog-actions>

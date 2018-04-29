@@ -11,8 +11,10 @@ export class HomeComponent implements OnInit {
 
   Username: string = localStorage.getItem("Username")
 
-  ngOnInit() {
+  
+  Datum: string = new Date().toLocaleDateString()
 
+  ngOnInit() {
   }
 
   inputs = [1]
