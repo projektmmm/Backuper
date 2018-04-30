@@ -10,20 +10,30 @@ namespace Daemon
 {
     public class Communicator
     {
+        int daemonId = DaemonSettings.Id;
+
         /// <summary>
         /// Kontrola, zda neni nove nastaveni backupu
         /// </summary>
-        public async Task GetNextRunSetting(string apiDestination)
+        public async Task<List<PlannedBackups>> GetNextRunSetting(string apiDestination = "")
         {
+            if (apiDestination == "")
+                apiDestination = $"api/daemon/{this.daemonId.ToString()}";
+
+            List<PlannedBackups> ret = new List<PlannedBackups>();
             using (var client = GetJsonClient())
             {
                 HttpResponseMessage response = await client.GetAsync(apiDestination);
                 if (response.IsSuccessStatusCode)
                 {
-                    this.nextRunSettings = new NextRunSettings();
-                    this.nextRunSettings = await response.Content.ReadAsAsync<NextRunSettings>();
+                    ret = await response.Content.ReadAsAsync<List<PlannedBackups>>();
+                }
+                else
+                {
+                    throw new HttpRequestException("Cannot connect to the api");
                 }
             }
+            return ret;
         }
 
 

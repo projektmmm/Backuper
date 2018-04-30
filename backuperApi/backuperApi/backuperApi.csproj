@@ -210,6 +210,7 @@
     <Compile Include="Controllers\Admin\LoginRegister_Controller.cs" />
     <Compile Include="Controllers\Admin\PlannedBackups_Controller.cs" />
     <Compile Include="Controllers\Default\ValuesController.cs" />
+    <Compile Include="CronController.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

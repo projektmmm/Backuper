@@ -10,6 +10,16 @@ namespace backuperApi.Controllers.Daemon
     public class Daemon_Controller : ApiController
     {
         private Database database = new Database();
+        private CronController cronController = new CronController();
+
+        [HttpGet]
+        [Route("api/daemon/{daemonId}")]
+        public List<Backups> Get(string daemonId)
+        {
+            int dId = Convert.ToInt32(daemonId);
+            this.cronController.UpdateCron(this.database.Backups.Where(b => b.DaemonId == dId).ToList<Backups>());
+            return this.database.Backups.Where(b => b.DaemonId == dId).ToList<Backups>();
+        }
 
         [HttpPost]
         [Route("api/daemon")]
@@ -19,12 +29,6 @@ namespace backuperApi.Controllers.Daemon
             this.database.SaveChanges();
         }
 
-        [HttpGet]
-        [Route("api/daemon")]
-        public Backups Get()
-        {
-            return this.database.Backups.Where(b => b.NextRun > DateTime.Now).First<Backups>();
-        }
 
         [HttpPut]
         [Route("api/admin/daemon/{username}")]

@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Communicator.cs" />
     <Compile Include="DaemonSettings.cs" />
+    <Compile Include="Models\PlannedBackups.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Application.cs" />

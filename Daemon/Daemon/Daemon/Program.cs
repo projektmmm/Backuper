@@ -10,6 +10,8 @@ namespace Daemon
     {
         static void Main(string[] args)
         {
+            Communicator cm = new Communicator();
+            cm.GetNextRunSetting();
 
             Console.ReadLine();
         }

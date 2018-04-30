@@ -12,6 +12,7 @@ namespace Daemon
     {
         private CrontabSchedule Cron;
         private Timer Timer;
+        private Communicator communicator = new Communicator();
 
         public void SetTimer()
         {
@@ -22,6 +23,7 @@ namespace Daemon
 
         private void SendRequest(Object sender, EventArgs e)
         {
+            //List<PlannedBackups> backups =  communicator.GetNextRunSetting();
 
         }
     }
