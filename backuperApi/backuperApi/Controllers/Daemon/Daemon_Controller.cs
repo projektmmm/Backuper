@@ -18,6 +18,7 @@ namespace backuperApi.Controllers.Daemon
         {
             int dId = Convert.ToInt32(daemonId);
             this.cronController.UpdateCron(this.database.Backups.Where(b => b.DaemonId == dId).ToList<Backups>());
+
             return this.database.Backups.Where(b => b.DaemonId == dId).ToList<Backups>();
         }
 

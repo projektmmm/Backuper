@@ -15,7 +15,7 @@ namespace Daemon
         /// <summary>
         /// Kontrola, zda neni nove nastaveni backupu
         /// </summary>
-        public async Task<List<PlannedBackups>> GetNextRunSetting(string apiDestination = "")
+        public async Task GetNextRunSetting(string apiDestination = "")
         {
             if (apiDestination == "")
                 apiDestination = $"api/daemon/{this.daemonId.ToString()}";
@@ -26,14 +26,13 @@ namespace Daemon
                 HttpResponseMessage response = await client.GetAsync(apiDestination);
                 if (response.IsSuccessStatusCode)
                 {
-                    ret = await response.Content.ReadAsAsync<List<PlannedBackups>>();
+                    DaemonSettings.plannedBackups = await response.Content.ReadAsAsync<List<PlannedBackups>>();
                 }
                 else
                 {
                     throw new HttpRequestException("Cannot connect to the api");
                 }
             }
-            return ret;
         }
 
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +11,21 @@ namespace Daemon
     {
         static void Main(string[] args)
         {
-            Communicator cm = new Communicator();
-            cm.GetNextRunSetting();
+            Application app = new Application();
+
+            DaemonSettings.plannedBackups = new List<PlannedBackups>()
+            {
+                new PlannedBackups()
+                {
+                    BackupType = "FULL",
+                    SourcePath = "[\"D:\\\\vojta\\\\Knihovny\\\\Hudba\\\\iTunes\",\"D:\\\\vojta\\\\Knihovny\\\\Obrázky\\\\lol\"]",
+                    DestinationPath = "[\"C:\\\\BACKUP\\\\BACKUPI\",\"C:\\\\BACKUP\\\\BACKUPII\",\"C:\\\\BACKUP\\\\BACKUPIII\"]",
+                    NextRun = DateTime.Now,               
+                }
+            };
+
+            app.AnalyzeBackups();
+
 
             Console.ReadLine();
         }

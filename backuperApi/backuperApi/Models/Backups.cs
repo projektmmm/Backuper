@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -15,5 +16,9 @@ namespace backuperApi
         public string BackupType { get; set; }
         public string SourcePath { get; set; }
         public string DestinationPath { get; set; }
+        public bool Rar { get; set; }
+
+        [NotMapped]
+        public string Path { get; set; }
     }
 }

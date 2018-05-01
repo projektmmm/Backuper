@@ -16,5 +16,6 @@ namespace Daemon
         public string BackupType { get; set; }
         public string SourcePath { get; set; }
         public string DestinationPath { get; set; }
+        public bool Rar { get; set; }
     }
 }

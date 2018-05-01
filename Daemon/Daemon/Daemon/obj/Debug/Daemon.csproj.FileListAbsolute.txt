@@ -10,3 +10,17 @@ C:\Users\mullervojtech\Desktop\GitHub\Backuper\Daemon\Daemon\Daemon\obj\Debug\Da
 C:\Users\mullervojtech\Desktop\GitHub\Backuper\Daemon\Daemon\Daemon\obj\Debug\Daemon.csproj.CoreCompileInputs.cache
 C:\Users\mullervojtech\Desktop\GitHub\Backuper\Daemon\Daemon\Daemon\obj\Debug\Daemon.exe
 C:\Users\mullervojtech\Desktop\GitHub\Backuper\Daemon\Daemon\Daemon\obj\Debug\Daemon.pdb
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Daemon\Daemon\Daemon\bin\Debug\Daemon.exe.config
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Daemon\Daemon\Daemon\bin\Debug\Daemon.exe
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Daemon\Daemon\Daemon\bin\Debug\Daemon.pdb
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Daemon\Daemon\Daemon\bin\Debug\NCrontab.dll
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Daemon\Daemon\Daemon\bin\Debug\Newtonsoft.Json.dll
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Daemon\Daemon\Daemon\bin\Debug\System.Net.Http.Formatting.dll
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Daemon\Daemon\Daemon\bin\Debug\Newtonsoft.Json.xml
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Daemon\Daemon\Daemon\bin\Debug\System.Net.Http.Formatting.xml
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Daemon\Daemon\Daemon\obj\Debug\Daemon.csprojResolveAssemblyReference.cache
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Daemon\Daemon\Daemon\obj\Debug\Daemon.csproj.CoreCompileInputs.cache
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Daemon\Daemon\Daemon\obj\Debug\Daemon.csproj.CopyComplete
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Daemon\Daemon\Daemon\obj\Debug\Daemon.exe
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Daemon\Daemon\Daemon\obj\Debug\Daemon.pdb
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\Daemon\Daemon\Daemon\bin\Debug\SharpCompress.dll
