@@ -35,6 +35,7 @@ namespace backuperApi.Controllers
 
             return query.First();
         }
+
         [HttpPost]
         [Route("api/admin/daemons/AddDaemon")]
         public string Post(Daemons daemon)
@@ -53,6 +54,7 @@ namespace backuperApi.Controllers
                 return "OOPS, error on our side...";
             }
         }
+
         [HttpPost]
         [Route("api/admin/daemons/GetId")]
         public int GetId(Users Username)
@@ -71,6 +73,7 @@ namespace backuperApi.Controllers
             this.database.SaveChanges();
             return true;
         }
+
         [HttpDelete]
         [Route("api/admin/daemons/DeleteDaemon/{id}")]
         public bool Delete(int id)
@@ -86,6 +89,7 @@ namespace backuperApi.Controllers
         {
             return this.database.Daemons.Find(id);
         }
+
         [HttpGet]
         [Route("api/admin/daemons/AddDaemon/{username}")]
         public List<Daemons> GetDaemonRequest(string username)
@@ -98,6 +102,7 @@ namespace backuperApi.Controllers
 
             return query.ToList<Daemons>();
         }
+
         [HttpGet]
         [Route("api/admin/daemons/Get/{username}")]
         public bool GetRequests(string username)
