@@ -9,6 +9,6 @@ namespace Daemon
     public interface IBackup
     {
         void Start();
-        void SendReport();
+        void SendReport(int count);
     }
 }

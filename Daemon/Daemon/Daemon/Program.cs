@@ -18,9 +18,10 @@ namespace Daemon
                 new PlannedBackups()
                 {
                     BackupType = "FULL",
-                    SourcePath = "[\"D:\\\\vojta\\\\Knihovny\\\\Hudba\\\\iTunes\",\"D:\\\\vojta\\\\Knihovny\\\\Obrázky\\\\lol\"]",
-                    DestinationPath = "[\"C:\\\\BACKUP\\\\BACKUPI\",\"C:\\\\BACKUP\\\\BACKUPII\",\"C:\\\\BACKUP\\\\BACKUPIII\"]",
+                    SourcePath = "[\"C:\\\\backupMMM\\\\Source\\\\DATA1\",\"C:\\\\backupMMM\\\\Source\\\\DATA2\",\"C:\\\\backupMMM\\\\Source\\\\DATA3\"]",
+                    DestinationPath = "[\"C:\\\\backupMMM\\\\Destination\\\\DESTINATION1\",\"C:\\\\backupMMM\\\\Destination\\\\DESTINATION2\"]",
                     NextRun = DateTime.Now,               
+                    Rar = false
                 }
             };
 

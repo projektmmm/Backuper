@@ -16,6 +16,7 @@ namespace Daemon
         ReportMaker reportMaker = new ReportMaker();
         private List<string> SourcePaths;
         private List<string> DestinationPaths;
+        private List<ErrorDetails> ErrorDetails = new List<ErrorDetails>();
         private int backupCount = 0;
         private bool Rar;
         public string appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -53,8 +54,9 @@ namespace Daemon
             }
         }
 
-        public void SendReport()
+        public void SendReport(int count)
         {
+            
             Console.WriteLine("FullBackup completed!");
         }
 
@@ -88,11 +90,22 @@ namespace Daemon
             {
                 foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories).OrderBy(f => new FileInfo(f).FullName))
                 {
-                    File.Copy(newPath, newPath.Replace(sourcePath, destinationPath), true);
-                    Count++;
-                    FileInfo fileInfo = new FileInfo(newPath);
-                    newLog.Add(new LogModel() { Action = "EXI", FileName = fileInfo.Name, FilePath = fileInfo.FullName, LastWriteTime = Convert.ToDateTime(fileInfo.LastWriteTime) });
-                    reportMaker.AddFile(new FileInfo(newPath));
+                    try
+                    {
+                        File.Copy(newPath, newPath.Replace(sourcePath, destinationPath), true);
+                        Count++;
+                        FileInfo fileInfo = new FileInfo(newPath);
+                        newLog.Add(new LogModel() { Action = "EXI", FileName = fileInfo.Name, FilePath = fileInfo.FullName, LastWriteTime = Convert.ToDateTime(fileInfo.LastWriteTime) });
+                        reportMaker.AddFile(new FileInfo(newPath));
+                    }
+                    catch (Exception ex)
+                    {
+                        this.ErrorDetails.Add(new ErrorDetails()
+                        {
+                            AffectedFiles = 1,
+                            Problem = ex.Message,
+                        });
+                    }
                 }
             }
 
@@ -109,7 +122,7 @@ namespace Daemon
             if (this.Rar)
                 this.ZipFiles();            
 
-            this.SendReport();
+            this.SendReport(Count);
         }
 
         private void ZipFiles()
