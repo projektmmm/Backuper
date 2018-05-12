@@ -13,7 +13,7 @@ namespace Daemon
 
         }
 
-        public void SendReport(int count)
+        public void SendReport()
         {
             throw new NotImplementedException();
         }

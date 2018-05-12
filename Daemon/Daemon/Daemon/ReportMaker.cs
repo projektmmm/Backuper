@@ -10,6 +10,7 @@ namespace Daemon
     public class ReportMaker
     {
         private List<FileInformation> Report = new List<FileInformation>();
+        private List<ErrorDetails> ErrorDetails = new List<ErrorDetails>();
 
         public List<FileInformation> GetReport()
         {
@@ -20,6 +21,11 @@ namespace Daemon
         public void AddFile(FileInfo file)
         {
             this.Report.Add(new FileInformation(file));
+        }
+
+        public void AddError(ErrorDetails er)
+        {
+            this.ErrorDetails.Add(er);
         }
     }
 }

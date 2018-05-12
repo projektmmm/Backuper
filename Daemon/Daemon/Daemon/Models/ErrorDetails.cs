@@ -8,8 +8,10 @@ namespace Daemon
 {
     public class ErrorDetails
     {
-        public int AffectedFiles { get; set; }
+        public int AffectedFiles { get; set; } = -1;
+        public string Path { get; set; }
         public string Problem { get; set; }
+        public string Exception { get; set; }
         public bool Solved { get; set; } = false;
     }
 }

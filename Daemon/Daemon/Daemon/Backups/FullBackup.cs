@@ -1,13 +1,11 @@
 ﻿using Newtonsoft.Json;
-using SharpCompress.Archives;
-using SharpCompress.Archives.Zip;
-using SharpCompress.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace Daemon
 {
@@ -54,9 +52,8 @@ namespace Daemon
             }
         }
 
-        public void SendReport(int count)
-        {
-            
+        public void SendReport()
+        {            
             Console.WriteLine("FullBackup completed!");
         }
 
@@ -80,7 +77,19 @@ namespace Daemon
             {
                 foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
                 {
-                    Directory.CreateDirectory(dirPath.Replace(sourcePath, destinationPath));
+                    try
+                    {
+                        Directory.CreateDirectory(dirPath.Replace(sourcePath, destinationPath));
+                    }
+                    catch (Exception ex)
+                    {
+                        this.reportMaker.AddError(new ErrorDetails()
+                        {
+                            Exception = ex.Message,
+                            Problem = "The program was unable to create folder.",
+                            Path = dirPath
+                        });
+                    }
                 }
             }
 
@@ -100,10 +109,12 @@ namespace Daemon
                     }
                     catch (Exception ex)
                     {
-                        this.ErrorDetails.Add(new ErrorDetails()
+                        this.reportMaker.AddError(new ErrorDetails()
                         {
-                            AffectedFiles = 1,
-                            Problem = ex.Message,
+                            Problem = "The file was not copied",
+                            Path = newPath,
+                            Exception = ex.Message,
+                            AffectedFiles = 1
                         });
                     }
                 }
@@ -120,29 +131,12 @@ namespace Daemon
             }
 
             if (this.Rar)
-                this.ZipFiles();            
+                if (!BackupOperations.ZipFiles(this.DestinationPaths))
+                    this.reportMaker.AddError(new ErrorDetails() { Problem = "Could not ZIP the files." });
 
-            this.SendReport(Count);
+            //this.SendReport();
         }
 
-        private void ZipFiles()
-        {
-            foreach (string destinationPath in this.DestinationPaths)
-            {
-                try
-                {
-                    using (var archive = ZipArchive.Create())
-                    {
-                        archive.AddAllFromDirectory(destinationPath);
-                        archive.SaveTo(destinationPath, CompressionType.Deflate);
-                    }
-                }
-                catch
-                {
-                    throw new Exception("Could not save to .RAR format");
-                }
-            }
-        }
 
     }
 }
