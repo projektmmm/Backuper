@@ -13,18 +13,7 @@ namespace Daemon
         {
             Application app = new Application();
 
-            DaemonSettings.plannedBackups = new List<PlannedBackups>()
-            {
-                new PlannedBackups()
-                {
-                    Id = 1,
-                    BackupType = "FULL",
-                    SourcePath = "[\"C:\\\\BACKUP\\\\BACKUPI\",\"C:\\\\BACKUP\\\\BACKUPII\",\"C:\\\\BACKUP\\\\BACKUPIII\"]",
-                    DestinationPath = "[\"C:\\\\BACKUP\\\\DESTINATIONI\",\"C:\\\\BACKUP\\\\DESTINATIONII\"]",
-                    NextRun = DateTime.Now,               
-                    Rar = true
-                }
-            };
+            app.SetTimer();
 
             app.AnalyzeBackups();
 
