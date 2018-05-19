@@ -17,6 +17,22 @@ namespace Daemon
             return this.Report;
         }
 
+        public List<ErrorDetails> GetErrors()
+        {
+            return this.ErrorDetails;
+        }
+
+        public int GetFileSize()
+        {
+            int ret = 0;
+            foreach (FileInformation item in this.Report)
+            {
+                ret += item.Size;
+            }
+
+            return ret;
+        }
+
         //přidá informace o filu do listu report
         public void AddFile(FileInfo file)
         {

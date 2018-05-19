@@ -23,10 +23,34 @@ namespace backuperApi.Controllers.Daemon
         }
 
         [HttpPost]
-        [Route("api/daemon")]
-        public void Post([FromBody] BackupReport report)
+        [Route("api/daemon/{daemonId}")]
+        public void Post(int daemonId, [FromBody] string data)
         {
+
+            List<BackupErrors> errors = new List<BackupErrors>();
+            string tosub = data.Substring(0, this.IdentifyBorder(data));
+            BackupReport report = JsonConvert.DeserializeObject<BackupReport>(tosub);
+
+            try
+            {
+                errors = JsonConvert.DeserializeObject<List<BackupErrors>>(data.Substring(this.IdentifyBorder(data) + 10));
+            }
+            catch
+            {
+                // NO ERRORS
+            }
+
             this.database.BackupReport.Add(report);
+            this.database.SaveChanges();
+
+            BackupReport dbRecord = this.database.BackupReport.Where(r => r.BackupId == report.BackupId && r.Date == report.Date && r.Size == report.Size && r.Type == report.Type && r.UserId == report.UserId).FirstOrDefault();
+            int reportId = dbRecord.Id;
+
+            foreach (BackupErrors item in errors)
+            {
+                item.BackupReportId = reportId;
+                this.database.BackupErrors.Add(item);
+            }
             this.database.SaveChanges();
         }
 
@@ -60,6 +84,23 @@ namespace backuperApi.Controllers.Daemon
                         select d;
 
             return query.First();
+        }
+
+        private int IdentifyBorder(string data)
+        {
+            string value = "";
+            foreach (char item in data)
+            {
+                value += item;
+                try
+                {
+                    if (value.Substring(value.Length - 10) == "@@border@@")
+                        break;
+                }
+                catch { } 
+            }
+
+            return value.Length - 10;
         }
 
     }

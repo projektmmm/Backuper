@@ -20,6 +20,7 @@ namespace Daemon
         /// </summary>
         public void SetTimer()
         {
+            Console.WriteLine("New Timer was set");
             this.Timer = new System.Timers.Timer(DaemonSettings.AskInterval);
             this.Timer.Enabled = true;
             this.Timer.Elapsed += this.CheckTimer;
@@ -30,6 +31,7 @@ namespace Daemon
         /// </summary>
         private void CheckTimer(Object sender, EventArgs e)
         {
+            Console.WriteLine("Checking the database for new backups");
             if (DaemonSettings.plannedBackups != null)
                 this.AnalyzeBackups();
 
@@ -51,6 +53,7 @@ namespace Daemon
         /// </summary>
         public void AnalyzeBackups()
         {
+            Console.WriteLine("Backups analyzation");
             foreach (PlannedBackups item in DaemonSettings.plannedBackups)
             {
                 if (item.NextRun.Date == DateTime.Now.Date && item.NextRun.Hour == DateTime.Now.Hour && item.NextRun.Minute == DateTime.Now.Minute)

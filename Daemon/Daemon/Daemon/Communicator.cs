@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Daemon
 {
@@ -36,7 +37,19 @@ namespace Daemon
         }
 
 
+        /// <summary>
+        /// Odeslani reportu o backupu
+        /// </summary>
+        public async Task PostBackupReport(BackupReport report, List<ErrorDetails> errorDetails)
+        {
+            string data = JsonConvert.SerializeObject(report) + "@@border@@" + JsonConvert.SerializeObject(errorDetails);
+            string apiDestination = $"api/daemon/{this.daemonId.ToString()}";
 
+            using (var client = GetJsonClient())
+            {
+                HttpResponseMessage response = await client.PostAsJsonAsync(apiDestination, data);
+            }
+        }
 
         /// <summary>
         /// Ziskani nastaveni pro komunikaci

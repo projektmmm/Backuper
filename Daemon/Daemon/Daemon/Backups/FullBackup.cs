@@ -12,6 +12,8 @@ namespace Daemon
     public class FullBackup : IBackup
     {
         ReportMaker reportMaker = new ReportMaker();
+        Communicator communicator = new Communicator();
+        PlannedBackups backup { get; set; }
         private List<string> SourcePaths;
         private List<string> DestinationPaths;
         private List<ErrorDetails> ErrorDetails = new List<ErrorDetails>();
@@ -21,6 +23,7 @@ namespace Daemon
 
         public FullBackup(PlannedBackups item)
         {
+            Console.WriteLine("Full backup in progress");
             try
             {
                 this.SourcePaths = JsonConvert.DeserializeObject<List<string>>(item.SourcePath);
@@ -39,6 +42,7 @@ namespace Daemon
                 this.DestinationPaths = new List<string>() { item.DestinationPath };
             }
 
+            this.backup = item;
             this.Rar = item.Rar;
             this.Start();
         }
@@ -53,8 +57,18 @@ namespace Daemon
         }
 
         public void SendReport()
-        {            
-            Console.WriteLine("FullBackup completed!");
+        {
+            BackupReport report = new BackupReport()
+            {
+                UserId = DaemonSettings.UserId,
+                DaemonId = DaemonSettings.Id,
+                Date = DateTime.Now,
+                Type = "FULL",
+                Size = this.reportMaker.GetFileSize(),
+                BackupId = this.backup.Id,
+            };
+
+            this.communicator.PostBackupReport(report, this.reportMaker.GetErrors());
         }
 
         private void Backup(string sourcePath)
@@ -133,8 +147,6 @@ namespace Daemon
             if (this.Rar)
                 if (!BackupOperations.ZipFiles(this.DestinationPaths))
                     this.reportMaker.AddError(new ErrorDetails() { Problem = "Could not ZIP the files." });
-
-            //this.SendReport();
         }
 
 

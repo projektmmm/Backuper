@@ -11,14 +11,14 @@ namespace Daemon
     {
         public string Path { get; set; }
         public string Name { get; set; }
-        public long Size { get; set; }
+        public int Size { get; set; }
         public DateTime LastWriteTime { get; set; }
 
         public FileInformation(FileInfo f)
         {
             this.Path = f.DirectoryName;
             this.Name = f.Name;
-            this.Size = f.Length;
+            this.Size = (int)f.Length;
             this.LastWriteTime = f.LastWriteTime;
         }
     }

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace backuperApi
+namespace Daemon
 {
     public class BackupReport
     {
@@ -14,6 +15,7 @@ namespace backuperApi
         public int ConnectedTo { get; set; }
         public int DaemonId { get; set; }
         public int UserId { get; set; }
+        public int BackupErrorId { get; set; }
         public int BackupId { get; set; }
     }
 }

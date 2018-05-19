@@ -61,6 +61,7 @@
     <Compile Include="Backups\IncrementalBackup.cs" />
     <Compile Include="Communicator.cs" />
     <Compile Include="DaemonSettings.cs" />
+    <Compile Include="Models\BackupReport.cs" />
     <Compile Include="Models\ErrorDetails.cs" />
     <Compile Include="Models\FileInformation.cs" />
     <Compile Include="Models\LogModel.cs" />
