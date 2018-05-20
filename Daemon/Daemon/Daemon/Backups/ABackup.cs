@@ -43,13 +43,13 @@ namespace Daemon
             this.Start();
         }
 
-        protected abstract void Backup(string sourcePath);
+        protected abstract void Backup(string sourcePath, List<string> destinationPaths);
 
         public virtual void Start()
         {
             foreach (string item in this.SourcePaths)
             {
-                this.Backup(item);
+                this.Backup(item, new List<string>(this.DestinationPaths));
                 this.backupCount++;
             }
         }

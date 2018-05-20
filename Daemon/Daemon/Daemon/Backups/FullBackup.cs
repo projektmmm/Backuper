@@ -15,10 +15,11 @@ namespace Daemon
 
         }
 
-        protected override void Backup(string sourcePath)
+        protected override void Backup(string sourcePath, List<string> destinationPaths)
         {
             int Count = 0;
 
+            /*
             //Vytvori slozky pro diferencialni backupy
             foreach (string destinationPath in this.DestinationPaths)
             {
@@ -29,10 +30,18 @@ namespace Daemon
                     Directory.CreateDirectory(destinationPath + "\\diff_backups\\0");
                 }
             }
+            */
+
+            //Prespsani destination path
+            for (int i = 0; i < destinationPaths.Count; i++)
+            {
+                destinationPaths[i] += $"\\{sourcePath.Substring(Functionality.IdentifyCharPosition('\\', sourcePath))}";
+            }
 
             //Vytvoří podsložky
-            foreach (string destinationPath in this.DestinationPaths)
+            foreach (string destinationPath in destinationPaths)
             {
+                int index = 0;
                 foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
                 {
                     try
@@ -48,12 +57,30 @@ namespace Daemon
                             Path = dirPath
                         });
                     }
+                    index++;
+                }
+
+                if (index == 0)
+                {
+                    try
+                    {
+                        Directory.CreateDirectory(destinationPath);
+                    }
+                    catch (Exception ex)
+                    {
+                        this.reportMaker.AddError(new ErrorDetails()
+                        {
+                            Exception = ex.Message,
+                            Problem = "The program was unable to destination create folder.",
+                            Path = destinationPath
+                        });
+                    }
                 }
             }
 
             //Zkopíruje všechny soubory a přepíše existující, zanese o nich zaznamy do logu
             List<LogModel> newLog = new List<LogModel>();
-            foreach (string destinationPath in this.DestinationPaths)
+            foreach (string destinationPath in destinationPaths)
             {
                 foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories).OrderBy(f => new FileInfo(f).FullName))
                 {
@@ -78,18 +105,34 @@ namespace Daemon
                 }
             }
 
-            //Zapsani logu do souboru souboru
-            foreach (string destinationPath in this.DestinationPaths)
+            //Zapsani logu do souboru souboru         
+            try
             {
-                using (StreamWriter streamWriter = new StreamWriter(destinationPath + "\\diff_backups\\0\\FileLog.log", false))
+                using (StreamWriter streamWriter = new StreamWriter(sourcePath + "\\BackupsLog.log", true))
                 {
                     string toWrite = JsonConvert.SerializeObject(newLog);
                     streamWriter.Write(toWrite);
                 }
             }
+            catch (Exception ex)
+            {
+                this.reportMaker.AddError(new ErrorDetails()
+                {
+                    Exception = ex.Message,
+                    Path = sourcePath + "\\BackupsLog.log",
+                    Problem = "Can't create the log file. Future DIFF and INCR backups won't be possible. Check the folder settings and repeat the backup."
+                });
+            }
+
+            /*
+            FileInfo fi = new FileInfo(sourcePath + "\\BackupsLog.log");
+            fi.Attributes = FileAttributes.ReadOnly;*/
+                 
+
+
 
             if (this.backup.Rar)
-                if (!BackupOperations.ZipFiles(this.DestinationPaths))
+                if (!BackupOperations.ZipFiles(destinationPaths))
                     this.reportMaker.AddError(new ErrorDetails() { Problem = "Could not ZIP the files." });
         }
 

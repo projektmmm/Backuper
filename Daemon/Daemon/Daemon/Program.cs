@@ -19,14 +19,14 @@ namespace Daemon
             */
             PlannedBackups backup = new PlannedBackups()
             {
-                Id = 1,
+                Id = 143,
                 BackupType = "DIFF",
                 SourcePath = "[\"C:\\\\BACKUP\\\\BACKUPI\",\"C:\\\\BACKUP\\\\BACKUPII\",\"C:\\\\BACKUP\\\\BACKUPIII\"]",
                 DestinationPath = "[\"C:\\\\BACKUP\\\\DESTINATIONI\",\"C:\\\\BACKUP\\\\DESTINATIONII\"]",
                 NextRun = DateTime.Now,
             };
 
-            DifferentialBackup df = new DifferentialBackup(backup);
+            FullBackup df = new FullBackup(backup);
             df.Start();
 
             Console.ReadLine();
