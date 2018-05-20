@@ -6,72 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace Daemon
 {
-    public class FullBackup : IBackup
+    public class FullBackup : ABackup
     {
-        ReportMaker reportMaker = new ReportMaker();
-        Communicator communicator = new Communicator();
-        PlannedBackups backup { get; set; }
-        private List<string> SourcePaths;
-        private List<string> DestinationPaths;
-        private List<ErrorDetails> ErrorDetails = new List<ErrorDetails>();
-        private int backupCount = 0;
-        private bool Rar;
-        public string appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-
-        public FullBackup(PlannedBackups item)
+        public FullBackup(PlannedBackups item) : base(item)
         {
-            Console.WriteLine("Full backup in progress");
-            try
-            {
-                this.SourcePaths = JsonConvert.DeserializeObject<List<string>>(item.SourcePath);
-            }
-            catch
-            {
-                this.SourcePaths = new List<string>() { item.SourcePath };
-            }
 
-            try
-            {
-                this.DestinationPaths = JsonConvert.DeserializeObject<List<string>>(item.DestinationPath);
-            }
-            catch
-            {
-                this.DestinationPaths = new List<string>() { item.DestinationPath };
-            }
-
-            this.backup = item;
-            this.Rar = item.Rar;
-            this.Start();
         }
 
-        public void Start()
-        {
-            foreach (string item in this.SourcePaths)
-            {
-                this.Backup(item);
-                this.backupCount++;
-            }
-        }
-
-        public void SendReport()
-        {
-            BackupReport report = new BackupReport()
-            {
-                UserId = DaemonSettings.UserId,
-                DaemonId = DaemonSettings.Id,
-                Date = DateTime.Now,
-                Type = "FULL",
-                Size = this.reportMaker.GetFileSize(),
-                BackupId = this.backup.Id,
-            };
-
-            this.communicator.PostBackupReport(report, this.reportMaker.GetErrors());
-        }
-
-        private void Backup(string sourcePath)
+        protected override void Backup(string sourcePath)
         {
             int Count = 0;
 
@@ -144,7 +88,7 @@ namespace Daemon
                 }
             }
 
-            if (this.Rar)
+            if (this.backup.Rar)
                 if (!BackupOperations.ZipFiles(this.DestinationPaths))
                     this.reportMaker.AddError(new ErrorDetails() { Problem = "Could not ZIP the files." });
         }

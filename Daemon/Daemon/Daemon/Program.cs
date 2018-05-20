@@ -12,11 +12,22 @@ namespace Daemon
         static void Main(string[] args)
         {
             Application app = new Application();
-
+            /*
             app.SetTimer();
 
             app.AnalyzeBackups();
+            */
+            PlannedBackups backup = new PlannedBackups()
+            {
+                Id = 1,
+                BackupType = "DIFF",
+                SourcePath = "[\"C:\\\\BACKUP\\\\BACKUPI\",\"C:\\\\BACKUP\\\\BACKUPII\",\"C:\\\\BACKUP\\\\BACKUPIII\"]",
+                DestinationPath = "[\"C:\\\\BACKUP\\\\DESTINATIONI\",\"C:\\\\BACKUP\\\\DESTINATIONII\"]",
+                NextRun = DateTime.Now,
+            };
 
+            DifferentialBackup df = new DifferentialBackup(backup);
+            df.Start();
 
             Console.ReadLine();
         }

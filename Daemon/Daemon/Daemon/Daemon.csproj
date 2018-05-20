@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Backups\ABackup.cs" />
     <Compile Include="Backups\BackupOperations.cs" />
     <Compile Include="Backups\DifferentialBackup.cs" />
     <Compile Include="Backups\FullBackup.cs" />

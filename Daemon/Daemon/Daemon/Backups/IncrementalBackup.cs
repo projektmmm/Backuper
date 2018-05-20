@@ -5,13 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Daemon
-{
-    public class IncrementalBackup : IBackup
+{/*
+    public class IncrementalBackup : ABackup
     {
-        public IncrementalBackup(PlannedBackups backup)
-        {
-
-        }
 
         public void SendReport()
         {
@@ -22,5 +18,10 @@ namespace Daemon
         {
             throw new NotImplementedException();
         }
-    }
+
+        protected override void Backup(string sourcePath)
+        {
+            throw new NotImplementedException();
+        }
+    }*/
 }
