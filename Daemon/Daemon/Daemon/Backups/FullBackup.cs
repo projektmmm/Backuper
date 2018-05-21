@@ -83,7 +83,6 @@ namespace Daemon
             }
 
             //Zkopíruje všechny soubory a přepíše existující, zanese o nich zaznamy do logu
-            //*List<LogModel> newLog = new List<LogModel>();
             foreach (string destinationPath in destinationPaths)
             {
                 foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories).OrderBy(f => new FileInfo(f).FullName))
@@ -107,34 +106,7 @@ namespace Daemon
                         });
                     }
                 }
-            }
-
-            //Zapsani logu do souboru souboru      
-            /*
-            try
-            {
-                using (StreamWriter streamWriter = new StreamWriter(sourcePath + "\\BackupsLog.log", true))
-                {
-                    string toWrite = JsonConvert.SerializeObject(newLog);
-                    streamWriter.Write(toWrite);
-                }
-            }
-            catch (Exception ex)
-            {
-                this.reportMaker.AddError(new ErrorDetails()
-                {
-                    Exception = ex.Message,
-                    Path = sourcePath + "\\BackupsLog.log",
-                    Problem = "Can't create the log file. Future DIFF and INCR backups won't be possible. Check the folder settings and repeat the backup."
-                });
-            }*/
-
-            /*
-            FileInfo fi = new FileInfo(sourcePath + "\\BackupsLog.log");
-            fi.Attributes = FileAttributes.ReadOnly;*/
-                 
-
-
+            }              
 
             if (this.backup.Rar)
                 if (!BackupOperations.ZipFiles(destinationPaths))

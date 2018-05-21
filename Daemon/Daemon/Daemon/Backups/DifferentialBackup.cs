@@ -36,7 +36,7 @@ namespace Daemon
                 this.reportMaker.AddError(new ErrorDetails()
                 {
                     Exception = ex.Message,
-                    Problem = "The program didn't find the full backup log. DIFF backup for this source folder hasn't been done.",
+                    Problem = "The program didn't find the full backup log. DIFF backup for this source folder hadn't been done.",
                     Path = sourcePath
                 });
                 return;
@@ -46,125 +46,33 @@ namespace Daemon
             for (int i = 0; i < destinationPaths.Count; i++)
             {
                 destinationPaths[i] += $"\\{sourcePath.Substring(Functionality.IdentifyCharPosition('\\', sourcePath))}";
-                string[] directories = Directory.GetDirectories(destinationPaths[i], "diff_backup", SearchOption.TopDirectoryOnly);
-                destinationPaths[i] += $"\\diff_backup_{directories.Length}";
+                int count = 0;
+                foreach (string item in Directory.GetDirectories(destinationPaths[i], "*", SearchOption.TopDirectoryOnly).Where(s => s.Contains("diff_backup")))
+                {
+                    if (item.Contains("diff_backup_"))
+                        count++;
+                }
+                destinationPaths[i] += $"\\diff_backup_{count}\\{sourcePath.Substring(Functionality.IdentifyCharPosition('\\', sourcePath))}";
+                Directory.CreateDirectory(destinationPaths[i]);
             }
-
-            /*
-            //Vytvoreni podslozek pro svuj diferencialni backup - v pripade opakovani
-            if (this.backupCount == 0)
-            {
-                for (int i = 0; i < destinationPaths.Count; i++)
-                {
-                    int lenght = 0;
-                    try
-                    {
-                        string[] paths = Directory.GetDirectories(destinationPaths[i], "*", SearchOption.TopDirectoryOnly);
-                        lenght = paths.Length;
-                    }
-                    catch
-                    {
-                        lenght = 1;
-                    }
-                    try
-                    {
-                        Directory.CreateDirectory(this.DestinationPaths[i]);
-                    }
-                    catch (Exception ex)
-                    {
-                        this.reportMaker.AddError(new ErrorDetails()
-                        {
-                            Exception = ex.Message,
-                            Problem = "The problam was unable to create folder for differential backup.",
-                            Path = this.DestinationPaths[i]
-                        });
-                    }
-                }
-            }*/
-            /*
-            //Vytvoreni podslozek
-            foreach (string destinationPath in destinationPaths)
-            {
-                foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
-                {
-                    int i = 0;
-                    try
-                    {
-                        Directory.CreateDirectory(dirPath.Replace(sourcePath, destinationPath));
-                    }
-                    catch (Exception ex)
-                    {
-                        this.reportMaker.AddError(new ErrorDetails()
-                        {
-                            Exception = ex.Message,
-                            Problem = "The program was unable to create a subfolder.",
-                            Path = dirPath
-                        });
-                    }
-
-                    if (i == 0)
-                    {
-                        try
-                        {
-                            Directory.CreateDirectory(destinationPath);
-                        }
-                        catch (Exception ex)
-                        {
-                            this.reportMaker.AddError(new ErrorDetails()
-                            {
-                                Exception = ex.Message,
-                                Problem = "The program was unable to destination create folder.",
-                                Path = destinationPath
-                            });
-                        }
-                    }
-                }
-            }
-            */
-            /*
-            //Prekopirovani novych slozek
-            foreach (string destinationPath in destinationPaths)
-            {
-                foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
-                {
-                    if (Directory.GetLastWriteTime(dirPath) > this.GetOldest(sourcePath))
-                    {
-                        try
-                        {
-                            Directory.CreateDirectory(dirPath.Replace(dirPath, destinationPath));
-                        }
-                        catch (Exception ex)
-                        {
-                            this.reportMaker.AddError(new ErrorDetails()
-                            {
-                                Exception = ex.Message,
-                                Path = destinationPath,
-                                Problem = "The program was unable to create a subfolder."
-                            });
-                        }
-                    }
-                }
-            }*/
-
-            
 
             int index;
             //Porovnavani logu s aktualni verzi vychozi slozky pro fullbackup
             foreach (string filePath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories).OrderBy(f => new FileInfo(f).FullName))
             {
                 FileInfo fileInfo = new FileInfo(filePath);
-                index = 0;
 
                 foreach (LogModel item in oldLog)
                 {
+                    if (item.FilePath != new FileInfo(filePath).FullName)
+                        continue;
                     //nezmeneno - EXISTS
                     if (fileInfo.FullName == item.FilePath && Convert.ToDateTime(fileInfo.LastWriteTime) == item.LastWriteTime)
                     {
-                        oldLog.RemoveAt(index);
                         break;
                     }
                     //zmeneno
-                    else if (fileInfo.FullName == item.FilePath && Convert.ToDateTime(fileInfo.LastWriteTime) != item.LastWriteTime)
+                    else
                     {
                         foreach (string destinationPath in destinationPaths)
                         {
@@ -183,21 +91,10 @@ namespace Daemon
                             }
                         }
 
-                        /*
-                        if (Application.CountChar(fileInfo.FullName, '\\') - 1 > Application.CountChar(this.DestinationPath, '\\') - 2)
-                        {
-                            string directoryName = fileInfo.FullName.Replace(this.SourcePath, this.DestinationPath);
-                            string newdirname = directoryName.Substring(0, Application.IdentifyLastCharIndex(directoryName, '\\'));
-                            Directory.CreateDirectory(newdirname);
-                        }
-
-                        File.Copy(filePath, filePath.Replace(this.SourcePath, this.DestinationPath), true);*/
-                        oldLog.RemoveAt(index);
                         reportMaker.AddFile(fileInfo);
                         fileCount++;
                         break;
                     }
-                    index++;
                 }
 
             }
@@ -205,7 +102,6 @@ namespace Daemon
             Console.WriteLine("DifferentialBackup completed!");
             Console.WriteLine(fileCount + " files copied");
             this.backupCount++;
-            //this.SendReport();
         }
         /// <summary>
         /// Porovná soubory a zjistí, jestli je jeden z nich starší

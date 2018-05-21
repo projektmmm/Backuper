@@ -27,8 +27,10 @@ namespace Daemon
                 Override = true
             };
 
+            //app.SetTimer();
+            app.AnalyzeBackups();
             DifferentialBackup df = new DifferentialBackup(backup);
-            //df.Start();
+            df.Start();
 
             Console.ReadLine();
         }
