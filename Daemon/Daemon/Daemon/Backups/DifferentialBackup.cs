@@ -47,7 +47,7 @@ namespace Daemon
             {
                 destinationPaths[i] += $"\\{sourcePath.Substring(Functionality.IdentifyCharPosition('\\', sourcePath))}";
                 string[] directories = Directory.GetDirectories(destinationPaths[i], "diff_backup", SearchOption.TopDirectoryOnly);
-                destinationPaths[i] += $"\\diff_backup{directories.Length}";
+                destinationPaths[i] += $"\\diff_backup_{directories.Length}";
             }
 
             /*
@@ -81,7 +81,7 @@ namespace Daemon
                     }
                 }
             }*/
-
+            /*
             //Vytvoreni podslozek
             foreach (string destinationPath in destinationPaths)
             {
@@ -120,7 +120,8 @@ namespace Daemon
                     }
                 }
             }
-
+            */
+            /*
             //Prekopirovani novych slozek
             foreach (string destinationPath in destinationPaths)
             {
@@ -143,7 +144,7 @@ namespace Daemon
                         }
                     }
                 }
-            }
+            }*/
 
             
 
@@ -169,7 +170,7 @@ namespace Daemon
                         {
                             try
                             {
-                                File.Copy(filePath, destinationPath);
+                                File.Copy(filePath, destinationPath + $"\\{fileInfo.Name}");
                             }
                             catch (Exception ex)
                             {

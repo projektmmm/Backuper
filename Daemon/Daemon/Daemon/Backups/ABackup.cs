@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace Daemon
 {
@@ -15,6 +16,7 @@ namespace Daemon
         protected List<string> SourcePaths;
         protected List<string> DestinationPaths;
         protected List<ErrorDetails> ErrorDetails = new List<ErrorDetails>();
+        protected List<LogModel> newLog;
         protected int backupCount = 0;
 
 
@@ -49,6 +51,8 @@ namespace Daemon
         {
             foreach (string item in this.SourcePaths)
             {
+                if (this.backup.BackupType == "FULL")
+                    this.CreateLog(item);
                 this.Backup(item, new List<string>(this.DestinationPaths));
                 this.backupCount++;
             }
@@ -68,6 +72,35 @@ namespace Daemon
             };
 
             this.communicator.PostBackupReport(report, this.reportMaker.GetErrors());
+        }
+
+        public virtual void CreateLog(string sourcePath)
+        {
+            this.newLog = new List<LogModel>();
+            foreach (string item in Directory.GetFiles(sourcePath, "*", SearchOption.AllDirectories))
+            {
+
+                FileInfo fileInfo = new FileInfo(item);
+                this.newLog.Add(new LogModel() { Action = "EXI", FileName = fileInfo.Name, FilePath = fileInfo.FullName, LastWriteTime = Convert.ToDateTime(fileInfo.LastWriteTime) });
+            }
+
+            try
+            {
+                using (StreamWriter streamWriter = new StreamWriter(sourcePath + "\\BackupsLog.log", false))
+                {
+                    string toWrite = JsonConvert.SerializeObject(this.newLog);
+                    streamWriter.Write(toWrite);
+                }
+            }
+            catch (Exception ex)
+            {
+                this.reportMaker.AddError(new ErrorDetails()
+                {
+                    Exception = ex.Message,
+                    Path = sourcePath + "\\BackupsLog.log",
+                    Problem = "Can't create the log file. Future DIFF and INCR backups won't be possible. Check the folder settings and repeat the backup."
+                });
+            }
         }
     }
 }

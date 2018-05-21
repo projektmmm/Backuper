@@ -19,19 +19,6 @@ namespace Daemon
         {
             int Count = 0;
 
-            /*
-            //Vytvori slozky pro diferencialni backupy
-            foreach (string destinationPath in this.DestinationPaths)
-            {
-                if (this.backupCount == 0)
-                {
-                    DirectoryInfo directoryInfo = Directory.CreateDirectory(destinationPath + "\\diff_backups");
-                    directoryInfo.Attributes = FileAttributes.Hidden;
-                    Directory.CreateDirectory(destinationPath + "\\diff_backups\\0");
-                }
-            }
-            */
-
             //Prespsani destination path
             for (int i = 0; i < destinationPaths.Count; i++)
             {
@@ -42,6 +29,23 @@ namespace Daemon
             foreach (string destinationPath in destinationPaths)
             {
                 int index = 0;
+                if (Directory.Exists(destinationPath) && backup.Override)
+                {
+                    try
+                    {
+                        Directory.Delete(destinationPath, true);
+                    }
+                    catch (Exception ex)
+                    {
+                        this.reportMaker.AddError(new ErrorDetails()
+                        {
+                            Exception = ex.Message,
+                            Problem = "Could not delete the old folder. Override failed",
+                            Path = destinationPath
+                        });
+                    }
+                }
+                    
                 foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
                 {
                     try
@@ -79,7 +83,7 @@ namespace Daemon
             }
 
             //Zkopíruje všechny soubory a přepíše existující, zanese o nich zaznamy do logu
-            List<LogModel> newLog = new List<LogModel>();
+            //*List<LogModel> newLog = new List<LogModel>();
             foreach (string destinationPath in destinationPaths)
             {
                 foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories).OrderBy(f => new FileInfo(f).FullName))
@@ -89,7 +93,7 @@ namespace Daemon
                         File.Copy(newPath, newPath.Replace(sourcePath, destinationPath), true);
                         Count++;
                         FileInfo fileInfo = new FileInfo(newPath);
-                        newLog.Add(new LogModel() { Action = "EXI", FileName = fileInfo.Name, FilePath = fileInfo.FullName, LastWriteTime = Convert.ToDateTime(fileInfo.LastWriteTime) });
+                        //*newLog.Add(new LogModel() { Action = "EXI", FileName = fileInfo.Name, FilePath = fileInfo.FullName, LastWriteTime = Convert.ToDateTime(fileInfo.LastWriteTime) });
                         reportMaker.AddFile(new FileInfo(newPath));
                     }
                     catch (Exception ex)
@@ -105,7 +109,8 @@ namespace Daemon
                 }
             }
 
-            //Zapsani logu do souboru souboru         
+            //Zapsani logu do souboru souboru      
+            /*
             try
             {
                 using (StreamWriter streamWriter = new StreamWriter(sourcePath + "\\BackupsLog.log", true))
@@ -122,7 +127,7 @@ namespace Daemon
                     Path = sourcePath + "\\BackupsLog.log",
                     Problem = "Can't create the log file. Future DIFF and INCR backups won't be possible. Check the folder settings and repeat the backup."
                 });
-            }
+            }*/
 
             /*
             FileInfo fi = new FileInfo(sourcePath + "\\BackupsLog.log");

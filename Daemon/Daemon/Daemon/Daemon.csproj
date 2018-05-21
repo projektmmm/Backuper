@@ -59,7 +59,6 @@
     <Compile Include="Backups\DifferentialBackup.cs" />
     <Compile Include="Backups\FullBackup.cs" />
     <Compile Include="Backups\Functionality.cs" />
-    <Compile Include="Backups\IBackup.cs" />
     <Compile Include="Backups\IncrementalBackup.cs" />
     <Compile Include="Communicator.cs" />
     <Compile Include="DaemonSettings.cs" />
