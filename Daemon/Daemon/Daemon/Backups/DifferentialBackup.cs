@@ -17,9 +17,6 @@ namespace Daemon
 
         protected override void Backup(string sourcePath, List<string> destinationPaths)
         {
-            int fileCount = 0;
-            int directoryCount = 0;
-
             //Nacteni FULL backup logu
             List<LogModel> oldLog = new List<LogModel>();
             //Nacetni stareho logu
@@ -92,15 +89,12 @@ namespace Daemon
                         }
 
                         reportMaker.AddFile(fileInfo);
-                        fileCount++;
                         break;
                     }
                 }
 
             }
 
-            Console.WriteLine("DifferentialBackup completed!");
-            Console.WriteLine(fileCount + " files copied");
             this.backupCount++;
         }
         /// <summary>

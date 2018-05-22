@@ -17,8 +17,6 @@ namespace Daemon
 
         protected override void Backup(string sourcePath, List<string> destinationPaths)
         {
-            int Count = 0;
-
             //Prespsani destination path
             for (int i = 0; i < destinationPaths.Count; i++)
             {
@@ -90,7 +88,6 @@ namespace Daemon
                     try
                     {
                         File.Copy(newPath, newPath.Replace(sourcePath, destinationPath), true);
-                        Count++;
                         FileInfo fileInfo = new FileInfo(newPath);
                         //*newLog.Add(new LogModel() { Action = "EXI", FileName = fileInfo.Name, FilePath = fileInfo.FullName, LastWriteTime = Convert.ToDateTime(fileInfo.LastWriteTime) });
                         reportMaker.AddFile(new FileInfo(newPath));
