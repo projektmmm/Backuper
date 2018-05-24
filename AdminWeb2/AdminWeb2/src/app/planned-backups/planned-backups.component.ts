@@ -31,7 +31,7 @@ export class PlannedBackupsComponent implements OnInit {
   }
 
   readonly Root_URL = 'http://localhost:63324'; 
-  displayedColumns = ['NextRun', 'Cron', 'DaemonId', 'BackupType', 'SourcePath', 'DestinationPath', 'Buttons'];
+  displayedColumns = ['NextRun', 'Cron', 'BackupType', 'SourcePath', 'DestinationPath', 'Buttons'];
   tableResource: MatTableDataSource<Backups>;
   items: Backups[] = [];
   itemCount: number;
