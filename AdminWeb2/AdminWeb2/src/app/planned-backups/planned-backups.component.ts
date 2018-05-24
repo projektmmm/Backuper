@@ -13,6 +13,7 @@ import { SendSettingsComponent } from './../settings-components/send-settings/se
 import { Http, Headers, RequestOptions, HttpModule} from '@angular/http';
 import { DataSource } from '@angular/cdk/table';
 import { FormGroupDirective } from '@angular/forms';
+import { forEach } from '@angular/router/src/utils/collection';
 
 
 @Component({
@@ -95,6 +96,13 @@ export class PlannedBackupsComponent implements OnInit {
   }
 
   private inititalizeTable(data: Backups[]) {
+
+    data.forEach(function (path)
+    {
+      path.SourcePath = path.SourcePath.replace(",","\n");
+      
+      path.DestinationPath = path.DestinationPath.replace(",","\n");
+    });
 
     this.tableResource = new MatTableDataSource(data);
     //this.tableResource.query({ offset: 0 })

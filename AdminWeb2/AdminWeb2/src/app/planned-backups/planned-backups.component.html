@@ -38,13 +38,50 @@
         <!-- SourcePath -->
         <ng-container matColumnDef="SourcePath">
           <mat-header-cell *matHeaderCellDef mat-sort-header>Source Path</mat-header-cell>
-          <mat-cell cell *matCellDef="let row">{{row.SourcePath}}</mat-cell>
+          <mat-cell cell *matCellDef="let row">
+            <!--{{row.SourcePath}}-->
+            
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Paths
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <!--div *ngFor="let path of SourcePaths">
+                    {{path}}
+                  </div-->
+
+                  {{row.SourcePath}}
+                </mat-expansion-panel>
+
+          </mat-cell>
         </ng-container>
       
           <!-- DestinationPath -->
           <ng-container matColumnDef="DestinationPath">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Destination Path</mat-header-cell>
-            <mat-cell cell *matCellDef="let row">{{row.DestinationPath}}</mat-cell>
+            <mat-cell cell *matCellDef="let row">
+              <!--{{row.DestinationPath}}-->
+
+              <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Paths
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <!--div *ngFor="let path of SourcePaths">
+                    {{path}}
+                  </div-->
+                  {{row.DestinationPath}}
+                </mat-expansion-panel>
+
+            </mat-cell>
           </ng-container>
       
           <!-- Buttons -->
