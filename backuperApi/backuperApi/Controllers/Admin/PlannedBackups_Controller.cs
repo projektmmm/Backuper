@@ -30,10 +30,12 @@ namespace backuperApi.Controllers
                 item.SourcePath = item.SourcePath.Replace("\\\\\\\\", "*");
                 item.SourcePath = item.SourcePath.Replace("\\", "");
                 item.SourcePath = item.SourcePath.Replace("*", "\\");
+                item.SourcePath = item.SourcePath.Replace("\"", "");
 
                 item.DestinationPath = item.DestinationPath.Replace("\\\\\\\\", "*");
                 item.DestinationPath = item.DestinationPath.Replace("\\", "");
                 item.DestinationPath = item.DestinationPath.Replace("*", "\\");
+                item.DestinationPath = item.DestinationPath.Replace("\"", "");
             }
 
 
@@ -64,10 +66,12 @@ namespace backuperApi.Controllers
                 item.SourcePath = item.SourcePath.Replace("\\\\\\\\", "*");
                 item.SourcePath = item.SourcePath.Replace("\\", "");
                 item.SourcePath = item.SourcePath.Replace("*", "\\");
+                item.SourcePath = item.SourcePath.Replace("\"", "");
 
                 item.DestinationPath = item.DestinationPath.Replace("\\\\\\\\", "*");
                 item.DestinationPath = item.DestinationPath.Replace("\\", "");
                 item.DestinationPath = item.DestinationPath.Replace("*", "\\");
+                item.DestinationPath = item.DestinationPath.Replace("\"", "");
             }
 
             return query.ToList<Backups>();
