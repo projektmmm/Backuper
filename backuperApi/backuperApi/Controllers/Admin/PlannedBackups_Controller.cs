@@ -19,6 +19,24 @@ namespace backuperApi.Controllers
         [Route("api/admin/planned-backups")]
         public List<Backups> Get()
         {
+            foreach (var item in this.database.Backups.ToList())
+            {
+                item.SourcePath = item.SourcePath.Remove(0, 2);
+                item.SourcePath = item.SourcePath.Remove(item.SourcePath.Length - 2, 2);
+
+                item.DestinationPath = item.DestinationPath.Remove(0, 2);
+                item.DestinationPath = item.DestinationPath.Remove(item.DestinationPath.Length - 2, 2);
+
+                item.SourcePath = item.SourcePath.Replace("\\\\\\\\", "*");
+                item.SourcePath = item.SourcePath.Replace("\\", "");
+                item.SourcePath = item.SourcePath.Replace("*", "\\");
+
+                item.DestinationPath = item.DestinationPath.Replace("\\\\\\\\", "*");
+                item.DestinationPath = item.DestinationPath.Replace("\\", "");
+                item.DestinationPath = item.DestinationPath.Replace("*", "\\");
+            }
+
+
             return this.database.Backups.ToList();
         }
 
@@ -34,6 +52,24 @@ namespace backuperApi.Controllers
                         select b;
 
             this.cronController.UpdateCron(query.ToList<Backups>());
+
+            foreach (var item in query.ToList<Backups>())
+            {
+                item.SourcePath = item.SourcePath.Remove(0, 2);
+                item.SourcePath = item.SourcePath.Remove(item.SourcePath.Length - 2, 2);
+
+                item.DestinationPath = item.DestinationPath.Remove(0, 2);
+                item.DestinationPath = item.DestinationPath.Remove(item.DestinationPath.Length - 2, 2);
+
+                item.SourcePath = item.SourcePath.Replace("\\\\\\\\", "*");
+                item.SourcePath = item.SourcePath.Replace("\\", "");
+                item.SourcePath = item.SourcePath.Replace("*", "\\");
+
+                item.DestinationPath = item.DestinationPath.Replace("\\\\\\\\", "*");
+                item.DestinationPath = item.DestinationPath.Replace("\\", "");
+                item.DestinationPath = item.DestinationPath.Replace("*", "\\");
+            }
+
             return query.ToList<Backups>();
         }
 
