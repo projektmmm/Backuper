@@ -31,9 +31,9 @@
 
             <!-- Funcbuttons -->
             <ng-container matColumnDef="Funcbuttons">
-                <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Edit</mat-header-cell>
                 <mat-cell cell *matCellDef="let row">
-                    <button mat-mini-fab color="primary" (click)="passRowIdToService(row.Id)">
+                    <button mat-icon-button color="primary" (click)="passRowIdToService(row.Id)">
                         <mat-icon>create</mat-icon>
                     </button>
                 </mat-cell>
