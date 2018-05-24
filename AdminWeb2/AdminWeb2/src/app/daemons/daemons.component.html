@@ -1,9 +1,11 @@
 <div class="page-header" color="primary">
     Daemons
     
+    <span class="addbutton">
+        <button mat-icon-button color="primary" (click)="AddDaemon()" class="margin-left"><mat-icon>add_circle</mat-icon></button>
+        <button *ngIf='NewRequest' mat-icon-button color="primary" (click)="Requests()"><mat-icon>notifications</mat-icon></button>
+    </span>
     
-    <button mat-mini-fab color="primary" (click)="AddDaemon()" class="margin-left"><mat-icon>add_circle</mat-icon></button>
-    <button *ngIf='NewRequest' mat-mini-fab color="primary" (click)="Requests()"><mat-icon>notifications</mat-icon></button>
 </div>
 
     

@@ -28,11 +28,11 @@
           <ng-container matColumnDef="Funcbuttons">
               <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
               <mat-cell cell *matCellDef="let row">
-                  <button mat-raised-button color="primary" (click)="VerifyDaemon(row.Id)">
-                      Verify
+                  <button mat-icon-button color="primary" (click)="VerifyDaemon(row.Id)">
+                    <mat-icon>verified_user</mat-icon>
                   </button>
-                  <button mat-raised-button color="primary" (click)="DeleteDaemon(row.Id)">
-                      KILL IT
+                  <button mat-icon-button color="primary" (click)="DeleteDaemon(row.Id)">
+                    <mat-icon>delete</mat-icon>
                 </button>
               </mat-cell>
           </ng-container>
