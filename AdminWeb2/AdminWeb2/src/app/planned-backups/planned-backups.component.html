@@ -52,11 +52,11 @@
             <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
             <mat-cell cell *matCellDef="let row">
       
-              <button mat-icon-button color="primary" (click)="showUpdateSettings(row.BackupType, row.Cron, row.DestinationPath, row.SourcePath, row.Id)">
+              <button mat-icon-button matTooltip="Edit" color="primary" (click)="showUpdateSettings(row.BackupType, row.Cron, row.DestinationPath, row.SourcePath, row.Id)">
                 <mat-icon>create</mat-icon>
               </button> 
 
-              <button mat-icon-button color="primary" (click)="delete(row)">
+              <button mat-icon-button matTooltip="Delete" color="primary" (click)="delete(row)">
                 <mat-icon>delete</mat-icon>
               </button> 
 

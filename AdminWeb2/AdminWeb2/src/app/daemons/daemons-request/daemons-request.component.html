@@ -1,4 +1,4 @@
-<div mat-dialog-title class="dialog-header">Verify Request</div>
+<div mat-dialog-title class="dialog-header">Verify Requests</div>
 
 
 
@@ -28,10 +28,10 @@
           <ng-container matColumnDef="Funcbuttons">
               <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
               <mat-cell cell *matCellDef="let row">
-                  <button mat-icon-button color="primary" (click)="VerifyDaemon(row.Id)">
+                  <button mat-icon-button matTooltip="Verify" color="primary" (click)="VerifyDaemon(row.Id)">
                     <mat-icon>verified_user</mat-icon>
                   </button>
-                  <button mat-icon-button color="primary" (click)="DeleteDaemon(row.Id)">
+                  <button mat-icon-button matTooltip="Delete" color="primary" (click)="DeleteDaemon(row.Id)">
                     <mat-icon>delete</mat-icon>
                 </button>
               </mat-cell>

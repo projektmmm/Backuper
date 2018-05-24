@@ -7,7 +7,7 @@
       <div class="infobuttons">
         <div class="infobutton">
           <button mat-raised-button routerLink="/daemons" class="leftButton">
-            <i class="material-icons">keyboard_arrow_left</i> Daemons List
+            <mat-icon>keyboard_return</mat-icon> Back
           </button>
         </div>
         <div class="infobutton">
@@ -28,13 +28,13 @@
         <mat-card class="card">
         <div>
             <form>
-                <mat-form-field class="dSettingsFormField">
+                <mat-form-field class="dSettingsFormField" color="">
                   <input matInput #DaemonId type="text" ng-model="DaemonId" placeholder="Daemon ID" disabled="true" value="{{ this.daemonId }}">
                 </mat-form-field>
-                <mat-form-field class="dSettingsFormField">
+                <mat-form-field class="dSettingsFormField" color="">
                   <input matInput #DaemonName type="text" ng-model="DaemonName" placeholder="Daemon Name" disabled = "{{ this.editSettings }}" value="{{ this.daemonName }}">
                 </mat-form-field>
-                <mat-form-field class="dSettingsFormField">
+                <mat-form-field class="dSettingsFormField" color="">
                   <input matInput #DaemonDescription type="text" ng-model="DaemonDescription" placeholder="Daemon Description" disabled="{{ this.editSettings }}" value="{{ this.daemonDescription }}">
                 </mat-form-field>
             </form>
@@ -44,87 +44,12 @@
             <mat-icon>create</mat-icon>
           </button>
           <a *ngIf="!this.editSettings" class="infobutton">
-            <button mat-raised-button class="formButton" color="primary" (click)="this.saveFormEditing(DaemonName.value, DaemonDescription.value)">Save</button>
-            <button mat-raised-button class="formButton" color="primary" (click)="this.cancelFormEditing()">Cancel</button>
+            <button mat-raised-button class="formButton" color="" (click)="this.saveFormEditing(DaemonName.value, DaemonDescription.value)">Save</button>
+            <button mat-raised-button class="formButton" color="" (click)="this.cancelFormEditing()">Cancel</button>
           </a>
         </div>
         </mat-card>
       </div>
-    
-
-
-
-
-      <!--table class="warningTable">
-        <tr>
-          <td>
-            
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2" >
-            <button mat-raised-button routerLink="/daemons" class="leftButton">
-              <i class="material-icons">keyboard_arrow_left</i> Daemons List
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td class="warningWindow" colspan="2">
-            <button mat-raised-button (click)="this.newBackup()" class="leftButton">New Backup</button>
-          </td>
-        </tr>
-        <tr>
-          <td class="nextBackupCountdown" colspan="2">
-            <button mat-raised-button color="{{ this.warningButtonColor }}" class="leftButton" ng-hide="this.hideWarningButton" (click)="showWarning()"><i class="material-icons">
-              {{ this.warningButtonIcon }}</i> {{ this.warningButtonText }}
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <h3 class="daemonSettings">Daemon Settings</h3>
-          </td>
-          <td>
-            <button mat-raised-button color="warn" (click)="this.allowEdit()" class="editButton"> 
-              <i class="material-icons">build</i>
-              Edit
-            </button>
-          </td>
-        </tr-->
-        <!-- DAEMON SETTINGS FORM -->
-        <!-- DAEMON ID -->
-        <!--tr>
-        <td colspan="2">
-          <form>
-            <mat-form-field class="dSettingsFormField">
-              <input matInput #DaemonId type="text" ng-model="DaemonId" placeholder="Daemon ID" disabled="true" value="{{ this.daemonId }}">
-            </mat-form-field-->
-        <!-- DAEMON NAME -->
-            <!--mat-form-field class="dSettingsFormField">
-              <input matInput #DaemonName type="text" ng-model="DaemonName" placeholder="Daemon Name" disabled = "{{ this.editSettings }}" value="{{ this.daemonName }}">
-            </mat-form-field-->
-        <!-- DAEMON DESCRIPTION -->
-            <!--mat-form-field class="dSettingsFormField">
-              <input matInput #DaemonDescription type="text" ng-model="DaemonDescription" placeholder="Daemon Description" disabled="{{ this.editSettings }}" value="{{ this.daemonDescription }}">
-            </mat-form-field>
-          </form>
-        </td>
-      </tr-->
-      <!-- BUTTONS -->
-      <!--div *ngIf="!this.editSettings">          
-      <tr>
-        <td colspan="2">
-          <button mat-raised-button class="formButton" color="primary" (click)="this.saveFormEditing(DaemonName.value, DaemonDescription.value)">Save</button>
-          <button mat-raised-button class="formButton" color="primary" (click)="this.cancelFormEditing()">Cancel</button>
-        </td>
-      </tr>
-      </div>
-      </table-->
-
-
-
-
-
     </mat-grid-tile>
     <mat-grid-tile colspan="3" rowspan="5">
       <div class="tabs">

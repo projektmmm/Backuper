@@ -36,6 +36,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCardModule} from '@angular/material/card';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 import 'hammerjs';
 import { PlannedBackupsComponent } from './planned-backups/planned-backups.component';
@@ -119,6 +120,7 @@ import { DaemonsRequestComponent } from './daemons/daemons-request/daemons-reque
     MatDialogModule,
     MatExpansionModule,
     MatCardModule,
+    MatTooltipModule,
   ],
   providers: [
     rowIdService

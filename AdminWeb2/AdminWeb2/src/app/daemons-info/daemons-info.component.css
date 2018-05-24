@@ -42,7 +42,7 @@ mat-grid-tile {
 }
 
 .dSettingsFormField {
-    width: 300px;
+    width: 250px;
 }
 
 .daemonSettings {
@@ -52,7 +52,7 @@ mat-grid-tile {
 }
 
 .card {
-    width: 70%;
+    width: 56%;
     margin-left: 30px;
 }
 

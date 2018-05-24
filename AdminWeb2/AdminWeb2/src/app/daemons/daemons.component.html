@@ -2,8 +2,8 @@
     Daemons
     
     <span class="addbutton">
-        <button mat-icon-button color="primary" (click)="AddDaemon()" class="margin-left"><mat-icon>add_circle</mat-icon></button>
-        <button *ngIf='NewRequest' mat-icon-button color="primary" (click)="Requests()"><mat-icon>notifications</mat-icon></button>
+        <button mat-icon-button matTooltip="New Daemon" color="primary" (click)="AddDaemon()" class="margin-left"><mat-icon>add_circle</mat-icon></button>
+        <button *ngIf='NewRequest' mat-icon-button matTooltip="Requests" color="primary" (click)="Requests()"><mat-icon>notifications</mat-icon></button>
     </span>
     
 </div>
@@ -35,7 +35,7 @@
             <ng-container matColumnDef="Funcbuttons">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Edit</mat-header-cell>
                 <mat-cell cell *matCellDef="let row">
-                    <button mat-icon-button color="primary" (click)="passRowIdToService(row.Id)">
+                    <button mat-icon-button matTooltip="Edit" color="primary" (click)="passRowIdToService(row.Id)">
                         <mat-icon>create</mat-icon>
                     </button>
                 </mat-cell>
