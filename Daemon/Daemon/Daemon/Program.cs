@@ -20,7 +20,7 @@ namespace Daemon
             PlannedBackups backup = new PlannedBackups()
             {
                 Id = 143,
-                BackupType = "DIFF",
+                BackupType = "INCR",
                 SourcePath = "[\"C:\\\\BACKUP\\\\BACKUPI\",\"C:\\\\BACKUP\\\\BACKUPII\",\"C:\\\\BACKUP\\\\BACKUPIII\"]",
                 DestinationPath = "[\"C:\\\\BACKUP\\\\DESTINATIONI\",\"C:\\\\BACKUP\\\\DESTINATIONII\"]",
                 NextRun = DateTime.Now,
@@ -28,9 +28,9 @@ namespace Daemon
             };
 
             //app.SetTimer();
-            app.AnalyzeBackups();
-            DifferentialBackup df = new DifferentialBackup(backup);
-            df.Start();
+           // app.AnalyzeBackups();
+            IncrementalBackup df = new IncrementalBackup(backup);
+            
 
             Console.ReadLine();
         }

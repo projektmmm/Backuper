@@ -58,24 +58,43 @@ namespace Daemon
             foreach (string filePath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories).OrderBy(f => new FileInfo(f).FullName))
             {
                 FileInfo fileInfo = new FileInfo(filePath);
+                bool found = false;
 
                 foreach (LogModel item in oldLog)
                 {
-                    if (item.FilePath != new FileInfo(filePath).FullName)
-                        continue;
                     //nezmeneno - EXISTS
                     if (fileInfo.FullName == item.FilePath && Convert.ToDateTime(fileInfo.LastWriteTime) == item.LastWriteTime)
                     {
+                        found = true;
                         break;
                     }
                     //zmeneno
-                    else
+                    else if (fileInfo.FullName == item.FilePath && Convert.ToDateTime(fileInfo.LastWriteTime) != item.LastWriteTime)
                     {
                         foreach (string destinationPath in destinationPaths)
                         {
                             try
                             {
-                                File.Copy(filePath, destinationPath + $"\\{fileInfo.Name}");
+                                string dirPath = fileInfo.FullName.Replace(sourcePath, destinationPath);
+                                dirPath = dirPath.Substring(0, Functionality.IdentifyCharPosition('\\', dirPath)-1);
+                                if (!Directory.Exists(dirPath))
+                                {
+                                    try
+                                    {
+                                        Directory.CreateDirectory(dirPath);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        this.reportMaker.AddError(new ErrorDetails()
+                                        {
+                                            Exception = ex.Message,
+                                            Problem = "Backupper was unable to create destination path.",
+                                            Path = dirPath
+                                        });
+                                    }
+                                }
+
+                                File.Copy(filePath, fileInfo.FullName.Replace(sourcePath, destinationPath));
                             }
                             catch (Exception ex)
                             {
@@ -89,10 +108,52 @@ namespace Daemon
                         }
 
                         reportMaker.AddFile(fileInfo);
+                        found = true;
                         break;
                     }
                 }
 
+                if (found)
+                    continue;
+                else
+                {
+                    foreach (string destinationPath in destinationPaths)
+                    {
+                        try
+                        {
+                            string dirPath = fileInfo.FullName.Replace(sourcePath, destinationPath);
+                            dirPath = dirPath.Substring(0, Functionality.IdentifyCharPosition('\\', dirPath)-1);
+
+                            if (!Directory.Exists(dirPath))
+                            {
+                                try
+                                {
+                                    Directory.CreateDirectory(dirPath);
+                                }
+                                catch (Exception ex)
+                                {
+                                    this.reportMaker.AddError(new ErrorDetails()
+                                    {
+                                        Exception = ex.Message,
+                                        Problem = "Backupper was unable to create destination path.",
+                                        Path = dirPath
+                                    });
+                                }
+                            }
+
+                            File.Copy(filePath, fileInfo.FullName.Replace(sourcePath, destinationPath));
+                        }
+                        catch (Exception ex)
+                        {
+                            this.reportMaker.AddError(new ErrorDetails()
+                            {
+                                Exception = ex.Message,
+                                Problem = "Backupper was unable to copy a file.",
+                                Path = sourcePath
+                            });
+                        }
+                    }
+                }
             }
 
             this.backupCount++;
