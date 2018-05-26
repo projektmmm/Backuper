@@ -32,6 +32,7 @@ export class SendNewSettingsComponent implements OnInit {
       this.i_sourcePath = data.sourcePath;
       this.i_backupId = data.backupId;
       this.isInEdit = true;
+      this.NewOrEdit = data.NewOrEdit;
       /*      
       this.i_serverAdress = data.serverAdress;
       this.i_portNumber = data.portNumber;
@@ -80,7 +81,7 @@ export class SendNewSettingsComponent implements OnInit {
   SourcePathmatcher = new MyErrorStateMatcher();
   DestinationPathmatcher = new MyErrorStateMatcher();
 
-
+  NewOrEdit: string = "New";
 
   ngOnInit() {
   }

@@ -136,7 +136,8 @@ export class PlannedBackupsComponent implements OnInit {
         cron: o_cron,
         destinationPath: o_destinationPath,
         sourcePath: o_sourcePath,
-        backupId: o_backupId
+        backupId: o_backupId,
+        NewOrEdit: "Edit"
       }
     });
 

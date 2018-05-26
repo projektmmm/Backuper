@@ -2,7 +2,7 @@
     Daemons
     
     <span class="addbutton">
-        <button mat-icon-button matTooltip="New Daemon" color="primary" (click)="AddDaemon()" class="margin-left"><mat-icon>add_circle</mat-icon></button>
+        <button mat-icon-button matTooltip="New daemon" color="primary" (click)="AddDaemon()" class="margin-left"><mat-icon>add_circle</mat-icon></button>
         <button *ngIf='NewRequest' mat-icon-button matTooltip="Requests" color="primary" (click)="Requests()"><mat-icon>notifications</mat-icon></button>
     </span>
     
@@ -27,7 +27,7 @@
 
             <!-- Description -->
             <ng-container matColumnDef="Description">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>
                 <mat-cell cell *matCellDef="let row">{{ row.Description }}</mat-cell>
             </ng-container>
 

@@ -11,7 +11,7 @@
           </button>
         </div>
         <div class="infobutton">
-          <button mat-raised-button (click)="this.newBackup()" class="leftButton">New Backup</button>
+          <button mat-raised-button (click)="this.newBackup()" class="leftButton">New backup</button>
         </div>
         <div class="infobutton">
           <button mat-raised-button color="{{ this.warningButtonColor }}" class="leftButton" ng-hide="this.hideWarningButton" (click)="showWarning()">
@@ -29,13 +29,13 @@
         <div>
             <form>
                 <mat-form-field class="dSettingsFormField" color="">
-                  <input matInput #DaemonId type="text" ng-model="DaemonId" placeholder="Daemon ID" disabled="true" value="{{ this.daemonId }}">
+                  <input matInput #DaemonId type="text" ng-model="DaemonId" placeholder="Daemon id" disabled="true" value="{{ this.daemonId }}">
                 </mat-form-field>
                 <mat-form-field class="dSettingsFormField" color="">
-                  <input matInput #DaemonName type="text" ng-model="DaemonName" placeholder="Daemon Name" disabled = "{{ this.editSettings }}" value="{{ this.daemonName }}">
+                  <input matInput #DaemonName type="text" ng-model="DaemonName" placeholder="Daemon name" disabled = "{{ this.editSettings }}" value="{{ this.daemonName }}">
                 </mat-form-field>
                 <mat-form-field class="dSettingsFormField" color="">
-                  <input matInput #DaemonDescription type="text" ng-model="DaemonDescription" placeholder="Daemon Description" disabled="{{ this.editSettings }}" value="{{ this.daemonDescription }}">
+                  <input matInput #DaemonDescription type="text" ng-model="DaemonDescription" placeholder="Daemon description" disabled="{{ this.editSettings }}" value="{{ this.daemonDescription }}">
                 </mat-form-field>
             </form>
         </div>

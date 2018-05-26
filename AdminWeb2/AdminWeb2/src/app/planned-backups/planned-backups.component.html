@@ -1,5 +1,5 @@
 <div class="page-header" color="primary">
-  Planned Backups
+  Planned backups
 </div>
 <div class="padding-left-right">
     <div class="mat-elevation-z8">
@@ -13,13 +13,13 @@
 
         <!-- DaemonId -->
         <ng-container matColumnDef="DaemonId">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Daemon Id </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Daemon id </mat-header-cell>
             <mat-cell *matCellDef="let row" ng-model="daemonId">{{row.DaemonId}}</mat-cell>
         </ng-container>
       
         <!-- RunAt -->
         <ng-container matColumnDef="NextRun">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Next Run</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Next run</mat-header-cell>
             <mat-cell cell *matCellDef="let row" ng-model="runAt">{{row.NextRun | date: "dd.MM.yyyy - hh:mm"}}</mat-cell>
         </ng-container>
       
@@ -31,13 +31,13 @@
       
         <!-- BackupType -->
         <ng-container matColumnDef="BackupType">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Backup Type</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Backup type</mat-header-cell>
           <mat-cell cell *matCellDef="let row">{{row.BackupType}}</mat-cell>
         </ng-container>
       
         <!-- SourcePath -->
         <ng-container matColumnDef="SourcePath">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Source Path</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Source path</mat-header-cell>
           <mat-cell cell *matCellDef="let row">
             <!--{{row.SourcePath}}-->
             
@@ -62,7 +62,7 @@
       
           <!-- DestinationPath -->
           <ng-container matColumnDef="DestinationPath">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Destination Path</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Destination path</mat-header-cell>
             <mat-cell cell *matCellDef="let row">
               <!--{{row.DestinationPath}}-->
 
