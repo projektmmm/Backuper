@@ -97,12 +97,12 @@ export class PlannedBackupsComponent implements OnInit {
 
   private inititalizeTable(data: Backups[]) {
 
-    data.forEach(function (path)
-    {
-      path.SourcePath = path.SourcePath.replace(",","\n");
-      
-      path.DestinationPath = path.DestinationPath.replace(",","\n");
-    });
+    //data.forEach(function (path)
+    //{
+    //  path.SourcePath = path.SourcePath.replace(",","\n");
+    //  
+    //  path.DestinationPath = path.DestinationPath.replace(",","\n");
+    //});
 
     this.tableResource = new MatTableDataSource(data);
     //this.tableResource.query({ offset: 0 })
