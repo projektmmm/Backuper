@@ -10,13 +10,13 @@ namespace Daemon
     class Program
     {
         static void Main(string[] args)
-        {
+        {/*
             Application app = new Application();
-            /*
+            
             app.SetTimer();
 
             app.AnalyzeBackups();
-            */
+            
             PlannedBackups backup = new PlannedBackups()
             {
                 Id = 143,
@@ -30,8 +30,19 @@ namespace Daemon
             //app.SetTimer();
            // app.AnalyzeBackups();
             IncrementalBackup df = new IncrementalBackup(backup);
-            
+            */
 
+            DaemonSettings.ftpSettings = new List<FtpSettings>()
+            {
+                new FtpSettings()
+                {
+                    Password = "eiTqR7EMZD5zy7M",
+                    Username = "dlpuser@dlptest.com",
+                    ServerAdress = "ftp://ftp.dlptest.com/"
+                }
+            };
+
+            BackupOperations.SendFtp("C:\\BACKUP\\BACKUPI");
             Console.ReadLine();
         }
     }

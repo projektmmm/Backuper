@@ -65,10 +65,10 @@ namespace Daemon
                             break;
                         case "DIFF":
                             this.DoBackup(new DifferentialBackup(item));
-                            break;/*
+                            break;
                         case "INCR":
                             this.DoBackup(new IncrementalBackup(item));
-                            break;*/
+                            break;
                     }
                 }
                 else if (item.NextRun > DateTime.Now)
@@ -80,6 +80,7 @@ namespace Daemon
         {
             backup.Start();
             backup.SendReport();
+            backup.Operations();
         }
     }
 }

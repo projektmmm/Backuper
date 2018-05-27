@@ -36,7 +36,6 @@ namespace Daemon
             }
         }
 
-
         /// <summary>
         /// Odeslani reportu o backupu
         /// </summary>
@@ -48,6 +47,25 @@ namespace Daemon
             using (var client = GetJsonClient())
             {
                 HttpResponseMessage response = await client.PostAsJsonAsync(apiDestination, data);
+            }
+        }
+
+        public async Task GetFtpSettings()
+        {
+            string apiDestination = $"api/daemon/ftp/{this.daemonId.ToString()}";
+
+            List<FtpSettings> ret = new List<FtpSettings>();
+            using (var client = GetJsonClient())
+            {
+                HttpResponseMessage response = await client.GetAsync(apiDestination);
+                if (response.IsSuccessStatusCode)
+                {
+                    DaemonSettings.ftpSettings = await response.Content.ReadAsAsync<List<FtpSettings>>();
+                }
+                else
+                {
+                    throw new HttpRequestException("Cannot connect to the api");
+                }
             }
         }
 

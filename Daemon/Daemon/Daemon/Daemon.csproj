@@ -65,6 +65,7 @@
     <Compile Include="Models\BackupReport.cs" />
     <Compile Include="Models\ErrorDetails.cs" />
     <Compile Include="Models\FileInformation.cs" />
+    <Compile Include="Models\FtpSettings.cs" />
     <Compile Include="Models\LogModel.cs" />
     <Compile Include="Models\PlannedBackups.cs" />
     <Compile Include="Program.cs" />

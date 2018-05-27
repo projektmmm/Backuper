@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using ICSharpCode.SharpZipLib.Core;
 using ICSharpCode.SharpZipLib.Zip;
 using System.IO;
+using System.Threading;
+using System.Net;
 
 namespace Daemon
 {
@@ -66,6 +68,51 @@ namespace Daemon
             {
                 CompressFolder(item, zipStream, folderOffset);
             }
+        }
+
+        public static void SendFtp(string source)
+        {
+            string[] files = Directory.GetFiles(source, "*.*");
+            string[] subDirs = Directory.GetDirectories(source);
+
+            foreach (FtpSettings item in DaemonSettings.ftpSettings)
+            {
+                foreach (string file in files)
+                {
+
+                    FtpWebRequest request = (FtpWebRequest)WebRequest.Create(new Uri(item.ServerAdress));
+                    request.Method = WebRequestMethods.Ftp.UploadFileWithUniqueName;
+
+                    request.Credentials = new NetworkCredential(item.Username, item.Password);
+
+                    byte[] fileContents;
+                    using (StreamReader sourceStream = new StreamReader(Path.GetFileName(file)))
+                    {
+                        fileContents = Encoding.UTF8.GetBytes(sourceStream.ReadToEnd());
+                    }
+
+                    request.ContentLength = fileContents.Length;
+
+                    using (Stream requestStream = request.GetRequestStream())
+                    {
+                        requestStream.Write(fileContents, 0, fileContents.Length);
+                    }
+
+                    using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+                    {
+                        Console.WriteLine("Upload File Complete, status {0}", response.StatusDescription);
+                    }
+                }
+
+                foreach (string subDir in subDirs)
+                {
+                    using (WebClient client = new WebClient())
+                    {
+                        //client.cre
+                    }
+                }
+            }
+
         }
     }
 }

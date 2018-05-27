@@ -102,5 +102,21 @@ namespace Daemon
                 });
             }
         }
+
+        public virtual void Operations()
+        {
+            if (this.backup.Ftp)
+            {
+                this.communicator.GetFtpSettings();
+                try
+                {
+                    BackupOperations.SendFtp(this.DestinationPaths[0]);
+                }
+                catch (Exception ex)
+                {
+                    
+                }
+            }
+        }
     }
 }

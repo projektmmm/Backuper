@@ -23,7 +23,7 @@ namespace backuperApi.Controllers.Admin
             {
                 sConn.Open();
                 MySqlCommand command = new MySqlCommand(commandText, sConn);
-                command.Parameters.Add("@UserName", MySqlDbType.VarChar);
+                command.Parameters.Add("@Username", MySqlDbType.VarChar);
                 command.Parameters.Add("@DaemonId", MySqlDbType.Int32);
 
                 command.Parameters["@UserName"].Value = userName;

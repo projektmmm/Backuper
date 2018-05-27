@@ -18,5 +18,6 @@ namespace Daemon
         public string DestinationPath { get; set; }
         public bool Rar { get; set; }
         public bool Override { get; set; } = false;
+        public bool Ftp { get; set; }
     }
 }

@@ -16,5 +16,6 @@ namespace Daemon
         public const int AskInterval = 60000; //60s
 
         public static List<PlannedBackups> plannedBackups;
+        public static List<FtpSettings> ftpSettings;
     }
 }
