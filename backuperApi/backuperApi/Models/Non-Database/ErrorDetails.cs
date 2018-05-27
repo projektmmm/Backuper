@@ -20,12 +20,13 @@ namespace backuperApi
         {
             return "SELECT be.Id, be.AffectedFiles, be.Problem, br.BackupId, da.Id, da.Name, be.Solved, be.ProblemPath " +
                 "FROM BackupErrors be INNER JOIN " +
-                "BackupReport br ON be.Id=br.BackupErrorId " +
-                "INNER JOIN Daemons da ON da.Id=br.DaemonId " +
-                "INNER JOIN Users us ON  br.UserId=us.Id " +
-                $"WHERE us.Username=@UserName AND br.DaemonId=@DaemonId " +
-                "AND be.Problem <> 'No problem'" +
+                "BackupReport br ON be.BackupReportId=br.Id INNER JOIN " +
+                "Daemons da ON br.DaemonId=da.Id INNER JOIN " +
+                "Users us ON br.UserId=us.Id " +
+                $"WHERE us.Username=@Username AND br.DaemonId=@DaemonId " +
+                "AND be.Problem <> 'No problem' " +
                 "ORDER BY be.Solved ASC";
+                
         }
     }
 }
