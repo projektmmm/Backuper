@@ -143,64 +143,68 @@
                     Path Settings
                 </div>
                 <mat-tab-group mat-stretch-tabs="always" class="tab-width">
-                      <mat-tab label="Local">   
-                          <div class="tab-padding padd">
+                      <mat-tab label="Source Paths">   
+                          <div class="tab-padding">
                               <form class="form-settings">
-                                  <div *ngFor="let DestinationPath of DestinationPaths">
-                                      <mat-form-field class="width-full">
-                                          <input matInput value="0" #DestinationPath type="text" ng-model="DestinationPath" placeholder="DestinationPath" value="{{i_destinationPath}}" [formControl]="DestinationPathFormControl" [errorStateMatcher]="DestinationPathmatcher">
-                                          <mat-error *ngIf="DestinationPathFormControl.hasError('pattern') && !DestinationPathFormControl.hasError('required')">
-                                              Please enter a valid pattern
-                                          </mat-error>
-                                          <mat-error *ngIf="DestinationPathFormControl.hasError('required')">
-                                              Path is <strong>required</strong>
-                                          </mat-error>
-                                      </mat-form-field>
-                                      <button mat-mini-fab color="primary" (click)="AddDestinationPath()"><mat-icon>add_circle</mat-icon></button>
-                                  </div> 
                                   <div *ngFor="let SourcePath of SourcePaths">
                                       <mat-form-field class="width-full">
-                                          <input matInput value="0" #SourcePath type="text" ng-model="SourcePath" placeholder="SourcePath" value="{{i_sourcePath}}" [formControl]="SourcePathFormControl" [errorStateMatcher]="SourcePathmatcher"> 
-                                          <mat-error *ngIf="SourcePathFormControl.hasError('pattern') && !SourcePathFormControl.hasError('required')">
-                                              Please enter a valid pattern
-                                          </mat-error>
-                                          <mat-error *ngIf="SourcePathFormControl.hasError('required')">
-                                              Path is <strong>required</strong>
-                                          </mat-error>
+                                          <input matInput value="0" #SourcePath type="text" ng-model="SourcePath" placeholder="SourcePath" value="{{i_sourcePath}}"> 
                                       </mat-form-field>
-                                      <button mat-mini-fab color="primary" (click)="AddSourcePath()"><mat-icon>add_circle</mat-icon></button>
+                                      <button mat-icon-button color="primary" (click)="AddSourcePath()"><mat-icon>add_circle</mat-icon></button>
                                   </div>
                               </form>
                           </div>
                       </mat-tab>
                       <!-- FTP -->
-                      <mat-tab label="FTP">
-                          <table>
-                              <tr>
-                                  <td>
-                              <mat-form-field class="rightFTPform">
-                                  <input matInput value="0" #ServerAddress type="text" ng-model="ServerAddress" placeholder="Server Address" value="{{i_serverAdress}}">
-                              </mat-form-field>
-                              </td>
-                              <td class="rightFTPpadding">
-                              <mat-form-field class="rightFTPform">
-                                  <input matInput value="0" #PortNumber type="text" ng-model="PortNumber" placeholder="Port Number" value="{{i_portNumber}}">
-                              </mat-form-field>    
-                              </td>
-                              </tr>
-                              <tr>
-                              <td>
-                              <mat-form-field class="rightFTPform">
-                                      <input matInput value="0" #FTPUsername type="text" ng-model="FTPUsername" placeholder="Username" value="{{this.i_username}}">
-                              </mat-form-field>
-                              </td>   
-                              <td class="rightFTPpadding">
-                              <mat-form-field class="rightFTPform">
-                                  <input matInput value="0" #FTPPassword type="password" ng-model="FTPPassword" placeholder="Password" value="{{this.i_password}}">
-                              </mat-form-field>
-                              </td>
-                              </tr>
-                              </table>
+                      <mat-tab label="Destination Paths">
+                          <div class="tab-padding">
+                              <mat-checkbox #LocalCheckbox color="primary" checked="true" (change)="changeLocalCheckBox(LocalCheckbox,FTPCheckbox)">Local</mat-checkbox>
+                              <span class="space"></span>
+                              <mat-checkbox #FTPCheckbox color="primary" (change)="changeFTPCheckBox(LocalCheckbox,FTPCheckbox)">FTP</mat-checkbox>
+                          </div>
+                            
+                            <div *ngIf="LocalCheckbox.checked">
+                                <div *ngFor="let DestinationPath of DestinationPaths">
+                                    <mat-form-field class="width-full">
+                                        <input matInput value="0" #DestinationPath type="text" ng-model="DestinationPath" placeholder="DestinationPath" value="{{i_destinationPath}}">
+                                    </mat-form-field>
+                                    <button mat-icon-button color="primary" (click)="AddDestinationPath()"><mat-icon>add_circle</mat-icon></button>
+                                </div>
+                            </div>
+
+                            <div *ngIf="FTPCheckbox.checked">
+                                <table>                              
+                                    <tr>
+                                        <td>
+                                            <mat-form-field class="rightFTPform">
+                                                <input matInput value="0" #ServerAddress type="text" ng-model="ServerAddress" placeholder="Server Address" value="{{i_serverAdress}}">
+                                            </mat-form-field>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <mat-form-field class="rightFTPform">
+                                                <input matInput value="0" #PortNumber type="text" ng-model="PortNumber" placeholder="Port Number" value="{{i_portNumber}}">
+                                            </mat-form-field>    
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <mat-form-field class="rightFTPform">
+                                                <input matInput value="0" #FTPUsername type="text" ng-model="FTPUsername" placeholder="Username" value="{{this.i_username}}">
+                                            </mat-form-field>
+                                        </td>  
+                                    </tr>
+                                    <tr> 
+                                        <td>
+                                            <mat-form-field class="rightFTPform">
+                                                <input matInput value="0" #FTPPassword type="password" ng-model="FTPPassword" placeholder="Password" value="{{this.i_password}}">
+                                            </mat-form-field>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
                       </mat-tab>
                   </mat-tab-group>               
             </div>

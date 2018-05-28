@@ -9,12 +9,7 @@ import { query } from '@angular/core/src/animation/dsl';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-}
+
 
 @Component({
   selector: 'send-new-settings',
@@ -78,8 +73,6 @@ export class SendNewSettingsComponent implements OnInit {
     Validators.pattern("^[a-zA-Z]{1}:(.)+"),
   ]);
 
-  SourcePathmatcher = new MyErrorStateMatcher();
-  DestinationPathmatcher = new MyErrorStateMatcher();
 
   NewOrEdit: string = "New";
 
@@ -192,6 +185,34 @@ export class SendNewSettingsComponent implements OnInit {
     }
   }
 
+
+  changeLocalCheckBox(LocalCheckbox,FTPCheckbox)
+  {
+    if(FTPCheckbox.checked)
+    {
+      LocalCheckbox.checked = true;
+      FTPCheckbox.checked = false;
+    }
+    else
+    {
+      LocalCheckbox.checked = true;
+      FTPCheckbox.checked = false;
+    }
+  }
+
+  changeFTPCheckBox(LocalCheckbox,FTPCheckbox)
+  {
+    if(LocalCheckbox.checked)
+    {
+      LocalCheckbox.checked = false;
+      FTPCheckbox.checked = true;
+    }
+    else
+    {
+      LocalCheckbox.checked = false;
+      FTPCheckbox.checked = true;
+    }
+  }
 
   UpdateCronHourly(Cron, EveryHourRadioHourly, StartEveryHourRadioHourly, EveryHourHourly, StartEveryHourHourly, StartEveryMinuteHourly)
   {

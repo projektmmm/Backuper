@@ -126,7 +126,6 @@ export class PlannedBackupsComponent implements OnInit {
     this.id = row.Id;
   }
 
-
   showUpdateSettings(o_backupType: string, o_cron: string, o_destinationPath: string, o_sourcePath: string, o_backupId: number)
   {
     console.log(o_backupId);

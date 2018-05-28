@@ -41,7 +41,7 @@
           <mat-cell cell *matCellDef="let row">
             <!--{{row.SourcePath}}-->
             
-                <mat-expansion-panel>
+                <mat-expansion-panel #sourceExp>
                   <mat-expansion-panel-header>
                     <mat-panel-title>
                       Paths
@@ -66,7 +66,7 @@
             <mat-cell cell *matCellDef="let row">
               <!--{{row.DestinationPath}}-->
 
-              <mat-expansion-panel>
+              <mat-expansion-panel #destinationExp (opened)="sourceExp.open()">
                   <mat-expansion-panel-header>
                     <mat-panel-title>
                       Paths

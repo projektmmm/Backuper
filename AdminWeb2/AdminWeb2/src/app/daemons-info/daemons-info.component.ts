@@ -145,7 +145,7 @@ export class DaemonsInfoComponent implements OnInit {
 
   newBackup() {
     let dialogRef = this.dialog.open(SendNewSettingsComponent, {
-      //width: '1400px',
+      width: '1300px',
       //height: '600px',
     });
 
