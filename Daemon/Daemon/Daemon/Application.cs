@@ -79,8 +79,8 @@ namespace Daemon
         private void DoBackup(ABackup backup)
         {
             backup.Start();
-            backup.SendReport();
             backup.Operations();
+            backup.SendReport();
         }
     }
 }

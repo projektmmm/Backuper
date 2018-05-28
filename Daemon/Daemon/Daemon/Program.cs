@@ -36,13 +36,13 @@ namespace Daemon
             {
                 new FtpSettings()
                 {
-                    Password = "eiTqR7EMZD5zy7M",
+                    Password = "deiTqR7EMZD5zy7M",
                     Username = "dlpuser@dlptest.com",
                     ServerAdress = "ftp://ftp.dlptest.com/"
                 }
             };
 
-            BackupOperations.SendFtp("C:\\BACKUP\\BACKUPI");
+            BackupOperations.Ftp("C:\\BACKUP\\BACKUPI");
             Console.ReadLine();
         }
     }

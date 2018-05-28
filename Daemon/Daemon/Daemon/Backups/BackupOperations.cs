@@ -70,49 +70,76 @@ namespace Daemon
             }
         }
 
-        public static void SendFtp(string source)
+        public static bool Ftp(string source)
         {
             string[] files = Directory.GetFiles(source, "*.*");
             string[] subDirs = Directory.GetDirectories(source);
+            bool ret = true;
 
             foreach (FtpSettings item in DaemonSettings.ftpSettings)
             {
-                foreach (string file in files)
-                {
-
-                    FtpWebRequest request = (FtpWebRequest)WebRequest.Create(new Uri(item.ServerAdress));
-                    request.Method = WebRequestMethods.Ftp.UploadFileWithUniqueName;
-
-                    request.Credentials = new NetworkCredential(item.Username, item.Password);
-
-                    byte[] fileContents;
-                    using (StreamReader sourceStream = new StreamReader(Path.GetFileName(file)))
-                    {
-                        fileContents = Encoding.UTF8.GetBytes(sourceStream.ReadToEnd());
-                    }
-
-                    request.ContentLength = fileContents.Length;
-
-                    using (Stream requestStream = request.GetRequestStream())
-                    {
-                        requestStream.Write(fileContents, 0, fileContents.Length);
-                    }
-
-                    using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
-                    {
-                        Console.WriteLine("Upload File Complete, status {0}", response.StatusDescription);
-                    }
-                }
-
-                foreach (string subDir in subDirs)
-                {
-                    using (WebClient client = new WebClient())
-                    {
-                        //client.cre
-                    }
-                }
+                if (ret == true)
+                    ret = SendFtp(item, source, source);
+                else
+                    SendFtp(item, source, source);
             }
+            return ret;
+        }
 
+        private static bool SendFtp(FtpSettings ftp, string source, string destinationPath, bool ret = true)
+        {
+            try
+            {
+                foreach (string subDir in Directory.GetDirectories(source))
+                {
+                    string[] files = Directory.GetFiles(source, "*.*");
+                    string dirSuffix = $"//{new DirectoryInfo(subDir).FullName.Replace(destinationPath, "")}";
+                    WebRequest folderRequest = WebRequest.Create(ftp.ServerAdress + dirSuffix);
+                    folderRequest.Method = WebRequestMethods.Ftp.MakeDirectory;
+                    folderRequest.Credentials = new NetworkCredential(ftp.Username, ftp.Password);
+                    using (var resp = (FtpWebResponse)folderRequest.GetResponse())
+                    {
+                        Console.WriteLine(resp.StatusCode);
+                    }
+
+                    foreach (string file in files)
+                    {
+                        FtpWebRequest request = (FtpWebRequest)WebRequest.Create(new Uri(ftp.ServerAdress + $"//{dirSuffix}"));
+                        request.Method = WebRequestMethods.Ftp.UploadFileWithUniqueName;
+
+                        request.Credentials = new NetworkCredential(ftp.Username, ftp.Password);
+
+                        byte[] fileContents;
+                        using (StreamReader sourceStream = new StreamReader(new FileInfo(file).FullName))
+                        {
+                            fileContents = Encoding.UTF8.GetBytes(sourceStream.ReadToEnd());
+                        }
+
+                        request.ContentLength = fileContents.Length;
+
+                        using (Stream requestStream = request.GetRequestStream())
+                        {
+                            requestStream.Write(fileContents, 0, fileContents.Length);
+                        }
+
+                        using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+                        {
+                            Console.WriteLine("Upload File Complete, status {0}", response.StatusDescription);
+                        }
+                    }
+
+                    if (ret == true)
+                        ret = SendFtp(ftp, subDir, destinationPath);
+                    else
+                        SendFtp(ftp, subDir, destinationPath);
+                }
+                return true;
+            }
+            catch
+            {
+                ret = false;
+                return ret;
+            }
         }
     }
 }

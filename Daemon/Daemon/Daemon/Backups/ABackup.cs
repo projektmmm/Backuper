@@ -108,15 +108,16 @@ namespace Daemon
             if (this.backup.Ftp)
             {
                 this.communicator.GetFtpSettings();
-                try
+
+                if (!BackupOperations.Ftp(this.DestinationPaths[0]))
                 {
-                    BackupOperations.SendFtp(this.DestinationPaths[0]);
+                    this.reportMaker.AddError(new ErrorDetails()
+                    {
+                        Problem = "Could not upload files to FTP. Check the connection settings.",
+                    });
                 }
-                catch (Exception ex)
-                {
-                    
-                }
+            }
             }
         }
     }
-}
+
