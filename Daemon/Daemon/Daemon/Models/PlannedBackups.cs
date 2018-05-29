@@ -19,5 +19,6 @@ namespace Daemon
         public bool Rar { get; set; }
         public bool Override { get; set; } = false;
         public bool Ftp { get; set; }
+        public bool Ssh { get; set; }
     }
 }

@@ -69,6 +69,25 @@ namespace Daemon
             }
         }
 
+        public async Task GetSshSettings()
+        {
+            string apiDestination = $"api/daemon/ssh/{this.daemonId.ToString()}";
+
+            List<SshSettings> ret = new List<SshSettings>();
+            using (var client = GetJsonClient())
+            {
+                HttpResponseMessage response = await client.GetAsync(apiDestination);
+                if (response.IsSuccessStatusCode)
+                {
+                    DaemonSettings.sshSettings = await response.Content.ReadAsAsync<List<SshSettings>>();
+                }
+                else
+                {
+                    throw new HttpRequestException("Cannot connect to the api");
+                }
+            }
+        }
+
         /// <summary>
         /// Ziskani nastaveni pro komunikaci
         /// </summary>

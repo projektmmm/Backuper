@@ -8,6 +8,7 @@ using ICSharpCode.SharpZipLib.Zip;
 using System.IO;
 using System.Threading;
 using System.Net;
+using Renci.SshNet;
 
 namespace Daemon
 {
@@ -72,7 +73,6 @@ namespace Daemon
 
         public static bool Ftp(string source)
         {
-            string[] files = Directory.GetFiles(source, "*.*");
             string[] subDirs = Directory.GetDirectories(source);
             bool ret = true;
 
@@ -128,7 +128,7 @@ namespace Daemon
                         }
                     }
 
-                    if (ret == true)
+                    if (ret)
                         ret = SendFtp(ftp, subDir, destinationPath);
                     else
                         SendFtp(ftp, subDir, destinationPath);
@@ -140,6 +140,65 @@ namespace Daemon
                 ret = false;
                 return ret;
             }
+        }
+
+        public static bool Ssh(string source)
+        {
+            bool toRet = true;
+            foreach (SshSettings ssh in DaemonSettings.sshSettings)
+            {
+                if (toRet)
+                    toRet = SendSsh(ssh, source, source);
+                else
+                    SendSsh(ssh, source, source);
+            }
+
+            return toRet;
+        }
+
+        private static bool SendSsh(SshSettings ssh, string sourceFolder, string destinationPath, bool toRet = false)
+        {
+            try
+            {
+                foreach (DirectoryInfo dir in new DirectoryInfo(sourceFolder).GetDirectories())
+                {
+                    foreach (FileInfo file in dir.GetFiles())
+                    {
+                        ConnectionInfo connInfo = new ConnectionInfo(ssh.HostOrIp, ssh.Port, ssh.Username,
+                            new AuthenticationMethod[]
+                            {
+                            new PasswordAuthenticationMethod(ssh.Username, ssh.Password)
+                            }
+                            );
+
+                        using (var sftp = new SftpClient(connInfo))
+                        {
+                            string uploadfn = file.FullName;
+
+                            sftp.Connect();
+                            sftp.ChangeDirectory(file.FullName.Replace(destinationPath, ""));
+                            using (var uplfileStream = System.IO.File.OpenRead(uploadfn))
+                            {
+                                sftp.UploadFile(uplfileStream, uploadfn, true);
+                            }
+                            sftp.Disconnect();
+                        }
+
+                    }
+
+                    if (toRet)
+                        toRet = SendSsh(ssh, sourceFolder, destinationPath);
+                    else
+                        SendSsh(ssh, sourceFolder, destinationPath);
+                }
+                return true;
+            }
+            catch
+            {
+                toRet = false;
+                return false;
+            }
+
         }
     }
 }

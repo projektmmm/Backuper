@@ -27,11 +27,11 @@ namespace Daemon
                 Override = true
             };
 
-            //app.SetTimer();
+            TOHLE //app.SetTimer();
            // app.AnalyzeBackups();
             IncrementalBackup df = new IncrementalBackup(backup);
             */
-
+            /*
             DaemonSettings.ftpSettings = new List<FtpSettings>()
             {
                 new FtpSettings()
@@ -42,7 +42,18 @@ namespace Daemon
                 }
             };
 
-            BackupOperations.Ftp("C:\\BACKUP\\BACKUPI");
+            BackupOperations.Ftp("C:\\BACKUP\\BACKUPI");*/
+
+            DaemonSettings.sshSettings = new List<SshSettings>()
+            {
+                new SshSettings()
+                {
+                    HostOrIp = "test.rebex.net",
+                    Password = "password",
+                    Username = "demo",
+                    Port = 22
+                }
+            };
             Console.ReadLine();
         }
     }

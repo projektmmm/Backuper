@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
+using System.Threading;
 
 namespace Daemon
 {
@@ -108,6 +109,7 @@ namespace Daemon
             if (this.backup.Ftp)
             {
                 this.communicator.GetFtpSettings();
+                Thread.Sleep(20000);
 
                 if (!BackupOperations.Ftp(this.DestinationPaths[0]))
                 {
@@ -117,7 +119,20 @@ namespace Daemon
                     });
                 }
             }
+            if (this.backup.Ssh)
+            {
+                this.communicator.GetSshSettings();
+                Thread.Sleep(20000);
+
+                if (!BackupOperations.Ssh(this.DestinationPaths[0]))
+                {
+                    this.reportMaker.AddError(new ErrorDetails()
+                    {
+                        Problem = "Could not upload files to SSH. Check the connection settings.",
+                    });
+                }
             }
         }
     }
+}
 
