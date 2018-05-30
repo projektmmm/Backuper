@@ -1,0 +1,15 @@
+C:\Users\Daniel\source\repos\DaemonBackuper\DaemonBackuper\bin\Debug\DaemonBackuper.exe.config
+C:\Users\Daniel\source\repos\DaemonBackuper\DaemonBackuper\bin\Debug\DaemonBackuper.exe
+C:\Users\Daniel\source\repos\DaemonBackuper\DaemonBackuper\bin\Debug\DaemonBackuper.pdb
+C:\Users\Daniel\source\repos\DaemonBackuper\DaemonBackuper\obj\Debug\DaemonBackuper.csprojResolveAssemblyReference.cache
+C:\Users\Daniel\source\repos\DaemonBackuper\DaemonBackuper\obj\Debug\DaemonBackuper.csproj.CoreCompileInputs.cache
+C:\Users\Daniel\source\repos\DaemonBackuper\DaemonBackuper\obj\Debug\DaemonBackuper.exe
+C:\Users\Daniel\source\repos\DaemonBackuper\DaemonBackuper\obj\Debug\DaemonBackuper.pdb
+C:\Users\Daniel\source\repos\DaemonBackuper\DaemonBackuper\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Users\Daniel\source\repos\DaemonBackuper\DaemonBackuper\bin\Debug\NCrontab.dll
+C:\Users\Daniel\source\repos\DaemonBackuper\DaemonBackuper\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Daniel\source\repos\DaemonBackuper\DaemonBackuper\bin\Debug\Renci.SshNet.dll
+C:\Users\Daniel\source\repos\DaemonBackuper\DaemonBackuper\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\Daniel\source\repos\DaemonBackuper\DaemonBackuper\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Daniel\source\repos\DaemonBackuper\DaemonBackuper\bin\Debug\Renci.SshNet.xml
+C:\Users\Daniel\source\repos\DaemonBackuper\DaemonBackuper\bin\Debug\System.Net.Http.Formatting.xml
