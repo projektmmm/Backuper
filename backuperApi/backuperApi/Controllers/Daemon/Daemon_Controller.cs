@@ -75,6 +75,37 @@ namespace backuperApi.Controllers.Daemon
             }
         }
 
+        /// FTP a SSH
+        
+        [HttpGet]
+        [Route("api/daemon/ftp/{daemonId}-{userId}")]
+        public List<FtpSettings> Get(int daemonId, int userId)
+        {
+            var query = from f in this.database.FtpSettings
+                        join b in this.database.Backups
+                        on f.BackupId equals b.Id
+                        where b.DaemonId == daemonId && b.UserId == userId
+                        select f;
+
+            
+            
+
+            return query.ToList<FtpSettings>();
+        }
+
+        //[HttpGet]
+        //[Route("api/daemon/ssh/{daemonId}-{userId}")]
+        //public List<SshSettings> Get(int daemonId, int userId)
+        //{
+        //    var query = from s in this.database.SshSettings
+        //                join b in this.database.Backups
+        //                on s.BackupId equals b.Id
+        //                where b.DaemonId == daemonId && b.UserId == userId
+        //                select s;
+
+        //    return query.ToList<SshSettings>();
+        //}
+
         private Daemons FindById(string username, int daemonId)
         {
             var query = from d in this.database.Daemons

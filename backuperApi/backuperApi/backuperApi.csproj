@@ -220,8 +220,10 @@
     <Compile Include="Models\BackupReport.cs" />
     <Compile Include="Models\Backups.cs" />
     <Compile Include="Models\Daemons.cs" />
+    <Compile Include="Models\FtpSettings.cs" />
     <Compile Include="Models\Non-Database\ErrorDetails.cs" />
     <Compile Include="Models\Paths.cs" />
+    <Compile Include="Models\SshSettings.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

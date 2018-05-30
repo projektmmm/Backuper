@@ -65,7 +65,7 @@ namespace backuperApi.Controllers
 
         [HttpPatch]
         [Route("api/admin/daemons/AddDaemon/{daemonId}")]
-        public bool patch(int daemonId)
+        public bool Patch(int daemonId)
         {
             Daemons dbRecord = this.FindById(daemonId);
 
