@@ -39,24 +39,7 @@
         <ng-container matColumnDef="SourcePath">
           <mat-header-cell *matHeaderCellDef mat-sort-header>Source path</mat-header-cell>
           <mat-cell cell *matCellDef="let row">
-            <!--{{row.SourcePath}}-->
-            
-                <mat-expansion-panel #sourceExp>
-                  <mat-expansion-panel-header>
-                    <mat-panel-title>
-                      Paths
-                    </mat-panel-title>
-                    <mat-panel-description>
-                      
-                    </mat-panel-description>
-                  </mat-expansion-panel-header>
-                  <!--div *ngFor="let path of SourcePaths">
-                    {{path}}
-                  </div-->
-
-                  {{row.SourcePath}}
-                </mat-expansion-panel>
-
+              <button mat-button color="primary" (click)="showPaths(row.SourcePath,'Source paths')">Source paths</button>
           </mat-cell>
         </ng-container>
       
@@ -64,23 +47,7 @@
           <ng-container matColumnDef="DestinationPath">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Destination path</mat-header-cell>
             <mat-cell cell *matCellDef="let row">
-              <!--{{row.DestinationPath}}-->
-
-              <mat-expansion-panel #destinationExp (opened)="sourceExp.open()">
-                  <mat-expansion-panel-header>
-                    <mat-panel-title>
-                      Paths
-                    </mat-panel-title>
-                    <mat-panel-description>
-                      
-                    </mat-panel-description>
-                  </mat-expansion-panel-header>
-                  <!--div *ngFor="let path of SourcePaths">
-                    {{path}}
-                  </div-->
-                  {{row.DestinationPath}}
-                </mat-expansion-panel>
-
+                  <button mat-button color="primary" (click)="showPaths(row.DestinationPath,'Destination paths')">Destination paths</button>
             </mat-cell>
           </ng-container>
       

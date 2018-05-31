@@ -37,10 +37,10 @@ namespace backuperApi.Controllers
                 item.DestinationPath = item.DestinationPath.Replace("*", "\\");
                 item.DestinationPath = item.DestinationPath.Replace("\"", "");
 
-                item.SourcePath = item.SourcePath.Replace(",", System.Environment.NewLine);
-                item.DestinationPath = item.DestinationPath.Replace(",", System.Environment.NewLine);
-            }
+                item.SourcePath = item.SourcePath.Replace(",", "," + System.Environment.NewLine);
+                item.DestinationPath = item.DestinationPath.Replace(",", "," + System.Environment.NewLine);
 
+            }
 
             return this.database.Backups.ToList();
         }
@@ -76,8 +76,8 @@ namespace backuperApi.Controllers
                 item.DestinationPath = item.DestinationPath.Replace("*", "\\");
                 item.DestinationPath = item.DestinationPath.Replace("\"", "");
 
-                item.SourcePath = item.SourcePath.Replace(",", System.Environment.NewLine);
-                item.DestinationPath = item.DestinationPath.Replace(",", System.Environment.NewLine);
+                item.SourcePath = item.SourcePath.Replace(",", "," + System.Environment.NewLine);
+                item.DestinationPath = item.DestinationPath.Replace(",", "," + System.Environment.NewLine);
             }
 
             return query.ToList<Backups>();

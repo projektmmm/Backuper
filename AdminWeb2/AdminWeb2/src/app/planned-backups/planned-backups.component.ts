@@ -14,6 +14,7 @@ import { Http, Headers, RequestOptions, HttpModule} from '@angular/http';
 import { DataSource } from '@angular/cdk/table';
 import { FormGroupDirective } from '@angular/forms';
 import { forEach } from '@angular/router/src/utils/collection';
+import { PathsComponent } from './paths/paths.component';
 
 
 @Component({
@@ -142,5 +143,19 @@ export class PlannedBackupsComponent implements OnInit {
 
     
   }
+
+  showPaths(ipath,ipathtype) {
+    
+    let dialogRef = this.dialog.open(PathsComponent, {
+      //width: '700px',
+      //height: '600px',
+      data: { 
+        path: ipath,
+        pathtype: ipathtype
+      }
+    });
+  
+}
+
 
 }

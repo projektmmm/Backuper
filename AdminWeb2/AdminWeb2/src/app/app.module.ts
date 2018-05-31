@@ -51,6 +51,7 @@ import { UpdateSettingsComponent } from './planned-backups/update-settings/updat
 import { checkAndUpdateView } from '@angular/core/src/view/view';
 import { DaemonAdderComponent } from './daemons/daemon-adder/daemon-adder.component';
 import { DaemonsRequestComponent } from './daemons/daemons-request/daemons-request.component';
+import { PathsComponent } from './planned-backups/paths/paths.component';
 
 
 @NgModule({
@@ -71,14 +72,16 @@ import { DaemonsRequestComponent } from './daemons/daemons-request/daemons-reque
     DaemonAdderComponent,
     DaemonsRequestComponent,
     ErrorInfoComponent,
-    UpdateSettingsComponent
+    UpdateSettingsComponent,
+    PathsComponent
   ],
   entryComponents: [
     ErrorInfoComponent,
     UpdateSettingsComponent,
     SendNewSettingsComponent,
     DaemonAdderComponent,
-    DaemonsRequestComponent
+    DaemonsRequestComponent,
+    PathsComponent
   ],
   imports: [
     BrowserModule,
