@@ -33,6 +33,9 @@ export class BackupReportsComponent implements OnInit {
   getReports() {
     if(this.daemonId != null)
       this.adress = this.adress + "/" + localStorage.getItem("Username") + "-" + this.daemonId;
+    else
+      this.adress = this.adress + "/" + localStorage.getItem("Username");
+
     this.http.get<BackupReport[]>(this.adress).subscribe
     (data => { 
 

@@ -63,6 +63,9 @@ export class PlannedBackupsComponent implements OnInit {
     this.rowIdService.rowId = this.actuallDaemonId;
       this.adress = this.adress + "/" + localStorage.getItem("Username") + "-" + this.actuallDaemonId; 
     }
+    else {
+      this.adress = this.adress + "/" + localStorage.getItem("Username");
+    }
     this.http.get<Backups[]>(this.adress).subscribe
     (data => { 
 

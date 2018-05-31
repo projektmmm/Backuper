@@ -5,7 +5,7 @@ using System.Web;
 
 namespace backuperApi
 {
-    public class SshSettings
+    public class SSHSettings
     {
         public int Id { get; set; }
         public int BackupId { get; set; }

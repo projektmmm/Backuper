@@ -12,10 +12,16 @@ namespace backuperApi.Controllers
         public Database database = new Database();
 
         [HttpGet]
-        [Route("api/admin/backup-reports")]
-        public List<BackupReport> Get()
+        [Route("api/admin/backup-reports/{username}")]
+        public List<BackupReport> Get(string username)
         {
-            return this.database.BackupReport.ToList();
+            var query = from b in this.database.BackupReport
+                        join u in this.database.Users
+                        on b.UserId equals u.Id
+                        where u.Username == username
+                        select b;
+
+            return query.ToList();
         }
 
         [HttpGet]

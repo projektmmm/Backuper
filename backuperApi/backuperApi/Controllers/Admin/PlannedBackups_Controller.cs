@@ -16,10 +16,16 @@ namespace backuperApi.Controllers
 
 
         [HttpGet]
-        [Route("api/admin/planned-backups")]
-        public List<Backups> Get()
+        [Route("api/admin/planned-backups/{username}")]
+        public List<Backups> Get(string username)
         {
-            foreach (var item in this.database.Backups.ToList())
+            var query = from b in this.database.Backups
+                        join u in this.database.Users
+                        on b.UserId equals u.Id
+                        where u.Username == username
+                        select b;
+
+            foreach (var item in query.ToList<Backups>())
             {
                 item.SourcePath = item.SourcePath.Remove(0, 2);
                 item.SourcePath = item.SourcePath.Remove(item.SourcePath.Length - 2, 2);
@@ -42,7 +48,7 @@ namespace backuperApi.Controllers
 
             }
 
-            return this.database.Backups.ToList();
+            return query.ToList();
         }
 
         [HttpGet]

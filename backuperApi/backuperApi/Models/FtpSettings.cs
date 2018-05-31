@@ -5,7 +5,7 @@ using System.Web;
 
 namespace backuperApi
 {
-    public class FtpSettings
+    public class FTPSettings
     {
         public int Id { get; set; }
         public int BackupId { get; set; }

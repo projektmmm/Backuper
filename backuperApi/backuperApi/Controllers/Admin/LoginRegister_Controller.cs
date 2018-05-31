@@ -33,20 +33,32 @@ namespace backuperApi.Controllers
         {
             try
             {
-                Users use = this.database.Users.Where(u => (u.Username == user.Username||u.Email == user.Username)).First<Users>();
+                Users use = this.database.Users.Where(u => (u.Username == user.Username || u.Email == user.Username)).First<Users>();
 
-
-                if (use.Password == user.Password)
-                    return this.PostFind(user.Username);
+                if (!(user.Username == "Vojtech" || user.Username == "Daniel"))
+                {
+                    if (BCrypt.Net.BCrypt.Verify(user.Password, use.Password))
+                        return this.PostFind(user.Username);
+                    else
+                        return "false";
+                }
                 else
-                    return "false";
-                
+                {
+                    
+
+
+                    if (use.Password == user.Password)
+                        return this.PostFind(user.Username);
+                    else
+                        return "false";
+                }
             }
             catch
             {
                 return "false";
             }
         }
+
         [HttpPost]
         [Route("api/admin/LocalStorage")]
         private string PostFind(string data)

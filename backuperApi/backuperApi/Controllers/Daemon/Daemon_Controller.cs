@@ -13,18 +13,17 @@ namespace backuperApi.Controllers.Daemon
         private CronController cronController = new CronController();
 
         [HttpGet]
-        [Route("api/daemon/{daemonId}")]
-        public List<Backups> Get(string daemonId)
+        [Route("api/daemon/{daemonId}-{userId}")]
+        public List<Backups> Get(int daemonId, int userId)
         {
-            int dId = Convert.ToInt32(daemonId);
-            this.cronController.UpdateCron(this.database.Backups.Where(b => b.DaemonId == dId).ToList<Backups>());
+            this.cronController.UpdateCron(this.database.Backups.Where(b => b.DaemonId == daemonId && b.UserId == userId).ToList<Backups>());
 
-            return this.database.Backups.Where(b => b.DaemonId == dId).ToList<Backups>();
+            return this.database.Backups.Where(b => b.DaemonId == daemonId && b.UserId == userId).ToList<Backups>();
         }
 
         [HttpPost]
-        [Route("api/daemon/{daemonId}")]
-        public void Post(int daemonId, [FromBody] string data)
+        [Route("api/daemon/{daemonId}-{userId}")]
+        public void Post(int daemonId, int userId, [FromBody] string data)
         {
 
             List<BackupErrors> errors = new List<BackupErrors>();
@@ -75,36 +74,8 @@ namespace backuperApi.Controllers.Daemon
             }
         }
 
-        /// FTP a SSH
-        
-        [HttpGet]
-        [Route("api/daemon/ftp/{daemonId}-{userId}")]
-        public List<FtpSettings> Get(int daemonId, int userId)
-        {
-            var query = from f in this.database.FtpSettings
-                        join b in this.database.Backups
-                        on f.BackupId equals b.Id
-                        where b.DaemonId == daemonId && b.UserId == userId
-                        select f;
 
-            
-            
 
-            return query.ToList<FtpSettings>();
-        }
-
-        //[HttpGet]
-        //[Route("api/daemon/ssh/{daemonId}-{userId}")]
-        //public List<SshSettings> Get(int daemonId, int userId)
-        //{
-        //    var query = from s in this.database.SshSettings
-        //                join b in this.database.Backups
-        //                on s.BackupId equals b.Id
-        //                where b.DaemonId == daemonId && b.UserId == userId
-        //                select s;
-
-        //    return query.ToList<SshSettings>();
-        //}
 
         private Daemons FindById(string username, int daemonId)
         {
@@ -134,5 +105,44 @@ namespace backuperApi.Controllers.Daemon
             return value.Length - 10;
         }
 
+    }
+
+    public class SshControler : ApiController
+    {
+        private Database database = new Database();
+
+        [HttpGet]
+        [Route("api/daemon/ssh/{daemonId}-{userId}")]
+        public List<SSHSettings> Get(int daemonId, int userId)
+        {
+            var query = from s in this.database.SshSettings
+                        join b in this.database.Backups
+                        on s.BackupId equals b.Id
+                        where b.DaemonId == daemonId && b.UserId == userId
+                        select s;
+
+            return query.ToList<SSHSettings>();
+        }
+    }
+
+    public class FtpController : ApiController
+    {
+        public Database database = new Database();
+
+        [HttpGet]
+        [Route("api/daemon/ftp/{daemonId}-{userId}")]
+        public List<FTPSettings> Get(int daemonId, int userId)
+        {
+            var query = from f in this.database.FtpSettings
+                        join b in this.database.Backups
+                        on f.BackupId equals b.Id
+                        where b.DaemonId == daemonId && b.UserId == userId
+                        select f;
+
+
+
+
+            return query.ToList<FTPSettings>();
+        }
     }
 }
