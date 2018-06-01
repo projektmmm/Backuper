@@ -11,7 +11,7 @@
             </div>
             <form class="form-settings">
                 <mat-form-field class="left-width-full">
-                    <mat-select placeholder="BackupType" #BackupType ng-model="BackupType" value="">
+                    <mat-select placeholder="BackupType" #BackupType ng-model="BackupType" value="{{i_backupType}}">
                         <mat-option *ngFor="let backup of backups" [value]="backup.value">
                             {{ backup.viewValue }}
                         </mat-option>
@@ -30,7 +30,7 @@
                 <div class="page-subheader">
                     Time Settings
                 </div>
-                <mat-tab-group mat-stretch-tabs="always" class="tab-width" #TimeTab ng-model="TimeTab">
+                <mat-tab-group mat-stretch-tabs="always" class="" #TimeTab ng-model="TimeTab">
                     <mat-tab label="Minutes" (select)="OnTabChanges(0)">
                         <div class="tab-padding">
                             Every
@@ -143,12 +143,12 @@
                     Path Settings
                 </div>
                 <mat-tab-group mat-stretch-tabs="always" class="tab-width">
-                      <mat-tab label="Source Paths">   
+                      <mat-tab label="Source">   
                           <div class="tab-padding">
                               <form class="form-settings">
-                                  <div *ngFor="let SourcePath of SourcePaths">
+                                  <div *ngFor="let iSourcePath of SourcePaths">
                                       <mat-form-field class="width-full">
-                                          <input matInput value="0" #SourcePath type="text" ng-model="SourcePath" placeholder="SourcePath" value="{{i_sourcePath}}"> 
+                                          <input matInput value="0" #SourcePath type="text" ng-model="SourcePath" placeholder="Source path" value="{{iSourcePath}}"> 
                                       </mat-form-field>
                                       <button mat-icon-button color="primary" (click)="AddSourcePath()"><mat-icon>add_circle</mat-icon></button>
                                   </div>
@@ -156,7 +156,7 @@
                           </div>
                       </mat-tab>
                       <!-- FTP -->
-                      <mat-tab label="Destination Paths">
+                      <mat-tab label="Destination">
                           <div class="tab-padding">
                               <mat-checkbox #LocalCheckbox color="primary" checked="true" (change)="changeLocalCheckBox(LocalCheckbox,FTPCheckbox)">Local</mat-checkbox>
                               <span class="space"></span>
@@ -164,9 +164,9 @@
                           </div>
                             
                             <div *ngIf="LocalCheckbox.checked">
-                                <div *ngFor="let DestinationPath of DestinationPaths">
+                                <div *ngFor="let iDestinationPath of DestinationPaths">
                                     <mat-form-field class="width-full">
-                                        <input matInput value="0" #DestinationPath type="text" ng-model="DestinationPath" placeholder="DestinationPath" value="{{i_destinationPath}}">
+                                        <input matInput value="0" #DestinationPath type="text" ng-model="DestinationPath" placeholder="Destination path" value={{iDestinationPath}}>
                                     </mat-form-field>
                                     <button mat-icon-button color="primary" (click)="AddDestinationPath()"><mat-icon>add_circle</mat-icon></button>
                                 </div>
@@ -177,14 +177,14 @@
                                     <tr>
                                         <td>
                                             <mat-form-field class="rightFTPform">
-                                                <input matInput value="0" #ServerAddress type="text" ng-model="ServerAddress" placeholder="Server Address" value="{{i_serverAdress}}">
+                                                <input matInput value="0" #ServerAddress type="text" ng-model="ServerAddress" placeholder="Server address" value="{{i_serverAdress}}">
                                             </mat-form-field>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <mat-form-field class="rightFTPform">
-                                                <input matInput value="0" #PortNumber type="text" ng-model="PortNumber" placeholder="Port Number" value="{{i_portNumber}}">
+                                                <input matInput value="0" #PortNumber type="text" ng-model="PortNumber" placeholder="Port number" value="{{i_portNumber}}">
                                             </mat-form-field>    
                                         </td>
                                     </tr>
@@ -214,9 +214,9 @@
 <mat-dialog-actions>
     <button mat-raised-button color="primary" (action)="closeDialog()" [mat-dialog-close] cdkFocusInitial>Close</button>
     <button *ngIf="!this.isInEdit" mat-raised-button color="primary" class="form-settings-button" (click)="Send(RunAt.value,Cron.value,BackupType.value,SourcePath.value,DestinationPath.value)">
-        Send Settings
+        Send new settings
     </button>  
     <button *ngIf="this.isInEdit" mat-raised-button color="primary" class="form-settings-button" (click)="UpdatePlannedBackup(RunAt.value,Cron.value,BackupType.value,SourcePath.value,DestinationPath.value)">
-        Update Settings
+        Update settings
     </button>    
 </mat-dialog-actions>

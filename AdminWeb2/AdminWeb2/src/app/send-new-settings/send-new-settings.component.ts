@@ -20,7 +20,8 @@ export class SendNewSettingsComponent implements OnInit {
   
   constructor(private http2: HttpClient, public snackBar: MatSnackBar, @Inject(MAT_DIALOG_DATA) public data: any, private rowIdService: rowIdService) {
 
-    if (data != null) {
+    if (data != null) 
+    {
       this.i_backupType = data.backupType;
       this.i_cron = data.cron;
       this.i_destinationPath = data.destinationPath;
@@ -77,6 +78,7 @@ export class SendNewSettingsComponent implements OnInit {
   NewOrEdit: string = "New";
 
   ngOnInit() {
+    this.initializePaths();
   }
 
   headers = new HttpHeaders();
@@ -87,14 +89,17 @@ export class SendNewSettingsComponent implements OnInit {
     const head = {headers: new HttpHeaders({'Content-Type':'application/json'})};
     head.headers.append('Content-Type', 'application/json');
 
+
+
+
     const data: Settings = {
       DaemonId: this.daemonId,
       UserId: 1,
       RunAt: new Date,
       Cron: cron,
       BackupType: backupType,
-      SourcePath: sourcePath,
-      DestinationPath: destinationPath,
+      SourcePath: this.SourcePaths.join(),
+      DestinationPath: this.DestinationPaths.join(),
       Id: null
     }
 
@@ -145,19 +150,28 @@ export class SendNewSettingsComponent implements OnInit {
     }
   }
 
-  DestinationPaths = [1]
-  SourcePaths = [1]
-
-  AddDestinationPath()
+  initializePaths()
   {
-    console.log("destinationpath added")
-    this.DestinationPaths.push(1)
+    this.DestinationPaths = this.i_destinationPath.split(",");
+    this.SourcePaths = this.i_sourcePath.split(",");
   }
 
-  AddSourcePath()
+
+
+  
+  DestinationPaths: string[];
+  SourcePaths: string[];
+
+  AddDestinationPath(ipath)
+  {
+    console.log("destinationpath added")
+    this.DestinationPaths.push(ipath)
+  }
+
+  AddSourcePath(ipath)
   {
     console.log("sourcepath added")
-    this.SourcePaths.push(1)
+    this.SourcePaths.push(ipath)
   }
 
 
