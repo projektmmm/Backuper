@@ -20,7 +20,7 @@
         <!-- RunAt -->
         <ng-container matColumnDef="NextRun">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Next run</mat-header-cell>
-            <mat-cell cell *matCellDef="let row" ng-model="runAt">{{row.NextRun | date: "dd.MM.yyyy - hh:mm"}}</mat-cell>
+            <mat-cell cell *matCellDef="let row" ng-model="runAt">{{row.NextRun | date: "dd.MM.yyyy - HH:mm"}}</mat-cell>
         </ng-container>
       
         <!-- Cron -->

@@ -15,11 +15,13 @@ namespace backuperApi.Controllers
         [Route("api/admin/backup-reports/{username}")]
         public List<BackupReport> Get(string username)
         {
-            var query = from b in this.database.BackupReport
-                        join u in this.database.Users
-                        on b.UserId equals u.Id
-                        where u.Username == username
-                        select b;
+            var query = from br in this.database.BackupReport
+                        join ba in this.database.Backups
+                        on br.BackupId equals ba.Id
+                        join us in this.database.Users
+                        on ba.UserId equals us.Id
+                        where us.Username == username
+                        select br;
 
             return query.ToList();
         }
@@ -28,12 +30,13 @@ namespace backuperApi.Controllers
         [Route("api/admin/backup-reports/{username}-{daemonId}")]
         public List<BackupReport> Get(string username, int daemonId)
         {
-            //inner join v entity frameworku boiis
-            var query = from b in this.database.BackupReport
-                        join u in this.database.Users
-                        on b.UserId equals u.Id
-                        where u.Username == username && b.DaemonId == daemonId
-                        select b;
+            var query = from br in this.database.BackupReport
+                        join ba in this.database.Backups
+                        on br.BackupId equals ba.Id
+                        join us in this.database.Users
+                        on ba.UserId equals us.Id
+                        where us.Username == username && ba.DaemonId == daemonId
+                        select br;
 
             return query.ToList<BackupReport>();
         }

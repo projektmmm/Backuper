@@ -54,9 +54,10 @@ namespace Daemon
         public void AnalyzeBackups()
         {
             Console.WriteLine("Backups analyzation");
+
             foreach (PlannedBackups item in DaemonSettings.plannedBackups)
             {
-                if (item.NextRun.Date == DateTime.Now.Date && item.NextRun.Hour == DateTime.Now.Hour && item.NextRun.Minute == DateTime.Now.Minute)
+                if (item.NextRun.Date <= DateTime.Now.Date && item.NextRun.Hour <= DateTime.Now.Hour && item.NextRun.Minute <= DateTime.Now.Minute)
                 {
                     switch (item.BackupType)
                     {
@@ -72,7 +73,7 @@ namespace Daemon
                     }
                 }
                 else if (item.NextRun > DateTime.Now)
-                    break;
+                    continue;
             }
         }
 

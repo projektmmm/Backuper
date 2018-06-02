@@ -16,9 +16,10 @@ namespace backuperApi
         public string BackupType { get; set; }
         public string SourcePath { get; set; }
         public string DestinationPath { get; set; }
-        public bool Rar { get; set; }
-
-        [NotMapped]
-        public string Path { get; set; }
+        public bool Rar { get; set; } = false;
+        public bool Override { get; set; } = false;
+        public bool Ftp { get; set; } = false;
+        public bool Ssh { get; set; } = false;
+        public int ParentBackup { get; set; }
     }
 }

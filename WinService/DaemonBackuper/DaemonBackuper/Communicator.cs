@@ -12,7 +12,6 @@ namespace Daemon
     public class Communicator
     {
         int daemonId = DaemonSettings.Id;
-        int userId = DaemonSettings.UserId;
 
         /// <summary>
         /// Kontrola, zda neni nove nastaveni backupu
@@ -20,7 +19,7 @@ namespace Daemon
         public async Task GetNextRunSetting(string apiDestination = "")
         {
             if (apiDestination == "")
-                apiDestination = $"api/daemon/{this.daemonId}-{this.userId}";
+                apiDestination = $"api/daemon/{this.daemonId}";
 
             List<PlannedBackups> ret = new List<PlannedBackups>();
             using (var client = GetJsonClient())
@@ -43,7 +42,7 @@ namespace Daemon
         public async Task PostBackupReport(BackupReport report, List<ErrorDetails> errorDetails)
         {
             string data = JsonConvert.SerializeObject(report) + "@@border@@" + JsonConvert.SerializeObject(errorDetails);
-            string apiDestination = $"api/daemon/{this.daemonId}-{this.userId}";
+            string apiDestination = $"api/daemon/{this.daemonId}";
 
             using (var client = GetJsonClient())
             {
@@ -53,7 +52,7 @@ namespace Daemon
 
         public async Task GetFtpSettings()
         {
-            string apiDestination = $"api/daemon/ftp/{this.daemonId}-{this.userId}";
+            string apiDestination = $"api/daemon/ftp/{this.daemonId}";
 
             List<FtpSettings> ret = new List<FtpSettings>();
             using (var client = GetJsonClient())
@@ -72,7 +71,7 @@ namespace Daemon
 
         public async Task GetSshSettings()
         {
-            string apiDestination = $"api/daemon/ssh/{this.daemonId}-{this.userId}";
+            string apiDestination = $"api/daemon/ssh/{this.daemonId}";
 
             List<SshSettings> ret = new List<SshSettings>();
             using (var client = GetJsonClient())

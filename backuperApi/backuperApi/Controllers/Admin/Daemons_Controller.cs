@@ -27,13 +27,19 @@ namespace backuperApi.Controllers
         [Route("api/admin/daemons/{username}-{daemonId}")]
         public Daemons Get(string username, int daemonId)
         {
-            var query = from d in this.database.Daemons
-                        join u in this.database.Users
-                        on d.UserId equals u.Id
-                        where u.Username == username && d.Id == daemonId
-                        select d;
-
-            return query.First();
+            try
+            {
+                var query = from d in this.database.Daemons
+                            join u in this.database.Users
+                            on d.UserId equals u.Id
+                            where u.Username == username && d.Id == daemonId
+                            select d;
+                return query.First();
+            }
+            catch
+            {
+                return new Daemons();
+            }
         }
 
         [HttpPost]

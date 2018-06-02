@@ -84,13 +84,10 @@ export class SendNewSettingsComponent implements OnInit {
   headers = new HttpHeaders();
   readonly root_URL = 'http://localhost:63324';
 
-  Send( runAt, cron, backupType, sourcePath, destinationPath) {
+  Send(runAt, cron, backupType, sourcePath, destinationPath) {
 
     const head = {headers: new HttpHeaders({'Content-Type':'application/json'})};
     head.headers.append('Content-Type', 'application/json');
-
-
-
 
     const data: Settings = {
       DaemonId: this.daemonId,
@@ -105,6 +102,7 @@ export class SendNewSettingsComponent implements OnInit {
 
     if(backupType == "" || cron == "" || sourcePath == "" || destinationPath == "")
     {
+      console.log("xxx");
       this.openSnackBar("Settings not sended","")
     }
     else

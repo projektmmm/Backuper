@@ -9,6 +9,7 @@ using System.IO;
 using System.Threading;
 using System.Net;
 using Renci.SshNet;
+using Newtonsoft.Json;
 
 namespace Daemon
 {
@@ -73,7 +74,22 @@ namespace Daemon
 
         public static bool Ftp(string source)
         {
-            string[] subDirs = Directory.GetDirectories(source);
+            try
+            {
+                string[] subDirs = Directory.GetDirectories(source);
+            }
+            catch
+            {
+                try
+                {
+                    List<string> src = JsonConvert.DeserializeObject<List<string>>(source);
+                    string[] subDirs = Directory.GetDirectories(src[0]);
+                }
+                catch
+                {
+                    return false;
+                }
+            }
             bool ret = true;
 
             foreach (FtpSettings item in DaemonSettings.ftpSettings)
@@ -145,12 +161,19 @@ namespace Daemon
         public static bool Ssh(string source)
         {
             bool toRet = true;
-            foreach (SshSettings ssh in DaemonSettings.sshSettings)
+            try
             {
-                if (toRet)
-                    toRet = SendSsh(ssh, source, source);
-                else
-                    SendSsh(ssh, source, source);
+                foreach (SshSettings ssh in DaemonSettings.sshSettings)
+                {
+                    if (toRet)
+                        toRet = SendSsh(ssh, source, source);
+                    else
+                        SendSsh(ssh, source, source);
+                }
+            }
+            catch
+            {
+                return false;
             }
 
             return toRet;

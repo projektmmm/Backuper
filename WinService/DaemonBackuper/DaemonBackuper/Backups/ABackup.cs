@@ -64,7 +64,6 @@ namespace Daemon
             Console.WriteLine("Sending the report");
             BackupReport report = new BackupReport()
             {
-                UserId = DaemonSettings.UserId,
                 DaemonId = DaemonSettings.Id,
                 Date = DateTime.Now,
                 Type = this.backup.BackupType,

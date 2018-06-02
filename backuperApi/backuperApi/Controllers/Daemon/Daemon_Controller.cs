@@ -13,17 +13,17 @@ namespace backuperApi.Controllers.Daemon
         private CronController cronController = new CronController();
 
         [HttpGet]
-        [Route("api/daemon/{daemonId}-{userId}")]
-        public List<Backups> Get(int daemonId, int userId)
+        [Route("api/daemon/{daemonId}")]
+        public List<Backups> Get(int daemonId)
         {
-            this.cronController.UpdateCron(this.database.Backups.Where(b => b.DaemonId == daemonId && b.UserId == userId).ToList<Backups>());
+            this.cronController.UpdateCron(this.database.Backups.Where(b => b.DaemonId == daemonId).ToList<Backups>());
 
-            return this.database.Backups.Where(b => b.DaemonId == daemonId && b.UserId == userId).ToList<Backups>();
+            return this.database.Backups.Where(b => b.DaemonId == daemonId).ToList<Backups>();
         }
 
         [HttpPost]
-        [Route("api/daemon/{daemonId}-{userId}")]
-        public void Post(int daemonId, int userId, [FromBody] string data)
+        [Route("api/daemon/{daemonId}")]
+        public void Post(int daemonId, [FromBody] string data)
         {
 
             List<BackupErrors> errors = new List<BackupErrors>();
@@ -42,7 +42,7 @@ namespace backuperApi.Controllers.Daemon
             this.database.BackupReport.Add(report);
             this.database.SaveChanges();
 
-            BackupReport dbRecord = this.database.BackupReport.Where(r => r.BackupId == report.BackupId && r.Date == report.Date && r.Size == report.Size && r.Type == report.Type && r.UserId == report.UserId).FirstOrDefault();
+            BackupReport dbRecord = this.database.BackupReport.Where(r => r.BackupId == report.BackupId && r.Date == report.Date && r.Size == report.Size && r.Type == report.Type).FirstOrDefault();
             int reportId = dbRecord.Id;
 
             foreach (BackupErrors item in errors)
@@ -112,13 +112,13 @@ namespace backuperApi.Controllers.Daemon
         private Database database = new Database();
 
         [HttpGet]
-        [Route("api/daemon/ssh/{daemonId}-{userId}")]
-        public List<SSHSettings> Get(int daemonId, int userId)
+        [Route("api/daemon/ssh/{daemonId}")]
+        public List<SSHSettings> Get(int daemonId)
         {
             var query = from s in this.database.SshSettings
                         join b in this.database.Backups
                         on s.BackupId equals b.Id
-                        where b.DaemonId == daemonId && b.UserId == userId
+                        where b.DaemonId == daemonId
                         select s;
 
             return query.ToList<SSHSettings>();
@@ -130,13 +130,13 @@ namespace backuperApi.Controllers.Daemon
         public Database database = new Database();
 
         [HttpGet]
-        [Route("api/daemon/ftp/{daemonId}-{userId}")]
-        public List<FTPSettings> Get(int daemonId, int userId)
+        [Route("api/daemon/ftp/{daemonId}")]
+        public List<FTPSettings> Get(int daemonId)
         {
             var query = from f in this.database.FtpSettings
                         join b in this.database.Backups
                         on f.BackupId equals b.Id
-                        where b.DaemonId == daemonId && b.UserId == userId
+                        where b.DaemonId == daemonId
                         select f;
 
 

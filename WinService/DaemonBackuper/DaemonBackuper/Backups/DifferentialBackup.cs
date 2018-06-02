@@ -39,6 +39,8 @@ namespace Daemon
                 return;
             }
 
+            
+
             //Prespsani destination path
             for (int i = 0; i < destinationPaths.Count; i++)
             {
@@ -46,10 +48,27 @@ namespace Daemon
                 int count = 0;
                 foreach (string item in Directory.GetDirectories(destinationPaths[i], "*", SearchOption.TopDirectoryOnly).Where(s => s.Contains("diff_backup")))
                 {
-                    if (item.Contains("diff_backup_"))
+                    if (item.Contains("diff_backup"))
                         count++;
                 }
-                destinationPaths[i] += $"\\diff_backup_{count}\\{sourcePath.Substring(Functionality.IdentifyCharPosition('\\', sourcePath))}";
+
+                if (this.backup.Override)
+                {
+                    try
+                    {
+                        Directory.Delete(destinationPaths[i] + $"diff_backup", true);
+                        destinationPaths[i] += $"\\diff_backup\\{sourcePath.Substring(Functionality.IdentifyCharPosition('\\', sourcePath))}";
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                else
+                {
+                    destinationPaths[i] += $"\\diff_backup_{count}\\{sourcePath.Substring(Functionality.IdentifyCharPosition('\\', sourcePath))}";
+                }
+
                 Directory.CreateDirectory(destinationPaths[i]);
             }
 

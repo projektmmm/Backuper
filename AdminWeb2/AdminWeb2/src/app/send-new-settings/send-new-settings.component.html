@@ -213,7 +213,7 @@
 
 <mat-dialog-actions>
     <button mat-raised-button color="primary" (action)="closeDialog()" [mat-dialog-close] cdkFocusInitial>Close</button>
-    <button *ngIf="!this.isInEdit" mat-raised-button color="primary" class="form-settings-button" (click)="Send(RunAt.value,Cron.value,BackupType.value,SourcePath.value,DestinationPath.value)">
+    <button *ngIf="!this.isInEdit" mat-raised-button color="primary" class="form-settings-button" (click)="Send(Cron.value,BackupType.value,SourcePath.value,DestinationPath.value)">
         Send new settings
     </button>  
     <button *ngIf="this.isInEdit" mat-raised-button color="primary" class="form-settings-button" (click)="UpdatePlannedBackup(RunAt.value,Cron.value,BackupType.value,SourcePath.value,DestinationPath.value)">

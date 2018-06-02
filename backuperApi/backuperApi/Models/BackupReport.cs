@@ -12,8 +12,6 @@ namespace backuperApi
         public string Type { get; set; }
         public int Size { get; set; }
         public int ConnectedTo { get; set; }
-        public int DaemonId { get; set; }
-        public int UserId { get; set; }
         public int BackupId { get; set; }
     }
 }

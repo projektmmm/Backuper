@@ -27,8 +27,17 @@ namespace Daemon
             }
 
             //Zjisteni slozek
+            string[] sourceFolder;
             int cnt = 0;
-            string[] sourceFolder = Directory.GetDirectories(sourcePath, "*", SearchOption.TopDirectoryOnly);
+            try
+            {
+                sourceFolder = Directory.GetDirectories(sourcePath, "*", SearchOption.TopDirectoryOnly);
+            }
+            catch
+            {
+                return;
+            }
+
             foreach (string item in sourceFolder)
             {
                 if (item.Contains("incr_backup"))
@@ -40,12 +49,68 @@ namespace Daemon
             string oldLogPath = "";
 
             //vytvoreni slozek v sourcePath pro log
-            if (cnt == 0)
+            if (!this.backup.Override)
+            {
+                if (cnt == 0)
+                {
+                    try
+                    {
+                        Directory.CreateDirectory(sourcePath + "\\incr_backup_0");
+                        oldLogPath = sourcePath + "\\BackupsLog.log";
+                    }
+                    catch (Exception ex)
+                    {
+                        this.reportMaker.AddError(new ErrorDetails()
+                        {
+                            Exception = ex.Message,
+                            Path = sourcePath + "\\incr_backup_0",
+                            Problem = "Can't create the folder for incremental backup. Backup hasn't been done."
+                        });
+                        return;
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        newLogPath = sourcePath + $"\\incr_backup_{cnt}";
+                        Directory.CreateDirectory(newLogPath);
+                        oldLogPath = sourcePath + $"\\incr_backup_{cnt - 1}\\BackupsLog.log";
+                        //uprava cesty na DestinationPath II
+                        for (int i = 0; i < destinationPaths.Count; i++)
+                        {
+                            destinationPaths[i] += $"\\incr_backup_{cnt}";
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        this.reportMaker.AddError(new ErrorDetails()
+                        {
+                            Exception = ex.Message,
+                            Path = sourcePath + $"\\incr_backup_{cnt}",
+                            Problem = "Can't create the folder for incremental backup. Backup hasn't been done."
+                        });
+                        return;
+                    }
+                }
+            }
+            else
             {
                 try
                 {
-                    Directory.CreateDirectory(sourcePath + "\\incr_backup_0");
+                    Directory.Delete(sourcePath + "\\incr_backup", true);
+                }
+                catch { }
+
+                try
+                {
+                    Directory.CreateDirectory(sourcePath + "\\incr_backup");
                     oldLogPath = sourcePath + "\\BackupsLog.log";
+                    //uprava cesty na DestinationPath II
+                    for (int i = 0; i < destinationPaths.Count; i++)
+                    {
+                        destinationPaths[i] += $"\\incr_backup";
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -57,32 +122,11 @@ namespace Daemon
                     });
                     return;
                 }
-            }
-            else
-            {
-                try
-                {
-                    newLogPath = sourcePath + $"\\incr_backup_{cnt}";
-                    Directory.CreateDirectory(newLogPath);
-                    oldLogPath = sourcePath + $"\\incr_backup_{cnt - 1}\\BackupsLog.log";
-                }
-                catch (Exception ex)
-                {
-                    this.reportMaker.AddError(new ErrorDetails()
-                    {
-                        Exception = ex.Message,
-                        Path = sourcePath + $"\\incr_backup_{cnt}",
-                        Problem = "Can't create the folder for incremental backup. Backup hasn't been done."
-                    });
-                    return;
-                }
+
+                
             }
 
-            //uprava cesty na DestinationPath II
-            for (int i = 0; i < destinationPaths.Count; i++)
-            {
-                destinationPaths[i] += $"\\incr_backup_{cnt}";
-            }
+           
 
             //Nacteni logu
             try
