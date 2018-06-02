@@ -146,12 +146,19 @@
                       <mat-tab label="Source">   
                           <div class="tab-padding">
                               <form class="form-settings">
+                                <!--cesty-->
                                   <div *ngFor="let iSourcePath of SourcePaths">
                                       <mat-form-field class="width-full">
                                           <input matInput value="0" #SourcePath type="text" ng-model="SourcePath" placeholder="Source path" value="{{iSourcePath}}"> 
                                       </mat-form-field>
-                                      <button mat-icon-button color="primary" (click)="AddSourcePath()"><mat-icon>add_circle</mat-icon></button>
+                                      
                                   </div>
+                                <!--pridavani-->
+                                  <mat-form-field class="width-full">
+                                    <input matInput value="0" #NewSourcePath type="text" ng-model="NewSourcePath" placeholder="New source path" value=""> 
+                                  </mat-form-field>
+                                  <button mat-icon-button color="primary" (click)="AddSourcePath(NewSourcePath)"><mat-icon>add_circle</mat-icon></button>
+
                               </form>
                           </div>
                       </mat-tab>
@@ -164,12 +171,19 @@
                           </div>
                             
                             <div *ngIf="LocalCheckbox.checked">
+                                <!--cesty-->
                                 <div *ngFor="let iDestinationPath of DestinationPaths">
                                     <mat-form-field class="width-full">
                                         <input matInput value="0" #DestinationPath type="text" ng-model="DestinationPath" placeholder="Destination path" value={{iDestinationPath}}>
                                     </mat-form-field>
-                                    <button mat-icon-button color="primary" (click)="AddDestinationPath()"><mat-icon>add_circle</mat-icon></button>
                                 </div>
+
+                              <!--pridavani-->
+                                <mat-form-field class="width-full">
+                                    <input matInput value="0" #NewDestinationPath type="text" ng-model="NewDestinationPath" placeholder="New destination path" value="">
+                                </mat-form-field>
+                                <button mat-icon-button color="primary" (click)="AddDestinationPath(NewDestinationPath)"><mat-icon>add_circle</mat-icon></button>
+
                             </div>
 
                             <div *ngIf="FTPCheckbox.checked">
@@ -213,10 +227,10 @@
 
 <mat-dialog-actions>
     <button mat-raised-button color="primary" (action)="closeDialog()" [mat-dialog-close] cdkFocusInitial>Close</button>
-    <button *ngIf="!this.isInEdit" mat-raised-button color="primary" class="form-settings-button" (click)="Send(Cron.value,BackupType.value,SourcePath.value,DestinationPath.value)">
+    <button *ngIf="!this.isInEdit" mat-raised-button color="primary" class="form-settings-button" (click)="Send(Cron.value,BackupType.value)">
         Send new settings
     </button>  
-    <button *ngIf="this.isInEdit" mat-raised-button color="primary" class="form-settings-button" (click)="UpdatePlannedBackup(RunAt.value,Cron.value,BackupType.value,SourcePath.value,DestinationPath.value)">
+    <button *ngIf="this.isInEdit" mat-raised-button color="primary" class="form-settings-button" (click)="UpdatePlannedBackup(Cron.value,BackupType.value)">
         Update settings
     </button>    
 </mat-dialog-actions>

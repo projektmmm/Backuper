@@ -33,13 +33,13 @@ namespace backuperApi.Controllers
                 item.DestinationPath = item.DestinationPath.Remove(0, 2);
                 item.DestinationPath = item.DestinationPath.Remove(item.DestinationPath.Length - 2, 2);
 
-                item.SourcePath = item.SourcePath.Replace("\\\\\\\\", "*");
-                item.SourcePath = item.SourcePath.Replace("\\", "");
+                item.SourcePath = item.SourcePath.Replace("\\\\", "\\");
+                item.SourcePath = item.SourcePath.Replace("\",\"", ",");
                 item.SourcePath = item.SourcePath.Replace("*", "\\");
                 item.SourcePath = item.SourcePath.Replace("\"", "");
 
-                item.DestinationPath = item.DestinationPath.Replace("\\\\\\\\", "*");
-                item.DestinationPath = item.DestinationPath.Replace("\\", "");
+                item.DestinationPath = item.DestinationPath.Replace("\\\\", "\\");
+                item.DestinationPath = item.DestinationPath.Replace("\",\"", ",");
                 item.DestinationPath = item.DestinationPath.Replace("*", "\\");
                 item.DestinationPath = item.DestinationPath.Replace("\"", "");
 
@@ -72,13 +72,13 @@ namespace backuperApi.Controllers
                 item.DestinationPath = item.DestinationPath.Remove(0, 2);
                 item.DestinationPath = item.DestinationPath.Remove(item.DestinationPath.Length - 2, 2);
 
-                item.SourcePath = item.SourcePath.Replace("\\\\\\\\", "*");
-                item.SourcePath = item.SourcePath.Replace("\\", "");
+                item.SourcePath = item.SourcePath.Replace("\\\\", "\\");
+                item.SourcePath = item.SourcePath.Replace("\",\"", ",");
                 item.SourcePath = item.SourcePath.Replace("*", "\\");
                 item.SourcePath = item.SourcePath.Replace("\"", "");
 
-                item.DestinationPath = item.DestinationPath.Replace("\\\\\\\\", "*");
-                item.DestinationPath = item.DestinationPath.Replace("\\", "");
+                item.DestinationPath = item.DestinationPath.Replace("\\\\", "\\");
+                item.DestinationPath = item.DestinationPath.Replace("\",\"", ",");
                 item.DestinationPath = item.DestinationPath.Replace("*", "\\");
                 item.DestinationPath = item.DestinationPath.Replace("\"", "");
 
@@ -96,7 +96,9 @@ namespace backuperApi.Controllers
             //ještě než se to uloží do databáze tak to vypočítá z cronu nextrun
             Schedule = CrontabSchedule.Parse(toInsert.Cron);
             toInsert.NextRun = Schedule.GetNextOccurrence(DateTime.Now);
-            
+
+            toInsert.SourcePath = "[\"" + toInsert.SourcePath.Replace(",", "\",\"").Replace("\\","\\\\") + "\"]";
+            toInsert.DestinationPath = "[\"" + toInsert.DestinationPath.Replace(",", "\",\"").Replace("\\", "\\\\") + "\"]";
 
             this.database.Backups.Add(toInsert);
             this.database.SaveChanges();
@@ -115,6 +117,9 @@ namespace backuperApi.Controllers
             dbRecord.DestinationPath = toUpdate.DestinationPath;
             dbRecord.NextRun = toUpdate.NextRun;
             dbRecord.SourcePath = toUpdate.SourcePath;
+
+            dbRecord.SourcePath = "[\"" + toUpdate.SourcePath.Replace(",", "\",\"").Replace("\\", "\\\\") + "\"]";
+            dbRecord.DestinationPath = "[\"" + toUpdate.DestinationPath.Replace(",", "\",\"").Replace("\\", "\\\\") + "\"]";
 
             this.database.SaveChanges();
                 

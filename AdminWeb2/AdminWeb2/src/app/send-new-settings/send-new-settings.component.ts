@@ -78,13 +78,20 @@ export class SendNewSettingsComponent implements OnInit {
   NewOrEdit: string = "New";
 
   ngOnInit() {
-    this.initializePaths();
+    if(this.NewOrEdit != "New")
+    {
+      this.initializePaths();
+    }
+    else
+    {
+      this.initializeNewPaths();
+    }
   }
 
   headers = new HttpHeaders();
   readonly root_URL = 'http://localhost:63324';
 
-  Send(runAt, cron, backupType, sourcePath, destinationPath) {
+  Send(cron, backupType) {
 
     const head = {headers: new HttpHeaders({'Content-Type':'application/json'})};
     head.headers.append('Content-Type', 'application/json');
@@ -92,7 +99,6 @@ export class SendNewSettingsComponent implements OnInit {
     const data: Settings = {
       DaemonId: this.daemonId,
       UserId: 1,
-      RunAt: new Date,
       Cron: cron,
       BackupType: backupType,
       SourcePath: this.SourcePaths.join(),
@@ -100,7 +106,7 @@ export class SendNewSettingsComponent implements OnInit {
       Id: null
     }
 
-    if(backupType == "" || cron == "" || sourcePath == "" || destinationPath == "")
+    if(backupType == "" || cron == "")
     {
       console.log("xxx");
       this.openSnackBar("Settings not sended","")
@@ -114,22 +120,21 @@ export class SendNewSettingsComponent implements OnInit {
     }
   }
 
-  UpdatePlannedBackup(runAt, cron, backupType, sourcePath, destinationPath) {
+  UpdatePlannedBackup(cron, backupType) {
     const head = {headers: new HttpHeaders({'Content-Type':'application/json'})};
     head.headers.append('Content-Type', 'application/json');
 
     const data: Settings = {
       DaemonId: this.daemonId,
       UserId: 1,
-      RunAt: new Date,
       Cron: cron,
       BackupType: backupType,
-      SourcePath: sourcePath,
-      DestinationPath: destinationPath,
+      SourcePath: this.SourcePaths.join(),
+      DestinationPath: this.DestinationPaths.join(),
       Id: this.i_backupId
     }
 
-    if(backupType == "" || cron == "" || sourcePath == "" || destinationPath == "")
+    if(backupType == "" || cron == "")
     {
       this.openSnackBar("Settings not Updated","")
     }
@@ -154,7 +159,11 @@ export class SendNewSettingsComponent implements OnInit {
     this.SourcePaths = this.i_sourcePath.split(",");
   }
 
-
+  initializeNewPaths()
+  {
+    this.DestinationPaths = new Array();
+    this.SourcePaths = new Array();
+  }
 
   
   DestinationPaths: string[];
@@ -162,16 +171,24 @@ export class SendNewSettingsComponent implements OnInit {
 
   AddDestinationPath(ipath)
   {
-    console.log("destinationpath added")
-    this.DestinationPaths.push(ipath)
+    if(ipath.value != "")
+    {
+      console.log("destinationpath added")
+      this.DestinationPaths.push(ipath.value)
+      ipath.value = "";
+    }
   }
 
   AddSourcePath(ipath)
   {
-    console.log("sourcepath added")
-    this.SourcePaths.push(ipath)
+    if(ipath.value != "")
+    {
+      console.log("sourcepath added")
+      this.SourcePaths.push(ipath.value)
+      ipath.value = "";
+    }
+    
   }
-
 
   OnTabChanges(currentTabIndex)
   {
