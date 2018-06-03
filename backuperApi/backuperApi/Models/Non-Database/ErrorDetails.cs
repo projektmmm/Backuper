@@ -15,10 +15,11 @@ namespace backuperApi
         public string DaemonName { get; set; }
         public bool Solved { get; set; }
         public string ProblemPath { get; set; }
+        public string Time { get; set; }
 
         public static string GetQuery()
         {
-            return "SELECT be.Id, be.AffectedFiles, be.Problem, br.BackupId, da.Id, da.Name, be.Solved, be.ProblemPath " +
+            return "SELECT be.Id, be.AffectedFiles, be.Problem, br.BackupId, da.Id, da.Name, be.Solved, be.ProblemPath, be.Time " +
                 "FROM BackupErrors be INNER JOIN " +
                 "BackupReport br ON be.BackupReportId=br.Id INNER JOIN " +
                 "Backups ba ON br.BackupId=ba.Id INNER JOIN " +
