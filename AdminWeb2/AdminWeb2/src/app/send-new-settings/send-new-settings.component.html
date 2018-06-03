@@ -11,8 +11,8 @@
             </div>
             <form class="form-settings">
                 <mat-form-field class="left-width-full">
-                    <mat-select placeholder="BackupType" #BackupType ng-model="BackupType" value="{{i_backupType}}">
-                        <mat-option *ngFor="let backup of backups" [value]="backup.value">
+                    <mat-select placeholder="Backup type" #BackupType ng-model="BackupType" value="{{i_backupType}}" >
+                        <mat-option *ngFor="let backup of backups" [value]="backup.value" (click)="DisableSources(BackupType,NewSourcePath)">
                             {{ backup.viewValue }}
                         </mat-option>
                     </mat-select>
@@ -143,46 +143,66 @@
                     Path Settings
                 </div>
                 <mat-tab-group mat-stretch-tabs="always" class="tab-width">
-                      <mat-tab label="Source">   
+                      <mat-tab label="Source" #SourceTab ng-model="SourceTab">   
                           <div class="tab-padding">
                               <form class="form-settings">
                                 <!--cesty-->
                                   <div *ngFor="let iSourcePath of SourcePaths">
                                       <mat-form-field class="width-full">
-                                          <input matInput value="0" #SourcePath type="text" ng-model="SourcePath" placeholder="Source path" value="{{iSourcePath}}"> 
+                                          <input matInput value="0" disabled="true" #SourcePath type="text" ng-model="SourcePath" placeholder="Source path" value="{{iSourcePath}}"> 
                                       </mat-form-field>
-                                      
+                                      <button mat-icon-button color="primary" matTooltip="Delete" (click)="DeleteSourcePath(SourcePath)"><mat-icon>delete</mat-icon></button>
                                   </div>
                                 <!--pridavani-->
-                                  <mat-form-field class="width-full">
-                                    <input matInput value="0" #NewSourcePath type="text" ng-model="NewSourcePath" placeholder="New source path" value=""> 
-                                  </mat-form-field>
-                                  <button mat-icon-button color="primary" (click)="AddSourcePath(NewSourcePath)"><mat-icon>add_circle</mat-icon></button>
+                                <div *ngIf="!isSourceDisabled">
+                                    <mat-form-field class="width-full">
+                                        <input matInput value="0" #NewSourcePath type="text" ng-model="NewSourcePath" placeholder="New source path" value=""> 
+                                      </mat-form-field>
+                                      <button mat-icon-button color="primary" matTooltip="Add" (click)="AddSourcePath(NewSourcePath)"><mat-icon>add_circle</mat-icon></button>
+                                </div>
+                                <div *ngIf="isSourceDisabled">
+                                    <mat-form-field class="left-width-full">
+                                        <mat-select placeholder="Full backup" #FullBackup ng-model="FullBackup">
+                                            <mat-option *ngFor="let Fullbackup of Fullbackups" [value]="Fullbackup.value">
+                                                {{ Fullbackup.viewValue }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
 
                               </form>
                           </div>
                       </mat-tab>
                       <!-- FTP -->
                       <mat-tab label="Destination">
-                          <div class="tab-padding">
-                              <mat-checkbox #LocalCheckbox color="primary" checked="true" (change)="changeLocalCheckBox(LocalCheckbox,FTPCheckbox)">Local</mat-checkbox>
-                              <span class="space"></span>
-                              <mat-checkbox #FTPCheckbox color="primary" (change)="changeFTPCheckBox(LocalCheckbox,FTPCheckbox)">FTP</mat-checkbox>
-                          </div>
+                          
+                        <div class="tab-padding">
+                            <mat-checkbox #Override color="primary" >Override</mat-checkbox>
+                            <span class="space"></span>
+                            <mat-checkbox #Zip color="primary" >Zip</mat-checkbox>
+                        </div>
+                        <div class="tab-padding">
+                            <mat-checkbox #LocalCheckbox color="primary" checked="true" (change)="changeLocalCheckBox(LocalCheckbox,FTPCheckbox,SSHCheckbox)">Local</mat-checkbox>
+                            <span class="space"></span>
+                            <mat-checkbox #FTPCheckbox color="primary" (change)="changeFTPCheckBox(LocalCheckbox,FTPCheckbox,SSHCheckbox)">FTP</mat-checkbox>
+                            <span class="space"></span>
+                            <mat-checkbox #SSHCheckbox color="primary" (change)="changeSSHCheckBox(LocalCheckbox,FTPCheckbox,SSHCheckbox)">SSH</mat-checkbox>
+                        </div>
                             
                             <div *ngIf="LocalCheckbox.checked">
                                 <!--cesty-->
                                 <div *ngFor="let iDestinationPath of DestinationPaths">
                                     <mat-form-field class="width-full">
-                                        <input matInput value="0" #DestinationPath type="text" ng-model="DestinationPath" placeholder="Destination path" value={{iDestinationPath}}>
+                                        <input matInput value="0" disabled="true" #DestinationPath type="text" ng-model="DestinationPath" placeholder="Destination path" value={{iDestinationPath}}>
                                     </mat-form-field>
+                                    <button mat-icon-button matTooltip="Delete" color="primary" (click)="DeleteDestinationPath(DestinationPath)"><mat-icon>delete</mat-icon></button>
                                 </div>
 
                               <!--pridavani-->
                                 <mat-form-field class="width-full">
                                     <input matInput value="0" #NewDestinationPath type="text" ng-model="NewDestinationPath" placeholder="New destination path" value="">
                                 </mat-form-field>
-                                <button mat-icon-button color="primary" (click)="AddDestinationPath(NewDestinationPath)"><mat-icon>add_circle</mat-icon></button>
+                                <button mat-icon-button color="primary" matTooltip="Add" (click)="AddDestinationPath(NewDestinationPath)"><mat-icon>add_circle</mat-icon></button>
 
                             </div>
 
@@ -190,29 +210,62 @@
                                 <table>                              
                                     <tr>
                                         <td>
-                                            <mat-form-field class="rightFTPform">
-                                                <input matInput value="0" #ServerAddress type="text" ng-model="ServerAddress" placeholder="Server address" value="{{i_serverAdress}}">
+                                            <mat-form-field class="rightFTPform" class=width-full>
+                                                <input matInput value="0" #FTPServerAddress type="text" ng-model="ServerAddress" placeholder="Server address" value="{{i_serverAdress}}">
                                             </mat-form-field>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <mat-form-field class="rightFTPform">
-                                                <input matInput value="0" #PortNumber type="text" ng-model="PortNumber" placeholder="Port number" value="{{i_portNumber}}">
+                                            <mat-form-field class="rightFTPform" class=width-full>
+                                                <input matInput value="0" #FTPPortNumber type="text" ng-model="PortNumber" placeholder="Port number" value="{{i_portNumber}}">
                                             </mat-form-field>    
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <mat-form-field class="rightFTPform">
+                                            <mat-form-field class="rightFTPform" class=width-full>
                                                 <input matInput value="0" #FTPUsername type="text" ng-model="FTPUsername" placeholder="Username" value="{{this.i_username}}">
                                             </mat-form-field>
                                         </td>  
                                     </tr>
                                     <tr> 
                                         <td>
-                                            <mat-form-field class="rightFTPform">
+                                            <mat-form-field class="rightFTPform" class=width-full>
                                                 <input matInput value="0" #FTPPassword type="password" ng-model="FTPPassword" placeholder="Password" value="{{this.i_password}}">
+                                            </mat-form-field>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div *ngIf="SSHCheckbox.checked">
+                                <table>                              
+                                    <tr>
+                                        <td>
+                                            <mat-form-field class="rightFTPform" class=width-full>
+                                                <input matInput value="0" #SSHServerAddress type="text" ng-model="ServerAddress" placeholder="Server address or IP" value="{{i_serverAdress}}">
+                                            </mat-form-field>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <mat-form-field class="rightFTPform" class=width-full>
+                                                <input matInput value="0" #SSHPortNumber type="text" ng-model="PortNumber" placeholder="Port number" value="{{i_portNumber}}">
+                                            </mat-form-field>    
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <mat-form-field class="rightFTPform" class=width-full>
+                                                <input matInput value="0" #SSHUsername type="text" ng-model="FTPUsername" placeholder="Username" value="{{this.i_username}}">
+                                            </mat-form-field>
+                                        </td>  
+                                    </tr>
+                                    <tr> 
+                                        <td>
+                                            <mat-form-field class="rightFTPform" class=width-full>
+                                                <input matInput value="0" #SSHPassword type="password" ng-model="FTPPassword" placeholder="Password" value="{{this.i_password}}">
                                             </mat-form-field>
                                         </td>
                                     </tr>
@@ -227,10 +280,10 @@
 
 <mat-dialog-actions>
     <button mat-raised-button color="primary" (action)="closeDialog()" [mat-dialog-close] cdkFocusInitial>Close</button>
-    <button *ngIf="!this.isInEdit" mat-raised-button color="primary" class="form-settings-button" (click)="Send(Cron.value,BackupType.value)">
+    <button *ngIf="!this.isInEdit" mat-raised-button color="primary" class="form-settings-button" [mat-dialog-close] (click)="Send(Cron.value,BackupType.value)">
         Send new settings
     </button>  
-    <button *ngIf="this.isInEdit" mat-raised-button color="primary" class="form-settings-button" (click)="UpdatePlannedBackup(Cron.value,BackupType.value)">
+    <button *ngIf="this.isInEdit" mat-raised-button color="primary" class="form-settings-button" [mat-dialog-close] (click)="UpdatePlannedBackup(Cron.value,BackupType.value)">
         Update settings
     </button>    
 </mat-dialog-actions>
