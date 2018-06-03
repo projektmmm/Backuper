@@ -9,7 +9,6 @@ namespace Daemon
     public class PlannedBackups
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
         public DateTime NextRun { get; set; }
         public string Cron { get; set; }
         public int DaemonId { get; set; }

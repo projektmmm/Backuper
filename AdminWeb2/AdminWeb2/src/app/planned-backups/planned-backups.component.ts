@@ -58,7 +58,7 @@ export class PlannedBackupsComponent implements OnInit {
       this.tableResource.sort = this.sort;
   }
 
-  async getBackup() {
+  getBackup() {
     if(this.actuallDaemonId != null) {
     this.rowIdService.rowId = this.actuallDaemonId;
       this.adress = this.adress + "/" + localStorage.getItem("Username") + "-" + this.actuallDaemonId; 

@@ -22,8 +22,9 @@ namespace backuperApi
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Conventions.Remove<System.Data.Entity.ModelConfiguration.Conventions.PluralizingTableNameConvention>();
+            base.OnModelCreating(modelBuilder);
         }
 
     }

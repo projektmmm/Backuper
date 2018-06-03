@@ -98,7 +98,6 @@ export class SendNewSettingsComponent implements OnInit {
 
     const data: Settings = {
       DaemonId: this.daemonId,
-      UserId: 1,
       Cron: cron,
       BackupType: backupType,
       SourcePath: this.SourcePaths.join(),
@@ -126,7 +125,6 @@ export class SendNewSettingsComponent implements OnInit {
 
     const data: Settings = {
       DaemonId: this.daemonId,
-      UserId: 1,
       Cron: cron,
       BackupType: backupType,
       SourcePath: this.SourcePaths.join(),

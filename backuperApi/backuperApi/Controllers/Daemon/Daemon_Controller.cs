@@ -44,8 +44,24 @@ namespace backuperApi.Controllers.Daemon
 
             BackupReport dbRecord = this.database.BackupReport.Where(r => r.BackupId == report.BackupId && r.Date == report.Date && r.Size == report.Size && r.Type == report.Type).FirstOrDefault();
             int reportId = dbRecord.Id;
+            List<BackupErrors> err = new List<BackupErrors>();
 
-            foreach (BackupErrors item in errors)
+            for (int i = 0; i < errors.Count; i++)
+            {
+                bool add = true;
+                BackupErrors error = errors[i];
+
+                for (int j = 0; j < err.Count; j++)
+                {
+                    if (err[j].ProblemPath == error.ProblemPath && err[j].Problem == error.Problem)
+                        add = false;
+                }
+
+                if (add)
+                    err.Add(errors[i]);
+            }
+
+            foreach (BackupErrors item in err)
             {
                 item.BackupReportId = reportId;
                 this.database.BackupErrors.Add(item);

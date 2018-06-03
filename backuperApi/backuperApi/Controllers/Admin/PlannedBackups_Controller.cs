@@ -20,8 +20,10 @@ namespace backuperApi.Controllers
         public List<Backups> Get(string username)
         {
             var query = from b in this.database.Backups
+                        join d in this.database.Daemons
+                        on b.DaemonId equals d.Id
                         join u in this.database.Users
-                        on b.UserId equals u.Id
+                        on d.UserId equals u.Id
                         where u.Username == username
                         select b;
 
@@ -43,9 +45,8 @@ namespace backuperApi.Controllers
                 item.DestinationPath = item.DestinationPath.Replace("*", "\\");
                 item.DestinationPath = item.DestinationPath.Replace("\"", "");
 
-                //item.SourcePath = item.SourcePath.Replace(",", "," + System.Environment.NewLine);
-                //item.DestinationPath = item.DestinationPath.Replace(",", "," + System.Environment.NewLine);
-
+                item.SourcePath = item.SourcePath.Replace(",", "," + System.Environment.NewLine);
+                item.DestinationPath = item.DestinationPath.Replace(",", "," + System.Environment.NewLine);
             }
 
             return query.ToList();
@@ -57,8 +58,10 @@ namespace backuperApi.Controllers
         {
             //inner join v entity frameworku
             var query = from b in this.database.Backups
+                        join d in this.database.Daemons
+                        on b.DaemonId equals d.Id
                         join u in this.database.Users
-                        on b.UserId equals u.Id
+                        on d.UserId equals u.Id
                         where u.Username == username && b.DaemonId == daemonId
                         select b;
 
@@ -82,8 +85,9 @@ namespace backuperApi.Controllers
                 item.DestinationPath = item.DestinationPath.Replace("*", "\\");
                 item.DestinationPath = item.DestinationPath.Replace("\"", "");
 
-                //item.SourcePath = item.SourcePath.Replace(",", "," + System.Environment.NewLine);
-                //item.DestinationPath = item.DestinationPath.Replace(",", "," + System.Environment.NewLine);
+
+                item.SourcePath = item.SourcePath.Replace(",", "," + System.Environment.NewLine);
+                item.DestinationPath = item.DestinationPath.Replace(",", "," + System.Environment.NewLine);
             }
 
             return query.ToList<Backups>();
@@ -97,7 +101,7 @@ namespace backuperApi.Controllers
             Schedule = CrontabSchedule.Parse(toInsert.Cron);
             toInsert.NextRun = Schedule.GetNextOccurrence(DateTime.Now);
 
-            toInsert.SourcePath = "[\"" + toInsert.SourcePath.Replace(",", "\",\"").Replace("\\","\\\\") + "\"]";
+            toInsert.SourcePath = "[\"" + toInsert.SourcePath.Replace(",", "\",\"").Replace("\\", "\\\\") + "\"]";
             toInsert.DestinationPath = "[\"" + toInsert.DestinationPath.Replace(",", "\",\"").Replace("\\", "\\\\") + "\"]";
 
             this.database.Backups.Add(toInsert);
@@ -126,15 +130,46 @@ namespace backuperApi.Controllers
             return true;
         }
 
+        /// Odstraneni naplanovaneho backupu
         [HttpDelete]
         [Route("api/admin/planned-backups/{id}")]
         public bool Delete(int id)
         {
-            Backups del = this.FindById(id);
-            this.database.Backups.Remove(del);
+            try
+            {
+                foreach (BackupReport item in this.database.BackupReport.Where(b => b.BackupId == id).ToList())
+                {
+                    foreach (BackupErrors error in this.database.BackupErrors.Where(e => e.BackupReportId == item.Id).ToList())
+                    {
+                        this.database.BackupErrors.Remove(error);
+                        this.database.SaveChanges();
+                    }
+                    this.database.BackupReport.Remove(item);
+                    this.database.SaveChanges();
+                }
 
-            this.database.SaveChanges();
-            return true;
+                foreach (FTPSettings item in this.database.FtpSettings.Where(f => f.BackupId == id).ToList())
+                {
+                    this.database.FtpSettings.Remove(item);
+                    this.database.SaveChanges();
+                }
+
+                foreach (SSHSettings item in this.database.SshSettings.Where(s => s.BackupId == id).ToList())
+                {
+                    this.database.SshSettings.Remove(item);
+                    this.database.SaveChanges();
+                }
+
+                Backups del = this.FindById(id);
+                this.database.Backups.Remove(del);
+
+                this.database.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         private Backups FindById(int id)

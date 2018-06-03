@@ -63,7 +63,7 @@ namespace Daemon
                         this.reportMaker.AddError(new ErrorDetails()
                         {
                             Exception = ex.Message,
-                            Path = sourcePath + "\\incr_backup_0",
+                            ProblemPath = sourcePath + "\\incr_backup_0",
                             Problem = "Can't create the folder for incremental backup. Backup hasn't been done."
                         });
                         return;
@@ -87,7 +87,7 @@ namespace Daemon
                         this.reportMaker.AddError(new ErrorDetails()
                         {
                             Exception = ex.Message,
-                            Path = sourcePath + $"\\incr_backup_{cnt}",
+                            ProblemPath = sourcePath + $"\\incr_backup_{cnt}",
                             Problem = "Can't create the folder for incremental backup. Backup hasn't been done."
                         });
                         return;
@@ -117,7 +117,7 @@ namespace Daemon
                     this.reportMaker.AddError(new ErrorDetails()
                     {
                         Exception = ex.Message,
-                        Path = sourcePath + "\\incr_backup_0",
+                        ProblemPath = sourcePath + "\\incr_backup_0",
                         Problem = "Can't create the folder for incremental backup. Backup hasn't been done."
                     });
                     return;
@@ -142,8 +142,8 @@ namespace Daemon
                 this.reportMaker.AddError(new ErrorDetails()
                 {
                     Exception = ex.Message,
-                    Problem = "The program didn't find the full backup log. DIFF backup for this source folder hadn't been done.",
-                    Path = sourcePath
+                    Problem = "The program didn't find the full backup log. INCR backup for this source folder hadn't been done.",
+                    ProblemPath = sourcePath
                 });
                 return;
             }
@@ -186,7 +186,7 @@ namespace Daemon
                                     {
                                         Exception = ex.Message,
                                         Problem = "The program was unable to create directory.",
-                                        Path = sourcePath
+                                        ProblemPath = sourcePath
                                     });
                                     continue;
                                 }
@@ -204,7 +204,7 @@ namespace Daemon
                                 {
                                     Exception = ex.Message,
                                     Problem = "The program was unable to copy file.",
-                                    Path = sourcePath
+                                    ProblemPath = filePath
                                 });
                                 continue;
                             }
@@ -232,7 +232,7 @@ namespace Daemon
                             {
                                 Exception = ex.Message,
                                 Problem = "Backupper was unable to create destination path.",
-                                Path = directoryName
+                                ProblemPath = directoryName
                             });
                         }
                     }
@@ -248,7 +248,7 @@ namespace Daemon
                         {
                             Exception = ex.Message,
                             Problem = "The program was unable to copy file.",
-                            Path = sourcePath
+                            ProblemPath = sourcePath
                         });
                     }
                 }
@@ -274,12 +274,10 @@ namespace Daemon
                     {
                         Exception = ex.Message,
                         Problem = "The program was unable to create log. Future Incremental backups won't be possible",
-                        Path = sourcePath
+                        ProblemPath = sourcePath
                     });
                 }
             }
-
-            this.backupCount++;
         }
     }
 }

@@ -18,8 +18,10 @@ namespace backuperApi.Controllers
             var query = from br in this.database.BackupReport
                         join ba in this.database.Backups
                         on br.BackupId equals ba.Id
+                        join da in this.database.Daemons
+                        on ba.DaemonId equals da.Id
                         join us in this.database.Users
-                        on ba.UserId equals us.Id
+                        on da.UserId equals us.Id
                         where us.Username == username
                         select br;
 
@@ -33,8 +35,10 @@ namespace backuperApi.Controllers
             var query = from br in this.database.BackupReport
                         join ba in this.database.Backups
                         on br.BackupId equals ba.Id
+                        join da in this.database.Daemons
+                        on ba.DaemonId equals da.Id
                         join us in this.database.Users
-                        on ba.UserId equals us.Id
+                        on da.UserId equals us.Id
                         where us.Username == username && ba.DaemonId == daemonId
                         select br;
 

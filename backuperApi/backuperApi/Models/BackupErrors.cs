@@ -12,6 +12,7 @@ namespace backuperApi
         public int AffectedFiles { get; set; }
         public string Problem { get; set; }
         public string ProblemPath { get; set; }
+        public DateTime Time { get; set; } = DateTime.Now;
         public bool Solved { get; set; }
     }
 }

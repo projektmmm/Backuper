@@ -23,6 +23,7 @@ namespace Daemon
 
         public ABackup(PlannedBackups item)
         {
+            this.backupCount = 0;
             Console.WriteLine($"{item.BackupType} backup in progress");
             try
             {
@@ -55,8 +56,8 @@ namespace Daemon
                 if (this.backup.BackupType == "FULL")
                     this.CreateLog(item);
                 this.Backup(item, new List<string>(this.DestinationPaths));
-                this.backupCount++;
             }
+                this.backupCount++;
         }
 
         public virtual void SendReport()
@@ -97,7 +98,7 @@ namespace Daemon
                 this.reportMaker.AddError(new ErrorDetails()
                 {
                     Exception = ex.Message,
-                    Path = sourcePath + "\\BackupsLog.log",
+                    ProblemPath = sourcePath + "\\BackupsLog.log",
                     Problem = "Can't create the log file. Future DIFF and INCR backups won't be possible. Check the folder settings and repeat the backup."
                 });
             }

@@ -39,7 +39,7 @@ namespace Daemon
                         {
                             Exception = ex.Message,
                             Problem = "Could not delete the old folder. Override failed",
-                            Path = destinationPath
+                            ProblemPath = destinationPath
                         });
                     }
                 }
@@ -56,7 +56,7 @@ namespace Daemon
                         {
                             Exception = ex.Message,
                             Problem = "The program was unable to create folder.",
-                            Path = dirPath
+                            ProblemPath = dirPath
                         });
                     }
                     index++;
@@ -74,7 +74,7 @@ namespace Daemon
                         {
                             Exception = ex.Message,
                             Problem = "The program was unable to destination create folder.",
-                            Path = destinationPath
+                            ProblemPath = destinationPath
                         });
                     }
                 }
@@ -97,7 +97,7 @@ namespace Daemon
                         this.reportMaker.AddError(new ErrorDetails()
                         {
                             Problem = "The file was not copied",
-                            Path = newPath,
+                            ProblemPath = newPath,
                             Exception = ex.Message,
                             AffectedFiles = 1
                         });

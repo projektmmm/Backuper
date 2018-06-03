@@ -34,7 +34,7 @@ namespace Daemon
                 {
                     Exception = ex.Message,
                     Problem = "The program didn't find the full backup log. DIFF backup for this source folder hadn't been done.",
-                    Path = sourcePath
+                    ProblemPath = sourcePath
                 });
                 return;
             }
@@ -108,7 +108,7 @@ namespace Daemon
                                         {
                                             Exception = ex.Message,
                                             Problem = "Backupper was unable to create destination path.",
-                                            Path = dirPath
+                                            ProblemPath = dirPath
                                         });
                                     }
                                 }
@@ -121,7 +121,7 @@ namespace Daemon
                                 {
                                     Exception = ex.Message,
                                     Problem = "Backupper was unable to copy a file.",
-                                    Path = sourcePath
+                                    ProblemPath = filePath
                                 });
                             }
                         }
@@ -155,7 +155,7 @@ namespace Daemon
                                     {
                                         Exception = ex.Message,
                                         Problem = "Backupper was unable to create destination path.",
-                                        Path = dirPath
+                                        ProblemPath = dirPath
                                     });
                                 }
                             }
@@ -168,14 +168,12 @@ namespace Daemon
                             {
                                 Exception = ex.Message,
                                 Problem = "Backupper was unable to copy a file.",
-                                Path = sourcePath
+                                ProblemPath = sourcePath
                             });
                         }
                     }
                 }
             }
-
-            this.backupCount++;
         }
         /// <summary>
         /// Porovná soubory a zjistí, jestli je jeden z nich starší
