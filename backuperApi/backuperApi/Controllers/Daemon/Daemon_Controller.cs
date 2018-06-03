@@ -155,9 +155,6 @@ namespace backuperApi.Controllers.Daemon
                         where b.DaemonId == daemonId
                         select f;
 
-
-
-
             return query.ToList<FTPSettings>();
         }
     }

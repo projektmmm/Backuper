@@ -104,10 +104,6 @@ namespace Daemon
                     }
                 }
             }
-
-            if (this.backup.Rar)
-                if (!BackupOperations.ZipFiles(destinationPaths))
-                    this.reportMaker.AddError(new ErrorDetails() { Problem = "Could not ZIP the files." });
         }
 
 

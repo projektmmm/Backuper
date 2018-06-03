@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ICSharpCode.SharpZipLib.Core;
-using ICSharpCode.SharpZipLib.Zip;
 using System.IO;
+using System.IO.Compression;
 using System.Threading;
 using System.Net;
 using Renci.SshNet;
@@ -15,140 +14,93 @@ namespace Daemon
 {
     public class BackupOperations
     {
-        public static bool ZipFiles(List<string> destinationPaths)
+        public static bool ZipFiles(List<string> destinationPaths, PlannedBackups backup)
         {
-            try
-            {
-                foreach (string destinationPath in destinationPaths)
-                {
-                    FileStream fsOut = File.Create(destinationPath);
-                    ZipOutputStream zipStream = new ZipOutputStream(fsOut);
-                    zipStream.SetLevel(3);
-                    zipStream.Password = null;
+            bool toRet = true;
+            string filename = "";
+            string tempPath = Path.GetTempPath();
 
-                    int folderOffset = destinationPath.Length + (destinationPath.EndsWith("\\") ? 0 : 1);
-                    BackupOperations.CompressFolder(destinationPath, zipStream, folderOffset);
-
-
-                    zipStream.IsStreamOwner = true;
-                    zipStream.Close();
-                }
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        private static void CompressFolder(string path, ZipOutputStream zipStream, int folderOffset)
-        {
-            string[] files = Directory.GetFiles(path);
-
-            foreach (string file in files)
-            {
-                FileInfo fi = new FileInfo(file);
-
-                string entryName = file.Substring(folderOffset);
-                entryName = ZipEntry.CleanName(entryName);
-                ZipEntry newEntry = new ZipEntry(entryName);
-                newEntry.DateTime = fi.LastWriteTime;
-                newEntry.Size = fi.Length;
-
-                zipStream.PutNextEntry(newEntry);
-                byte[] buffer = new byte[4096];
-                using (FileStream streamReader = File.OpenRead(file))
-                {
-                    StreamUtils.Copy(streamReader, zipStream, buffer);
-                }
-
-                zipStream.CloseEntry();
-            }
-
-            string[] folders = Directory.GetDirectories(path);
-            foreach (string item in folders)
-            {
-                CompressFolder(item, zipStream, folderOffset);
-            }
-        }
-
-        public static bool Ftp(string source)
-        {
-            try
-            {
-                string[] subDirs = Directory.GetDirectories(source);
-            }
-            catch
+            foreach (string item in destinationPaths)
             {
                 try
                 {
-                    List<string> src = JsonConvert.DeserializeObject<List<string>>(source);
-                    string[] subDirs = Directory.GetDirectories(src[0]);
+                    File.Delete($"{tempPath}//backup.zip");
+                    ZipFile.CreateFromDirectory(item, $"{tempPath}//backup.zip", CompressionLevel.Optimal, false);
                 }
-                catch
+                catch { toRet = false; continue; }
+
+                if (backup.Override)
                 {
-                    return false;
+                    try
+                    {
+                        Directory.Delete(item, true);
+                        Directory.CreateDirectory(item);
+                        File.Copy($"{tempPath}//backup.zip", $"{item}//backup.zip", true);
+                    }
+                    catch { toRet = false; continue; }
                 }
-            }
+                else
+                {
+                    try
+                    {
+                        int cnt = 0;
+                        foreach (string file in Directory.GetFiles(item, "*", SearchOption.TopDirectoryOnly))
+                        {
+                            if (file.Contains("backup"))
+                                cnt++;
+                        }
+                        File.Copy($"{tempPath}//backup.zip", $"{item}//backup_{cnt}.zip", true);
+                    }
+                    catch { toRet = false; continue; }
+                }
+            }      
+            return toRet;
+        }
+
+        public static bool Ftp(List<string> destinationPaths, PlannedBackups backup)
+        {
             bool ret = true;
+            ZipFiles(destinationPaths, backup);
+            string path = Path.GetTempPath() + "//backup.zip";
 
             foreach (FtpSettings item in DaemonSettings.ftpSettings)
             {
                 if (ret == true)
-                    ret = SendFtp(item, source, source);
+                    ret = SendFtp(item, path);
                 else
-                    SendFtp(item, source, source);
+                    SendFtp(item, path);
             }
             return ret;
         }
 
-        private static bool SendFtp(FtpSettings ftp, string source, string destinationPath, bool ret = true)
+        private static bool SendFtp(FtpSettings ftp, string source, bool ret = true)
         {
             try
-            {
-                foreach (string subDir in Directory.GetDirectories(source))
-                {
-                    string[] files = Directory.GetFiles(source, "*.*");
-                    string dirSuffix = $"//{new DirectoryInfo(subDir).FullName.Replace(destinationPath, "")}";
-                    WebRequest folderRequest = WebRequest.Create(ftp.ServerAdress + dirSuffix);
-                    folderRequest.Method = WebRequestMethods.Ftp.MakeDirectory;
-                    folderRequest.Credentials = new NetworkCredential(ftp.Username, ftp.Password);
-                    using (var resp = (FtpWebResponse)folderRequest.GetResponse())
+            {                    
+                    FtpWebRequest request = (FtpWebRequest)WebRequest.Create(new Uri(ftp.ServerAdress));
+                    request.Method = WebRequestMethods.Ftp.UploadFileWithUniqueName;
+
+                    request.Credentials = new NetworkCredential(ftp.Username, ftp.Password);
+
+                    byte[] fileContents;
+                    using (StreamReader sourceStream = new StreamReader(new FileInfo(source).FullName))
                     {
-                        Console.WriteLine(resp.StatusCode);
+                        fileContents = Encoding.UTF8.GetBytes(sourceStream.ReadToEnd());
                     }
 
-                    foreach (string file in files)
+                    request.ContentLength = fileContents.Length;
+
+                    using (Stream requestStream = request.GetRequestStream())
                     {
-                        FtpWebRequest request = (FtpWebRequest)WebRequest.Create(new Uri(ftp.ServerAdress + $"//{dirSuffix}"));
-                        request.Method = WebRequestMethods.Ftp.UploadFileWithUniqueName;
-
-                        request.Credentials = new NetworkCredential(ftp.Username, ftp.Password);
-
-                        byte[] fileContents;
-                        using (StreamReader sourceStream = new StreamReader(new FileInfo(file).FullName))
-                        {
-                            fileContents = Encoding.UTF8.GetBytes(sourceStream.ReadToEnd());
-                        }
-
-                        request.ContentLength = fileContents.Length;
-
-                        using (Stream requestStream = request.GetRequestStream())
-                        {
-                            requestStream.Write(fileContents, 0, fileContents.Length);
-                        }
-
-                        using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
-                        {
-                            Console.WriteLine("Upload File Complete, status {0}", response.StatusDescription);
-                        }
+                        requestStream.Write(fileContents, 0, fileContents.Length);
                     }
 
-                    if (ret)
-                        ret = SendFtp(ftp, subDir, destinationPath);
-                    else
-                        SendFtp(ftp, subDir, destinationPath);
-                }
+                    using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+                    {
+                        Console.WriteLine("Upload File Complete, status {0}", response.StatusDescription);
+                    }
+                    
+                
                 return true;
             }
             catch

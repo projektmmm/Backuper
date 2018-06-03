@@ -17,6 +17,17 @@ namespace Daemon
 
         protected override void Backup(string sourcePath, List<string> destinationPaths)
         {
+            //oprava formatu sourcePath
+            if (sourcePath.Contains(@"\\"))
+                sourcePath = sourcePath.Replace(@"\\", "\\");
+
+
+            for (int i = 0; i < destinationPaths.Count; i++)
+            {
+                if (destinationPaths[i].Contains(@"\\"))
+                    destinationPaths[i] = destinationPaths[i].Replace(@"\\", "\\");
+            }
+
             string newLogPath = "";
             this.newLog = new List<LogModel>();
 
@@ -57,6 +68,10 @@ namespace Daemon
                     {
                         Directory.CreateDirectory(sourcePath + "\\incr_backup_0");
                         oldLogPath = sourcePath + "\\BackupsLog.log";
+                        for (int i = 0; i < destinationPaths.Count; i++)
+                        {
+                            destinationPaths[i] += $"\\incr_backup";
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -145,12 +160,21 @@ namespace Daemon
                     Problem = "The program didn't find the full backup log. INCR backup for this source folder hadn't been done.",
                     ProblemPath = sourcePath
                 });
+                
+                try
+                {
+                    Directory.Delete(sourcePath + $"//incr_backup{cnt}", true);
+                }
+                catch { }
+                
                 return;
             }
 
             foreach (string filePath in Directory.GetFiles(sourcePath, "*", SearchOption.AllDirectories))
             {
                 FileInfo fileInfo = new FileInfo(filePath);
+                if (fileInfo.Name == "BackupsLog.log")
+                    continue;
                 bool found = false;
 
                 foreach (LogModel item in oldLog)
@@ -172,13 +196,14 @@ namespace Daemon
 
                         foreach (string destinationPath in destinationPaths)
                         {
-                            string directoryName = fileInfo.FullName.Replace(sourcePath, destinationPath);
-                            directoryName = directoryName.Substring(0, Functionality.IdentifyCharPosition('\\', directoryName) - 1);
-                            if (!Directory.Exists(directoryName))
+                            string dirPath = destinationPath;
+                            dirPath += fileInfo.FullName.Replace(sourcePath, "");
+                            dirPath = dirPath.Substring(0, Functionality.IdentifyCharPosition('\\', dirPath) - 1);
+                            if (!Directory.Exists(dirPath))
                             {
                                 try
                                 {
-                                    Directory.CreateDirectory(directoryName.Substring(0, Functionality.IdentifyCharPosition('\\', directoryName) - 1));
+                                    Directory.CreateDirectory(dirPath);
                                 }
                                 catch (Exception ex)
                                 {
@@ -186,16 +211,15 @@ namespace Daemon
                                     {
                                         Exception = ex.Message,
                                         Problem = "The program was unable to create directory.",
-                                        ProblemPath = sourcePath
+                                        ProblemPath = dirPath
                                     });
                                     continue;
                                 }
                             }
 
-
                             try
                             {
-                                File.Copy(filePath, filePath.Replace(sourcePath, destinationPath), true);
+                                File.Copy(filePath, dirPath + $"\\{fileInfo.Name}", true);
                                 reportMaker.AddFile(new FileInfo(filePath));
                             }
                             catch (Exception ex)
@@ -218,13 +242,15 @@ namespace Daemon
                 //nenalezene v minulem logu - NEW
                 foreach (string destinationPath in destinationPaths)
                 {
-                    string directoryName = fileInfo.FullName.Replace(sourcePath, destinationPath);
-                    directoryName = directoryName.Substring(0, Functionality.IdentifyCharPosition('\\', directoryName) - 1);
-                    if (!Directory.Exists(directoryName))
+                    string dirPath = destinationPath;
+                    dirPath += fileInfo.FullName.Replace(sourcePath, "");
+                    dirPath = dirPath.Substring(0, Functionality.IdentifyCharPosition('\\', dirPath) - 1);
+
+                    if (!Directory.Exists(dirPath))
                     {
                         try
                         {
-                            Directory.CreateDirectory(directoryName);
+                            Directory.CreateDirectory(dirPath);
                         }
                         catch (Exception ex)
                         {
@@ -232,13 +258,13 @@ namespace Daemon
                             {
                                 Exception = ex.Message,
                                 Problem = "Backupper was unable to create destination path.",
-                                ProblemPath = directoryName
+                                ProblemPath = dirPath
                             });
                         }
                     }
                     try
                     {
-                        File.Copy(filePath, filePath.Replace(sourcePath, destinationPath), true);
+                        File.Copy(filePath, dirPath + $"\\{fileInfo.Name}", true);
                         reportMaker.AddFile(new FileInfo(filePath));
                         this.newLog.Add(new LogModel() { Action = "NEW", FileName = fileInfo.Name, FilePath = fileInfo.FullName, LastWriteTime = Convert.ToDateTime(fileInfo.LastWriteTime) });
                     }
@@ -248,35 +274,32 @@ namespace Daemon
                         {
                             Exception = ex.Message,
                             Problem = "The program was unable to copy file.",
-                            ProblemPath = sourcePath
+                            ProblemPath = filePath
                         });
                     }
                 }
             }
 
-            //zapsani logu
-            if (this.backupCount == 0)
+            string newlogpath = (this.backup.Override) ? sourcePath + $"\\incr_backup" + "\\BackupsLog.log" : sourcePath + $"\\incr_backup_{cnt}" + "\\BackupsLog.log";
+            try
             {
-                try
+                using (StreamWriter sw = new StreamWriter(newlogpath, false))
                 {
-                    using (StreamWriter sw = new StreamWriter(sourcePath + $"\\incr_backup_{cnt}" + "\\BackupsLog.log", false))
-                    {
 
-                        string toWrite = JsonConvert.SerializeObject(this.newLog);
-                        sw.Write(toWrite);
+                    string toWrite = JsonConvert.SerializeObject(this.newLog);
+                    sw.Write(toWrite);
 
-                        sw.Flush();
-                    }
+                    sw.Flush();
                 }
-                catch (Exception ex)
+            }
+            catch (Exception ex)
+            {
+                this.reportMaker.AddError(new ErrorDetails()
                 {
-                    this.reportMaker.AddError(new ErrorDetails()
-                    {
-                        Exception = ex.Message,
-                        Problem = "The program was unable to create log. Future Incremental backups won't be possible",
-                        ProblemPath = sourcePath
-                    });
-                }
+                    Exception = ex.Message,
+                    Problem = "The program was unable to create log. Future Incremental backups won't be possible",
+                    ProblemPath = newlogpath
+                });
             }
         }
     }

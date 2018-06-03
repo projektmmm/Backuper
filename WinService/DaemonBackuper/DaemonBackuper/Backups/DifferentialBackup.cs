@@ -17,6 +17,17 @@ namespace Daemon
 
         protected override void Backup(string sourcePath, List<string> destinationPaths)
         {
+            //oprava formatu sourcePath
+            if (sourcePath.Contains(@"\\"))
+                sourcePath = sourcePath.Replace(@"\\", "\\");
+
+
+            for (int i = 0; i < destinationPaths.Count; i++)
+            {
+                if (destinationPaths[i].Contains(@"\\"))
+                    destinationPaths[i] = destinationPaths[i].Replace(@"\\", "\\");
+            }
+
             //Nacteni FULL backup logu
             List<LogModel> oldLog = new List<LogModel>();
             //Nacetni stareho logu
@@ -46,11 +57,15 @@ namespace Daemon
             {
                 destinationPaths[i] += $"\\{sourcePath.Substring(Functionality.IdentifyCharPosition('\\', sourcePath))}";
                 int count = 0;
-                foreach (string item in Directory.GetDirectories(destinationPaths[i], "*", SearchOption.TopDirectoryOnly).Where(s => s.Contains("diff_backup")))
+                try
                 {
-                    if (item.Contains("diff_backup"))
-                        count++;
+                    foreach (string item in Directory.GetDirectories(destinationPaths[i], "*", SearchOption.TopDirectoryOnly).Where(s => s.Contains("diff_backup")).ToList())
+                    {
+                        if (item.Contains("diff_backup"))
+                            count++;
+                    }
                 }
+                catch { }
 
                 if (this.backup.Override)
                 {
@@ -61,7 +76,7 @@ namespace Daemon
                     }
                     catch
                     {
-
+                        destinationPaths[i] += $"\\diff_backup\\{sourcePath.Substring(Functionality.IdentifyCharPosition('\\', sourcePath))}";
                     }
                 }
                 else
@@ -74,9 +89,12 @@ namespace Daemon
 
             int index;
             //Porovnavani logu s aktualni verzi vychozi slozky pro fullbackup
-            foreach (string filePath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories).OrderBy(f => new FileInfo(f).FullName))
+            foreach (string filePath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories).OrderBy(f => new FileInfo(f).FullName).ToList())
             {
                 FileInfo fileInfo = new FileInfo(filePath);
+                if (fileInfo.Name == "BackupsLog.log")
+                    continue;
+
                 bool found = false;
 
                 foreach (LogModel item in oldLog)
@@ -94,8 +112,11 @@ namespace Daemon
                         {
                             try
                             {
-                                string dirPath = fileInfo.FullName.Replace(sourcePath, destinationPath);
+                                //string dirPath = fileInfo.FullName.Replace(sourcePath, destinationPath);
+                                string dirPath = destinationPath;
+                                dirPath += fileInfo.FullName.Replace(sourcePath, "");
                                 dirPath = dirPath.Substring(0, Functionality.IdentifyCharPosition('\\', dirPath) - 1);
+                                //dirPath = dirPath.Substring(0, Functionality.IdentifyCharPosition('\\', dirPath) - 1);
                                 if (!Directory.Exists(dirPath))
                                 {
                                     try
@@ -113,7 +134,7 @@ namespace Daemon
                                     }
                                 }
 
-                                File.Copy(filePath, fileInfo.FullName.Replace(sourcePath, destinationPath));
+                                File.Copy(filePath, dirPath + $"\\{fileInfo.Name}");
                             }
                             catch (Exception ex)
                             {
@@ -140,7 +161,10 @@ namespace Daemon
                     {
                         try
                         {
-                            string dirPath = fileInfo.FullName.Replace(sourcePath, destinationPath);
+                            //string dirPath = fileInfo.FullName.Replace(sourcePath, destinationPath);
+                            //dirPath = dirPath.Substring(0, Functionality.IdentifyCharPosition('\\', dirPath) - 1);
+                            string dirPath = destinationPath;
+                            dirPath += fileInfo.FullName.Replace(sourcePath, "");
                             dirPath = dirPath.Substring(0, Functionality.IdentifyCharPosition('\\', dirPath) - 1);
 
                             if (!Directory.Exists(dirPath))
@@ -160,7 +184,7 @@ namespace Daemon
                                 }
                             }
 
-                            File.Copy(filePath, fileInfo.FullName.Replace(sourcePath, destinationPath));
+                            File.Copy(filePath, dirPath + $"\\{fileInfo.Name}");
                         }
                         catch (Exception ex)
                         {
@@ -168,7 +192,7 @@ namespace Daemon
                             {
                                 Exception = ex.Message,
                                 Problem = "Backupper was unable to copy a file.",
-                                ProblemPath = sourcePath
+                                ProblemPath = filePath
                             });
                         }
                     }

@@ -19,6 +19,7 @@ namespace Daemon
         protected List<ErrorDetails> ErrorDetails = new List<ErrorDetails>();
         protected List<LogModel> newLog;
         protected int backupCount = 0;
+        protected int backupCountFolders = 0;
 
 
         public ABackup(PlannedBackups item)
@@ -56,6 +57,7 @@ namespace Daemon
                 if (this.backup.BackupType == "FULL")
                     this.CreateLog(item);
                 this.Backup(item, new List<string>(this.DestinationPaths));
+                this.backupCountFolders++;
             }
                 this.backupCount++;
         }
@@ -111,7 +113,7 @@ namespace Daemon
                 this.communicator.GetFtpSettings();
                 Thread.Sleep(20000);
 
-                if (!BackupOperations.Ftp(this.DestinationPaths[0]))
+                if (!BackupOperations.Ftp(this.DestinationPaths, this.backup))
                 {
                     this.reportMaker.AddError(new ErrorDetails()
                     {
@@ -119,6 +121,7 @@ namespace Daemon
                     });
                 }
             }
+
             if (this.backup.Ssh)
             {
                 this.communicator.GetSshSettings();
@@ -132,6 +135,11 @@ namespace Daemon
                     });
                 }
             }
+
+            if (this.backup.Rar)
+                if (!BackupOperations.ZipFiles(this.DestinationPaths, this.backup))
+                    this.reportMaker.AddError(new ErrorDetails() { Problem = "Could not ZIP the files." });
+
         }
     }
 }
