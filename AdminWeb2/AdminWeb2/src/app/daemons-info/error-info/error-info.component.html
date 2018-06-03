@@ -41,6 +41,10 @@
                     <td class="listHeader">Daemon name</td>
                     <td>{{ error.DaemonName }}</td>
                   </tr>
+                  <tr>
+                    <td class="listHeader">Time</td>
+                    <td>{{ error.Time }}</td>
+                  </tr>
                 </table>
 
                 <button mat-raised-button color="primary" (click)="solvedProblem(error.Id)" disabled="{{error.Solved}}">
