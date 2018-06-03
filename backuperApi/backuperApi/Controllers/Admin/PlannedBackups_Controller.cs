@@ -44,9 +44,6 @@ namespace backuperApi.Controllers
                 item.DestinationPath = item.DestinationPath.Replace("\",\"", ",");
                 item.DestinationPath = item.DestinationPath.Replace("*", "\\");
                 item.DestinationPath = item.DestinationPath.Replace("\"", "");
-
-                item.SourcePath = item.SourcePath.Replace(",", "," + System.Environment.NewLine);
-                item.DestinationPath = item.DestinationPath.Replace(",", "," + System.Environment.NewLine);
             }
 
             return query.ToList();
@@ -84,10 +81,6 @@ namespace backuperApi.Controllers
                 item.DestinationPath = item.DestinationPath.Replace("\",\"", ",");
                 item.DestinationPath = item.DestinationPath.Replace("*", "\\");
                 item.DestinationPath = item.DestinationPath.Replace("\"", "");
-
-
-                item.SourcePath = item.SourcePath.Replace(",", "," + System.Environment.NewLine);
-                item.DestinationPath = item.DestinationPath.Replace(",", "," + System.Environment.NewLine);
             }
 
             return query.ToList<Backups>();
@@ -112,14 +105,17 @@ namespace backuperApi.Controllers
         [HttpPatch]
         [Route("api/admin/planned-backups/{id}")]
         public bool Patch(Backups toUpdate)
-        {
+        {  
             Backups dbRecord = this.FindById(toUpdate.Id);
+
+            Schedule = CrontabSchedule.Parse(toUpdate.Cron);
+            dbRecord.NextRun = Schedule.GetNextOccurrence(DateTime.Now);
 
             dbRecord.DaemonId = toUpdate.DaemonId;
             dbRecord.BackupType = toUpdate.BackupType;
             dbRecord.Cron = toUpdate.Cron;
             dbRecord.DestinationPath = toUpdate.DestinationPath;
-            dbRecord.NextRun = toUpdate.NextRun;
+            ////dbRecord.NextRun = toUpdate.NextRun;
             dbRecord.SourcePath = toUpdate.SourcePath;
 
             dbRecord.SourcePath = "[\"" + toUpdate.SourcePath.Replace(",", "\",\"").Replace("\\", "\\\\") + "\"]";
