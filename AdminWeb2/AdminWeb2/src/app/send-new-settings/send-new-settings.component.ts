@@ -47,6 +47,11 @@ export class SendNewSettingsComponent implements OnInit {
     });
   }
 
+  Fullbackups = [
+    {value: 'xxx',viewValue: 'xxx'},
+    {value: 'xxx',viewValue: 'xxx'},
+    {value: 'xxx',viewValue: 'xxx'}]
+
   backups = [
     {value: 'FULL', viewValue: 'FULL'},
     {value: 'DIFF', viewValue: 'DIFF'},
@@ -63,6 +68,8 @@ export class SendNewSettingsComponent implements OnInit {
   i_backupId: number;
   isInEdit: boolean = false;
   daemonId: number;
+
+  isSourceDisabled: boolean = false;
 
   SourcePathFormControl = new FormControl('', [
     Validators.required,
@@ -91,7 +98,7 @@ export class SendNewSettingsComponent implements OnInit {
   headers = new HttpHeaders();
   readonly root_URL = 'http://localhost:63324';
 
-  Send(cron, backupType) {
+  Send(cron, backupType, ftpserveradress, ftpport, ftpusername, ftppassword, sshserveradress, sshport, sshusername, sshpassword) {
 
     const head = {headers: new HttpHeaders({'Content-Type':'application/json'})};
     head.headers.append('Content-Type', 'application/json');
@@ -102,10 +109,18 @@ export class SendNewSettingsComponent implements OnInit {
       BackupType: backupType,
       SourcePath: this.SourcePaths.join(),
       DestinationPath: this.DestinationPaths.join(),
-      Id: null
+      Id: null,
+      FTPServerAdress: ftpserveradress,
+      FTPPort: ftpport,
+      FTPUsername: ftpusername,
+      FTPPassword: ftppassword,
+      SSHServerAdress: sshserveradress,
+      SSHPort: sshport,
+      SSHUsername: sshusername,
+      SSHPassword: sshpassword
     }
 
-    if(backupType == "" || cron == "")
+    if(backupType == "" || cron == "" || this.DestinationPaths.join() == "")
     {
       console.log("xxx");
       this.openSnackBar("Settings not sended","")
@@ -119,7 +134,9 @@ export class SendNewSettingsComponent implements OnInit {
     }
   }
 
-  UpdatePlannedBackup(cron, backupType) {
+  UpdatePlannedBackup(cron, backupType, ftpserveradress, ftpport, ftpusername, ftppassword, sshserveradress, sshport, sshusername, sshpassword) {
+    this
+
     const head = {headers: new HttpHeaders({'Content-Type':'application/json'})};
     head.headers.append('Content-Type', 'application/json');
 
@@ -129,7 +146,15 @@ export class SendNewSettingsComponent implements OnInit {
       BackupType: backupType,
       SourcePath: this.SourcePaths.join(),
       DestinationPath: this.DestinationPaths.join(),
-      Id: this.i_backupId
+      Id: this.i_backupId,
+      FTPServerAdress: ftpserveradress,
+      FTPPort: ftpport,
+      FTPUsername: ftpusername,
+      FTPPassword: ftppassword,
+      SSHServerAdress: sshserveradress,
+      SSHPort: sshport,
+      SSHUsername: sshusername,
+      SSHPassword: sshpassword
     }
 
     if(backupType == "" || cron == "")
@@ -184,8 +209,55 @@ export class SendNewSettingsComponent implements OnInit {
       console.log("sourcepath added")
       this.SourcePaths.push(ipath.value)
       ipath.value = "";
+    }   
+  }
+
+  DeleteSourcePath(ipath)
+  {
+    let NewSourcePaths: string[];
+
+    this.SourcePaths
+
+    NewSourcePaths = this.SourcePaths.join().replace(ipath.value,"*").split(",");
+
+    NewSourcePaths = NewSourcePaths.join().replace("*,","").replace(",*","").split(",");
+
+    if(NewSourcePaths.join() == "*")
+    {
+      NewSourcePaths.pop();
     }
-    
+
+    this.SourcePaths = NewSourcePaths;
+  }
+
+  DeleteDestinationPath(ipath)
+  {
+    let NewDestinationPaths: string[];
+
+    this.SourcePaths
+
+    NewDestinationPaths = this.DestinationPaths.join().replace(ipath.value,"*").split(",");
+
+    NewDestinationPaths = NewDestinationPaths.join().replace("*,","").replace(",*","").split(",");
+
+    if(NewDestinationPaths.join() == "*")
+    {
+      NewDestinationPaths.pop();
+    }
+
+    this.DestinationPaths = NewDestinationPaths;
+  }
+
+  DisableSources(iBackupType,iNewSourcePath)
+  {
+    if(iBackupType.value != "FULL")
+    {
+      this.isSourceDisabled = true;
+    }
+    else
+    {
+      this.isSourceDisabled = false;
+    }
   }
 
   OnTabChanges(currentTabIndex)
@@ -213,31 +285,51 @@ export class SendNewSettingsComponent implements OnInit {
   }
 
 
-  changeLocalCheckBox(LocalCheckbox,FTPCheckbox)
+  changeLocalCheckBox(LocalCheckbox,FTPCheckbox,SSHCheckbox)
   {
     if(FTPCheckbox.checked)
     {
       LocalCheckbox.checked = true;
       FTPCheckbox.checked = false;
+      SSHCheckbox.checked = false;
     }
     else
     {
       LocalCheckbox.checked = true;
       FTPCheckbox.checked = false;
+      SSHCheckbox.checked = false;
     }
   }
 
-  changeFTPCheckBox(LocalCheckbox,FTPCheckbox)
+  changeFTPCheckBox(LocalCheckbox,FTPCheckbox,SSHCheckbox)
   {
     if(LocalCheckbox.checked)
     {
       LocalCheckbox.checked = false;
       FTPCheckbox.checked = true;
+      SSHCheckbox.checked = false;
     }
     else
     {
       LocalCheckbox.checked = false;
       FTPCheckbox.checked = true;
+      SSHCheckbox.checked = false;
+    }
+  }
+
+  changeSSHCheckBox(LocalCheckbox,FTPCheckbox,SSHCheckbox)
+  {
+    if(LocalCheckbox.checked)
+    {
+      LocalCheckbox.checked = false;
+      FTPCheckbox.checked = false;
+      SSHCheckbox.checked = true;
+    }
+    else
+    {
+      LocalCheckbox.checked = false;
+      FTPCheckbox.checked = false;
+      SSHCheckbox.checked = true;
     }
   }
 
