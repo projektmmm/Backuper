@@ -27,7 +27,7 @@ export class ChangePasswordComponent implements OnInit {
         Password: Password,
         Content: Email
       }
-     this.http.patch<boolean>("http://localhost:63324/api/admin/AdminSettings/newPassword",JSON.stringify(data),head)
+     this.http.patch<boolean>("http://localhost:63324/api/admin/AdminSettings/newPassword",JSON.stringify(data), {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))})
      .subscribe(data=>{
       if (data)
       {

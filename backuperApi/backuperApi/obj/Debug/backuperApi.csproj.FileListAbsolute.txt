@@ -334,7 +334,6 @@ D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\backuperApi\backuperApi\bin\cs\Syste
 D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\backuperApi\backuperApi\bin\cs\System.Web.WebPages.resources.dll
 D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\backuperApi\backuperApi\bin\cs\System.Web.WebPages.Deployment.resources.dll
 D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\backuperApi\backuperApi\bin\cs\System.Web.WebPages.Razor.resources.dll
-D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\backuperApi\backuperApi\obj\Debug\backuperApi.csprojResolveAssemblyReference.cache
 D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\backuperApi\backuperApi\obj\Debug\backuperApi.csproj.CoreCompileInputs.cache
 D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\backuperApi\backuperApi\obj\Debug\backuperApi.csproj.CopyComplete
 D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\backuperApi\backuperApi\obj\Debug\backuperApi.dll
@@ -810,3 +809,13 @@ C:\Users\Pc1\Desktop\Backuper-master\backuperApi\backuperApi\obj\Debug\backuperA
 C:\Users\Pc1\Desktop\Backuper-master\backuperApi\backuperApi\obj\Debug\backuperApi.csproj.CopyComplete
 C:\Users\Pc1\Desktop\Backuper-master\backuperApi\backuperApi\obj\Debug\backuperApi.dll
 C:\Users\Pc1\Desktop\Backuper-master\backuperApi\backuperApi\obj\Debug\backuperApi.pdb
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\backuperApi\backuperApi\obj\Debug\backuperApi.csprojAssemblyReference.cache
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\backuperApi\backuperApi\bin\Microsoft.IdentityModel.Logging.dll
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\backuperApi\backuperApi\bin\Microsoft.IdentityModel.Tokens.dll
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\backuperApi\backuperApi\bin\System.IdentityModel.Tokens.Jwt.dll
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\backuperApi\backuperApi\bin\Microsoft.IdentityModel.Logging.pdb
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\backuperApi\backuperApi\bin\Microsoft.IdentityModel.Logging.xml
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\backuperApi\backuperApi\bin\Microsoft.IdentityModel.Tokens.pdb
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\backuperApi\backuperApi\bin\Microsoft.IdentityModel.Tokens.xml
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\backuperApi\backuperApi\bin\System.IdentityModel.Tokens.Jwt.pdb
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\backuperApi\backuperApi\bin\System.IdentityModel.Tokens.Jwt.xml

@@ -8,6 +8,7 @@ using MySql.Data.MySqlClient;
 
 namespace backuperApi.Controllers
 {
+    [Authorize]
     public class Home_Controller : ApiController
     {
         public Database database = new Database();

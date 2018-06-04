@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit, Input } from '@angular/core';
-import { HttpClientModule, HttpClient, HttpParams,HttpClientJsonpModule} from '@angular/common/http';
+import { HttpClientModule, HttpHeaders, HttpClient, HttpParams,HttpClientJsonpModule} from '@angular/common/http';
 import { BackupReport} from './backup-report';
 import { DataTableResource } from 'angular5-data-table';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
@@ -36,7 +36,7 @@ export class BackupReportsComponent implements OnInit {
     else
       this.adress = this.adress + "/" + localStorage.getItem("Username");
 
-    this.http.get<BackupReport[]>(this.adress).subscribe
+    this.http.get<BackupReport[]>(this.adress, {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))}).subscribe
     (data => { 
 
       this.inititalizeTable(data);

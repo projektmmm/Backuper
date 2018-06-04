@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 
 namespace backuperApi.Controllers
 {
+    [Authorize]
     public class BackupReport_Controller : ApiController
     {
         public Database database = new Database();

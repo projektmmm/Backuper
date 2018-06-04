@@ -18,26 +18,31 @@ export class LoginComponent implements OnInit {
       private router:Router,) {
      
   }
+  arrayResponse: string[] = [];
   
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 1500,
     })};
+
   Login(IUsername:string,IPassword:string) {
     const head =  {headers: new  HttpHeaders({'Content-Type':'application/json'}) };
     head.headers.append('Content-Type', 'application/json')
-    const data: User={
-      Username:IUsername,
-      Password:IPassword
+
+    const data: User= {
+      Username: IUsername,
+      Password: IPassword
     }
+    
     this.http.post<string>('http://localhost:63324/api/admin/login', JSON.stringify(data), head)
     .subscribe(Response=>{
       if(Response!="false")
       {
-      
-        localStorage.setItem("LogedIn","true");
-        localStorage.setItem("Username",Response);
-        ///localStorage.setItem("Token",)
+        this.arrayResponse = Response.split("@@border@@");
+
+        localStorage.setItem("LogedIn", "true");
+        localStorage.setItem("Username", this.arrayResponse[1]);
+        localStorage.setItem("Token", this.arrayResponse[0])
         
         this.openSnackBar("","Login Succeded")
         this.router.navigate(['/home'])
@@ -48,9 +53,7 @@ export class LoginComponent implements OnInit {
       }
     }
     )}
-  Register(){
-    
-  }
+
   ngOnInit() {
     
   }

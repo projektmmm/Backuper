@@ -7,6 +7,7 @@ using System.Web.Http;
 
 namespace backuperApi.Controllers
 {
+    [Authorize]
     public class Daemons_Controller : ApiController
     {
         public Database database = new Database();

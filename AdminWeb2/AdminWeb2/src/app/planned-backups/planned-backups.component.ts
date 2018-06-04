@@ -1,7 +1,7 @@
 import { rowIdService } from './../daemons-info/service';
 import { SendNewSettingsComponent } from './../send-new-settings/send-new-settings.component';
 import { Component, ViewChild, OnInit, Input, Output } from '@angular/core';
-import { HttpClientModule, HttpClient, HttpParams,HttpClientJsonpModule} from '@angular/common/http';
+import { HttpClientModule, HttpHeaders, HttpClient, HttpParams,HttpClientJsonpModule} from '@angular/common/http';
 import { Backups} from './backups';
 import { DataTableResource } from 'angular5-data-table';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
@@ -66,7 +66,7 @@ export class PlannedBackupsComponent implements OnInit {
     else {
       this.adress = this.adress + "/" + localStorage.getItem("Username");
     }
-    this.http.get<Backups[]>(this.adress).subscribe
+    this.http.get<Backups[]>(this.adress, {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))}).subscribe
     (data => { 
 
       this.inititalizeTable(data);
@@ -77,7 +77,7 @@ export class PlannedBackupsComponent implements OnInit {
 
   
   async delete(row) {
-    this.http.delete(this.Root_URL + "/api/admin/planned-backups/" + row.Id).subscribe
+    this.http.delete(this.Root_URL + "/api/admin/planned-backups/" + row.Id, {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))}).subscribe
     (response => {
      
       if (response == true) {

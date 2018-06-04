@@ -17,22 +17,25 @@ import { DaemonsRequestComponent } from './daemons-request/daemons-request.compo
 })
 export class DaemonsComponent implements OnInit {
   
-  headers = new HttpHeaders();
   readonly root_URL = 'http://localhost:63324';
   NewRequest : boolean
   displayedColumns = ['Id', 'Name', 'Description', 'Funcbuttons'];
   tableSource: MatTableDataSource<Daemons>;
+  headers = new HttpHeaders();
+  
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private http: HttpClient, public snackBar: MatSnackBar, private rowIdService: rowIdService, private router: Router,public dialog: MatDialog) {
+    this.headers.append("Token", localStorage.getItem("Token"));
     this.headers.append("Content-Type", "application/json");
     this.headers.append("Accept", "application/json");
     this.newRequests();
     this.getDaemons();
   }
 
+  
    ngOnInit() {
      this.newRequests();
      this.getDaemons();
@@ -44,7 +47,7 @@ export class DaemonsComponent implements OnInit {
   }
 
   getDaemons() {
-    this.http.get<Daemons[]>(this.root_URL + "/api/admin/daemons/" + localStorage.getItem("Username")).subscribe
+    this.http.get<Daemons[]>(this.root_URL + "/api/admin/daemons/" + localStorage.getItem("Username"), {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))}).subscribe
     (data => {
 
       this.initializeTable(data);
@@ -52,7 +55,7 @@ export class DaemonsComponent implements OnInit {
     });
   }
   newRequests(){
-      this.http.get<boolean>(this.root_URL+"/api/admin/daemons/Get"+localStorage.getItem("Username"))
+      this.http.get<boolean>(this.root_URL+"/api/admin/daemons/Get"+localStorage.getItem("Username"), {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))})
       .subscribe
       (Response=>{
         this.NewRequest = Response

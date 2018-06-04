@@ -25,11 +25,11 @@ export class AdminSettingsComponent implements OnInit {
   checked: boolean = true;
   Foo: number
   ngOnInit() {
-    this.http.get<string>(this.root_URL+"/api/admin/AdminSettings/"+localStorage.getItem("Username"))
+    this.http.get<string>(this.root_URL+"/api/admin/AdminSettings/"+localStorage.getItem("Username"), {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))})
     .subscribe  (data => {
       this.Email = data
     })
-    this.http.get<Daemons[]>(this.root_URL+"/api/admin/daemons/"+this.Username)
+    this.http.get<Daemons[]>(this.root_URL+"/api/admin/daemons/"+this.Username, {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))})
     .subscribe  (data => {
       this.tableSource = new MatTableDataSource(data);
     })
@@ -50,13 +50,13 @@ export class AdminSettingsComponent implements OnInit {
   
   SendEmail(IDaemonId: number)
   {
-    this.http.get(this.root_URL+"/api/admin/AdminSettings/Email/"+IDaemonId)
+    this.http.get(this.root_URL+"/api/admin/AdminSettings/Email/"+IDaemonId, {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))})
     .subscribe (data => {
     })
   }
   SendSMS(DaemonId: number)
   {
-    this.http.get(this.root_URL+"/api/admin/AdminSettings/Sms/"+DaemonId)
+    this.http.get(this.root_URL+"/api/admin/AdminSettings/Sms/"+DaemonId, {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))})
     .subscribe (data => {
     })
   }

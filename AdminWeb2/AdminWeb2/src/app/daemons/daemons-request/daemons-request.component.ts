@@ -31,7 +31,7 @@ export class DaemonsRequestComponent implements OnInit {
     this.getDaemons();
   }
   getDaemons() {
-    this.http.get<Daemons[]>(this.root_URL + "/api/admin/daemons/AddDaemon/" + localStorage.getItem("Username")).subscribe
+    this.http.get<Daemons[]>(this.root_URL + "/api/admin/daemons/AddDaemon/" + localStorage.getItem("Username"), {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))}).subscribe
     (data => {
 
       this.initializeTable(data);
@@ -40,14 +40,14 @@ export class DaemonsRequestComponent implements OnInit {
     
 }
 DeleteDaemon(Row: number){
-this.http.delete<boolean>(this.root_URL+"/api/admin/daemons/DeleteDaemon/"+Row)
+this.http.delete<boolean>(this.root_URL+"/api/admin/daemons/DeleteDaemon/"+Row, {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))})
 .subscribe(Response=>{
   this.dialogRef.close()
 })
 }
 VerifyDaemon(Row: number){
   
- this.http.patch<boolean>(this.root_URL+"/api/admin/daemons/AddDaemon/"+Row,Row)
+ this.http.patch<boolean>(this.root_URL+"/api/admin/daemons/AddDaemon/"+Row,Row, {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))})
  .subscribe(Response=>{
    if (Response)
    {

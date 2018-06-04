@@ -127,7 +127,7 @@ export class SendNewSettingsComponent implements OnInit {
     }
     else
     {
-      this.http2.post(this.root_URL + "/api/admin/daemon-settings", JSON.stringify(data), head)
+      this.http2.post(this.root_URL + "/api/admin/daemon-settings", JSON.stringify(data), {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))})
           .subscribe(Response => { console.log(Response) })
 
       this.openSnackBar("","Settings sended!")
@@ -163,7 +163,7 @@ export class SendNewSettingsComponent implements OnInit {
     }
     else
     {
-      this.http2.patch(this.root_URL + "/api/admin/planned-backups/" + this.i_backupId, JSON.stringify(data), head)
+      this.http2.patch(this.root_URL + "/api/admin/planned-backups/" + this.i_backupId, JSON.stringify(data), {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))})
           .subscribe(Response => { 
             if (Response == false) {
               this.openSnackBar("Settings not Updated","");

@@ -8,6 +8,7 @@ using NCrontab;
 
 namespace backuperApi.Controllers
 {
+    [Authorize]
     public class PlannedBackups_Controller : ApiController
     {
         public Database database = new Database();
