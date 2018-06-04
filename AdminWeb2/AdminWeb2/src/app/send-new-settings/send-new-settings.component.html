@@ -21,11 +21,30 @@
                 <mat-form-field class="left-width-full">
                     <input matInput value="0" #Cron type="text" ng-model="Cron" placeholder="Cron" disabled="true" value="{{i_cron}}">
                 </mat-form-field>
+                <br>
+                <mat-checkbox #BatchPathBeforeCheckbox color="primary">Batch before - path</mat-checkbox>
+                <br>
+                <mat-checkbox #BatchPathAfterCheckbox color="primary">Batch after - path</mat-checkbox>
+                <br>
+                <mat-checkbox #BatchCodeBeforeCheckbox color="primary">Batch before - code</mat-checkbox>
+                <br>
+                <mat-checkbox #BatchCodeAfterCheckbox color="primary">Batch after - code</mat-checkbox>
+                <br>
+                <div *ngIf=BatchPathBeforeCheckbox.checked>
+                <mat-form-field class="left-width-full">
+                    <input matInput #BatchPathBefore ng-model="BatchPathBefore" placeholder="Batch before - path">
+                </mat-form-field>
+                </div>
+                <div *ngIf=BatchPathAfterCheckbox.checked>
+                <mat-form-field class="left-width-full">
+                    <input matInput #BatchPathAfter ng-model="BatchPathAfter" placeholder="Batch after - path">
+                </mat-form-field>
+                </div>
             </form> 
         </div>
     </td>
     <!-- TIME SETTINGS -->
-    <td colspan="2">
+    <td colspan="1">
             <div class="timeSettings">
                 <div class="page-subheader">
                     Time Settings
@@ -137,7 +156,7 @@
             </div>
     </td>
     <!-- PATH SETTINGS -->
-    <td colspan="3">
+    <td colspan="1">
             <div class="pathSettings">
                 <div class="page-subheader">
                     Path Settings
@@ -277,6 +296,15 @@
             </div>
     </td>
 </table>
+<div *ngIf=BatchCodeAfterCheckbox.checked>
+    <p>Batch after - code</p>
+    <textarea #BatchCodeAfter name="Text1" cols="33" rows="10"></textarea>
+</div>
+<div *ngIf=BatchCodeBeforeCheckbox.checked>
+    <p>Batch before - code</p>
+    <textarea #BatchCodeBefore name="Text1" cols="33" rows="10"></textarea>
+</div>
+
 
 <mat-dialog-actions>
     <button mat-raised-button color="primary" (action)="closeDialog()" [mat-dialog-close] cdkFocusInitial>Close</button>

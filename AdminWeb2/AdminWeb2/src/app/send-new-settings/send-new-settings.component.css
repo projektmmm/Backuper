@@ -1,6 +1,6 @@
 
 .left-width-full {
-    width: 150px;
+    width: 250px;
 }
 
 .pathSettings {
@@ -58,4 +58,8 @@
 
 .width-full {
     width: 420px;
+}
+
+.spaceplus{
+    margin-left: 100px;
 }
