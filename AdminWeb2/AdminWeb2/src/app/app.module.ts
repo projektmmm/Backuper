@@ -55,6 +55,7 @@ import { PathsComponent } from './planned-backups/paths/paths.component';
 import { ChangeEmailComponent } from './admin-settings/change-email/change-email.component';
 import { ChangePasswordComponent } from './admin-settings/change-password/change-password.component';
 import { AddDatabaseComponent } from './daemons-info/add-database/add-database.component';
+import { SendNewSettingsOnetimeComponent } from './send-new-settings-onetime/send-new-settings-onetime.component';
 
 
 @NgModule({
@@ -79,7 +80,8 @@ import { AddDatabaseComponent } from './daemons-info/add-database/add-database.c
     ChangeEmailComponent,
     ChangePasswordComponent,
     AddDatabaseComponent,
-    PathsComponent
+    PathsComponent,
+    SendNewSettingsOnetimeComponent
   ],
   entryComponents: [
     ErrorInfoComponent,
@@ -90,7 +92,8 @@ import { AddDatabaseComponent } from './daemons-info/add-database/add-database.c
     PathsComponent,
     ChangeEmailComponent,
     ChangePasswordComponent,
-    AddDatabaseComponent
+    AddDatabaseComponent,
+    SendNewSettingsOnetimeComponent
   ],
   imports: [
     BrowserModule,

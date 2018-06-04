@@ -13,6 +13,7 @@ import { DataSource } from '@angular/cdk/table';
 import { DataTableResource } from 'angular5-data-table';
 import { FormGroupDirective } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { SendNewSettingsOnetimeComponent } from '../send-new-settings-onetime/send-new-settings-onetime.component';
 
 @Component({
   selector: 'daemons-info',
@@ -56,8 +57,8 @@ export class DaemonsInfoComponent implements OnInit {
 
   AddDatabase() {
     let dialogRef = this.dialog.open(AddDatabaseComponent, {
-      width: '1400px',
-      height: '600px',
+      //width: '1400px',
+      //height: '600px',
     });
   }
   openSnackBar(message: string, action: string) {
@@ -161,6 +162,15 @@ export class DaemonsInfoComponent implements OnInit {
     });    
   }
 
+  newOneTimeBackup() {
+    let dialogRef = this.dialog.open(SendNewSettingsOnetimeComponent, {
+      //width: '1300px',
+      height: '500px',
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      
+    });    
+  }
 
 }
