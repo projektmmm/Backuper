@@ -17,8 +17,9 @@ namespace backuperApi.Controllers.Daemon
         public List<Backups> Get(int daemonId)
         {
             this.cronController.UpdateCron(this.database.Backups.Where(b => b.DaemonId == daemonId).ToList<Backups>());
+            List<Backups> toRet = this.database.Backups.Where(b => b.DaemonId == daemonId).ToList<Backups>();
 
-            return this.database.Backups.Where(b => b.DaemonId == daemonId).ToList<Backups>();
+            return toRet;
         }
 
         [HttpPost]

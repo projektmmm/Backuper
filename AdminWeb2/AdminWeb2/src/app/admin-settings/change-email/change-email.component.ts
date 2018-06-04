@@ -30,7 +30,7 @@ export class ChangeEmailComponent implements OnInit {
         Password: Password,
         Content: Email
       }
-     this.http.patch<boolean>("http://localhost:63324/api/admin/AdminSettings/newEmail",JSON.stringify(data), {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))})
+     this.http.patch<boolean>("http://localhost:63324/api/admin/AdminSettings/newEmail",JSON.stringify(data), {headers: new HttpHeaders( {"Authorization": "Bearer " + localStorage.getItem("Token"), 'Content-Type':'application/json'})})
      .subscribe(data=>{
       if (data)
       {

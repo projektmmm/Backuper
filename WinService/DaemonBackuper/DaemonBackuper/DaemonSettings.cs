@@ -14,7 +14,7 @@ namespace Daemon
         //public static string Name = "PC01";
         public static string ApiAdress = "http://localhost:63324/";
 
-        public static int AskInterval = 30000;
+        public static int AskInterval = 300000;
 
         public static List<PlannedBackups> plannedBackups;
         public static List<FtpSettings> ftpSettings;

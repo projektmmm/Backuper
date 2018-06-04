@@ -47,7 +47,7 @@ export class DaemonsComponent implements OnInit {
   }
 
   getDaemons() {
-    this.http.get<Daemons[]>(this.root_URL + "/api/admin/daemons/" + localStorage.getItem("Username"), {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))}).subscribe
+    this.http.get<Daemons[]>(this.root_URL + "/api/admin/daemons/" + localStorage.getItem("Username"), {headers: new HttpHeaders( {"Authorization": "Bearer " + localStorage.getItem("Token"), 'Content-Type':'application/json'})}).subscribe
     (data => {
 
       this.initializeTable(data);
@@ -55,7 +55,7 @@ export class DaemonsComponent implements OnInit {
     });
   }
   newRequests(){
-      this.http.get<boolean>(this.root_URL+"/api/admin/daemons/Get"+localStorage.getItem("Username"), {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))})
+      this.http.get<boolean>(this.root_URL+"/api/admin/daemons/Get"+localStorage.getItem("Username"), {headers: new HttpHeaders( {"Authorization": "Bearer " + localStorage.getItem("Token"), 'Content-Type':'application/json'})})
       .subscribe
       (Response=>{
         this.NewRequest = Response

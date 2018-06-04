@@ -27,7 +27,7 @@ export class DaemonAdderComponent implements OnInit {
     const head =  {headers: new  HttpHeaders({'Content-Type':'application/json'}) };
     head.headers.append('Content-Type', 'application/json')
     
-    this.http.post<number>("http://localhost:63324/api/admin/daemons/GetId",JSON.stringify(data),{headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))})
+    this.http.post<number>("http://localhost:63324/api/admin/daemons/GetId",JSON.stringify(data),{headers: new HttpHeaders( {"Authorization": "Bearer " + localStorage.getItem("Token"), 'Content-Type':'application/json'})})
     .subscribe(Response =>{
       this.ID = Response
     })
@@ -49,7 +49,7 @@ export class DaemonAdderComponent implements OnInit {
     }
 
     
-    this.http.post("http://localhost:63324/api/admin/daemons/AddDaemon",JSON.stringify(data),{headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))})
+    this.http.post("http://localhost:63324/api/admin/daemons/AddDaemon",JSON.stringify(data),{headers: new HttpHeaders( {"Authorization": "Bearer " + localStorage.getItem("Token"), 'Content-Type':'application/json'})})
     .subscribe(Response => {
       console.log(Response)
     })

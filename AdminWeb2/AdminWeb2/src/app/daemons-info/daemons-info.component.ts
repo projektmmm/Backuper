@@ -68,7 +68,7 @@ export class DaemonsInfoComponent implements OnInit {
   }
 
   getErrors() {
-    this.http.get<ErrorDetails[]>(this.root_URL + "/api/admin/backup-errors/" + localStorage.getItem("Username") + "-" + this.daemonId, {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))}).subscribe
+    this.http.get<ErrorDetails[]>(this.root_URL + "/api/admin/backup-errors/" + localStorage.getItem("Username") + "-" + this.daemonId, {headers: new HttpHeaders( {"Authorization": "Bearer " + localStorage.getItem("Token"), 'Content-Type':'application/json'})}).subscribe
     (data => {
 
       this.errorDetails = data;
@@ -94,14 +94,14 @@ export class DaemonsInfoComponent implements OnInit {
   }
 
   async getBackups() {
-    this.http.get<Backups[]>(this.root_URL + "/api/admin/planned-backups", {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))}).subscribe
+    this.http.get<Backups[]>(this.root_URL + "/api/admin/planned-backups", {headers: new HttpHeaders( {"Authorization": "Bearer " + localStorage.getItem("Token"), 'Content-Type':'application/json'})}).subscribe
     (data => { 
       this.plannedBackups = data;
     });
   }
 
   async getDaemonInfo() {
-    this.http.get<Daemons>(this.root_URL + "/api/admin/daemons/" + localStorage.getItem("Username") + "-" + this.daemonId, {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))}).subscribe
+    this.http.get<Daemons>(this.root_URL + "/api/admin/daemons/" + localStorage.getItem("Username") + "-" + this.daemonId, {headers: new HttpHeaders( {"Authorization": "Bearer " + localStorage.getItem("Token"), 'Content-Type':'application/json'})}).subscribe
     (data => {
       this.daemonDescription = data.Description;
       this.daemonName = data.Name;
@@ -121,7 +121,7 @@ export class DaemonsInfoComponent implements OnInit {
     this.toSend.Name = name;
     this.toSend.Description = description;
 
-    this.http.put(this.root_URL + "/api/admin/daemon/" + localStorage.getItem("Username"), this.toSend, {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))}).subscribe
+    this.http.put(this.root_URL + "/api/admin/daemon/" + localStorage.getItem("Username"), this.toSend, {headers: new HttpHeaders( {"Authorization": "Bearer " + localStorage.getItem("Token"), 'Content-Type':'application/json'})}).subscribe
     (response => {
       if (response == true) {
         this.openSnackBar("", "Successfully Updated!");
