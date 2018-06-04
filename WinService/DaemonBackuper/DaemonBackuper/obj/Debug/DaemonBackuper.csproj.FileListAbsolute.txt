@@ -23,9 +23,11 @@ D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\WinService\DaemonBackuper\DaemonBack
 D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\WinService\DaemonBackuper\DaemonBackuper\bin\Debug\Newtonsoft.Json.xml
 D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\WinService\DaemonBackuper\DaemonBackuper\bin\Debug\Renci.SshNet.xml
 D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\WinService\DaemonBackuper\DaemonBackuper\bin\Debug\System.Net.Http.Formatting.xml
-D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\WinService\DaemonBackuper\DaemonBackuper\obj\Debug\DaemonBackuper.csprojResolveAssemblyReference.cache
 D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\WinService\DaemonBackuper\DaemonBackuper\obj\Debug\DaemonBackuper.csproj.CoreCompileInputs.cache
 D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\WinService\DaemonBackuper\DaemonBackuper\obj\Debug\DaemonBackuper.csproj.CopyComplete
 D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\WinService\DaemonBackuper\DaemonBackuper\obj\Debug\DaemonBackuper.exe
 D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\WinService\DaemonBackuper\DaemonBackuper\obj\Debug\DaemonBackuper.pdb
 D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\WinService\DaemonBackuper\DaemonBackuper\bin\Debug\System.IO.Compression.ZipFile.dll
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\WinService\DaemonBackuper\DaemonBackuper\obj\Debug\DaemonBackuper.csprojAssemblyReference.cache
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\WinService\DaemonBackuper\DaemonBackuper\obj\Debug\DaemonBackuper.ProjectInstaller.resources
+D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\WinService\DaemonBackuper\DaemonBackuper\obj\Debug\DaemonBackuper.csproj.GenerateResource.cache

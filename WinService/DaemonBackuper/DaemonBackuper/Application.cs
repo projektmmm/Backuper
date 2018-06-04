@@ -37,7 +37,7 @@ namespace Daemon
 
             communicator.GetNextRunSetting();
 
-            Thread.Sleep(20000); //vycka 20s, kvuli asynchronni metode
+            Thread.Sleep(30000); //vycka 20s, kvuli asynchronni metode
 
             if (DaemonSettings.plannedBackups.Count != 0)
                 DaemonSettings.plannedBackups.OrderBy(r => r.NextRun);

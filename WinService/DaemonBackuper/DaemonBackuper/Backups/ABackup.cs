@@ -52,6 +52,14 @@ namespace Daemon
 
         public virtual void Start()
         {
+            if (this.backup.Batches)
+            {
+                this.communicator.GetBatchSettings();
+                Thread.Sleep(20000);
+
+                BackupOperations.Batches(this.reportMaker, "BEFORE");
+            }
+
             foreach (string item in this.SourcePaths)
             {
                 if (this.backup.BackupType == "FULL")
@@ -108,6 +116,14 @@ namespace Daemon
 
         public virtual void Operations()
         {
+            if (this.backup.Batches)
+            {
+                this.communicator.GetBatchSettings();
+                Thread.Sleep(20000);
+
+                BackupOperations.Batches(this.reportMaker, "AFTER");
+            }
+
             if (this.backup.Ftp)
             {
                 this.communicator.GetFtpSettings();

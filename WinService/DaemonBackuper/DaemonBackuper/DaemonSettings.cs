@@ -19,5 +19,6 @@ namespace Daemon
         public static List<PlannedBackups> plannedBackups;
         public static List<FtpSettings> ftpSettings;
         public static List<SshSettings> sshSettings;
+        public static List<BatchesSettings> batchesSettings;
     }
 }

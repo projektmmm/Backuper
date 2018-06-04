@@ -216,7 +216,10 @@
     <Compile Include="Controllers\Admin\BackupReport_Controller.cs" />
     <Compile Include="Controllers\Admin\Daemons_Controller.cs" />
     <Compile Include="Controllers\Admin\Home_Controller.cs" />
+    <Compile Include="Controllers\Daemon\BatchesController.cs" />
     <Compile Include="Controllers\Daemon\Daemon_Controller.cs" />
+    <Compile Include="Controllers\Daemon\FtpController.cs" />
+    <Compile Include="Controllers\Daemon\SshController.cs" />
     <Compile Include="Controllers\Default\HomeController.cs" />
     <Compile Include="Controllers\Admin\LoginRegister_Controller.cs" />
     <Compile Include="Controllers\Admin\PlannedBackups_Controller.cs" />
@@ -231,6 +234,7 @@
     <Compile Include="Models\BackupErrors.cs" />
     <Compile Include="Models\BackupReport.cs" />
     <Compile Include="Models\Backups.cs" />
+    <Compile Include="Models\Batches.cs" />
     <Compile Include="Models\Daemons.cs" />
     <Compile Include="Models\Databases.cs" />
     <Compile Include="Models\FtpSettings.cs" />

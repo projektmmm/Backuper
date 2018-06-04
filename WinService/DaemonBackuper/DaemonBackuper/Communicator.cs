@@ -88,6 +88,27 @@ namespace Daemon
             }
         }
 
+        public async Task GetBatchSettings()
+        {
+            string apiDestination = $"api/daemon/batches/{this.daemonId}";
+
+            List<BatchesSettings> ret = new List<BatchesSettings>();
+            using (var client = GetJsonClient())
+            {
+                HttpResponseMessage response = await client.GetAsync(apiDestination);
+                if (response.IsSuccessStatusCode)
+                {
+                    DaemonSettings.batchesSettings = await response.Content.ReadAsAsync<List<BatchesSettings>>();
+                }
+                else
+                {
+                    throw new HttpRequestException("Cannot connect to the api");
+                }
+            }
+        }
+
+    
+
         /// <summary>
         /// Ziskani nastaveni pro komunikaci
         /// </summary>
@@ -100,5 +121,6 @@ namespace Daemon
 
             return client;
         }
+
     }
 }

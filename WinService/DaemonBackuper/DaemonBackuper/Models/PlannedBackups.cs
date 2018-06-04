@@ -21,6 +21,7 @@ namespace Daemon
         public bool Ssh { get; set; } = false;
         public int ParentBackup { get; set; }
         public bool DatabaseBackup { get; set; }
+        public bool Batches { get; set; }
     }
 }
 

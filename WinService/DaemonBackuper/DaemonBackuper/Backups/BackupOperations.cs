@@ -9,11 +9,61 @@ using System.Threading;
 using System.Net;
 using Renci.SshNet;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace Daemon
 {
     public class BackupOperations
     {
+        public static ReportMaker Batches(ReportMaker errors, string time = "BEFORE")
+        {
+            string tempPath = Path.GetTempPath();
+            
+            foreach (BatchesSettings batch in DaemonSettings.batchesSettings)
+            {
+                if (batch.Time != time)
+                    continue;
+
+                if (batch.Type == "SAVED")
+                {
+                    try
+                    {
+                        Process.Start(batch.LocalPath);
+                    }
+                    catch
+                    {
+                        errors.AddError(new ErrorDetails()
+                        {
+                            Problem = "Program didn't find saved batch. It was unable to run it.",
+                            ProblemPath = batch.LocalPath
+                        });
+                    }
+                }
+                else if (batch.Type == "COMMAND")
+                {
+                    try
+                    {
+                        using (StreamWriter sw = new StreamWriter(tempPath + "\\savedProcedure.bat", false))
+                        {
+                            sw.Write(batch.CommandText);
+                            sw.Flush();
+                        }
+
+                        Process.Start(tempPath + "\\savedProcedure.bat");
+                    }
+                    catch
+                    {
+                        errors.AddError(new ErrorDetails()
+                        {
+                            Problem = "Program was unable to run typed query." + batch.Id.ToString()
+                        });
+                    }
+                }
+            }
+
+            return errors;
+        }
+
         public static bool ZipFiles(List<string> destinationPaths, PlannedBackups backup)
         {
             bool toRet = true;
