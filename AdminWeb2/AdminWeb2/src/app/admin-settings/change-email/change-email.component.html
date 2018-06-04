@@ -1,0 +1,27 @@
+<div class="form">
+    <form>
+        <div>
+            <mat-form-field class="full-width">
+                <input matInput #Password type="Password" ng-model="Text" placeholder="Your password">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="full-width">
+                <input matInput #NewEmail type="Text" ng-model="Text" placeholder="New Emai">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="full-width">
+                <input matInput #NewEmail2 type="Text" ng-model="Text" placeholder="New Email">
+            </mat-form-field>
+        </div>
+    </form>
+    <div>
+    <span>{{  ErrorText  }}</span>
+  </div>
+</div>
+
+<mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="closeDialog()">Close</button>
+    <button mat-raised-button color="primary" (click)="Email(Password.value,NewEmail.value,NewEmail2.value)">Ok</button>
+</mat-dialog-actions>

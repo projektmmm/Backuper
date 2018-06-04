@@ -1,0 +1,17 @@
+C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.exe.config
+C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.exe
+C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.pdb
+C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\NCrontab.dll
+C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\Newtonsoft.Json.dll
+C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\Renci.SshNet.dll
+C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\System.IO.Compression.ZipFile.dll
+C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\System.Net.Http.Formatting.dll
+C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\Newtonsoft.Json.xml
+C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\Renci.SshNet.xml
+C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\System.Net.Http.Formatting.xml
+C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\obj\Release\DaemonBackuper.csproj.CoreCompileInputs.cache
+C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\obj\Release\DaemonBackuper.csproj.CopyComplete
+C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\obj\Release\DaemonBackuper.exe
+C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\obj\Release\DaemonBackuper.pdb
+C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\obj\Release\DaemonBackuper.ProjectInstaller.resources
+C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\obj\Release\DaemonBackuper.csproj.GenerateResource.cache

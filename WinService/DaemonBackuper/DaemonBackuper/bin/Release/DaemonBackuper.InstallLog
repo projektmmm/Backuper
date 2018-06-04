@@ -1,0 +1,82 @@
+﻿Instalace sestavení C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.exe
+Zasažené parametry:
+   logtoconsole = 
+   logfile = C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.InstallLog
+   assemblypath = C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.exe
+V sestavení C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.exe nebyly nalezeny žádné veřejné instalační služby s atributem RunInstallerAttribute.Yes.
+Potvrzování sestavení C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.exe
+Zasažené parametry:
+   logtoconsole = 
+   logfile = C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.InstallLog
+   assemblypath = C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.exe
+V sestavení C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.exe nebyly nalezeny žádné veřejné instalační služby s atributem RunInstallerAttribute.Yes.
+Odebírání souboru InstallState, protože nebyly nalezeny žádné instalační služby
+Instalace sestavení C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.exe
+Zasažené parametry:
+   logtoconsole = 
+   logfile = C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.InstallLog
+   assemblypath = C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.exe
+Instalace služby DaemonBackuper...
+Vytváření zdroje EventLog DaemonBackuper v protokolu Application...
+Odvolání sestavení C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.exe
+Zasažené parametry:
+   logtoconsole = 
+   logfile = C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.InstallLog
+   assemblypath = C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.exe
+Obnova protokolu událostí na předchozí stav zdroje DaemonBackuper
+V odvolací fázi instalační služby System.Diagnostics.EventLogInstaller došlo k výjimce.
+System.Security.SecurityException: Zdroj nebyl nalezen, ale některé nebo všechny protokoly událostí nelze prohledat. Nepřístupné protokoly: Security.
+Při odvolací fázi instalace došlo k vyvolání výjimky. Výjimka bude ignorována a odvolání bude pokračovat. Po dokončení odvolací operace se však počítač nemusí zcela vrátit do původního stavu.
+Instalace sestavení C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.exe
+Zasažené parametry:
+   logtoconsole = 
+   logfile = C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.InstallLog
+   assemblypath = C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.exe
+Instalace služby DaemonBackuper...
+Vytváření zdroje EventLog DaemonBackuper v protokolu Application...
+Odvolání sestavení C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.exe
+Zasažené parametry:
+   logtoconsole = 
+   logfile = C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.InstallLog
+   assemblypath = C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.exe
+Obnova protokolu událostí na předchozí stav zdroje DaemonBackuper
+V odvolací fázi instalační služby System.Diagnostics.EventLogInstaller došlo k výjimce.
+System.Security.SecurityException: Zdroj nebyl nalezen, ale některé nebo všechny protokoly událostí nelze prohledat. Nepřístupné protokoly: Security.
+Při odvolací fázi instalace došlo k vyvolání výjimky. Výjimka bude ignorována a odvolání bude pokračovat. Po dokončení odvolací operace se však počítač nemusí zcela vrátit do původního stavu.
+Instalace sestavení C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.exe
+Zasažené parametry:
+   logtoconsole = 
+   logfile = C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.InstallLog
+   assemblypath = C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.exe
+Instalace služby DaemonBackuper...
+Vytváření zdroje EventLog DaemonBackuper v protokolu Application...
+Odvolání sestavení C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.exe
+Zasažené parametry:
+   logtoconsole = 
+   logfile = C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.InstallLog
+   assemblypath = C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.exe
+Obnova protokolu událostí na předchozí stav zdroje DaemonBackuper
+V odvolací fázi instalační služby System.Diagnostics.EventLogInstaller došlo k výjimce.
+System.Security.SecurityException: Zdroj nebyl nalezen, ale některé nebo všechny protokoly událostí nelze prohledat. Nepřístupné protokoly: Security.
+Při odvolací fázi instalace došlo k vyvolání výjimky. Výjimka bude ignorována a odvolání bude pokračovat. Po dokončení odvolací operace se však počítač nemusí zcela vrátit do původního stavu.
+Instalace sestavení C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.exe
+Zasažené parametry:
+   logtoconsole = 
+   logfile = C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.InstallLog
+   assemblypath = C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.exe
+Instalace služby DaemonBackuper...
+Služba DaemonBackuper byla úspěšně nainstalována.
+Vytváření zdroje EventLog DaemonBackuper v protokolu Application...
+Potvrzování sestavení C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.exe
+Zasažené parametry:
+   logtoconsole = 
+   logfile = C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.InstallLog
+   assemblypath = C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.exe
+Odinstalace sestavení C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.exe
+Zasažené parametry:
+   logtoconsole = 
+   logfile = C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.InstallLog
+   assemblypath = C:\Users\Pc1\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Release\DaemonBackuper.exe
+Odebírání zdroje EventLog DaemonBackuper
+Odebírání služby DaemonBackuper ze systému...
+Služba DaemonBackuper byla úspěšně odebrána ze systému.

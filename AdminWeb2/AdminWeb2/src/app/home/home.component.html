@@ -12,20 +12,29 @@
                 Dnes je {{Datum}}
             </div>
             <div class="page-subheader">
-                <!--contentboi-->
+                    <div *ngIf="ShowProblems">
+                    <button mat-button [matMenuTriggerFor]="menu">||Backup Error||</button>
+                    <mat-menu #menu="matMenu">
+                      <button mat-menu-item (click)="ToDaemon(ErrorDetails.BackupReportId)"*ngFor="let ErrorDetails of DataSource">
+                           {{ErrorDetails.Problem}}
+                      </button>
+                    </mat-menu>
+                    </div>
+                    <div *ngIf="ShowProblems == false">
+                            <font color="Green">No Problems</font>
+                    </div>
             </div>
         </div>
     </mat-grid-tile>
     <mat-grid-tile>
-        <!--
-        <div *ngFor="let input of inputs">
-            <div>
-                <input mat-input placeholder="xxx">
-            </div>
+    <div class="Weather">
+        <div class="Weather1">
+           Dnes je {{Temp}} °C
         </div>
-
-        <button (click)="Add()">add</button>
-    -->
+        <div class="Weather2">
+            ---{{WeatherDesc}}---
+        </div>
+    </div>
     </mat-grid-tile>
 </mat-grid-list>
 

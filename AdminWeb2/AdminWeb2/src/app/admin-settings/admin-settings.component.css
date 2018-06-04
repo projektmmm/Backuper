@@ -1,0 +1,49 @@
+
+.form {
+    position: absolute;
+    left: 100px;
+    top: 0px;
+    color: white;
+}
+
+.infobutton1 {
+    margin-top:70px;
+    margin-bottom: 5px;
+}
+.infobutton2 {
+    margin-top: 7px;
+    margin-bottom: 5px;
+}
+.leftButton {
+    width: 250px;
+    height: 50px;
+}
+.LeftColor {
+    font-family: 'Roboto';
+    color: #3f51b5;
+    margin-top: 100px;
+}
+
+
+.rigt-table-test {
+    width: 400px;
+    padding-right: 50px;
+    background-color: #3f51b5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0px;
+    z-index: 1;
+}
+
+.left-table-test {
+    padding-left: 600px;
+}
+
+.test-width {
+    width: 100px;
+}
+
+.test-width-table {
+    width: 1000px;
+}

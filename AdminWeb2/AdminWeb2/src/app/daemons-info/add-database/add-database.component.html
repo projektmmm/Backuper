@@ -1,0 +1,50 @@
+<div class="form">
+    <form>
+        <div>
+            <mat-form-field class="full-width">
+                <input matInput #ServerName type="text" ng-model="Text" placeholder="ServerName">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="full-width">
+                <input matInput #DatabaseName type="text" ng-model="Text" placeholder="DatabaseName">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="full-width">
+                <input matInput #Login type="Text" ng-model="Text" placeholder="Login">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="full-width">
+                <input matInput #Password type="Text" ng-model="Text" placeholder="Password">
+            </mat-form-field>
+        </div>
+    </form>
+  </div>
+  
+  <mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="closeDialog()">Close</button>
+    <button mat-raised-button color="primary" (click)="AddDatabase(ServerName.value,DatabaseName.value,Login.value,Password.value)">Add Database</button>
+  </mat-dialog-actions>
+
+<mat-table [dataSource]="tableSource" matSort class="test-width-table">
+        <ng-container matColumnDef="SrvName" class="test-width">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>SrvName</mat-header-cell>
+                <mat-cell cell *matCellDef="let Databases">{{Databases.ServerName}}</mat-cell>
+            </ng-container>
+    <ng-container matColumnDef="DbName" class="test-width">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>DbName</mat-header-cell>
+        <mat-cell cell *matCellDef="let Databases">{{Databases.Name}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Login">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Login</mat-header-cell>
+        <mat-cell cell *matCellDef="let Databases">{{Databases.Login}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Password">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Password</mat-header-cell>
+        <mat-cell cell *matCellDef="let Databases">{{Databases.Password}}</mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let daemon; columns: displayedColumns;"></mat-row>
+</mat-table>

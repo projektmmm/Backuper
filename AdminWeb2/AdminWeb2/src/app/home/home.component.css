@@ -7,3 +7,11 @@
 mat-grid-tile {
     background: rgb(255, 255, 255);
 }
+.Weather {
+    position: absolute;
+    left:  110px;
+    top:10px;
+    color: #3f51b5;
+    font-family:  "Times New Roman", Times, serif;
+    font-size: 30px;
+}

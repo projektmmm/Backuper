@@ -4,6 +4,7 @@ import { rowIdService } from './service';
 import { ErrorInfoComponent } from './error-info/error-info.component';
 import { SendSettingsComponent } from './../settings-components/send-settings/send-settings.component';
 import { Component, OnInit, Inject, Output } from '@angular/core';
+import { AddDatabaseComponent} from './add-database/add-database.component';
 import { HttpClientModule, HttpClient, HttpParams, HttpClientJsonpModule, HttpHeaders } from '@angular/common/http';
 import { Http, Headers, RequestOptions, HttpModule} from '@angular/http';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
@@ -53,6 +54,12 @@ export class DaemonsInfoComponent implements OnInit {
     this.sub.unsubscribe();
   }
 
+  AddDatabase() {
+    let dialogRef = this.dialog.open(AddDatabaseComponent, {
+      width: '1400px',
+      height: '600px',
+    });
+  }
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 1500,

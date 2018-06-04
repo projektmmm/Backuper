@@ -14,5 +14,8 @@ namespace backuperApi
         public string DaemonPassword { get; set; }
         public bool Installed { get; set; }
         public bool Verified { get; set; }
+        public bool SendSMS { get; set; }
+        public bool SendEmail { get; set; }
+    
     }
 }

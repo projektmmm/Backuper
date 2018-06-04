@@ -1,3 +1,61 @@
-<div class="page-header" color="primary">
-    Admin settings
-</div>
+<!--<mat-grid-list cols="2" rowHeight="fit">
+<mat-grid-tile class="Leftasdf"> -->
+<table>
+    <tr>
+        <td class="rigt-table-test">
+        <div class="form">
+                <div class="LeftColor">
+                <div class="page-header-white"  >
+                    <div class="HeaderColor">
+                            Admin Settings
+                    </div>
+                </div>
+                <div color="White" >
+                        <font color="White"> Username: <span>{{Username}}</span></font>
+                </div>
+                <div class="Left2">
+                        <font color="White"> Email: <span>{{Email}}</span></font>
+                </div>
+                </div>
+                <div class="infobutton1">
+                        <button mat-raised-button color="primary" class="leftButton" (click)="ChangePassword()">Change Password</button>
+                </div>
+                <div class="infobutton2">
+                        <button mat-raised-button color="primary" class="leftButton" (click)="ChangeEmail()">Change Email</button>
+                </div>
+   
+           </div> 
+        </td><!--
+</mat-grid-tile>
+<mat-grid-tile class="Right"> -->
+        <td class="left-table-test">
+        <mat-table [dataSource]="tableSource" matSort class="test-width-table">
+            <ng-container matColumnDef="Name" class="test-width">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+                <mat-cell cell *matCellDef="let daemon">{{daemon.Name}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="Description">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>
+                <mat-cell cell *matCellDef="let daemon">{{daemon.Description}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="SendSMS">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>SendSMS</mat-header-cell>
+                <mat-cell cell *matCellDef="let daemon">
+                    <mat-checkbox [checked]="daemon.SendSMS" (change)=SendSMS(daemon.Id)>Send</mat-checkbox>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="SendEmail">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>SendEmail</mat-header-cell>
+                    <mat-cell cell *matCellDef="let daemon">
+                        <mat-checkbox [checked]="daemon.SendEmail" (change)=SendEmail(daemon.Id)>Send</mat-checkbox>
+                    </mat-cell>
+                </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let daemon; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        </td>
+    </tr>
+</table>
+        <!--
+</mat-grid-tile>
+</mat-grid-list>-->

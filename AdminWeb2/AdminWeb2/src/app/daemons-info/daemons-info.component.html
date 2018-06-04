@@ -43,6 +43,9 @@
           <button mat-mini-fab *ngIf="this.editSettings" (click)="this.allowEdit()" class="editButton" color="basic"> 
             <mat-icon>create</mat-icon>
           </button>
+          <button mat-mini-fab *ngIf="this.editSettings" (click)="this.AddDatabase()" class="editButton" color="basic"> 
+            Db
+          </button>
           <a *ngIf="!this.editSettings" class="infobutton">
             <button mat-raised-button class="formButton" color="" (click)="this.saveFormEditing(DaemonName.value, DaemonDescription.value)">Save</button>
             <button mat-raised-button class="formButton" color="" (click)="this.cancelFormEditing()">Cancel</button>

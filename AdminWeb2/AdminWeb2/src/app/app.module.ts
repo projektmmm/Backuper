@@ -52,6 +52,9 @@ import { checkAndUpdateView } from '@angular/core/src/view/view';
 import { DaemonAdderComponent } from './daemons/daemon-adder/daemon-adder.component';
 import { DaemonsRequestComponent } from './daemons/daemons-request/daemons-request.component';
 import { PathsComponent } from './planned-backups/paths/paths.component';
+import { ChangeEmailComponent } from './admin-settings/change-email/change-email.component';
+import { ChangePasswordComponent } from './admin-settings/change-password/change-password.component';
+import { AddDatabaseComponent } from './daemons-info/add-database/add-database.component';
 
 
 @NgModule({
@@ -73,6 +76,9 @@ import { PathsComponent } from './planned-backups/paths/paths.component';
     DaemonsRequestComponent,
     ErrorInfoComponent,
     UpdateSettingsComponent,
+    ChangeEmailComponent,
+    ChangePasswordComponent,
+    AddDatabaseComponent,
     PathsComponent
   ],
   entryComponents: [
@@ -81,7 +87,10 @@ import { PathsComponent } from './planned-backups/paths/paths.component';
     SendNewSettingsComponent,
     DaemonAdderComponent,
     DaemonsRequestComponent,
-    PathsComponent
+    PathsComponent,
+    ChangeEmailComponent,
+    ChangePasswordComponent,
+    AddDatabaseComponent
   ],
   imports: [
     BrowserModule,
