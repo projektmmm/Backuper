@@ -136,6 +136,11 @@ namespace Daemon
                 }
             }
 
+            if (this.backup.DatabaseBackup)
+            {
+                /// MACEK KOD
+            }
+
             if (this.backup.Rar)
                 if (!BackupOperations.ZipFiles(this.DestinationPaths, this.backup))
                     this.reportMaker.AddError(new ErrorDetails() { Problem = "Could not ZIP the files." });

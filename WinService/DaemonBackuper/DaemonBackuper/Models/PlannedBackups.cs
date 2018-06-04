@@ -20,6 +20,7 @@ namespace Daemon
         public bool Ftp { get; set; } = false;
         public bool Ssh { get; set; } = false;
         public int ParentBackup { get; set; }
+        public bool DatabaseBackup { get; set; }
     }
 }
 
