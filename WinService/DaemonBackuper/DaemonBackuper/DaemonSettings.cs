@@ -21,6 +21,9 @@ namespace Daemon
         public static List<FtpSettings> ftpSettings;
         public static List<SshSettings> sshSettings;
         public static List<BatchesSettings> batchesSettings;
+<<<<<<< HEAD
         public static List<Databases> ListDatabases;
+=======
+>>>>>>> 4ec0bac1a3e487221c71023e912948ae9952ed08
     }
 }

@@ -102,7 +102,10 @@
     <Compile Include="DatabaseDump.cs" />
     <Compile Include="Models\BackupReport.cs" />
     <Compile Include="Models\BatchesSettings.cs" />
+<<<<<<< HEAD
     <Compile Include="Models\Databases.cs" />
+=======
+>>>>>>> 4ec0bac1a3e487221c71023e912948ae9952ed08
     <Compile Include="Models\ErrorDetails.cs" />
     <Compile Include="Models\FileInformation.cs" />
     <Compile Include="Models\FtpSettings.cs" />

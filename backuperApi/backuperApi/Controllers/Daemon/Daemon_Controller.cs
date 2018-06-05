@@ -21,6 +21,7 @@ namespace backuperApi.Controllers.Daemon
             List<Backups> toRet = this.database.Backups.Where(b => b.DaemonId == daemonId).ToList<Backups>();
 
             return toRet;
+<<<<<<< HEAD
         }
         [HttpGet]
         [Route("api/daemon/IsInstalled/{daemonId}")]
@@ -35,6 +36,8 @@ namespace backuperApi.Controllers.Daemon
         public List<Databases> GetDatabases(int daemonId)
         {
             return this.database.Databases.Where(d => d.DaemonId == daemonId).ToList<Databases>();
+=======
+>>>>>>> 4ec0bac1a3e487221c71023e912948ae9952ed08
         }
         [HttpPost]
         [Route("api/daemon/{daemonId}")]

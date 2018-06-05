@@ -18,7 +18,10 @@ namespace backuperApi
         public DbSet<Paths> Paths { get; set; }
         public DbSet<FTPSettings> FtpSettings { get; set; }
         public DbSet<SSHSettings> SshSettings { get; set; }
+<<<<<<< HEAD
         public DbSet<Databases> Databases { get; set; }
+=======
+>>>>>>> 4ec0bac1a3e487221c71023e912948ae9952ed08
         public DbSet<Batches> Batches { get; set; }
 
         public static string ConnectionString = "Server=mysqlstudenti.litv.sssvt.cz; Database=3b2_macekdaniel_db2; Uid=macekdaniel; Pwd=123456";

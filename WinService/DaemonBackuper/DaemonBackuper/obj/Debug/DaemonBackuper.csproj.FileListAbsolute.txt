@@ -31,6 +31,7 @@ D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\WinService\DaemonBackuper\DaemonBack
 D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\WinService\DaemonBackuper\DaemonBackuper\obj\Debug\DaemonBackuper.csprojAssemblyReference.cache
 D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\WinService\DaemonBackuper\DaemonBackuper\obj\Debug\DaemonBackuper.ProjectInstaller.resources
 D:\vojta\Knihovny\Dokumenty\GitHub\Backuper\WinService\DaemonBackuper\DaemonBackuper\obj\Debug\DaemonBackuper.csproj.GenerateResource.cache
+<<<<<<< HEAD
 C:\Users\Daniel\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Debug\DaemonBackuper.exe.config
 C:\Users\Daniel\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Debug\DaemonBackuper.exe
 C:\Users\Daniel\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Debug\DaemonBackuper.pdb
@@ -56,3 +57,5 @@ C:\Users\Daniel\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper
 C:\Users\Daniel\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Debug\Microsoft.SqlServer.SmoExtended.dll
 C:\Users\Daniel\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Debug\Microsoft.SqlServer.SqlClrProvider.dll
 C:\Users\Daniel\Desktop\Backuper-master\WinService\DaemonBackuper\DaemonBackuper\bin\Debug\Microsoft.SqlServer.SqlEnum.dll
+=======
+>>>>>>> 4ec0bac1a3e487221c71023e912948ae9952ed08
