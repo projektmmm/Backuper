@@ -12,6 +12,12 @@ export interface Settings {
     SSHPort: string;
     SSHUsername: string;
     SSHPassword: string;
-
+    Override: Boolean;
+    Rar: Boolean;
+    //Batches: Boolean;
+    BatchBeforePath: string;
+    BatchAfterPath: string;
+    BatchBeforeCode: string;
+    BatchAfterCode: string;
     Id: number;
 }

@@ -240,6 +240,7 @@
     <Compile Include="Models\FtpSettings.cs" />
     <Compile Include="Models\Non-Database\AddDaemon.cs" />
     <Compile Include="Models\Non-Database\ErrorDetails.cs" />
+    <Compile Include="Models\Non-Database\NewBackup.cs" />
     <Compile Include="Models\Paths.cs" />
     <Compile Include="Models\SshSettings.cs" />
     <Compile Include="Models\Users.cs" />

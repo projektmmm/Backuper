@@ -179,11 +179,13 @@
                                       </mat-form-field>
                                       <button mat-icon-button color="primary" matTooltip="Add" (click)="AddSourcePath(NewSourcePath)"><mat-icon>add_circle</mat-icon></button>
                                 </div>
+
+                                <!-- VYBER PRI DIFF - INCR -->
                                 <div *ngIf="isSourceDisabled">
                                     <mat-form-field class="left-width-full">
                                         <mat-select placeholder="Full backup" #FullBackup ng-model="FullBackup">
                                             <mat-option *ngFor="let Fullbackup of Fullbackups" [value]="Fullbackup.value">
-                                                {{ Fullbackup.viewValue }}
+                                                {{ Fullbackup.Id }}
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>

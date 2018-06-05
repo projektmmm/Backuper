@@ -1,3 +1,4 @@
+import { Backups } from './../daemons-info/interfaces';
 import { rowIdService } from './../daemons-info/service';
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Settings } from './settings';
@@ -96,7 +97,15 @@ export class SendNewSettingsComponent implements OnInit {
   headers = new HttpHeaders();
   readonly root_URL = 'http://localhost:63324';
 
-  Send(cron, backupType, ftpserveradress, ftpport, ftpusername, ftppassword, sshserveradress, sshport, sshusername, sshpassword) {
+  GetFullBackups() {
+    this.http2.get<Backups>(this.root_URL + "/api/admin/full-backups/" + this.daemonId, {headers: new HttpHeaders( {"Authorization": "Bearer " + localStorage.getItem("Token"), 'Content-Type':'application/json'})}).subscribe
+    (data => {
+      //this.Fullbackups = data;
+    })
+  }
+
+  Send(cron, backupType, ftpserveradress, ftpport, ftpusername, ftppassword, sshserveradress, sshport, sshusername, sshpassword,
+    batchaftercode, batchafterpath, batchbeforecode, batchbeforepath, override, rar) {
 
     const head = {headers: new HttpHeaders({'Content-Type':'application/json'})};
     head.headers.append("Authorization", "Bearer " + localStorage.getItem("Token"));
@@ -116,7 +125,13 @@ export class SendNewSettingsComponent implements OnInit {
       SSHServerAdress: sshserveradress,
       SSHPort: sshport,
       SSHUsername: sshusername,
-      SSHPassword: sshpassword
+      SSHPassword: sshpassword,
+      BatchAfterCode: batchaftercode,
+      BatchAfterPath: batchafterpath,
+      BatchBeforeCode: batchbeforecode,
+      BatchBeforePath: batchbeforepath,
+      Override: override,
+      Rar: rar,
     }
 
     if(backupType == "" || cron == "" || this.DestinationPaths.join() == "")
@@ -139,7 +154,7 @@ export class SendNewSettingsComponent implements OnInit {
     const head = {headers: new HttpHeaders({'Content-Type':'application/json'})};
     head.headers.append('Content-Type', 'application/json');
 
-    const data: Settings = {
+    /*const data: Settings = {
       DaemonId: this.daemonId,
       Cron: cron,
       BackupType: backupType,
@@ -155,7 +170,7 @@ export class SendNewSettingsComponent implements OnInit {
       SSHUsername: sshusername,
       SSHPassword: sshpassword
     }
-
+**/
     if(backupType == "" || cron == "")
     {
       this.openSnackBar("Settings not Updated","")
