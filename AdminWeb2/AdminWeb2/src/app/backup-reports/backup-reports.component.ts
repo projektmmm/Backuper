@@ -36,7 +36,7 @@ export class BackupReportsComponent implements OnInit {
     else
       this.adress = this.adress + "/" + localStorage.getItem("Username");
 
-    this.http.get<BackupReport[]>(this.adress, {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))}).subscribe
+    this.http.get<BackupReport[]>(this.adress, {headers: new HttpHeaders( {"Authorization": "Bearer " + localStorage.getItem("Token"), 'Content-Type':'application/json'})}).subscribe
     (data => { 
 
       this.inititalizeTable(data);

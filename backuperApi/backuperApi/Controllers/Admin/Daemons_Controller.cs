@@ -52,23 +52,26 @@ namespace backuperApi.Controllers
             int userId = daemon.UserId;
             Daemons ToAdd = new Daemons();
             ToAdd.UserId = daemon.UserId;
-            ToAdd.Name = daemon.Description;
+            ToAdd.Description = daemon.Description;
             ToAdd.Name = daemon.Name;
             try
             {
+                this.database.Daemons.Add(ToAdd);
+                this.database.SaveChanges();
+                
                 //Make Settings
                 File.Delete(@"C:\Settings\DaemonSettings.txt");
                 string path = @"C:\Settings\DaemonSettings.txt";
-                
+
+
+                Daemons d = this.database.Daemons.Where(u => u.Name == daemon.Name && u.Description == daemon.Description).First();
                 using (StreamWriter sw = File.CreateText(path))
                 {
-                    sw.WriteLine("Hello");
+                    sw.WriteLine(d.Id);
                 }
                 //SendMail
-                //mail.SendMail("Daemon Installer","Install Daemon Backuper and add Settings to C:/Settings",daemon.DaemonTo);
+                mail.SendMail("Daemon Installer","Install Daemon Backuper and add Settings to C:/Settings",daemon.DaemonTo);
 
-                this.database.Daemons.Add(ToAdd);
-                this.database.SaveChanges();
                 return "Daemon Added";
             }
             catch

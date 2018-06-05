@@ -91,9 +91,17 @@ namespace backuperApi.Controllers
         [Route("api/admin/daemon-settings")]
         public bool Post(Backups toInsert)
         {
-            //ještě než se to uloží do databáze tak to vypočítá z cronu nextrun
-            Schedule = CrontabSchedule.Parse(toInsert.Cron);
-            toInsert.NextRun = Schedule.GetNextOccurrence(DateTime.Now);
+            if (toInsert.Cron.Substring(0, 1) == "#")
+            {
+                toInsert.NextRun = Convert.ToDateTime(toInsert.Cron.Substring(1, toInsert.Cron.Length));
+                toInsert.Cron = "* * * * *";
+            }
+            else
+            {
+                //ještě než se to uloží do databáze tak to vypočítá z cronu nextrun
+                Schedule = CrontabSchedule.Parse(toInsert.Cron);
+                toInsert.NextRun = Schedule.GetNextOccurrence(DateTime.Now);
+            }
 
             toInsert.SourcePath = "[\"" + toInsert.SourcePath.Replace(",", "\",\"").Replace("\\", "\\\\") + "\"]";
             toInsert.DestinationPath = "[\"" + toInsert.DestinationPath.Replace(",", "\",\"").Replace("\\", "\\\\") + "\"]";

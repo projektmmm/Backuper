@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
 using System.Threading;
-
+using Daemon;
 namespace Daemon
 {
     public abstract class ABackup
     {
         public ReportMaker reportMaker = new ReportMaker();
         public Communicator communicator = new Communicator();
+        public DatabaseDump dump = new DatabaseDump();
         protected PlannedBackups backup { get; set; }
         protected List<string> SourcePaths;
         protected List<string> DestinationPaths;
@@ -52,6 +53,14 @@ namespace Daemon
 
         public virtual void Start()
         {
+            if (this.backup.Batches)
+            {
+                this.communicator.GetBatchSettings();
+                Thread.Sleep(20000);
+
+                BackupOperations.Batches(this.reportMaker, "BEFORE");
+            }
+
             foreach (string item in this.SourcePaths)
             {
                 if (this.backup.BackupType == "FULL")
@@ -108,6 +117,14 @@ namespace Daemon
 
         public virtual void Operations()
         {
+            if (this.backup.Batches)
+            {
+                this.communicator.GetBatchSettings();
+                Thread.Sleep(20000);
+
+                BackupOperations.Batches(this.reportMaker, "AFTER");
+            }
+
             if (this.backup.Ftp)
             {
                 this.communicator.GetFtpSettings();
@@ -136,9 +153,10 @@ namespace Daemon
                 }
             }
 
+            
             if (this.backup.DatabaseBackup)
             {
-                /// MACEK KOD
+                this.dump.FullBackup();
             }
 
             if (this.backup.Rar)

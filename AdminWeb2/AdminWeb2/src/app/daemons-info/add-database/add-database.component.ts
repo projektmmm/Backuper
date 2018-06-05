@@ -25,7 +25,7 @@ export class AddDatabaseComponent implements OnInit {
    tableSource: MatTableDataSource<Databases>;
   ngOnInit() {
     this.DaemonId = +localStorage.getItem("DaemonId")
-    this.http.get<Databases[]>('http://localhost:63324/api/admin/daemons/databases/'+this.DaemonId, {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))})
+    this.http.get<Databases[]>('http://localhost:63324/api/admin/daemons/databases/'+this.DaemonId, {headers: new HttpHeaders( {"Authorization": "Bearer " + localStorage.getItem("Token"), 'Content-Type':'application/json'})})
     .subscribe  (data => {
       this.tableSource = new MatTableDataSource(data);
     })
@@ -40,7 +40,7 @@ export class AddDatabaseComponent implements OnInit {
       Password:Password,
       DaemonId: this.DaemonId
     }
-    this.http.post<boolean>('http://localhost:63324/api/admin/daemons/AddDatabase',JSON.stringify(data),{headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))})
+    this.http.post<boolean>('http://localhost:63324/api/admin/daemons/AddDatabase',JSON.stringify(data),{headers: new HttpHeaders( {"Authorization": "Bearer " + localStorage.getItem("Token"), 'Content-Type':'application/json'})})
     .subscribe(Response=>{
     console.log(Response)
     })

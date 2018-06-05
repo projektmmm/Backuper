@@ -9,8 +9,6 @@ import { query } from '@angular/core/src/animation/dsl';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 
-
-
 @Component({
   selector: 'send-new-settings',
   templateUrl: './send-new-settings.component.html',
@@ -101,6 +99,7 @@ export class SendNewSettingsComponent implements OnInit {
   Send(cron, backupType, ftpserveradress, ftpport, ftpusername, ftppassword, sshserveradress, sshport, sshusername, sshpassword) {
 
     const head = {headers: new HttpHeaders({'Content-Type':'application/json'})};
+    head.headers.append("Authorization", "Bearer " + localStorage.getItem("Token"));
     head.headers.append('Content-Type', 'application/json');
 
     const data: Settings = {
@@ -127,7 +126,7 @@ export class SendNewSettingsComponent implements OnInit {
     }
     else
     {
-      this.http2.post(this.root_URL + "/api/admin/daemon-settings", JSON.stringify(data), {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))})
+      this.http2.post(this.root_URL + "/api/admin/daemon-settings", JSON.stringify(data), {headers: new HttpHeaders( {"Authorization": "Bearer " + localStorage.getItem("Token"), 'Content-Type':'application/json'})})
           .subscribe(Response => { console.log(Response) })
 
       this.openSnackBar("","Settings sended!")
@@ -163,7 +162,7 @@ export class SendNewSettingsComponent implements OnInit {
     }
     else
     {
-      this.http2.patch(this.root_URL + "/api/admin/planned-backups/" + this.i_backupId, JSON.stringify(data), {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))})
+      this.http2.patch(this.root_URL + "/api/admin/planned-backups/" + this.i_backupId, JSON.stringify(data), {headers: new HttpHeaders( {"Authorization": "Bearer " + localStorage.getItem("Token"), 'Content-Type':'application/json'})})
           .subscribe(Response => { 
             if (Response == false) {
               this.openSnackBar("Settings not Updated","");

@@ -1,0 +1,65 @@
+
+.left-width-full {
+    width: 250px;
+}
+
+.pathSettings {
+    height: 230px;
+    padding-left: 30px;
+    border-left-style: solid;
+    border-left-color: #3f51b5;
+    border-left-width: 0.5px;
+}
+.timeSettings {
+    height: 350px;
+    padding-left: 30px;
+    border-left-style: solid;
+    border-left-color: #3f51b5;
+    border-left-width: 0.5px;
+}
+
+.rightFTPform {
+    width: 150px;
+}
+
+.rightFTPpadding {
+    padding-left: 20px;
+}
+
+
+
+.width-quarter {
+    width: 25%;
+    margin-left: 10px;
+}
+
+
+.width-small { 
+    width: 10%;
+    margin-left: 10px;
+}
+
+
+.tab-padding {
+    padding: 15px 15px;
+}
+
+.padd {
+    margin-left: 50px;
+}
+
+.space{
+    margin-left: 50px;
+}
+
+.tab-width {
+    width: 500px;
+}
+
+.width-full {
+    width: 420px;
+}
+
+.spaceplus{
+    margin-left: 100px;
+}

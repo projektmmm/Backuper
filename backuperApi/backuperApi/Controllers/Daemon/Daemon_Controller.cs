@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using backuperApi.Models;
 using Newtonsoft.Json;
 
 namespace backuperApi.Controllers.Daemon
@@ -17,15 +18,29 @@ namespace backuperApi.Controllers.Daemon
         public List<Backups> Get(int daemonId)
         {
             this.cronController.UpdateCron(this.database.Backups.Where(b => b.DaemonId == daemonId).ToList<Backups>());
+            List<Backups> toRet = this.database.Backups.Where(b => b.DaemonId == daemonId).ToList<Backups>();
 
-            return this.database.Backups.Where(b => b.DaemonId == daemonId).ToList<Backups>();
+            return toRet;
         }
-
+        [HttpGet]
+        [Route("api/daemon/IsInstalled/{daemonId}")]
+        public bool IsInstalled(int daemonId)
+        {
+            Daemons d = this.database.Daemons.Where(b => b.Id == daemonId).First();
+            d.Installed = true;
+            return true;
+        }
+        [HttpGet]
+        [Route("api/daemon/GetDatabases/{daemonId}")]
+        public List<Databases> GetDatabases(int daemonId)
+        {
+            return this.database.Databases.Where(d => d.DaemonId == daemonId).ToList<Databases>();
+        }
         [HttpPost]
         [Route("api/daemon/{daemonId}")]
         public void Post(int daemonId, [FromBody] string data)
         {
-
+            Mail m = new Mail();
             List<BackupErrors> errors = new List<BackupErrors>();
             string tosub = data.Substring(0, this.IdentifyBorder(data));
             BackupReport report = JsonConvert.DeserializeObject<BackupReport>(tosub);
@@ -41,6 +56,11 @@ namespace backuperApi.Controllers.Daemon
 
             this.database.BackupReport.Add(report);
             this.database.SaveChanges();
+
+            Daemons dem = this.database.Daemons.Where(d => d.Id == daemonId).First();
+            Users user = this.database.Users.Where(u => u.Id == dem.UserId).First();
+            m.SendMail("Backup Report", tosub, user.Email);
+
 
             BackupReport dbRecord = this.database.BackupReport.Where(r => r.BackupId == report.BackupId && r.Date == report.Date && r.Size == report.Size && r.Type == report.Type).FirstOrDefault();
             int reportId = dbRecord.Id;
@@ -121,41 +141,5 @@ namespace backuperApi.Controllers.Daemon
             return value.Length - 10;
         }
 
-    }
-
-    public class SshControler : ApiController
-    {
-        private Database database = new Database();
-
-        [HttpGet]
-        [Route("api/daemon/ssh/{daemonId}")]
-        public List<SSHSettings> Get(int daemonId)
-        {
-            var query = from s in this.database.SshSettings
-                        join b in this.database.Backups
-                        on s.BackupId equals b.Id
-                        where b.DaemonId == daemonId
-                        select s;
-
-            return query.ToList<SSHSettings>();
-        }
-    }
-
-    public class FtpController : ApiController
-    {
-        public Database database = new Database();
-
-        [HttpGet]
-        [Route("api/daemon/ftp/{daemonId}")]
-        public List<FTPSettings> Get(int daemonId)
-        {
-            var query = from f in this.database.FtpSettings
-                        join b in this.database.Backups
-                        on f.BackupId equals b.Id
-                        where b.DaemonId == daemonId
-                        select f;
-
-            return query.ToList<FTPSettings>();
-        }
     }
 }

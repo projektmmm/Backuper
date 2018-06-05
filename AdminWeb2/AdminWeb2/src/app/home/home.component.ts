@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
   ShowProblems: boolean = true;
 
   ngOnInit() {
-    this.http.get<ErrorDetails[]>(this.root_URL + "api/admin/Home/"+ this.Username, {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))}).subscribe
+    this.http.get<ErrorDetails[]>(this.root_URL + "api/admin/Home/"+ this.Username, {headers: new HttpHeaders( {"Authorization": "Bearer " + localStorage.getItem("Token"), 'Content-Type':'application/json'})}).subscribe
     (data => {
       this.DataSource = data;
       if (data.length == 0)
@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
   }
 
   ToDaemon(ReportId:number) {
-    this.http.get<number>(this.root_URL+"api/admin/Home/Daemon/"+ ReportId, {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))}).subscribe
+    this.http.get<number>(this.root_URL+"api/admin/Home/Daemon/"+ ReportId, {headers: new HttpHeaders( {"Authorization": "Bearer " + localStorage.getItem("Token"), 'Content-Type':'application/json'})}).subscribe
     (data => {
       this.router.navigate(["./daemons-info/"+data])
     })

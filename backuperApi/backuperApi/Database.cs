@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.ComponentModel;
+using backuperApi.Models;
 
 namespace backuperApi
 {
@@ -17,6 +18,8 @@ namespace backuperApi
         public DbSet<Paths> Paths { get; set; }
         public DbSet<FTPSettings> FtpSettings { get; set; }
         public DbSet<SSHSettings> SshSettings { get; set; }
+        public DbSet<Databases> Databases { get; set; }
+        public DbSet<Batches> Batches { get; set; }
 
         public static string ConnectionString = "Server=mysqlstudenti.litv.sssvt.cz; Database=3b2_macekdaniel_db2; Uid=macekdaniel; Pwd=123456";
 

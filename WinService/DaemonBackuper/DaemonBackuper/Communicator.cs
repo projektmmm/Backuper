@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using DaemonBackuper.Models;
 using Newtonsoft.Json;
 
 namespace Daemon
@@ -68,8 +69,24 @@ namespace Daemon
                 }
             }
         }
-
-        public async Task GetSshSettings()
+        public async Task GetDatabases()
+        {
+            string apiDestination = $"api/daemon/GetDatabases/{this.daemonId}";
+            
+            using (var client = GetJsonClient())
+            {
+                HttpResponseMessage response = await client.GetAsync(apiDestination);
+                if (response.IsSuccessStatusCode)
+                {
+                    DaemonSettings.ListDatabases = await response.Content.ReadAsAsync<List<Databases>>();
+                }
+                else
+                {
+                    throw new HttpRequestException("Cannot connect to the api");
+                }
+            }
+        }
+            public async Task GetSshSettings()
         {
             string apiDestination = $"api/daemon/ssh/{this.daemonId}";
 
@@ -88,6 +105,27 @@ namespace Daemon
             }
         }
 
+        public async Task GetBatchSettings()
+        {
+            string apiDestination = $"api/daemon/batches/{this.daemonId}";
+
+            List<BatchesSettings> ret = new List<BatchesSettings>();
+            using (var client = GetJsonClient())
+            {
+                HttpResponseMessage response = await client.GetAsync(apiDestination);
+                if (response.IsSuccessStatusCode)
+                {
+                    DaemonSettings.batchesSettings = await response.Content.ReadAsAsync<List<BatchesSettings>>();
+                }
+                else
+                {
+                    throw new HttpRequestException("Cannot connect to the api");
+                }
+            }
+        }
+
+    
+
         /// <summary>
         /// Ziskani nastaveni pro komunikaci
         /// </summary>
@@ -100,5 +138,6 @@ namespace Daemon
 
             return client;
         }
+
     }
 }

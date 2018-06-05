@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DaemonBackuper.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,10 +15,12 @@ namespace Daemon
         //public static string Name = "PC01";
         public static string ApiAdress = "http://localhost:63324/";
 
-        public static int AskInterval = 30000;
+        public static int AskInterval = 300000;
 
         public static List<PlannedBackups> plannedBackups;
         public static List<FtpSettings> ftpSettings;
         public static List<SshSettings> sshSettings;
+        public static List<BatchesSettings> batchesSettings;
+        public static List<Databases> ListDatabases;
     }
 }

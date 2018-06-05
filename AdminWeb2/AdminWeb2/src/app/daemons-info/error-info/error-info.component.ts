@@ -49,7 +49,7 @@ export class ErrorInfoComponent implements OnInit {
   }
 
   getErrors() {
-    this.http.get<ErrorDetails[]>(this.root_URL + "/api/admin/backup-errors/" + this.userName + "-" + this.daemonId, {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))}).subscribe
+    this.http.get<ErrorDetails[]>(this.root_URL + "/api/admin/backup-errors/" + this.userName + "-" + this.daemonId, {headers: new HttpHeaders( {"Authorization": "Bearer " + localStorage.getItem("Token"), 'Content-Type':'application/json'})}).subscribe
     (data => {
       if (data[0].Problem == 'N') {
         this.errorDetails = null;
@@ -63,7 +63,7 @@ export class ErrorInfoComponent implements OnInit {
   }
 
   solvedProblem(problemId) {
-    this.http.patch(this.root_URL + "/api/admin/backup-errors/" + problemId, problemId, {headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("Token"))}).subscribe
+    this.http.patch(this.root_URL + "/api/admin/backup-errors/" + problemId, problemId, {headers: new HttpHeaders( {"Authorization": "Bearer " + localStorage.getItem("Token"), 'Content-Type':'application/json'})}).subscribe
     (data => {
       if(data == true) {
         this.openSnackBar("", "Problem was solved!");
